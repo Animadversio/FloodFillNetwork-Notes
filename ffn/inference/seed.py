@@ -52,6 +52,8 @@ class BaseSeedPolicy(object):
     self.idx = 0
 
   def _init_coords(self):
+    """Make the full seed point list, __next__ will only select and filter the list
+    """
     raise NotImplementedError()
 
   def __iter__(self):
@@ -70,15 +72,15 @@ class BaseSeedPolicy(object):
       StopIteration when the seeds are exhausted.
     """
     if self.coords is None:
-      self._init_coords()
+      self._init_coords()  # make the long list of seeds in _init_coords()
 
     while self.idx < self.coords.shape[0]:
-      curr = self.coords[self.idx, :]
+      curr = self.coords[self.idx, :]  # each row is a coordinate of seed points
       self.idx += 1
 
       # TODO(mjanusz): Get rid of this.
       # Do early filtering of clearly invalid locations (too close to image
-      # borders) as late filtering might be expensive.
+      # borders) as late filtering might be expensive!!!
       if (np.all(curr - self.canvas.margin >= 0) and
           np.all(curr + self.canvas.margin < self.canvas.shape)):
         return tuple(curr)  # z, y, x

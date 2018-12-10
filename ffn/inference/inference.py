@@ -418,9 +418,9 @@ class Canvas(object):
       start = np.array(pos) - off
       end = start + self._input_seed_size
       logit_seed = np.array(
-          self.seed[[slice(s, e) for s, e in zip(start, end)]])
+          self.seed[[slice(s, e) for s, e in zip(start, end)]])  # Slice out a cube around pos with size `_input_seed_size`
       init_prediction = np.isnan(logit_seed)
-      logit_seed[init_prediction] = np.float32(self.options.pad_value)
+      logit_seed[init_prediction] = np.float32(self.options.pad_value)  # pad the nan values with `pad_value`
 
       extra_fetches = {f: getattr(self.model, f) for f
                        in self.halt_signaler.extra_fetches}
@@ -525,7 +525,7 @@ class Canvas(object):
           self.counters['skip_restriced_pos'].Increment()
           continue
 
-        pred = self.update_at(pos, start_pos)
+        pred = self.update_at(pos, start_pos)  # core function call
         self._min_pos = np.minimum(self._min_pos, pos)
         self._max_pos = np.maximum(self._max_pos, pos)
         num_iters += 1
@@ -585,7 +585,7 @@ class Canvas(object):
         # Too close to an existing segment?
         low = np.array(pos) - mbd
         high = np.array(pos) + mbd + 1
-        sel = [slice(s, e) for s, e in zip(low, high)]
+        sel = [slice(s, e) for s, e in zip(low, high)]  # A cube centered at `pos`, with half edge length `mbd`
         if np.any(self.segmentation[sel] > 0):
           logging.debug('Too close to existing segment.')
           self.segmentation[pos] = -1
@@ -595,7 +595,7 @@ class Canvas(object):
 
         # Try segmentation.
         seg_start = time.time()
-        num_iters = self.segment_at(pos)
+        num_iters = self.segment_at(pos)  # Core line
         t_seg = time.time() - seg_start
 
         # Check if segmentation was successful.
@@ -655,7 +655,7 @@ class Canvas(object):
         while self._max_id in self.origins:
           self._max_id += 1
 
-        self.segmentation[sel][mask] = self._max_id
+        self.segmentation[sel][mask] = self._max_id  # Explicitly assign id to segmentation
         self.seg_prob[sel][mask] = storage.quantize_probability(
             expit(self.seed[sel][mask]))
 
@@ -824,7 +824,7 @@ class Runner(object):
       logging.info('Checkpoint loaded.')
 
   def start(self, request, batch_size=1, exec_cls=None, session=None):
-    """Opens input volumes and initializes the FFN."""
+    """ Opens input volumes and initializes the FFN. """
     self.request = request
     assert self.request.segmentation_output_dir
 
@@ -1104,7 +1104,7 @@ class Runner(object):
     return canvas, alignment
 
   def get_seed_policy(self, corner, subvol_size):
-    """Get seed policy generating callable.
+    """Get seed policy generating callable. (defined as Classes in `seed.py`)
 
     Args:
       corner: the original corner of the requested subvolume, before any
@@ -1114,10 +1114,10 @@ class Runner(object):
     Returns:
       A callable for generating seed policies.
     """
-    policy_cls = getattr(seed, self.request.seed_policy)
+    policy_cls = getattr(seed, self.request.seed_policy)  # get the requested seed_policy object in `seed.py`
     kwargs = {'corner': corner, 'subvol_size': subvol_size}
     if self.request.seed_policy_args:
-      kwargs.update(json.loads(self.request.seed_policy_args))
+      kwargs.update(json.loads(self.request.seed_policy_args))  # update the values of the key if there are seed_policy_args in request
     return functools.partial(policy_cls, **kwargs)
 
   def save_segmentation(self, canvas, alignment, target_path, prob_path):
@@ -1207,7 +1207,7 @@ class Runner(object):
       with storage.atomic_file(image_path) as fd:
         np.savez_compressed(fd, im=canvas.image)
 
-    canvas.segment_all(seed_policy=self.get_seed_policy(corner, subvol_size))
+    canvas.segment_all(seed_policy=self.get_seed_policy(corner, subvol_size))  # Core lines
     self.save_segmentation(canvas, alignment, seg_path, prob_path)
 
     # Attempt to remove the checkpoint file now that we no longer need it.

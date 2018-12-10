@@ -37,7 +37,7 @@ flags.DEFINE_string('bounding_box', None,
 
 
 def main(unused_argv):
-  request = inference_flags.request_from_flags()
+  request = inference_flags.request_from_flags()  # Parsed structure from flag
 
   if not gfile.Exists(request.segmentation_output_dir):
     gfile.MakeDirs(request.segmentation_output_dir)
@@ -48,7 +48,7 @@ def main(unused_argv):
   runner = inference.Runner()
   runner.start(request)
   runner.run((bbox.start.z, bbox.start.y, bbox.start.x),
-             (bbox.size.z, bbox.size.y, bbox.size.x))  # Main Statement!
+             (bbox.size.z, bbox.size.y, bbox.size.x))  # Main Body
 
   counter_path = os.path.join(request.segmentation_output_dir, 'counters.txt')
   if not gfile.Exists(counter_path):
