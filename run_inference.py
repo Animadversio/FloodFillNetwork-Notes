@@ -42,13 +42,13 @@ def main(unused_argv):
   if not gfile.Exists(request.segmentation_output_dir):
     gfile.MakeDirs(request.segmentation_output_dir)
 
-  bbox = bounding_box_pb2.BoundingBox()
-  text_format.Parse(FLAGS.bounding_box, bbox)
+  bbox = bounding_box_pb2.BoundingBox()  # bounding box structure
+  text_format.Parse(FLAGS.bounding_box, bbox)  # Parse the param in flag
 
   runner = inference.Runner()
   runner.start(request)
   runner.run((bbox.start.z, bbox.start.y, bbox.start.x),
-             (bbox.size.z, bbox.size.y, bbox.size.x))
+             (bbox.size.z, bbox.size.y, bbox.size.x))  # Main Statement!
 
   counter_path = os.path.join(request.segmentation_output_dir, 'counters.txt')
   if not gfile.Exists(counter_path):
