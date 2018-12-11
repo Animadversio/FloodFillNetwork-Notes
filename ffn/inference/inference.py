@@ -426,14 +426,14 @@ class Canvas(object):
                        in self.halt_signaler.extra_fetches}
 
       prob_seed = expit(logit_seed)
-      for _ in range(MAX_SELF_CONSISTENT_ITERS):
+      for _ in range(MAX_SELF_CONSISTENT_ITERS):  # iteratively update corresponding prob, logit (until converge)
         (prob, logits), fetches = self.predict(pos, logit_seed,
                                                extra_fetches=extra_fetches)
-        if self.options.consistency_threshold <= 0:
+        if self.options.consistency_threshold <= 0:  # if consistency_threshold set <=0 then no iteration
           break
 
         diff = np.average(np.abs(prob_seed - prob))
-        if diff < self.options.consistency_threshold:
+        if diff < self.options.consistency_threshold:  # iteration until prob_seed of 2 iters are consistent!
           break
 
         prob_seed, logit_seed = prob, logits
@@ -469,7 +469,7 @@ class Canvas(object):
           logits[mask] = old_seed[mask]
 
       # Update working space.
-      self.seed[sel] = logits
+      self.seed[sel] = logits  # only place that update `seed`
 
     return logits
 
@@ -525,7 +525,7 @@ class Canvas(object):
           self.counters['skip_restriced_pos'].Increment()
           continue
 
-        pred = self.update_at(pos, start_pos)  # core function call
+        pred = self.update_at(pos, start_pos)  # core function call, update
         self._min_pos = np.minimum(self._min_pos, pos)
         self._max_pos = np.maximum(self._max_pos, pos)
         num_iters += 1
@@ -595,7 +595,7 @@ class Canvas(object):
 
         # Try segmentation.
         seg_start = time.time()
-        num_iters = self.segment_at(pos)  # Core line
+        num_iters = self.segment_at(pos)  # **Core line **
         t_seg = time.time() - seg_start
 
         # Check if segmentation was successful.
@@ -620,27 +620,27 @@ class Canvas(object):
         # significantly reduce processing time.
         sel = [slice(max(s, 0), e + 1) for s, e in zip(
             self._min_pos - self._pred_size // 2,
-            self._max_pos + self._pred_size // 2)]
+            self._max_pos + self._pred_size // 2)]  # sel is the bounding box
 
         # We only allow creation of new segments in areas that are currently
         # empty.
-        mask = self.seed[sel] >= self.options.segment_threshold
-        raw_segmented_voxels = np.sum(mask)
+        mask = self.seed[sel] >= self.options.segment_threshold  # mask is the local mask to selected voxels
+        raw_segmented_voxels = np.sum(mask)  # count the number of raw segmented voxels
 
         # Record existing segment IDs overlapped by the newly added object.
         overlapped_ids, counts = np.unique(self.segmentation[sel][mask],
                                            return_counts=True)
-        valid = overlapped_ids > 0
+        valid = overlapped_ids > 0  # id < 0 are the background and invalid voxels
         overlapped_ids = overlapped_ids[valid]
         counts = counts[valid]
 
-        mask &= self.segmentation[sel] <= 0
-        actual_segmented_voxels = np.sum(mask)
+        mask &= self.segmentation[sel] <= 0  # get rid of the marked voxels from mask
+        actual_segmented_voxels = np.sum(mask)  # only count those unmarked voxel in `actual_segmented_voxels`
 
-        # Segment too small?
+        # Segment too small? (too few newly labeled segments)
         if actual_segmented_voxels < self.options.min_segment_size:
           if self.segmentation[pos] == 0:
-            self.segmentation[pos] = -1
+            self.segmentation[pos] = -1  # mark the seed position as in-valid
           self.log_info('Failed: too small: %d', actual_segmented_voxels)
           self.counters['invalid-small-time-ms'].IncrementBy(t_seg *
                                                              MSEC_IN_SEC)
@@ -657,7 +657,7 @@ class Canvas(object):
 
         self.segmentation[sel][mask] = self._max_id  # Explicitly assign id to segmentation
         self.seg_prob[sel][mask] = storage.quantize_probability(
-            expit(self.seed[sel][mask]))
+            expit(self.seed[sel][mask]))  # in essence `seg_prob` is same as `seed` connect with a transform
 
         self.log_info('Created supervoxel:%d  seed(zyx):%s  size:%d  iters:%d',
                       self._max_id, pos,
@@ -887,7 +887,7 @@ class Runner(object):
       config = tf.ConfigProto()
       tf.reset_default_graph()
       session = tf.Session(config=config)
-    self.session = session
+    self.session = session  # initiate tf_session to execute model.
     logging.info('Available TF devices: %r', self.session.list_devices())
 
     # Initialize the FFN model.
@@ -1071,7 +1071,7 @@ class Runner(object):
       return None, None
 
     image = (image.astype(np.float32) -
-             self.request.image_mean) / self.request.image_stddev
+             self.request.image_mean) / self.request.image_stddev  # full image normalized here!
     if restrictor == self.ALL_MASKED:
       return None, None
 
