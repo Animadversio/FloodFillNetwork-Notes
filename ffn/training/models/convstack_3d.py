@@ -53,7 +53,7 @@ class ConvStack3DFFNModel(model.FFNModel):
 
   def __init__(self, fov_size=None, deltas=None, batch_size=None, depth=9):
     super(ConvStack3DFFNModel, self).__init__(deltas, batch_size)
-    self.set_uniform_io_size(fov_size)
+    self.set_uniform_io_size(fov_size)  # pred_mask_size, input_seed_size, input_image_size are the same
     self.depth = depth
 
   def define_tf_graph(self):
@@ -62,7 +62,7 @@ class ConvStack3DFFNModel(model.FFNModel):
     if self.input_patches is None:
       self.input_patches = tf.placeholder(
           tf.float32, [1] + list(self.input_image_size[::-1]) +[1],
-          name='patches')
+          name='patches')  # axis 4 is a dummy axis can concat with `input_seed`
 
     net = tf.concat([self.input_patches, self.input_seed], 4)
 

@@ -152,7 +152,7 @@ class EvalTracker(object):
 
   def __init__(self, eval_shape):
     self.eval_labels = tf.placeholder(
-        tf.float32, [1] + eval_shape + [1], name='eval_labels')
+        tf.float32, [1] + eval_shape + [1], name='eval_labels')  # why add 1 more axis at front or end of the shape?
     self.eval_preds = tf.placeholder(
         tf.float32, [1] + eval_shape + [1], name='eval_preds')
     self.eval_loss = tf.reduce_mean(
@@ -295,7 +295,7 @@ def run_training_step(sess, model, fetch_summary, feed_dict):
   if fetch_summary is not None:
     ops_to_run.append(fetch_summary)
 
-  results = sess.run(ops_to_run, feed_dict)
+  results = sess.run(ops_to_run, feed_dict)  # get prediction for the operation
   step, prediction = results[1:3]
 
   if fetch_summary is not None:
@@ -642,8 +642,8 @@ def train_ffn(model_cls, **model_kwargs):
           scaffold=scaffold) as sess:
 
         eval_tracker.sess = sess
-        step = int(sess.run(model.global_step))
-
+        step = int(sess.run(model.global_step))  # global_step is the tf inner mechanism that keeps the batches seen by
+        # thus when revive a model from checkpoint the `step` can be restored
         if FLAGS.task > 0:
           # To avoid early instabilities when using multiple replicas, we use
           # a launch schedule where new replicas are brought online gradually.
@@ -670,12 +670,12 @@ def train_ffn(model_cls, **model_kwargs):
 
         t_last = time.time()
 
-        while not sess.should_stop() and step < FLAGS.max_steps:
+        while not sess.should_stop() and step < FLAGS.max_steps:  # Major loop
           # Run summaries periodically.
           t_curr = time.time()
           if t_curr - t_last > FLAGS.summary_rate_secs and FLAGS.task == 0:
             summ_op = merge_summaries_op
-            t_last = t_curr
+            t_last = t_curr  # update at summary_rate_secs
           else:
             summ_op = None
 

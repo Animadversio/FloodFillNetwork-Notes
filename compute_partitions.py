@@ -134,23 +134,23 @@ def compute_partitions(seg_array,
     else:
       return slice(i, -i)
 
-  valid_sel = [_sel(x) for x in lom_radius_zyx]
+  valid_sel = [_sel(x) for x in lom_radius_zyx]  # exclude border margin of `lom_radius_zyx` !
   output = np.zeros(seg_array[valid_sel].shape, dtype=np.uint8)
-  corner = lom_radius
+  corner = lom_radius  # corner in the order of x,y,z
 
   if exclusion_regions is not None:
     sz, sy, sx = output.shape
-    hz, hy, hx = np.mgrid[:sz, :sy, :sx]
+    hz, hy, hx = np.mgrid[:sz, :sy, :sx]  # grid coordinate
 
     hz += corner[2]
     hy += corner[1]
     hx += corner[0]
 
     for x, y, z, r in exclusion_regions:
-      mask = (hx - x)**2 + (hy - y)**2 + (hz - z)**2 <= r**2
+      mask = (hx - x)**2 + (hy - y)**2 + (hz - z)**2 <= r**2  # mask the ball region around (x,y,z) as 255 invalid
       output[mask] = 255
 
-  labels = set(np.unique(seg_array))
+  labels = set(np.unique(seg_array))  # in order
   logging.info('Labels to process: %d', len(labels))
 
   if id_whitelist is not None:
@@ -166,7 +166,7 @@ def compute_partitions(seg_array,
   fov_volume = np.prod(lom_diam_zyx)
   for l in labels:
     # Don't create a mask for the background component.
-    if l == 0:
+    if l == 0:  # 0 label is always background
       continue
 
     object_mask = (seg_array == l)
@@ -236,7 +236,7 @@ def main(argv):
     s = partitions.shape
     ds[corner[2]:corner[2] + s[0],
        corner[1]:corner[1] + s[1],
-       corner[0]:corner[0] + s[2]] = partitions
+       corner[0]:corner[0] + s[2]] = partitions  # writing down the output of compute_partitions
     ds.attrs['bounding_boxes'] = [(b.start, b.size) for b in bboxes]
     ds.attrs['partition_counts'] = np.array(np.unique(partitions,
                                                       return_counts=True))

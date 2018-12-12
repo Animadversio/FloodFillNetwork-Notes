@@ -62,7 +62,7 @@ class FFNModel(object):
 
     # Initialize the shift collection. This is used during training with the
     # fixed step size policy.
-    self.shifts = []
+    self.shifts = []  # A collection of (dx,dy,dz) tuple
     for dx in (-self.deltas[0], 0, self.deltas[0]):
       for dy in (-self.deltas[1], 0, self.deltas[1]):
         for dz in (-self.deltas[2], 0, self.deltas[2]):
@@ -117,9 +117,9 @@ class FFNModel(object):
     Assumes input_seed_size and input_image_size are already set.
     """
     self.input_seed.set_shape([self.batch_size] +
-                              list(self.input_seed_size[::-1]) + [1])
+                              list(self.input_seed_size[::-1]) + [1])  # Here the size is [b, z, y, x, 1]
     self.input_patches.set_shape([self.batch_size] +
-                                 list(self.input_image_size[::-1]) + [1])
+                                 list(self.input_image_size[::-1]) + [1])  # Here the size is [b, z, y, x, 1]
 
   def set_up_sigmoid_pixelwise_loss(self, logits):
     """Sets up the loss function of the model."""
@@ -182,7 +182,7 @@ class FFNModel(object):
     dz = self.input_seed_size[2] - self.pred_mask_size[2]
 
     if dx == 0 and dy == 0 and dz == 0:
-      seed += update
+      seed += update  # if use `set_uniform_io_size` then the 2 are of same size
     else:
       seed += tf.pad(update, [[0, 0],
                               [dz // 2, dz - dz // 2],
