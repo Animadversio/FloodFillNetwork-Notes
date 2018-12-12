@@ -524,7 +524,7 @@ def get_example(load_example, eval_tracker, model, get_offsets):
     get_offsets: iterable of (x, y, z) offsets to investigate within the
         training patch
 
-  Yields:
+  Yields: (defining a generator function)
     tuple of:
       seed array, shape [1, z, y, x, 1]
       image array, shape [1, z, y, x, 1]

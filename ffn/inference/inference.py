@@ -908,7 +908,7 @@ class Runner(object):
     self.movement_policy_fn = movement.get_policy_fn(request, self.model)
 
     self.saver = tf.train.Saver()
-    self._load_model_checkpoint(request.model_checkpoint_path)
+    self._load_model_checkpoint(request.model_checkpoint_path)  # load the saved checkpoint information into self.model
 
     self.executor.start_server()
 
