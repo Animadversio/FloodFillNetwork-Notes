@@ -56,11 +56,11 @@ flags.DEFINE_integer('min_size', 10000,
 
 
 def _summed_volume_table(val):
-  """Computes a summed volume table of 'val'."""
+  """Computes a summed volume table of 'val'.(intermediate table to reduce redundancy)"""
   val = val.astype(np.int32)
   svt = val.cumsum(axis=0).cumsum(axis=1).cumsum(axis=2)
-  return np.pad(svt, [[1, 0], [1, 0], [1, 0]], mode='constant')
-
+  return np.pad(svt, [[1, 0], [1, 0], [1, 0]], mode='constant')  # pad one 0 entry before each axis.
+  # still a tensor with padding! ease the further query of subvolume
 
 def _query_summed_volume(svt, diam):
   """Queries a summed volume table.
@@ -121,7 +121,7 @@ def compute_partitions(seg_array,
       corner of output subvolume as (x, y, z)
       uint8 ndarray of active fraction voxels
   """
-  seg_array = segmentation.clear_dust(seg_array, min_size=min_size)
+  seg_array = segmentation.clear_dust(seg_array, min_size=min_size)  # small segments marked as 0
   assert seg_array.ndim == 3
 
   lom_radius = np.array(lom_radius)
@@ -161,19 +161,19 @@ def compute_partitions(seg_array,
                        start=(0, 0, 0), size=seg_array.shape[::-1]),
                    lom_diam_zyx)
   if mask is not None:
-    output[mask] = 255
+    output[mask] = 255  # invalid mark
 
-  fov_volume = np.prod(lom_diam_zyx)
+  fov_volume = np.prod(lom_diam_zyx)  # volume of each fov cube around each voxel
   for l in labels:
     # Don't create a mask for the background component.
-    if l == 0:  # 0 label is always background
+    if l == 0:  # 0 label is always background, the output will be 0 as default
       continue
 
     object_mask = (seg_array == l)
 
     svt = _summed_volume_table(object_mask)
     active_fraction = _query_summed_volume(svt, lom_diam_zyx) / fov_volume
-    assert active_fraction.shape == output.shape
+    assert active_fraction.shape == output.shape  # fraction of active voxel around each voxel labelled l
 
     # Drop context that is only necessary for computing the active fraction
     # (i.e. one LOM radius in every direction).
@@ -182,10 +182,10 @@ def compute_partitions(seg_array,
     # TODO(mjanusz): Use np.digitize here.
     for i, th in enumerate(thresholds):
       output[object_mask & (active_fraction < th) & (output == 0)] = i + 1
-
+    # mark those voxel in object_mask with active_fraction \in [threshold[i-1], threshold[i]] as i
     output[object_mask & (active_fraction >= thresholds[-1]) &
            (output == 0)] = len(thresholds) + 1
-
+    # mark the output w.r.t the active_fraction (to find the center / border of an object)
     logging.info('Done processing %d', l)
 
   logging.info('Nonzero values: %d', np.sum(output > 0))

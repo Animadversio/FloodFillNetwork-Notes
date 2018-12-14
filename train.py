@@ -655,15 +655,15 @@ def train_ffn(model_cls, **model_kwargs):
           summary_writer = tf.summary.FileWriterCache.get(FLAGS.train_dir)
           summary_writer.add_session_log(
               tf.summary.SessionLog(status=tf.summary.SessionLog.START), step)
-
-        fov_shifts = list(model.shifts)  # x, y, z
+        # Prepare the batch_it object by input shifts parameters into it
+        fov_shifts = list(model.shifts)  # x, y, z  vector collection formed by input deltas in 3*3*3-1 directions
         if FLAGS.shuffle_moves:
           random.shuffle(fov_shifts)
 
         policy_map = {
             'fixed': partial(fixed_offsets, fov_shifts=fov_shifts),
             'max_pred_moves': max_pred_offsets
-        }
+        }  # delta, fov_shift come into policy map to
         batch_it = get_batch(lambda: sess.run(load_data_ops),
                              eval_tracker, model, FLAGS.batch_size,
                              policy_map[FLAGS.fov_policy])

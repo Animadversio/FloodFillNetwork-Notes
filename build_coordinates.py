@@ -49,8 +49,8 @@ def _bytes_feature(value):
 def main(argv):
   del argv  # Unused.
 
-  totals = defaultdict(int)  # partition -> voxel count
-  indices = defaultdict(list)  # partition -> [(vol_id, 1d index)]
+  totals = defaultdict(int)  # partition -> voxel count (len of the indices of the same key )
+  indices = defaultdict(list)  # partition -> [(vol_id, 1d index), ]
   # Note: shared index among different partition volumes are allowed and merged together
   vol_labels = []
   vol_shapes = []
@@ -59,18 +59,18 @@ def main(argv):
   for i, partvol in enumerate(FLAGS.partition_volumes):
     name, path, dataset = partvol.split('::')
     with h5py.File(path, 'r') as f:
-      partitions = f[dataset][mz:-mz, my:-my, mx:-mx]  # FIXME:input 0 induce error here! partitions will be none output
+      partitions = f[dataset][mz:-mz, my:-my, mx:-mx]  # FIXME:input 0 induce error here! partitions will be none output, can use _sel() trick
       vol_shapes.append(partitions.shape)
-      vol_labels.append(name)
+      vol_labels.append(name)  # Name of the total volume
 
       uniques, counts = np.unique(partitions, return_counts=True)
-      for val, cnt in zip(uniques, counts):
+      for val, cnt in zip(uniques, counts):  # val are the uint8 marked in compute_partition
         if val == IGNORE_PARTITION:
           continue
 
         totals[val] += cnt  #
         indices[val].extend(
-            [(i, flat_index) for flat_index in
+            [(i, flat_index) for flat_index in  # indices here is tuple of volume #i and #flat_index in the volume
              np.flatnonzero(partitions == val)])  # FIXME: This line can induce MEMORYERROR
         # Last line is one-by-one searching for `val` labelled entry in the partitions tensor, and use `np.flatnonzero`
         # to get the flat index in the huge tensor. (Don't know if it is time costing)
@@ -83,16 +83,16 @@ def main(argv):
   max_count = max(totals.values())  # voxel number maximum in kinds
   indices = np.concatenate(
       [np.resize(np.random.permutation(v), (max_count, 2)) for
-       v in indices.values()], axis=0)   # FIXME: This line can induce MEMORYERROR
-  np.random.shuffle(indices)
-
-  logging.info('Saving coordinates.')
+       v in indices.values()], axis=0)   # FIXME: This line can induce MEMORYERROR,
+  np.random.shuffle(indices)  # NoteL This line is also the most time consumming
+  # Note: Multi-dimensional arrays are only shuffled along the first axis
+  logging.info('Saving coordinates.')  # Saving takes time
   record_options = tf.python_io.TFRecordOptions(
       tf.python_io.TFRecordCompressionType.GZIP)
   with tf.python_io.TFRecordWriter(FLAGS.coordinate_output,
                                    options=record_options) as writer:
     for i, coord_idx in indices:
-      z, y, x = np.unravel_index(coord_idx, vol_shapes[i])  # get z,y,x value back from the flast coordinate of 1d array
+      z, y, x = np.unravel_index(coord_idx, vol_shapes[i])  # get z,y,x value back from the flat coordinate of 1d array
 
       coord = tf.train.Example(features=tf.train.Features(feature=dict(
           center=_int64_feature([mx + x, my + y, mz + z]),

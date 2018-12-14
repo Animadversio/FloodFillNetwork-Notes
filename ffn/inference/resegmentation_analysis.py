@@ -37,7 +37,7 @@ class IncompleteResegmentationError(Exception):
 
 
 def compute_iou(reseg):
-  """Computes the Jaccard index for two objects.
+  """Computes the Jaccard index for two objects. (Intersection over Union )
 
   Args:
     reseg: 4d boolean ndarray of mask for two objects over which to compute
@@ -98,7 +98,7 @@ def parse_resegmentation_filename(filename):
 def evaluate_endpoint_resegmentation(filename, seg_volstore,
                                      resegmentation_radius,
                                      threshold=0.5):
-  """Evaluates endpoint resegmentation.
+  """ Evaluates endpoint resegmentation.
 
   Args:
     filename: path to the file containing resegmentation results

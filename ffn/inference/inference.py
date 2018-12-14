@@ -485,7 +485,7 @@ class Canvas(object):
   def segment_at(self, start_pos, dynamic_image=None,
                  vis_update_every=10,
                  vis_fixed_z=False):
-    """Runs FFN segmentation starting from a specific point.
+    """Runs FFN segmentation starting from a specific point. (very good visualization)
 
     Args:
       start_pos: location at which to run segmentation as (z, y, x)
