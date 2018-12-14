@@ -280,7 +280,7 @@ class Canvas(object):
     self.overlaps = {}  # (ids, number overlapping voxels)
 
     # Whether to always create a new seed in segment_at.
-    self.reset_seed_per_segment = True
+    self.reset_seed_per_segment = True  # defaultly clear all seed at a segment_at
 
     if movement_policy_fn is None:
       # The model.deltas are (for now) in xyz order and must be swapped to zyx.
@@ -469,7 +469,7 @@ class Canvas(object):
           logits[mask] = old_seed[mask]
 
       # Update working space.
-      self.seed[sel] = logits  # only place that update `seed`
+      self.seed[sel] = logits  # only place, that update `seed` segmentation and seg_prob is not updated
 
     return logits
 
@@ -515,7 +515,7 @@ class Canvas(object):
       self.movement_policy.append(item)
 
     with timer_counter(self.counters, 'segment_at-loop'):
-      for pos in self.movement_policy:
+      for pos in self.movement_policy:  # movment iterator adaptively generate the next `pos`
         # Terminate early if the seed got too weak.
         if self.seed[start_pos] < self.options.move_threshold:
           self.counters['seed_got_too_weak'].Increment()
@@ -525,7 +525,7 @@ class Canvas(object):
           self.counters['skip_restriced_pos'].Increment()
           continue
 
-        pred = self.update_at(pos, start_pos)  # core function call, update
+        pred = self.update_at(pos, start_pos)  # core function call, the pred (logits) used to update movement
         self._min_pos = np.minimum(self._min_pos, pos)
         self._max_pos = np.maximum(self._max_pos, pos)
         num_iters += 1
@@ -537,7 +537,7 @@ class Canvas(object):
           if self._keep_history:
             self.history.append(pos)
 
-          if dynamic_image is not None and num_iters % vis_update_every == 0:
+          if dynamic_image is not None and num_iters % vis_update_every == 0: # dynamic visualization
             vis_pos = pos if not vis_fixed_z else (start_pos[0], pos[1],
                                                    pos[2])
             visualize_state(self.seed, vis_pos, self.movement_policy,

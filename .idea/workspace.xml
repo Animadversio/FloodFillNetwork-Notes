@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ffn-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ffn-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_coordinates.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_coordinates.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute_partitions.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_partitions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ffn/inference/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn_inference_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ffn_inference_demo.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="533" column="34" lean-forward="true" selection-start-line="533" selection-start-column="34" selection-end-line="533" selection-end-column="34" />
+            <state relative-caret-position="272">
+              <caret line="517" column="37" selection-start-line="517" selection-start-column="16" selection-end-line="517" selection-end-column="37" />
               <folding>
                 <element signature="e#701#739#0" expanded="true" />
               </folding>
@@ -67,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="229" column="28" selection-start-line="229" selection-start-column="28" selection-end-line="229" selection-end-column="28" />
+            <state relative-caret-position="-858">
+              <caret line="160" column="27" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -119,6 +113,7 @@
       <find>global_step</find>
       <find>lom_radius</find>
       <find>segment_at</find>
+      <find>nan</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -231,7 +226,7 @@
       <updated>1544055572148</updated>
       <workItem from="1544055574963" duration="2978000" />
       <workItem from="1544464500519" duration="58067000" />
-      <workItem from="1544747345185" duration="2107000" />
+      <workItem from="1544747345185" duration="3529000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -275,11 +270,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544647505475</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add notes">
+      <created>1544750912540</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544750912540</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63152000" />
+    <option name="totallyTimeSpent" value="64574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -595,13 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="229" column="28" selection-start-line="229" selection-start-column="28" selection-end-line="229" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configs/inference_training_sample2.pbtxt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -611,11 +606,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="533" column="34" lean-forward="true" selection-start-line="533" selection-start-column="34" selection-end-line="533" selection-end-column="34" />
+        <state relative-caret-position="272">
+          <caret line="517" column="37" selection-start-line="517" selection-start-column="16" selection-end-line="517" selection-end-column="37" />
           <folding>
             <element signature="e#701#739#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-858">
+          <caret line="160" column="27" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="27" />
         </state>
       </provider>
     </entry>
