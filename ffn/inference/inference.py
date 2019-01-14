@@ -89,7 +89,7 @@ def visualize_state(seed_logits, pos, movement_policy, dynimage):
 
   planes = ortho_plane_visualization.cut_ortho_planes(
       seed_logits, center=pos, cross_hair=True)
-  to_vis = ortho_plane_visualization.concat_ortho_planes(planes)
+  to_vis = ortho_plane_visualization.concat_ortho_planes(planes)  # get the 3 direction view concat into a full view
 
   if isinstance(movement_policy.scored_coords, np.ndarray):
     scores = movement_policy.scored_coords
@@ -407,7 +407,7 @@ class Canvas(object):
     Args:
       pos: (z, y, x) position of the center of the FoV
       start_pos: (z, y, x) position from which the segmentation of the current
-          object has started
+          object has started (only used in self predictive, `halt_signaler` part)
 
     Returns:
       ndarray of the predicted mask in logit space
@@ -824,7 +824,7 @@ class Runner(object):
       logging.info('Checkpoint loaded.')
 
   def start(self, request, batch_size=1, exec_cls=None, session=None):
-    """ Opens input volumes and initializes the FFN. """
+    """ Opens input volumes and initializes the FFN. (can use multiple times)"""
     self.request = request
     assert self.request.segmentation_output_dir
 
@@ -1150,7 +1150,7 @@ class Runner(object):
         out_origins[key] = value._replace(start_zyx=tuple(zyx))
       return out_origins
 
-    # Remove markers.
+    # Remove markers. [ invalid marker -1
     canvas.segmentation[canvas.segmentation < 0] = 0
 
     # Save segmentation results. Reduce # of bits per item if possible.
@@ -1167,7 +1167,7 @@ class Runner(object):
     # directories.
     prob = unalign_image(canvas.seg_prob)
     with storage.atomic_file(prob_path) as fd:
-      np.savez_compressed(fd, qprob=prob)
+      np.savez_compressed(fd, qprob=prob)  # keyword "qprob"
 
   def run(self, corner, subvol_size, reset_counters=True):
     """Runs FFN inference over a subvolume.

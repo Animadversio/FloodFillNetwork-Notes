@@ -325,7 +325,7 @@ def train_eval_size(model):
 
 def train_image_size(model):
   return (np.array(model.input_image_size) +
-          np.array(model.deltas) * 2 * fov_moves())
+          np.array(model.deltas) * 2 * fov_moves())  # fov_moves() is defaultly 1
 
 
 def train_canvas_size(model):
@@ -476,7 +476,7 @@ def max_pred_offsets(model, seed):
   queue = deque([(0, 0, 0)])
   done = set()
 
-  train_image_radius = train_image_size(model) // 2
+  train_image_radius = train_image_size(model) // 2  # 2*deltas + fov_size
   input_image_radius = np.array(model.input_image_size) // 2
 
   while queue:
@@ -492,7 +492,7 @@ def max_pred_offsets(model, seed):
     quantized_offset = (
         offset[0] // max(model.deltas[0], 1),
         offset[1] // max(model.deltas[1], 1),
-        offset[2] // max(model.deltas[2], 1))
+        offset[2] // max(model.deltas[2], 1))  # offset using integer multiples of deltas
 
     if quantized_offset in done:
       continue
@@ -518,7 +518,7 @@ def get_example(load_example, eval_tracker, model, get_offsets):
 
   Args:
     load_example: callable returning a tuple of image and label ndarrays
-                  as well as the seed coordinate and volume name of the example
+                  as well as the seed coordinate and volume name of the example (E.g. lambda: sess.run(load_data_ops))
     eval_tracker: EvalTracker object
     model: FFNModel object
     get_offsets: iterable of (x, y, z) offsets to investigate within the

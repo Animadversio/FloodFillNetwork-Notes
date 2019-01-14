@@ -69,7 +69,7 @@ def get_scored_move_offsets(deltas, prob_map, threshold=0.9):
                 in zip(center, deltas)]
 
   done = set()
-  for axis, axis_delta in enumerate(deltas):
+  for axis, axis_delta in enumerate(deltas):  # 0,1,2 axis
     if axis_delta == 0:
       continue
     for axis_offset in (-axis_delta, axis_delta):
@@ -234,7 +234,7 @@ def get_policy_fn(request, ffn_model):
   else:
     kwargs = {}
   if 'deltas' not in kwargs:
-    kwargs['deltas'] = ffn_model.deltas[::-1]
+    kwargs['deltas'] = ffn_model.deltas[::-1]  # deltas in 3 direction zyx order
   if 'score_threshold' not in kwargs:
     kwargs['score_threshold'] = logit(request.inference_options.move_threshold)
 
