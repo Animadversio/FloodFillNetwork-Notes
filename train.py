@@ -58,12 +58,17 @@ from ffn.training import augmentation
 # pylint: disable=unused-import
 from ffn.training import optimizer
 # pylint: enable=unused-import
+import platform
+if platform.system() == 'Windows':
+    DIVSTR = '::'
+elif platform.system() == 'Linux':
+    DIVSTR = ':'
 
 FLAGS = flags.FLAGS
 
 # Options related to training data.
 flags.DEFINE_string('train_coords', None,
-                    'Glob for the TFRecord of training coordinates.')
+                    'Glob for the TFRecord of training coordinates.') # What's the use of TFRecord
 flags.DEFINE_string('data_volumes', None,
                     'Comma-separated list of <volume_name>:<volume_path>:'
                     '<dataset>, where volume_name need to match the '
@@ -339,7 +344,7 @@ def _get_offset_and_scale_map():
 
   ret = {}
   for vol_def in FLAGS.image_offset_scale_map:
-    vol_name, offset, scale = vol_def.split('::')
+    vol_name, offset, scale = vol_def.split(DIVSTR)
     ret[vol_name] = float(offset), float(scale)
 
   return ret
@@ -358,12 +363,12 @@ def define_data_input(model, queue_batch=None):
 
   label_volume_map = {}
   for vol in FLAGS.label_volumes.split(','):
-    volname, path, dataset = vol.split('::')
+    volname, path, dataset = vol.split(DIVSTR)
     label_volume_map[volname] = h5py.File(path)[dataset]
 
   image_volume_map = {}
   for vol in FLAGS.data_volumes.split(','):
-    volname, path, dataset = vol.split('::')
+    volname, path, dataset = vol.split(DIVSTR)
     image_volume_map[volname] = h5py.File(path)[dataset]
 
   if queue_batch is None:

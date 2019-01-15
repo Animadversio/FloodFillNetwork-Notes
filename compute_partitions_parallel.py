@@ -30,6 +30,12 @@ from scipy.ndimage import filters
 import multiprocessing as mp
 import ctypes
 from time import time
+import platform
+
+if platform.system() == 'Windows':
+    DIVSTR = '::'
+elif platform.system() == 'Linux':
+    DIVSTR = ':'
 
 FLAGS = flags.FLAGS
 
@@ -237,7 +243,7 @@ def adjust_bboxes(bboxes, lom_radius):
 
 def main(argv):
     del argv  # Unused.
-    path, dataset = FLAGS.input_volume.split('::')
+    path, dataset = FLAGS.input_volume.split(DIVSTR)
     with h5py.File(path) as f:
         segmentation = f[dataset]
         bboxes = []
@@ -260,7 +266,7 @@ def main(argv):
 
     bboxes = adjust_bboxes(bboxes, np.array(lom_radius))
 
-    path, dataset = FLAGS.output_volume.split('::')
+    path, dataset = FLAGS.output_volume.split(DIVSTR)
     with h5py.File(path, 'w') as f:
         ds = f.create_dataset(dataset, shape=shape, dtype=np.uint8, fillvalue=255,
                               chunks=True, compression='gzip')
