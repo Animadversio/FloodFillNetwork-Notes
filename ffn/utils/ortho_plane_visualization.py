@@ -50,7 +50,7 @@ def cut_ortho_planes(vol, center=None, cross_hair=False):
   for axis, ix in enumerate(center):
     cut_slice = list(full_slice)
     cut_slice[axis] = ix
-    planes.append(vol[cut_slice])
+    planes.append(vol[cut_slice])  # i.e. ([center[0],:,:]), (:,[center[1],:]), ([:,:,center[2]])
     if cross_hair:
       # Copy because cross hair is written into array data.
       plane = planes[-1].copy()
@@ -58,7 +58,7 @@ def cut_ortho_planes(vol, center=None, cross_hair=False):
       for ax, c in enumerate(center):
         if ax != axis:
           # Make axis i the 0-axis an work in-place.
-          view = np.rollaxis(plane, i)
+          view = np.rollaxis(plane, i)  # rolling the order of 3-axis
           view[c] *= 0.5
           i += 1
 

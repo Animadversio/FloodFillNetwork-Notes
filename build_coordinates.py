@@ -86,7 +86,7 @@ def main(argv):
        v in indices.values()], axis=0)   # FIXME: This line can induce MEMORYERROR,
   np.random.shuffle(indices)  # NoteL This line is also the most time consumming
   # Note: Multi-dimensional arrays are only shuffled along the first axis
-  logging.info('Saving coordinates.')  # Saving takes time
+  logging.info('Saving coordinates.')  # Saving takes the most of time!!
   record_options = tf.python_io.TFRecordOptions(
       tf.python_io.TFRecordCompressionType.GZIP)
   with tf.python_io.TFRecordWriter(FLAGS.coordinate_output,
