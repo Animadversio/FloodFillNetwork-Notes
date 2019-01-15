@@ -127,7 +127,7 @@ class PermuteAndReflect(object):
     Args:
       rank: The rank of the Tensor to be transformed.
       permutable_axes: The list (not a Tensor) of axes to be permuted.
-      reflectable_axes: The list (not a Tensor) of axes to be reflected.
+      reflectable_axes: The list (not a Tensor) of axes to be reflected. if [] then no reflect
       permutation_seed: Optional integer.  Seed value to use for sampling axes
         permutation.
       reflection_seed: Optional integer.  Seed value to use for sampling
@@ -150,7 +150,7 @@ class PermuteAndReflect(object):
 
     if self.reflectable_axes.size > 0:
       self.reflect_decisions = tf.random_uniform([len(self.reflectable_axes)],
-                                                 seed=reflection_seed) > 0.5
+                                                 seed=reflection_seed) > 0.5  # entry >= 1
       self.reflected_axes = tf.boolean_mask(self.reflectable_axes,
                                             self.reflect_decisions)
 
