@@ -63,7 +63,7 @@ FLAGS = flags.FLAGS
 
 # Options related to training data.
 flags.DEFINE_string('train_coords', None,
-                    'Glob for the TFRecord of training coordinates.')
+                    'Glob for the TFRecord of training coordinates.') # What's the use of TFRecord
 flags.DEFINE_string('data_volumes', None,
                     'Comma-separated list of <volume_name>:<volume_path>:'
                     '<dataset>, where volume_name need to match the '

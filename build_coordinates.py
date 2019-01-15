@@ -64,7 +64,7 @@ def main(argv):
       vol_labels.append(name)  # Name of the total volume
 
       uniques, counts = np.unique(partitions, return_counts=True)
-      for val, cnt in zip(uniques, counts):  # val are the uint8 marked in compute_partition
+      for val, cnt in zip(uniques, counts):  # val are the uint8 markers marked in compute_partition (not label)
         if val == IGNORE_PARTITION:
           continue
 
@@ -76,7 +76,7 @@ def main(argv):
         # to get the flat index in the huge tensor. (Don't know if it is time costing)
   logging.info('Partition counts:')
   for k, v in totals.items():
-    logging.info(' %d: %d', k, v)  # the voxel number for different kinds of label
+    logging.info(' %d: %d', k, v)  # the voxel number for different labels
 
   logging.info('Resampling and shuffling coordinates.')
 
@@ -91,7 +91,7 @@ def main(argv):
       tf.python_io.TFRecordCompressionType.GZIP)
   with tf.python_io.TFRecordWriter(FLAGS.coordinate_output,
                                    options=record_options) as writer:
-    for i, coord_idx in indices:
+    for i, coord_idx in indices:  # note `i` is the No. of volume
       z, y, x = np.unravel_index(coord_idx, vol_shapes[i])  # get z,y,x value back from the flat coordinate of 1d array
 
       coord = tf.train.Example(features=tf.train.Features(feature=dict(
