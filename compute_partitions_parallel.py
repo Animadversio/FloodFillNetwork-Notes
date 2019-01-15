@@ -5,7 +5,7 @@ labeled voxels within a neighborhood of radius `lom_radius`, and then quantizes
 that number according to `thresholds`.
 
 Sample invocation:
-  python compute_partitions.py \
+  python compute_partitions_parallel.py \
       --input_volume third_party/neuroproof_examples/training_sample2/groundtruth.h5:stack \
       --output_volume af.h5:af \
       --thresholds 0.025,0.05,0.075,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9 \
@@ -32,9 +32,12 @@ import ctypes
 from time import time
 import platform
 
+DIVSTR = ':'
 if platform.system() == 'Windows':
     DIVSTR = '::'
 elif platform.system() == 'Linux':
+    DIVSTR = ':'
+else:
     DIVSTR = ':'
 
 FLAGS = flags.FLAGS
@@ -219,10 +222,154 @@ def compute_partitions_parallel(seg_array,
         return
 
     # Assign tasks (worker_func) to the processes
-    with mp.Pool(processes=mp.cpu_count()) as pool:  # , initializer=init_worker, initargs=(X, X_shape)
-        result = pool.map(worker_func, labels)
+    # with mp.Pool(processes=mp.cpu_count()) as pool:  # , initializer=init_worker, initargs=(X, X_shape)
+    #     result = pool.map(worker_func, labels)
+    pool = mp.Pool(processes=mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
+    result = pool.map(worker_func, labels)
         # result in output_np
         # print(output_np)
+    print("Total Processing time %.3f s" % (time() - t1))
+
+    logging.info('Nonzero values: %d', np.sum(output_sh > 0))
+
+    return corner, output_sh
+
+
+# Define global variables
+seg_array_sh = []
+output_sh = []
+fov_volume = []
+lom_diam_zyx = []
+thresholds = []
+valid_sel= []
+t1 = 0
+
+def worker_func(l):
+    ''' Parallel processing work lines '''
+    global seg_array_sh, output_sh, fov_volume, lom_diam_zyx, thresholds, valid_sel, t1
+    # Don't create a mask for the background component.
+    if l == 0:  # 0 label is always background, the output will be 0 as default
+        return
+
+    object_mask = (seg_array_sh == l)
+    svt = _summed_volume_table(object_mask)
+    active_fraction = _query_summed_volume(svt, lom_diam_zyx) / fov_volume
+    assert active_fraction.shape == output_sh.shape  # fraction of active voxel around each voxel labelled l
+
+    # Drop context that is only necessary for computing the active fraction
+    # (i.e. one LOM radius in every direction).
+    object_mask = object_mask[valid_sel]
+
+    # TODO(mjanusz): Use np.digitize here.
+    for i, th in enumerate(thresholds):
+        output_sh[object_mask & (active_fraction < th) & (output_sh == 0)] = i + 1
+    # mark those voxel in object_mask with active_fraction \in [threshold[i-1], threshold[i]] as i
+    output_sh[object_mask & (active_fraction >= thresholds[-1]) & (output_sh == 0)] = len(thresholds) + 1
+    # mark the output w.r.t the active_fraction (to find the center / border of an object)
+    print('Done processing %d. Time %.3f s' % (l, time() - t1))
+    print("Label %d processing finished. Time %.3f s" % (l, time() - t1))
+    return
+
+
+def compute_partitions_parallel_new(seg_array,
+                                threshold,
+                                lom_radius,
+                                id_whitelist=None,
+                                exclusion_regions=None,
+                                mask_configs=None,
+                                min_size=10000):
+    """Computes quantized fractions of active voxels in a local object mask.
+
+    Args:
+      thresholds: list of activation voxel fractions to use for partitioning.
+      lom_radius: LOM radii as [x, y, z]
+      id_whitelist: (optional) whitelist of object IDs for which to compute the
+          partition numbers
+      exclusion_regions: (optional) list of x, y, z, r tuples specifying regions
+          to mark as excluded (with 255). The regions are spherical, with
+          (x, y, z) definining the center of the sphere and 'r' specifying its
+          radius. All values are in voxels.
+      mask_configs: (optional) MaskConfigs proto; any locations where at least
+          one voxel of the LOM is masked will be marked as excluded (255).
+
+    Returns:
+      tuple of:
+        corner of output subvolume as (x, y, z)
+        uint8 ndarray of active fraction voxels
+
+    Note : new version use global variables to talk through processes Older version has bugs....
+    Quick but dirty!! Beware the variable `thresholds` and `threshold`
+    """
+    global seg_array_sh, output_sh, fov_volume, lom_diam_zyx, valid_sel, thresholds, t1
+    thresholds = threshold
+
+    seg_array = segmentation.clear_dust(seg_array, min_size=min_size)  # small segments marked as 0
+    assert seg_array.ndim == 3
+
+    lom_radius = np.array(lom_radius)
+    lom_radius_zyx = lom_radius[::-1]
+    lom_diam_zyx = 2 * lom_radius_zyx + 1
+
+    def _sel(i):
+        if i == 0:
+            return slice(None)
+        else:
+            return slice(i, -i)
+
+    valid_sel = [_sel(x) for x in lom_radius_zyx]  # exclude border margin of `lom_radius_zyx` !
+    output = np.zeros(seg_array[valid_sel].shape, dtype=np.uint8)
+    corner = lom_radius  # corner in the order of x,y,z
+
+    if exclusion_regions is not None:
+        sz, sy, sx = output.shape
+        hz, hy, hx = np.mgrid[:sz, :sy, :sx]  # grid coordinate
+
+        hz += corner[2]
+        hy += corner[1]
+        hx += corner[0]
+
+        for x, y, z, r in exclusion_regions:
+            mask = (hx - x) ** 2 + (hy - y) ** 2 + (
+                    hz - z) ** 2 <= r ** 2  # mask the ball region around (x,y,z) as 255 invalid
+            output[mask] = 255
+
+    labels = set(np.unique(seg_array))  # in order
+    logging.info('Labels to process: %d', len(labels))
+
+    if id_whitelist is not None:
+        labels &= set(id_whitelist)
+
+    mask = load_mask(mask_configs,
+                     bounding_box.BoundingBox(
+                         start=(0, 0, 0), size=seg_array.shape[::-1]),
+                     lom_diam_zyx)
+    if mask is not None:
+        output[mask] = 255  # invalid mark
+
+    fov_volume = np.prod(lom_diam_zyx)  # volume of each fov cube around each voxel
+
+    t0 = time()
+    # Start prepare shared data across processes
+    inz, iny, inx = seg_array.shape
+    sz, sy, sx = output.shape
+    X = mp.RawArray(ctypes.c_int16, inz * iny * inx)  # Note the datatype esp. when wrapping
+    Out = mp.RawArray(ctypes.c_uint8, sz * sy * sx)  # Note the data type, int here. Short `h` maybe fine
+    # Wrap X as an inumpy array so we can easily manipulates its data.
+    seg_array_sh = np.frombuffer(X, dtype=np.int16).reshape(seg_array.shape)
+    output_sh = np.frombuffer(Out, dtype=np.uint8).reshape(output.shape)
+    # Copy data to our shared array.
+    np.copyto(seg_array_sh, seg_array)  # seg_array is int16 array.
+    np.copyto(output_sh, output)  # output is uint8 array
+    t1 = time()
+    print("Multiprocess data sharing finished, spent time %.3f s " % (t1 - t0))
+    # Define parallel processing lines
+
+    # Assign tasks (worker_func) to the processes
+    # with mp.Pool(processes=mp.cpu_count()) as pool:  # , initializer=init_worker, initargs=(X, X_shape)
+    #     result = pool.map(worker_func, labels)
+    pool = mp.Pool(processes=mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
+    result = pool.map(worker_func, labels)
+
     print("Total Processing time %.3f s" % (time() - t1))
 
     logging.info('Nonzero values: %d', np.sum(output_sh > 0))
@@ -259,7 +406,7 @@ def main(argv):
 
         shape = segmentation.shape
         lom_radius = [int(x) for x in FLAGS.lom_radius]
-        corner, partitions = compute_partitions_parallel(
+        corner, partitions = compute_partitions_parallel_new(
             segmentation[...], [float(x) for x in FLAGS.thresholds], lom_radius,
             FLAGS.id_whitelist, FLAGS.exclusion_regions, FLAGS.mask_configs,
             FLAGS.min_size)
