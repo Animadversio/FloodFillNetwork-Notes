@@ -39,7 +39,7 @@ from ..utils import bounding_box
 
 
 def get_starting_location(dists, exclusion_radius):
-  z, y, x = np.unravel_index(np.argmax(dists), tuple(dists.shape))
+  z, y, x = np.unravel_index(np.argmax(dists), tuple(dists.shape))  # find the maximum from the distance matrix (Euclidean distance transform of xxx matrix )
   # Mark area around the new point as 'excluded' by clearing the distance
   # map around it.
   er = exclusion_radius
@@ -125,11 +125,11 @@ def process_point(request, runner, point_num):
     if target_path is None:
       return
 
-    curr = request.points[point_num]
+    curr = request.points[point_num]  # curr has the information of reseg point and the 2 relevant id_a, id_b
     point = curr.point
     point = point.z, point.y, point.x
     radius = (request.radius.z, request.radius.y, request.radius.x)
-    canvas, alignment = get_canvas(point, radius, runner)
+    canvas, alignment = get_canvas(point, radius, runner)  # error will be thrown if the cube goes out of bound box
     if canvas is None:
       logging.warning('Could not get a canvas object.')
       return
@@ -144,9 +144,9 @@ def process_point(request, runner, point_num):
 
     is_shift = (canvas.restrictor is not None and
                 np.any(canvas.restrictor.shift_mask))
-    is_endpoint = not curr.HasField('id_b')
+    is_endpoint = not curr.HasField('id_b')  # if no id_b is given then it does seg_a endpoint extension
 
-    seg_a = canvas.segmentation == canvas.local_id(curr.id_a)
+    seg_a = canvas.segmentation == canvas.local_id(curr.id_a)  # Boolean mask for seg_a
     size_a = np.sum(seg_a)
 
     if is_endpoint:
@@ -166,7 +166,7 @@ def process_point(request, runner, point_num):
       canvas._deregister_client()  # pylint:disable=protected-access
       return
 
-    if is_endpoint:
+    if is_endpoint:  # clear the canvas and restart
       canvas.seg_prob[:] = 0.0
       canvas.segmentation[:] = 0
     else:
@@ -210,7 +210,7 @@ def process_point(request, runner, point_num):
       with timer_counter(canvas.counters, 'edt'):
         ps = runner.init_seg_volstore.info.pixelsize
         dists = ndimage.distance_transform_edt(seg, sampling=(ps.z, ps.y, ps.x))
-        # Do not seed where not enough context is available.
+        # Do not seed where not enough context is available. (set 0 the 6 margins)
         dists[:canvas.margin[0], :, :] = 0
         dists[:, :canvas.margin[1], :] = 0
         dists[:, :, :canvas.margin[2]] = 0
@@ -230,7 +230,7 @@ def process_point(request, runner, point_num):
       recovered = False
 
       for _ in range(request.max_retry_iters):
-        z0, y0, x0 = get_starting_location(dists, request.exclusion_radius)
+        z0, y0, x0 = get_starting_location(dists, request.exclusion_radius)  # index of the maximum in dist tensor
         if not seg[z0, y0, x0]:
           continue
 
@@ -238,7 +238,7 @@ def process_point(request, runner, point_num):
                         x0, y0, z0)
         canvas.segment_at((z0, y0, x0))
         seg_prob = expit(canvas.seed)
-        start_points[i].append((x0, y0, z0))
+        start_points[i].append((x0, y0, z0))  # record the starting point in xyz format
 
         # Check if we recovered an acceptable fraction of the initial segment
         # in which the seed was located.
