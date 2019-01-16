@@ -1050,7 +1050,7 @@ class Runner(object):
       logging.info('Image data loaded, shape: %r.', image.shape)
 
     restrictor = self.make_restrictor(dst_corner, dst_size, image, alignment)
-
+    # Interesting part to change the image histogram to match reference
     try:
       if self._reference_lut is not None:
         if self.request.histogram_masks:

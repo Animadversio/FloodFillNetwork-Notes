@@ -296,7 +296,7 @@ message ResegmentationRequest {
   repeated ResegmentationPoint points = 2;
 
   // Number of voxels around the decision point. Defines the segmentation
-  // subvolume size.
+  // subvolume size. (i.e. context for resegmentation, only information in this cube will be used)
   optional proto.Vector3j radius = 5;
 
   // Output options.
