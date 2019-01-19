@@ -8,6 +8,7 @@ This is a temporary script file.
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+
 #%%
 testDatLoc='/home/morganlab/Downloads/ffn-master/results/fib25/sample-training2.npz'
 data=np.load(testDatLoc)
@@ -37,6 +38,10 @@ idx,cnts=np.unique(segmentation[125,:,:],return_counts=True)
 #%%
 plt.hist(np.log10(cnts),bins=50)
 plt.show()
+
+#%%
+
+cmap = cmap.from_list('Custom cmap', cmaplist, cmap.N)
 #%%
 exportLoc = '/home/morganlab/Downloads/LGN_Autoseg_Result/'
 for i in range(segmentation.shape[0]):

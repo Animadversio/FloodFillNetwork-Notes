@@ -21,7 +21,9 @@ import platform
 
 if platform.system() == 'Windows':
     DIVSTR = '::'
-elif platform.system() == 'Linux':
+elif platform.system() in ['Linux', 'Darwin']:
+    DIVSTR = ':'
+else:
     DIVSTR = ':'
 
 FLAGS = flags.FLAGS

@@ -32,10 +32,9 @@ import ctypes
 from time import time
 import platform
 
-DIVSTR = ':'
 if platform.system() == 'Windows':
     DIVSTR = '::'
-elif platform.system() == 'Linux':
+elif platform.system() in ['Linux', 'Darwin']:
     DIVSTR = ':'
 else:
     DIVSTR = ':'

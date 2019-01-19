@@ -6,15 +6,15 @@ inference {
     image_stddev: 33
     checkpoint_interval: 1800
     seed_policy: "PolicyPeaks"
-    model_checkpoint_path: "models/fib25/model.ckpt-27465036"
+    model_checkpoint_path: "/tmp/LR_model/model.ckpt-3680"
     model_name: "convstack_3d.ConvStack3DFFNModel"
     model_args: "{\"depth\": 9, \"fov_size\": [55, 37, 17], \"deltas\": [9,6,3]}"
-    segmentation_output_dir: "results/fib25/training2"
+    segmentation_output_dir: "results/LGN/testing_LR"
     inference_options {
       init_activation: 0.95
       pad_value: 0.05
       move_threshold: 0.9
-      min_boundary_dist { x: 1 y: 1 z: 1}
+      min_boundary_dist { x: 3 y: 3 z: 1}
       segment_threshold: 0.6
       min_segment_size: 1000
     }
@@ -28,4 +28,4 @@ radius {x: 200 y: 200 z: 40}
 output_directory: "results/LGN_LR/reseg"
 max_retry_iters: 1
 segment_recovery_fraction: 0.4
-analysis_radius { x:  y:  z: }
+analysis_radius {x: 200 y: 200 z: 40}

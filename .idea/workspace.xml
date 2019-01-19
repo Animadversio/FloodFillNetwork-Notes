@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/compute_partitions_parallel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_format_convert.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ffn-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ffn-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FFN_reading_notes.md" beforeDir="false" afterPath="$PROJECT_DIR$/FFN_reading_notes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/readLGNResults_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/readLGNResults_v1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_coordinates.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_coordinates.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compute_partitions_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_partitions_parallel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/resegment_example.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/configs/resegment_example.pbtxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,103 +40,115 @@
     <session id="1326753333">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="ipynb" value="2" />
           <entry key="md" value="1" />
-          <entry key="py" value="16" />
+          <entry key="pbtxt" value="3" />
+          <entry key="proto" value="5" />
+          <entry key="pstat" value="2" />
+          <entry key="py" value="41" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="IPNB" value="2" />
           <entry key="Markdown" value="1" />
-          <entry key="Python" value="13" />
-          <entry key="Scratch" value="4" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PROTO" value="4" />
+          <entry key="Profiler Session" value="2" />
+          <entry key="Python" value="37" />
+          <entry key="Scratch" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1315" />
+          <entry key="Python Console" value="326" />
+          <entry key="pbtxt" value="1" />
+          <entry key="py" value="2757" />
           <entry key="scratch" value="21" />
           <entry key="scratch_2" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="614" />
-          <entry key="Scratch" value="726" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="2379" />
+          <entry key="Scratch" value="729" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/compute_partitions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="235" column="22" selection-start-line="235" selection-start-column="22" selection-end-line="235" selection-end-column="22" />
-              <folding>
-                <element signature="e#563#601#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build_coordinates.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1548">
-              <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
+        <entry file="file://$PROJECT_DIR$/analysis_script/ResegmentGeneration.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="176" column="52" selection-start-line="176" selection-start-column="4" selection-end-line="176" selection-end-column="52" />
+            <state relative-caret-position="175">
+              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
               <folding>
-                <element signature="e#563#601#0" expanded="true" />
+                <element signature="e#169#187#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils_format_convert.py">
+        <entry file="mock:///Users/binxu/Library/Caches/PyCharm2018.2/snapshots/FloodFillNetwork-Notes1.pstat">
+          <provider selected="true" editor-type-id="profiler-session-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/configs/resegment_example.pbtxt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-768" />
+            <state relative-caret-position="540">
+              <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1345">
-              <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="229">
+              <caret line="327" lean-forward="true" selection-start-line="327" selection-end-line="327" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis_script/readLGNResults_v1.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
               <folding>
-                <marker date="1546774531900" expanded="true" signature="2649:4011" ph="..." />
+                <element signature="e#81#99#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2682">
-              <caret line="160" column="27" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="27" />
+            <state relative-caret-position="183">
+              <caret line="58" column="10" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
+              <folding>
+                <element signature="e#912#950#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -177,6 +191,9 @@
       <find>segment_at</find>
       <find>nan</find>
       <find>output</find>
+      <find>segmentation_output_dir</find>
+      <find>runner</find>
+      <find>init_segmentation</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,9 +206,7 @@
         <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
         <option value="$PROJECT_DIR$/ffn/training/model.py" />
         <option value="$PROJECT_DIR$/ffn/training/models/convstack_3d.py" />
-        <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/compute_partitions.py" />
-        <option value="$PROJECT_DIR$/build_coordinates.py" />
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" />
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
@@ -199,7 +214,13 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/storage.py" />
+        <option value="$PROJECT_DIR$/build_coordinates.py" />
         <option value="$PROJECT_DIR$/compute_partitions_parallel.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/configs/resegment_example.pbtxt" />
+        <option value="$PROJECT_DIR$/analysis_script/readLGNResults_v1.py" />
+        <option value="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" />
       </list>
     </option>
   </component>
@@ -228,13 +249,32 @@
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
+              <item name="analysis_script" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
+              <item name="configs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
               <item name="ffn" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
               <item name="ffn" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="inference" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -244,12 +284,20 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ToolWindowDatabase.ShowToolbar" value="false" />
     <property name="ToolWindowR Graphics.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python&#10;GenericSQL" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -263,7 +311,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_2">
+  <component name="RunManager" selected="Python.ResegmentGeneration">
+    <configuration name="ResegmentGeneration" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ffn-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis_script" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -334,7 +404,10 @@
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python" />
       <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -353,9 +426,11 @@
       <item itemvalue="Python.scratch" />
       <item itemvalue="Python.scratch_1" />
       <item itemvalue="Python.scratch_2" />
+      <item itemvalue="Python.ResegmentGeneration" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ResegmentGeneration" />
         <item itemvalue="Python.scratch_2" />
         <item itemvalue="Python.scratch" />
         <item itemvalue="Python.scratch_1" />
@@ -435,12 +510,12 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1757925" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18443803" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2881907" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3292232" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39950678" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -450,16 +525,17 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.3292232" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.30949447" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
+      <window_info anchor="right" id="Coverage" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.3299712" />
-      <window_info anchor="right" id="Database" order="4" weight="0.3299712" />
-      <window_info anchor="right" id="R Packages" order="5" weight="0.3299712" />
-      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="6" side_tool="true" weight="0.31628242" />
-      <window_info anchor="right" auto_hide="true" id="R Graphics" order="7" type="SLIDING" weight="0.3299712" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.5459559" visible="true" weight="0.28025937" />
+      <window_info anchor="right" id="Database" order="4" show_stripe_button="false" weight="0.3299712" />
+      <window_info anchor="right" id="R Packages" order="5" show_stripe_button="false" weight="0.3299712" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="6" sideWeight="0.4540441" side_tool="true" visible="true" weight="0.28025937" />
+      <window_info anchor="right" auto_hide="true" id="R Graphics" internal_type="SLIDING" order="7" show_stripe_button="false" type="SLIDING" weight="0.3299712" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,75 +560,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/training/mask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1143" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-313451744/_weakref.py" />
-    <entry file="file://$PROJECT_DIR$/ffn/training/optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-638" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/training/inputs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1360">
-          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5718">
-          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/training/import_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/executor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3111">
-          <caret line="256" column="6" selection-start-line="256" selection-start-column="6" selection-end-line="256" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/pkgs/pandas-0.23.4-py37h830ac7b_0/Lib/site-packages/pandas/core/internals.py" />
-    <entry file="file://$PROJECT_DIR$/ffn/training/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1503">
-          <caret line="93" column="6" selection-start-line="93" selection-start-column="6" selection-end-line="93" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4318">
-          <caret line="128" column="39" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/lib/arraypad.py" />
-    <entry file="file://$PROJECT_DIR$/ffn/training/models/convstack_3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="55" column="73" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
-          <caret line="138" column="8" lean-forward="true" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/collections/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -565,18 +572,6 @@
         <state relative-caret-position="-600" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_pb2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-540" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn_inference_demo.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/scipy/ndimage/morphology.py" />
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/core/fromnumeric.py" />
     <entry file="file://$PROJECT_DIR$/ffn/inference/align.py">
@@ -586,17 +581,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference_pb2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="1149" selection-start-line="1149" selection-end-line="1149" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/utils/ortho_plane_visualization.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/consensus.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference_flags.py">
@@ -606,54 +591,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/absl/app.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.sql">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/inference_training_sample2.pbtxt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2286">
-          <caret line="127" column="36" selection-start-line="127" selection-start-column="36" selection-end-line="127" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8694">
-          <caret line="517" column="37" selection-start-line="517" selection-start-column="16" selection-end-line="517" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.proto">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="58" column="10" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -683,9 +623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1206">
           <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -710,13 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2682">
-          <caret line="160" column="27" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/multiprocessing/pool.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -738,9 +668,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/utils/png_to_h5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-201" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/multiprocessing/sharedctypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2682">
+          <caret line="160" column="27" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/compute_partitions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="3978">
           <caret line="235" column="22" selection-start-line="235" selection-start-column="22" selection-end-line="235" selection-end-column="22" />
           <folding>
             <element signature="e#563#601#0" expanded="true" />
@@ -748,49 +704,186 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1548">
-          <caret line="98" column="24" selection-start-line="98" selection-start-column="24" selection-end-line="98" selection-end-column="24" />
+        <state relative-caret-position="33">
+          <caret line="175" column="17" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/utils/png_to_h5.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_pb2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-201" />
+        <state relative-caret-position="-7297" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils_format_convert.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/consensus.proto">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-768" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/multiprocessing/sharedctypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="-16">
           <folding>
-            <element signature="e#201#214#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/executor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1345">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="4518">
+          <caret line="256" column="6" selection-start-line="256" selection-start-column="6" selection-end-line="256" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1797" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="28" column="35" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn_inference_demo.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/consensus.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference_pb2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19015">
+          <caret line="1149" selection-start-line="1149" selection-end-line="1149" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="845" column="37" selection-start-line="845" selection-start-column="20" selection-end-line="845" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/utils/vector.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <marker date="1546774531900" expanded="true" signature="2649:4011" ph="..." />
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/utils/geom_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1182" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="21" selection-start-line="21" selection-end-line="26" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/inference_training_LGN_LR.pbtxt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="327" lean-forward="true" selection-start-line="327" selection-end-line="327" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/inference_training_sample2.pbtxt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="58" column="10" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
+          <folding>
+            <element signature="e#912#950#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="176" column="52" selection-start-line="176" selection-start-column="4" selection-end-line="176" selection-end-column="52" />
+        <state relative-caret-position="18">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/readLGNResults_v1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
           <folding>
-            <element signature="e#563#601#0" expanded="true" />
+            <element signature="e#81#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/resegment_example.pbtxt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/ResegmentGeneration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="e#169#187#0" expanded="true" />
           </folding>
         </state>
       </provider>
