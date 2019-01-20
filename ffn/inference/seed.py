@@ -107,7 +107,7 @@ class PolicyPeaks(BaseSeedPolicy):
   def _init_coords(self):
     logging.info('peaks: starting')
 
-    # Edge detection.
+    # Edge detection. !!!!!!!!!!! Edge detection here will detect all the vesicles as well!
     edges = ndimage.generic_gradient_magnitude(
         self.canvas.image.astype(np.float32),
         ndimage.sobel)
