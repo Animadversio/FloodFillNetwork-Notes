@@ -101,10 +101,14 @@ def get_canvas(point, radius, runner):
   subvol_size = radius * 2 + 1
   end = subvol_size + corner
 
+  # if (np.any(corner < 0) or
+  #     runner.init_seg_volstore.size.z <= end[0] or
+  #     runner.init_seg_volstore.size.y <= end[1] or
+  #     runner.init_seg_volstore.size.x <= end[2]):  # init_seg_volstore is not defined !!!
   if (np.any(corner < 0) or
-      runner.init_seg_volstore.size.z <= end[0] or
-      runner.init_seg_volstore.size.y <= end[1] or
-      runner.init_seg_volstore.size.x <= end[2]):
+        runner._image_volume.shape[0] <= end[0] or
+        runner._image_volume.shape[1] <= end[1] or
+        runner._image_volume.shape[2] <= end[2]):  # z,y,x
     logging.error('Not enough context for: %d, %d, %d; corner: %r; end: %r',
                   point[2], point[1], point[0], corner, end)
     return None, None
@@ -130,7 +134,7 @@ def process_point(request, runner, point_num):
     point = point.z, point.y, point.x
     radius = (request.radius.z, request.radius.y, request.radius.x)
     canvas, alignment = get_canvas(point, radius, runner)  # error will be thrown if the cube goes out of bound box
-    if canvas is None:
+    if canvas is None:  # BUG HERE !! get_canvas will always give empty canvas instead of
       logging.warning('Could not get a canvas object.')
       return
 
@@ -208,8 +212,10 @@ def process_point(request, runner, point_num):
       logging.info('processing object %d', i)
 
       with timer_counter(canvas.counters, 'edt'):
-        ps = runner.init_seg_volstore.info.pixelsize
-        dists = ndimage.distance_transform_edt(seg, sampling=(ps.z, ps.y, ps.x))
+        # ps = runner.init_seg_volstore.info.pixelsize # no init_seg_volstore
+        # dists = ndimage.distance_transform_edt(seg, sampling=(ps.z, ps.y, ps.x))
+        ps = runner.pixelsize
+        dists = ndimage.distance_transform_edt(seg, sampling=tuple(ps[::-1]))
         # Do not seed where not enough context is available. (set 0 the 6 margins)
         dists[:canvas.margin[0], :, :] = 0
         dists[:, :canvas.margin[1], :] = 0
@@ -237,7 +243,7 @@ def process_point(request, runner, point_num):
         canvas.log_info('.. starting segmentation at (xyz): %d %d %d',
                         x0, y0, z0)
         canvas.segment_at((z0, y0, x0))
-        seg_prob = expit(canvas.seed)
+        seg_prob = expit(canvas.seed)  # seeds are NANs !!!???
         start_points[i].append((x0, y0, z0))  # record the starting point in xyz format
 
         # Check if we recovered an acceptable fraction of the initial segment
@@ -247,8 +253,8 @@ def process_point(request, runner, point_num):
         crop_seg = seg[analysis_box.to_slice()]
         crop_prob = seg_prob[analysis_box.to_slice()]
         start_size = np.sum(crop_seg)
-        segmented_voxels = np.sum((crop_prob >= options.segment_threshold) &
-                                  crop_seg)
+        segmented_voxels = np.nansum((crop_prob >= options.segment_threshold) &
+                                  crop_seg)  # there are nan entries for not segmented voxels
         if request.segment_recovery_fraction > 0:
           if segmented_voxels / start_size >= request.segment_recovery_fraction:
             break

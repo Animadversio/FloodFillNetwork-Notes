@@ -297,7 +297,7 @@ class EvalTracker(object):
 
 def run_training_step(sess, model, fetch_summary, feed_dict):
   """Runs one training step for a single FFN FOV."""
-  ops_to_run = [model.train_op, model.global_step, model.logits]
+  ops_to_run = [model.train_op, model.global_step, model.logits]  # train_op defined in model.set_up_optimizer()
 
   if fetch_summary is not None:
     ops_to_run.append(fetch_summary)

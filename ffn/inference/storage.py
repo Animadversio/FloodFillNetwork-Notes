@@ -59,7 +59,13 @@ def decorated_volume(settings, **kwargs):
     if len(path) != 2:
       raise ValueError('hdf5 volume_path should be specified as file_path:'
                        'hdf5_internal_dataset_path.  Got: ' + settings.hdf5)
-    volume = h5py.File(path[0])[path[1]]
+    volume = h5py.File(path[0],'r')[path[1]]
+  elif settings.HasField('npz'):
+    path = settings.npz.split(':')
+    if len(path) != 2:
+      raise ValueError('npz volume_path should be specified as file_path:'
+                       'dataset_key_name.  Got: ' + settings.npz)
+    volume = np.load(path[0])[path[1]]
   else:
     raise ValueError('A volume_path must be set.')
 
