@@ -148,13 +148,16 @@ pool = mp.Pool(processes=mp.cpu_count())  # the code above does not work in Pyth
 result = pool.map(worker_func, pair_list)
 pickle.dump(result, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 
+#%%
 # Save result to dict
 seed_dict = {}
 for result_vec, id_pair in zip(result, pair_list):
     cur_idx1, cur_idx2 = id_pair[0], id_pair[1]
     if len(result_vec)!=0:
-        seed_dict[(cur_idx1, cur_idx2)] = seed_dict.get((cur_idx1, cur_idx2), []) + result_vec  # note extend here #seed_dict[(cur_idx1, cur_idx2)] =
-
+        if type(result_vec) == list:
+            seed_dict[(cur_idx1, cur_idx2)] = seed_dict.get((cur_idx1, cur_idx2), []) + result_vec  # note extend here #seed_dict[(cur_idx1, cur_idx2)] =
+        else:
+            seed_dict[(cur_idx1, cur_idx2)] = seed_dict.get((cur_idx1, cur_idx2), []) + [result_vec]
 pickle.dump(seed_dict, open(join(output_path, 'seed_dict.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 # Write the pb file
 file = open(join(output_path, "resegment_point_list.txt"), "w")
