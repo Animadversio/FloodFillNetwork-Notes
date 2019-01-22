@@ -26,7 +26,7 @@ from ffn.inference import seed
 #"/tmp/LR_model/model.ckpt-3680"
 config = """inference {
     image {
-      hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
+      hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR (copy).h5:raw"
     }
     image_mean: 128
     image_stddev: 33
@@ -44,8 +44,7 @@ config = """inference {
       segment_threshold: 0.6
       min_segment_size: 1000
     }
-    init_segmentation {
-    }
+
 }
 points {id_a:22 id_b:29 point {x: 510 y: 158 z: 8} } 
 points {id_a:432 id_b:636 point {x: 550 y: 331 z: 32} } 
@@ -89,15 +88,17 @@ seed_list = seed_policy.coords
 import pickle
 pickle.dump(seed_list, open("/home/morganlab/Downloads/LGN_Autoseg_Result/Seed_Distribution/seed_list.pkl",'wb'))
 #%%
+seed_list = pickle.load(open("/home/morganlab/Downloads/LGN_Autoseg_Result/Seed_Distribution/seed_list.pkl",'rb'))
+#%%
 import h5py
-f = h5py.File("/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5",'r')
+#f = h5py.File("/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5",'r')
 
 from ffn.inference import storage
 volume = storage.decorated_volume(req.image)
 #%%
 volume = volume.value.copy()
 #%%%
-for zid in range(175):
+for zid in range(5):
     seeds_in_layer = seed_list[seed_list[:,0]==zid]
     plt.imshow(volume[zid,:,:],cmap='gray')
     plt.scatter(seeds_in_layer[:,2],seeds_in_layer[:,1],c='red',s=0.5) # note the way they scatter, Xaxis corr to 3rd index
