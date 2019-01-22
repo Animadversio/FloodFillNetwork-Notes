@@ -26,6 +26,7 @@ message DecoratedVolume {
 
     // file_path:hdf5_internal_dataset_path for the volume.
     string hdf5 = 3;
+    string npz = 4;
   }
 
   // For volinfo Volumes only.

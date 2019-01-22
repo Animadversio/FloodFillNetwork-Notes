@@ -20,13 +20,16 @@ from ffn.utils import bounding_box_pb2
 from ffn.inference import inference
 from ffn.inference import inference_flags
 from ffn.inference import resegmentation
-from ffn.inference import seed
-
+from importlib import reload
+import logging
+# reload(inference)
+# reload(resegmentation)
+logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 #%%
 #"/tmp/LR_model/model.ckpt-3680"
 config = """inference {
     image {
-      hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR (copy).h5:raw"
+      hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
     }
     image_mean: 128
     image_stddev: 33
@@ -44,10 +47,12 @@ config = """inference {
       segment_threshold: 0.6
       min_segment_size: 1000
     }
-
+    init_segmentation {
+       npz: "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/0/0/seg-0_0_0.npz:segmentation"
+    }
 }
-points {id_a:22 id_b:29 point {x: 510 y: 158 z: 8} } 
-points {id_a:432 id_b:636 point {x: 550 y: 331 z: 32} } 
+points {id_a:22 id_b:29 point {x: 158 y: 510 z: 8} }
+points {id_a:432 id_b:636 point {x: 334 y: 542 z: 32} }
 radius {x: 200 y: 200 z: 20}
 output_directory: "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/reseg"
 max_retry_iters: 2
@@ -63,18 +68,8 @@ req = reseg_req.inference
 #%%
 runner = inference.Runner()
 runner.start(req)
-#%% Recover the canvas but it does not recover the segmentation!
-canvas, alignment = runner.make_canvas((0, 0, 0), (175, 1000, 1000))
+runner.set_pixelsize([8,12,30])
 
-#%%
-ResultPath = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
-testSegLoc = ResultPath + "seg-0_0_0.npz"
-testProbLoc = ResultPath + 'seg-0_0_0.prob'
-data = np.load(testSegLoc)
-segmentation = data['segmentation']
-#%%
-seg = segmentation.reshape((1, *segmentation.shape))
-canvas.init_segmentation_from_volume(seg,(0,0,0),(175, 1000, 1000))
 #%%
 # seg_canvas1 = runner.run((0, 0, 0), (1000, 1000, 175))
 resegmentation.process(reseg_req,runner)

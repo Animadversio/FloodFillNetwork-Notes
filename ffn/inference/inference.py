@@ -693,7 +693,8 @@ class Canvas(object):
     """
     self.log_info('Loading initial segmentation from (zyx) %r:%r',
                   corner, end)
-
+    if len(volume.shape)==3:
+      volume = volume.reshape((1, *volume.shape))
     init_seg = volume[:,  #
                       corner[0]:end[0],  #
                       corner[1]:end[1],  #
@@ -1098,10 +1099,15 @@ class Runner(object):
         corner_zyx=dst_corner,
         **canvas_kwargs)
 
-    if self.request.HasField('init_segmentation'):
+    if self.request.HasField('init_segmentation'): # need to have init_segmentation field to get
       canvas.init_segmentation_from_volume(self.init_seg_volume, src_corner,
                                            src_bbox.end[::-1], align_and_crop)
     return canvas, alignment
+
+  def set_pixelsize(self, pixelsize):
+    '''Set pixel size in order of (x,y,z)'''
+    self.pixelsize = list(pixelsize)
+    logging.info('Volume pixel size set as x:%d nm y:%d nm z:%d nm' % (pixelsize[0],pixelsize[1],pixelsize[2]))
 
   def get_seed_policy(self, corner, subvol_size):
     """Get seed policy generating callable. (defined as Classes in `seed.py`)
