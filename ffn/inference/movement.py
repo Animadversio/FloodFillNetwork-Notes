@@ -72,16 +72,16 @@ def get_scored_move_offsets(deltas, prob_map, threshold=0.9):
   for axis, axis_delta in enumerate(deltas):  # 0,1,2 axis
     if axis_delta == 0:
       continue
-    for axis_offset in (-axis_delta, axis_delta):
+    for axis_offset in (-axis_delta, axis_delta):  # delta denote the movement step size one time
       # Move exactly by the delta along the current axis, and select the face
       # of the subvolume orthogonal to the current axis.
       face_sel = subvol_sel[:]
       face_sel[axis] = axis_offset + center[axis]
-      face_prob = prob_map[face_sel]
+      face_prob = prob_map[face_sel]  # restrict to one face of cube
       shape = face_prob.shape
 
       # Find voxel with maximum activation.
-      face_pos = np.unravel_index(face_prob.argmax(), shape)
+      face_pos = np.unravel_index(face_prob.argmax(), shape)  # find maximum position on that face
       score = face_prob[face_pos]
 
       # Only move if activation crosses threshold.
@@ -90,8 +90,8 @@ def get_scored_move_offsets(deltas, prob_map, threshold=0.9):
 
       # Convert within-face position to be relative vs the center of the face.
       relative_pos = [face_pos[0] - shape[0] // 2, face_pos[1] - shape[1] // 2]
-      relative_pos.insert(axis, axis_offset)
-      ret = (score, tuple(relative_pos))
+      relative_pos.insert(axis, axis_offset)  # get full offset (3 coord)
+      ret = (score, tuple(relative_pos))  # tuple of activation and the relative coordinate w.r.t. the center of
 
       if ret not in done:
         done.add(ret)
@@ -181,7 +181,7 @@ class FaceMaxMovementPolicy(BaseMovementPolicy):
   def __next__(self):
     """Pops positions from queue until a valid one is found and returns it."""
     while self.scored_coords:
-      _, coord = self.scored_coords.popleft()
+      _, coord = self.scored_coords.popleft()  # score is saved only for sorting, not used
       coord = tuple(coord)
       if self.quantize_pos(coord) in self.done_rounded_coords:
         continue
@@ -211,8 +211,8 @@ class FaceMaxMovementPolicy(BaseMovementPolicy):
     self.done_rounded_coords.add(qpos)
 
     scored_coords = get_scored_move_offsets(self.deltas, prob_map,
-                                            threshold=self.score_threshold)
-    scored_coords = sorted(scored_coords, reverse=True)
+                                            threshold=self.score_threshold)  # scored_coords has been generated as list kindof.
+    scored_coords = sorted(scored_coords, reverse=True)  # sorted by score
     for score, rel_coord in scored_coords:
       # convert to whole cube coordinates
       coord = [rel_coord[i] + position[i] for i in range(3)]
@@ -227,7 +227,7 @@ def get_policy_fn(request, ffn_model):
     if movement_policy_class is None:
       movement_policy_class = import_symbol(request.movement_policy_name)
   else:  # Default / fallback.
-    movement_policy_class = FaceMaxMovementPolicy
+    movement_policy_class = FaceMaxMovementPolicy  # FaceMaxMovement is default for Inference
 
   if request.movement_policy_args:
     kwargs = json.loads(request.movement_policy_args)

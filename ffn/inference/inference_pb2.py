@@ -12,8 +12,8 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from utils import vector_pb2 as utils_dot_vector__pb2
-from utils import bounding_box_pb2 as utils_dot_bounding__box__pb2
+from ffn.utils import vector_pb2 as utils_dot_vector__pb2
+from ffn.utils import bounding_box_pb2 as utils_dot_bounding__box__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(

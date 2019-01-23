@@ -332,7 +332,7 @@ def train_eval_size(model):
 
 def train_image_size(model):
   return (np.array(model.input_image_size) +
-          np.array(model.deltas) * 2 * fov_moves())  # fov_moves() is defaultly 1
+          np.array(model.deltas) * 2 * fov_moves())  # fov_moves() is defaultly 1, 2 when max_pred_mov enabled
 
 
 def train_canvas_size(model):
@@ -363,7 +363,7 @@ def _get_permutable_axes():
 def define_data_input(model, queue_batch=None):
   """Adds TF ops to load input data."""
 
-  label_volume_map = {}
+  label_volume_map = {} # VOLNAME->H5 DATASET MAP
   for vol in FLAGS.label_volumes.split(','):
     volname, path, dataset = vol.split(DIVSTR)
     label_volume_map[volname] = h5py.File(path)[dataset]
@@ -525,7 +525,7 @@ def get_example(load_example, eval_tracker, model, get_offsets):
 
   Args:
     load_example: callable returning a tuple of image and label ndarrays
-                  as well as the seed coordinate and volume name of the example (E.g. lambda: sess.run(load_data_ops))
+                  as well as the seed coordinate and volume name of the example (E.g. lambda: sess.run(load_data_ops)) (defined in define_data_input)
     eval_tracker: EvalTracker object
     model: FFNModel object
     get_offsets: iterable of (x, y, z) offsets to investigate within the

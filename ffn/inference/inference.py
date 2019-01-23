@@ -515,11 +515,11 @@ class Canvas(object):
       self.movement_policy.append(item)
 
     with timer_counter(self.counters, 'segment_at-loop'):
-      for pos in self.movement_policy:  # movment iterator adaptively generate the next `pos`
+      for pos in self.movement_policy:  # movment iterator adaptively generate the next `pos`,
         # Terminate early if the seed got too weak.
         if self.seed[start_pos] < self.options.move_threshold:
           self.counters['seed_got_too_weak'].Increment()
-          break
+          break  # whenever one starting position is lower than threshold then no more move
 
         if not self.restrictor.is_valid_pos(pos):
           self.counters['skip_restriced_pos'].Increment()
@@ -531,7 +531,7 @@ class Canvas(object):
         num_iters += 1
 
         with timer_counter(self.counters, 'movement_policy'):
-          self.movement_policy.update(pred, pos)
+          self.movement_policy.update(pred, pos)  # update movement set from the logit get from current call
 
         with timer_counter(self.counters, 'segment_at-overhead'):
           if self._keep_history:
@@ -694,7 +694,7 @@ class Canvas(object):
     self.log_info('Loading initial segmentation from (zyx) %r:%r',
                   corner, end)
     if len(volume.shape)==3:
-      volume = volume.reshape((1, *volume.shape))
+      volume = volume.reshape((1, volume.shape[0], volume.shape[1], volume.shape[2]))
     init_seg = volume[:,  #
                       corner[0]:end[0],  #
                       corner[1]:end[1],  #

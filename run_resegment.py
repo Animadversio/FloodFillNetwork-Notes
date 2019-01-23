@@ -22,9 +22,10 @@ from ffn.inference import inference_flags
 from ffn.inference import resegmentation
 from importlib import reload
 import logging
+logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 # reload(inference)
 # reload(resegmentation)
-logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
+
 #%%
 #"/tmp/LR_model/model.ckpt-3680"
 config = """inference {
@@ -68,37 +69,10 @@ req = reseg_req.inference
 #%%
 runner = inference.Runner()
 runner.start(req)
-runner.set_pixelsize([8,12,30])
+runner.set_pixelsize([8, 12, 30])
 
 #%%
 # seg_canvas1 = runner.run((0, 0, 0), (1000, 1000, 175))
 resegmentation.process(reseg_req,runner)
 
-
-#%% Seed policy tuning !
-seed_policy = seed.PolicyPeaks(canvas)
-seed_policy._init_coords()
-seed_list = seed_policy.coords
-#%%
-import pickle
-pickle.dump(seed_list, open("/home/morganlab/Downloads/LGN_Autoseg_Result/Seed_Distribution/seed_list.pkl",'wb'))
-#%%
-seed_list = pickle.load(open("/home/morganlab/Downloads/LGN_Autoseg_Result/Seed_Distribution/seed_list.pkl",'rb'))
-#%%
-import h5py
-#f = h5py.File("/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5",'r')
-
-from ffn.inference import storage
-volume = storage.decorated_volume(req.image)
-#%%
-volume = volume.value.copy()
-#%%%
-for zid in range(5):
-    seeds_in_layer = seed_list[seed_list[:,0]==zid]
-    plt.imshow(volume[zid,:,:],cmap='gray')
-    plt.scatter(seeds_in_layer[:,2],seeds_in_layer[:,1],c='red',s=0.5) # note the way they scatter, Xaxis corr to 3rd index
-    plt.axis('off')
-    plt.savefig('seed_distribution_%d.png'%zid)
-    plt.show()
-    plt.close()
 
