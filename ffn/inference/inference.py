@@ -544,6 +544,9 @@ class Canvas(object):
                             dynamic_image)
 
           assert np.all(pred.shape == self._pred_size)
+          if num_iters % 100 == 0 and num_iters != 0:
+            self.log_info("Iteration #: %d, Segmented Voxels: %d"%(num_iters,
+              np.sum(self.seed >= self.options.segment_threshold)))
 
           self._maybe_save_checkpoint()
 

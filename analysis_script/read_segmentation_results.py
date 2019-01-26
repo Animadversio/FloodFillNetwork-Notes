@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import ffn.inference.storage as storage
+from ffn.inference import inference
 import logging
 from os.path import isdir, join
 import os
@@ -36,7 +37,7 @@ def load_segmentation_output(output_dir, corner):
     qprob = data_prob['qprob']
     return segmentation, qprob
 
-seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp2/'  # Longterm wide field, lowthreshold file
+seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_point/'  # Longterm wide field, lowthreshold file
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
 corner = (0, 0, 0)
 segmentation, qprob = load_segmentation_output(seg_dir, corner)
@@ -88,7 +89,7 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
         plt.show()
         plt.close()
 #%%
-exportLoc = '/home/morganlab/Downloads/LGN_WF_Autoseg_exp2_Result/'
+exportLoc = '/home/morganlab/Downloads/LGN_Autoseg_point_Result/'
 export_segmentation_to_VAST(exportLoc, segmentation)
 #%%
 # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)
