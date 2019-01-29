@@ -53,6 +53,8 @@ from ..utils import bounding_box
 MSEC_IN_SEC = 1000
 MAX_SELF_CONSISTENT_ITERS = 32
 
+# handlers = [logging.FileHandler('inference_log.log'), logging.StreamHandler()]
+# logging.basicConfig(level=logging.INFO, handlers=handlers)
 
 # Visualization.
 # ---------------------------------------------------------------------------
@@ -236,7 +238,7 @@ class Canvas(object):
 
     self.counters = counters if counters is not None else Counters()
     self.checkpoint_interval_sec = checkpoint_interval_sec
-    self.checkpoint_path = checkpoint_path
+    self.checkpoint_path = checkpoint_path  # when making canvas, this is automatically filled with  storage.checkpoint_path(self.request.segmentation_output_dir, corner),
     self.checkpoint_last = time.time()
 
     self._keep_history = keep_history
@@ -254,7 +256,7 @@ class Canvas(object):
     self._input_seed_size = np.array(model.input_seed_size[::-1])
     self._input_image_size = np.array(model.input_image_size[::-1])
     self.margin = self._input_image_size // 2
-
+    # in case the input_seed_size and output pred_size are different
     self._pred_delta = (self._input_seed_size - self._pred_size) // 2
     assert np.all(self._pred_delta >= 0)
 
@@ -418,7 +420,7 @@ class Canvas(object):
       start = np.array(pos) - off
       end = start + self._input_seed_size
       logit_seed = np.array(
-          self.seed[[slice(s, e) for s, e in zip(start, end)]])  # Slice out a cube around pos with size `_input_seed_size`
+          self.seed[[slice(s, e) for s, e in zip(start, end)]])  # Slice out a cube around pos with `_input_seed_size`
       init_prediction = np.isnan(logit_seed)
       logit_seed[init_prediction] = np.float32(self.options.pad_value)  # pad the nan values with `pad_value`
 
@@ -436,7 +438,7 @@ class Canvas(object):
         if diff < self.options.consistency_threshold:  # iteration until prob_seed of 2 iters are consistent!
           break
 
-        prob_seed, logit_seed = prob, logits
+        prob_seed, logit_seed = prob, logits  # these are all cubes of `_input_seed_size` size
 
       if self.halt_signaler.is_halt(fetches=fetches, pos=pos,
                                     orig_pos=start_pos,
@@ -445,7 +447,7 @@ class Canvas(object):
 
       start += self._pred_delta
       end = start + self._pred_size
-      sel = [slice(s, e) for s, e in zip(start, end)]
+      sel = [slice(s, e) for s, e in zip(start, end)]  # the cube mask
 
       # Bias towards oversegmentation by making it impossible to reverse
       # disconnectedness predictions in the course of inference.

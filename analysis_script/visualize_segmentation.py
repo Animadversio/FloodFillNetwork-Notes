@@ -14,7 +14,7 @@ def visualize_seed(canvas, zid, threshold=0.6, baseline=0.1):
     plt.show()
     plt.close()
 #%%
-visualize_seed(canvas, 70, baseline=0.1)
+visualize_seed(canvas, 41, baseline=0.1)
 
 
 #%%
