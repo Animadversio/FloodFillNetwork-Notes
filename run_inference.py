@@ -28,6 +28,46 @@ from tensorflow import gfile
 from ffn.utils import bounding_box_pb2
 from ffn.inference import inference
 from ffn.inference import inference_flags
+import logging
+import logging.config
+logger = logging.getLogger(__name__)
+# logging.config.fileConfig(json.load(open('configs/logging.json')), disable_existing_loggers=False)
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s [%(filename)s: %(funcName)s(): %(lineno)d] %(message)s"
+        },
+    },
+    "handlers": {
+        "default": {
+            "level":"INFO",
+            "class":"logging.StreamHandler",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        },
+        "logfile": {
+            "class": "logging.FileHandler",
+            "level": "INFO",
+            "formatter": "standard",
+            "filename": "inference_log_new.log",
+            "encoding": "utf8"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console", "logfile"],
+            "level": "INFO",
+            "propagate": True
+        }
+    }
+})
+logging.info("Logger prepared! ")
 
 FLAGS = flags.FLAGS
 

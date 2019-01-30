@@ -26,7 +26,7 @@ import matplotlib.colors as color
 import h5py
 from os.path import join
 
-def convert_image_stack_to_h5(path, pattern, stack_n, output = "grayscale_maps_zyx.h5"):
+def convert_image_stack_to_h5(path, pattern, stack_n, beg_n=0, output = "grayscale_maps_zyx.h5"):
     ''' 
     
     E.g. 
@@ -38,14 +38,15 @@ def convert_image_stack_to_h5(path, pattern, stack_n, output = "grayscale_maps_z
     convert_image_stack_to_h5(path=path, pattern="tweakedImageVolume2_LRexport_s%03d.png",stack_n=175,output="grayscale_maps_LR.h5") 
     
     '''
-    tmp_img = plt.imread((join(path,pattern)) % 0)
+    tmp_img = plt.imread((join(path, pattern)) % beg_n)
     img_shape = tmp_img.shape[:2]
     # Read in image stacks (PNG gray scale)
-    EM_image_stacks = np.zeros((stack_n,*img_shape,), dtype=np.uint8) 
+    EM_image_stacks = np.zeros((stack_n, *img_shape,), dtype=np.uint8)
     print("Image stack shape: ")
-    print((stack_n,*img_shape,))
-    for i in range(stack_n): 
-        img = plt.imread((join(path,pattern)) % (i))
+    print((stack_n, *img_shape,))
+
+    for i, name_i in enumerate( range(beg_n, beg_n + stack_n) ):
+        img = plt.imread((join(path,pattern)) % (name_i))
         img = (img[:,:,0]*255).astype(dtype=np.uint8)
         EM_image_stacks[i,:,:] = img
         plt.imshow(img, cmap="Greys") 
@@ -56,7 +57,7 @@ def convert_image_stack_to_h5(path, pattern, stack_n, output = "grayscale_maps_z
     f.close() 
     return EM_image_stacks
 
-def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape, output="groundtruth_zyx.h5", in_dtype=np.int16, out_dtype='int16'):
+def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape, beg_n=0, output="groundtruth_zyx.h5", in_dtype=np.int16, out_dtype='int16'):
     '''
     raw_shape: shape marked in the name of file(inverse order)
     img_shape: shape of image stack, use to crop the seg_stack as there are 0 padding 
@@ -75,7 +76,7 @@ def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape
     print("Raw Data stack shape: ")
     print((stack_n,*raw_shape,))
     image_stacks = np.zeros((stack_n,*raw_shape), dtype=in_dtype)
-    for i in range(stack_n):
+    for i in range(beg_n, beg_n + stack_n):
         # img = plt.imread((join(path,raw_pattern)) % (i))
         data_from_raw = np.fromfile((join(path,raw_pattern)) % (i), dtype=in_dtype)
         data_from_raw.shape = raw_shape

@@ -45,12 +45,13 @@ analysis_radius {x: 200 y: 200 z: 20}
 reseg_req = inference_pb2.ResegmentationRequest()
 _ = text_format.Parse(config, reseg_req)
 req = reseg_req.inference
-#%%
+#%% Get the canvas and volume
 runner = inference.Runner()
 runner.start(req)
 runner.set_pixelsize([8, 12, 30])
 canvas, alignment = runner.make_canvas((0,0,0),(175, 1058, 1180))
-#%% Seed policy tuning !
+
+#%% Seed policy calculation
 seed_policy = seed.PolicyPeaks(canvas)
 seed_policy._init_coords()
 seed_list = seed_policy.coords
@@ -59,6 +60,7 @@ seeds_segment = np.zeros(canvas.shape, dtype=np.uint8)
 seeds_segment[seed_list[:, 0], seed_list[:, 1], seed_list[:, 2]] = 1
 #%%
 export_segmentation_to_VAST('/home/morganlab/Downloads/LGN_WF_Autoseg_Result2/seeds', seeds_segment)
+
 #%% Check filtering procedure and intermediate result!
 edges = ndimage.generic_gradient_magnitude(
         canvas.image.astype(np.float32),
@@ -73,28 +75,25 @@ dt = ndimage.distance_transform_edt(1 - filt_edges).astype(np.float32)
 #%%
 #%%
 del thresh_image
-#%% visualize the result!
+#%% visualize the result! First generate the seed list
 zid = 50
-#%%
-plt.imshow(canvas.image[zid, :, :], cmap='gray')
-plt.title("Grayscale image, normalized")
-plt.show()
-plt.figure(figsize = [10,10])
-plt.imshow(edges[zid, :, :], cmap='gray')
-plt.title("Sobel filtered edge image")
-plt.show()
-#%%
-plt.figure(figsize = [10,10])
-plt.imshow(filt_edges[zid, :, :], cmap='gray')
-plt.title("Thresholded edge image")
-plt.show()
-#%%
-plt.figure(figsize = [10,10])
-plt.imshow(dt[zid, :, :], cmap='gray')
-plt.title("Euclidean transformed edge image")
 seeds_in_layer = seed_list[seed_list[:, 0] == zid]
-plt.scatter(seeds_in_layer[:, 2], seeds_in_layer[:, 1], c='red', s=0.5)
-plt.show()
+#%%
+def show_img_with_scatter(img, zid, title, savename=""):
+    plt.figure(figsize=[12, 12])
+    plt.imshow(img[zid, :, :], cmap='gray')
+    plt.scatter(seeds_in_layer[:, 2], seeds_in_layer[:, 1], c='red', s=2)
+    plt.title(title+" z=%d"%zid)
+    if not savename=="":
+        plt.savefig(savename+"z%d.png" % zid)
+    plt.show()
+    plt.close()
+
+show_img_with_scatter(canvas.image, zid, "EM image, normalized", "EM_img")
+show_img_with_scatter(edges, zid, "Edge (Sobel filtered) image", "sobel_filter")
+show_img_with_scatter(filt_edges, zid, "Thresholded edge image", "thresh_edge")
+show_img_with_scatter(dt, zid, "Euclidean transformed edge image", "edt")
+
 
 #%%
 # pickle.dump(seed_list, open("/home/morganlab/Downloads/LGN_Autoseg_Result/Seed_Distribution/seed_list.pkl", 'wb'))

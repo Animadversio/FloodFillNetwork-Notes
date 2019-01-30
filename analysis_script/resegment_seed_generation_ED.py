@@ -7,6 +7,7 @@ Created on Thu Jan 17 14:52:18 2019
 
 Search for connecting components in a object tensor
 Generate the decision points for the algorithm using the mid point of nearest point pair
+Using Euclidean distance transform
 (Parallel Computing Version)
 """
 #%%

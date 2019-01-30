@@ -621,6 +621,7 @@ def save_flags():
 
 def train_ffn(model_cls, **model_kwargs):
   with tf.Graph().as_default():
+    # whole context is replica_device multiple devices
     with tf.device(tf.train.replica_device_setter(FLAGS.ps_tasks, merge_devices=True)):
       # The constructor might define TF ops/placeholders, so it is important
       # that the FFN is instantiated within the current context.

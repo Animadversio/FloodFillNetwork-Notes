@@ -1,28 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
+Read and Export the Segmentation files to VAST
 """
 
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import ffn.inference.storage as storage
+from ffn.inference import inference
 import logging
 from os.path import isdir, join
 import os
 logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
-#%%
-# testDatLoc='/home/morganlab/Downloads/ffn-master/results/fib25/sample-training2.npz'
-# data =np.load(testDatLoc)
-# dataFast=np.load(testDatLoc, mmap_mode='r')
-#
-# segs=data['segmentation']
-# testimage=segs[50,:,:]
-# testimagebit=testimage*7
-# img = Image.fromarray(testimagebit)
-# img
+
 #%% 
 # testSegLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.npz'
 # testProbLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.prob'
@@ -36,7 +26,7 @@ def load_segmentation_output(output_dir, corner):
     qprob = data_prob['qprob']
     return segmentation, qprob
 
-seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp2/'  # Longterm wide field, lowthreshold file
+seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_Mov_full/'  # Longterm wide field, lowthreshold file
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
 corner = (0, 0, 0)
 segmentation, qprob = load_segmentation_output(seg_dir, corner)
@@ -45,9 +35,7 @@ plt.figure()
 plt.imshow(segmentation[80, :, :])
 plt.show()
 #%%
-
-#%%
-idx, cnts=np.unique(segmentation[125,:,:],return_counts=True)
+# idx, cnts=np.unique(segmentation[125,:,:],return_counts=True)
 #%%
 def visualize_supervoxel_size_dist():
     idx, cnts = np.unique(segmentation, return_counts=True)
@@ -69,8 +57,14 @@ idx, cnts = visualize_supervoxel_size_dist()
 
 #%% Export
 #%%
-#%%
 def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix='tif'):
+    '''Turn a segmentation(numpy ndarray) into importable tif or png files
+
+    Use the GB bytes to code integer label
+    Example:
+    exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_point'
+    export_segmentation_to_VAST(exportLoc, canvas.segmentation)
+    '''
     # if len(idx) > 2 ** 16: # if idx is not defined
     if segmentation.max() > 2 ** 16:
         print("Too many labels, more than the import maximum of VAST %d " % 2 ** 16)
@@ -85,10 +79,11 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
         plt.imsave(join(export_dir, "seg_%03d.%s" % (i, suffix)), export_img)
         if show_fig:
             plt.imshow(export_img)
-        plt.show()
+            plt.show()
         plt.close()
 #%%
-exportLoc = '/home/morganlab/Downloads/LGN_WF_Autoseg_exp2_Result/'
-export_segmentation_to_VAST(exportLoc, segmentation)
+exportLoc = "/home/morganlab/Documents/Sample1_branch109/Autoseg/Longtime_Mov_point"
+    # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
+export_segmentation_to_VAST(exportLoc, np.nan_to_num(canvas.seed>0.6)) # canvas.segmentation  segmentation
 #%%
 # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)
