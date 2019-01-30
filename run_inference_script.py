@@ -144,8 +144,34 @@ inference_options {
   min_segment_size: 10000
   disco_seed_threshold: 0.005
 }'''
-
 seed_list = [(1080, 860, 72), (1616, 1872, 43), (612, 1528, 92), (616, 180, 92),  (144, 712, 43), (400, 168, 45), (1332, 248, 45), (120, 700,45)]  # in xyz order
+downsample_factor =2
+canvas_bbox = [(0, 0, 0), (175, 1058, 1180)]
+#%%
+config = '''image {
+ hdf5: "/home/morganlab/Documents/Sample1_branch109/grayscale_branch.h5:raw"
+}
+image_mean: 140
+image_stddev: 43
+checkpoint_interval: 1200
+seed_policy: "PolicyPeaks"
+model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime_Mov/model.ckpt-953997"
+model_name: "convstack_3d.ConvStack3DFFNModel"
+model_args: "{\\"depth\\": 9, \\"fov_size\\": [37, 25, 15], \\"deltas\\": [8,6,2]}"
+segmentation_output_dir: "/home/morganlab/Documents/Sample1_branch109/Autoseg/Longtime_Mov_point"
+inference_options {
+  init_activation: 0.95
+  pad_value: 0.05
+  move_threshold: 0.90
+  min_boundary_dist { x: 5 y: 5 z: 1}
+  segment_threshold: 0.6
+  min_segment_size: 10000
+  disco_seed_threshold: 0.005
+}'''
+
+seed_list = [(707, 353, 385), (371, 478, 384), (259, 391, 386), (88,264,333), (830, 894, 333), (502,462,278), (878, 256, 278)]
+downsample_factor =1 # Mip level 0, df=1;  Mip level 1 df =2
+canvas_bbox = [(0, 0, 0), (441, 1024, 1024)]
 
 request = inference_pb2.InferenceRequest()
 _ = text_format.Parse(config, request)
@@ -153,10 +179,10 @@ if not gfile.Exists(request.segmentation_output_dir):
     gfile.MakeDirs(request.segmentation_output_dir)
 runner = inference.Runner()
 runner.start(request)
-canvas, alignment = runner.make_canvas((0, 0, 0), (175, 1058, 1180))
+canvas, alignment = runner.make_canvas(canvas_bbox[0], canvas_bbox[1]) # like (0, 0, 0), (175, 1058, 1180)
 for id, start_point in enumerate(seed_list):
     label = id + 1
-    pos = (start_point[2], start_point[1]//2, start_point[0]//2)
+    pos = (start_point[2], start_point[1]//downsample_factor, start_point[0]//downsample_factor)
     canvas.log_info('Starting segmentation at %r (zyx)', pos)
     num_iters = canvas.segment_at(pos,)  # zyx
                     # dynamic_image=inference.DynamicImage(),
@@ -183,7 +209,6 @@ for id, start_point in enumerate(seed_list):
            segmentation=mask,
             prob=storage.quantize_probability(
             expit(canvas.seed)))
-
 
 counter_path = os.path.join(request.segmentation_output_dir, 'counters.txt')
 if not gfile.Exists(counter_path):

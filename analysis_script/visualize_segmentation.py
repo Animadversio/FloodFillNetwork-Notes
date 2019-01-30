@@ -5,7 +5,7 @@ from ffn.inference import inference
 from os.path import isdir, join
 import os
 import logging
-logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
+# logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 
 #%%
 def visualize_seed(canvas, zid, threshold=0.6, baseline=0.1):
@@ -29,5 +29,5 @@ data = np.load("/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Long
 mask = data['segmentation']
 
 #%%
-visualize_mask(canvas, mask, 120)
+visualize_mask(canvas, canvas.seed>0.6, 400, baseline=0.05)
 

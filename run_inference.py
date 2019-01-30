@@ -29,6 +29,7 @@ from ffn.utils import bounding_box_pb2
 from ffn.inference import inference
 from ffn.inference import inference_flags
 import logging
+import logging.config
 logger = logging.getLogger(__name__)
 # logging.config.fileConfig(json.load(open('configs/logging.json')), disable_existing_loggers=False)
 logging.config.dictConfig({

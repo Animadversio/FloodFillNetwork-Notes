@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
+Read and Export the Segmentation files to VAST
 """
 
 import numpy as np
@@ -28,7 +26,7 @@ def load_segmentation_output(output_dir, corner):
     qprob = data_prob['qprob']
     return segmentation, qprob
 
-seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_success/'  # Longterm wide field, lowthreshold file
+seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_Mov_full/'  # Longterm wide field, lowthreshold file
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
 corner = (0, 0, 0)
 segmentation, qprob = load_segmentation_output(seg_dir, corner)
@@ -84,7 +82,8 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
             plt.show()
         plt.close()
 #%%
-exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_point'
-export_segmentation_to_VAST(exportLoc, canvas.segmentation) # canvas.segmentation
+exportLoc = "/home/morganlab/Documents/Sample1_branch109/Autoseg/Longtime_Mov_point"
+    # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
+export_segmentation_to_VAST(exportLoc, np.nan_to_num(canvas.seed>0.6)) # canvas.segmentation  segmentation
 #%%
 # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)

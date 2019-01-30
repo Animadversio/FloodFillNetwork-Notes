@@ -5,7 +5,9 @@ Created on Thu Jan 17 14:52:18 2019
 
 @author: morganlab
 
-Search for connecting components in a object tensor (Parallel Computing Version)
+Search for connecting components in a object tensor
+Using morgan's move and unique the pair strategy
+(Parallel Computing Version)
 """
 #%%
 import numpy as np
