@@ -47,7 +47,10 @@ def convert_image_stack_to_h5(path, pattern, stack_n, beg_n=0, output = "graysca
 
     for i, name_i in enumerate( range(beg_n, beg_n + stack_n) ):
         img = plt.imread((join(path,pattern)) % (name_i))
-        img = (img[:,:,0]*255).astype(dtype=np.uint8)
+        if len(img.shape)==3:
+            img = (img[:,:,0]*255).astype(dtype=np.uint8)
+        elif len(img.shape)==2:
+            img = (img * 255).astype(dtype=np.uint8)
         EM_image_stacks[i,:,:] = img
         plt.imshow(img, cmap="Greys") 
         plt.axis('off')

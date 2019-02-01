@@ -11,6 +11,8 @@ from ffn.inference import inference
 import logging
 from os.path import isdir, join
 import os
+from scipy import ndimage
+from scipy.misc import imresize
 logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 
 #%% 
@@ -57,9 +59,11 @@ idx, cnts = visualize_supervoxel_size_dist()
 
 #%% Export
 #%%
-def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix='tif'):
+def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix='tif', resize=1):
     '''Turn a segmentation(numpy ndarray) into importable tif or png files
 
+    resize: is used in case the segmentation is done on a Higher resolution than the VAST volume
+    then the segmentation has to be resized(downsampled) to be imported into VAST
     Use the GB bytes to code integer label
     Example:
     exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_point'
@@ -70,20 +74,27 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
         print("Too many labels, more than the import maximum of VAST %d " % 2 ** 16)
         logging.warning("Too many labels %d, more than the import maximum of VAST %d " % (len(idx), 2 ** 16))
     os.makedirs(export_dir, exist_ok=True)
+    out_img_size = (int(segmentation.shape[1]*resize), int(segmentation.shape[2]*resize), 3)
     for i in range(segmentation.shape[0]):
         # code the integer labels in G and B channel of the color image!
         export_img = np.zeros((segmentation.shape[1], segmentation.shape[2], 3), dtype=np.uint8)
         export_img[:, :, 1], export_img[:, :, 2] = np.divmod(segmentation[i, :, :], 256)
         # export_img[:, :, 0], export_img[:, :, 1] = np.divmod(export_img[:, :, 1], 256)
+        if resize==1:
+            out_img = export_img
+        else:
+            out_img = np.zeros(out_img_size, dtype=np.uint8)
+            # out_img = ndimage.zoom(export_img, (resize, resize, 1)) # do not zoom on channel direction
+            out_img = imresize(export_img, out_img_size, interp='nearest') # much faster
         plt.figure()
-        plt.imsave(join(export_dir, "seg_%03d.%s" % (i, suffix)), export_img)
+        plt.imsave(join(export_dir, "seg_%03d.%s" % (i, suffix)), out_img)
         if show_fig:
-            plt.imshow(export_img)
+            plt.imshow(out_img)
             plt.show()
         plt.close()
 #%%
-exportLoc = "/home/morganlab/Documents/Sample1_branch109/Autoseg/Longtime_Mov_point"
+exportLoc = "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
     # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
-export_segmentation_to_VAST(exportLoc, np.nan_to_num(canvas.seed>0.6)) # canvas.segmentation  segmentation
+export_segmentation_to_VAST(exportLoc, canvas.segmentation, resize=0.5) # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
 #%%
 # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)

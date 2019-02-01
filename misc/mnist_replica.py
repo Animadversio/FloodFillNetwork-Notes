@@ -42,16 +42,16 @@ import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 flags = tf.app.flags
-flags.DEFINE_string("data_dir", "/Users/binxu/mnist-data",
+flags.DEFINE_string("data_dir", "/tmp/mnist-data",
                     "Directory for storing mnist data")
 flags.DEFINE_boolean("download_only", False,
                      "Only perform downloading of data; Do not proceed to "
                      "session preparation, model definition or training")
-flags.DEFINE_integer("task_index", 0,
+flags.DEFINE_integer("task_index", None,
                      "Worker task index, should be >= 0. task_index=0 is "
                      "the master worker task the performs the variable "
                      "initialization ")
-flags.DEFINE_integer("num_gpus", 0, "Total number of gpus for each machine."
+flags.DEFINE_integer("num_gpus", 1, "Total number of gpus for each machine."
                                     "If you don't use GPU, please set it to '0'")
 flags.DEFINE_integer("replicas_to_aggregate", None,
                      "Number of replicas to aggregate before parameter update "
@@ -77,7 +77,7 @@ flags.DEFINE_string("ps_hosts", "localhost:2222",
                     "Comma-separated list of hostname:port pairs")
 flags.DEFINE_string("worker_hosts", "localhost:2223,localhost:2224",
                     "Comma-separated list of hostname:port pairs")
-flags.DEFINE_string("job_name", "ps", "job name: worker or ps")
+flags.DEFINE_string("job_name", None, "job name: worker or ps")
 
 FLAGS = flags.FLAGS
 
@@ -205,12 +205,13 @@ def main(unused_argv):
                 init_op=init_op,
                 recovery_wait_secs=1,
                 global_step=global_step)
-
+        gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
         sess_config = tf.ConfigProto(
             allow_soft_placement=True,
             log_device_placement=False,
             device_filters=["/job:ps",
-                            "/job:worker/task:%d" % FLAGS.task_index])
+                            "/job:worker/task:%d" % FLAGS.task_index],
+            gpu_options=gpu_options)
         sess_config.gpu_options.allow_growth = True
         # The chief worker (task_index==0) session will prepare the session,
         # while the remaining workers will wait for the preparation to complete.
