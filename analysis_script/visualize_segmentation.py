@@ -29,5 +29,5 @@ data = np.load("/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Long
 mask = data['segmentation']
 
 #%%
-visualize_mask(canvas, canvas.seed>0.6, 400, baseline=0.05)
+visualize_mask(canvas, canvas.segmentation, 350, baseline=1.2)#    canvas.segmentation,
 

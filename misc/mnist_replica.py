@@ -105,14 +105,13 @@ def main(unused_argv):
     num_workers = len(worker_spec)
 
     cluster = tf.train.ClusterSpec({"ps": ps_spec, "worker": worker_spec})
-
     if not FLAGS.existing_servers:
         # Not using existing servers. Create an in-process server.
         server = tf.train.Server(
             cluster, job_name=FLAGS.job_name, task_index=FLAGS.task_index)
         if FLAGS.job_name == "ps":
             server.join()
-
+    print("started")
     is_chief = (FLAGS.task_index == 0)
     if FLAGS.num_gpus > 0:
         # Avoid gpu allocation conflict: now allocate task_num -> #gpu
@@ -205,13 +204,14 @@ def main(unused_argv):
                 init_op=init_op,
                 recovery_wait_secs=1,
                 global_step=global_step)
-
+        gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
         sess_config = tf.ConfigProto(
             allow_soft_placement=True,
             log_device_placement=False,
             device_filters=["/job:ps",
-                            "/job:worker/task:%d" % FLAGS.task_index])
-
+                            "/job:worker/task:%d" % FLAGS.task_index],
+            gpu_options=gpu_options)
+        sess_config.gpu_options.allow_growth = True
         # The chief worker (task_index==0) session will prepare the session,
         # while the remaining workers will wait for the preparation to complete.
         if is_chief:
