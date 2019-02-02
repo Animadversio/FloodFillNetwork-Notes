@@ -14,7 +14,7 @@ def visualize_seed(canvas, zid, threshold=0.6, baseline=0.1):
     plt.show()
     plt.close()
 #%%
-visualize_seed(canvas, 41, baseline=0.1)
+visualize_seed(canvas, 10, baseline=0.1)
 
 
 #%%
@@ -29,5 +29,5 @@ data = np.load("/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Long
 mask = data['segmentation']
 
 #%%
-visualize_mask(canvas, canvas.segmentation, 350, baseline=1.2)#    canvas.segmentation,
+visualize_mask(canvas, canvas.segmentation, 350, baseline=1.2)#    canvas.segmentation, canvas.seed>0.6
 
