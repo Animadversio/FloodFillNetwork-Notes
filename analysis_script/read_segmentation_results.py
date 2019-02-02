@@ -28,7 +28,7 @@ def load_segmentation_output(output_dir, corner):
     qprob = data_prob['qprob']
     return segmentation, qprob
 
-seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_Mov_full/'  # Longterm wide field, lowthreshold file
+seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_success2/'  # Longterm wide field, lowthreshold file
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
 corner = (0, 0, 0)
 segmentation, qprob = load_segmentation_output(seg_dir, corner)
@@ -93,8 +93,10 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
             plt.show()
         plt.close()
 #%%
-exportLoc = "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
+exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_full2'\
+    # "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
     # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
-export_segmentation_to_VAST(exportLoc, canvas.segmentation, resize=0.5) # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
+export_segmentation_to_VAST(exportLoc, segmentation, resize=1)  # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
 #%%
 # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)
+# canvas.

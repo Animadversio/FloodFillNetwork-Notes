@@ -78,6 +78,8 @@ from ffn.inference import inference_pb2
 from ffn.inference import storage
 from scipy.special import expit, logit
 
+corner = (0,0,0)
+downsample_factor =1
 #%%
 # Model on LGN of mice
 # "models/LR_model_Longtime/model.ckpt-264380"
@@ -88,10 +90,10 @@ image_mean: 136
 image_stddev: 55
 checkpoint_interval: 1200
 seed_policy: "PolicyPeaks"
-model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime/model.ckpt-687329"
+model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime/model.ckpt-1127307"
 model_name: "convstack_3d.ConvStack3DFFNModel"
 model_args: "{\\"depth\\": 9, \\"fov_size\\": [55, 37, 17], \\"deltas\\": [9,6,3]}"
-segmentation_output_dir: "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_point2"
+segmentation_output_dir: "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_point3"
 inference_options {
   init_activation: 0.95
   pad_value: 0.05
@@ -101,104 +103,11 @@ inference_options {
   min_segment_size: 1000
   disco_seed_threshold: 0.005
 }'''
+seed_list = [(1080, 860, 72), (1616, 1872, 43), (612, 1528, 92), (616, 180, 92),  (144, 712, 43), (400, 168, 45), (1332, 248, 45), (120, 700,45)]  # in xyz order
+downsample_factor =2
+canvas_bbox = [(0, 0, 0), (175, 1058, 1180)]
 
 #%%
-config = '''image {
- hdf5: "/home/morganlab/Documents/Sample1_branch109/grayscale_branch_upsp.h5:raw"
-}
-image_mean: 140
-image_stddev: 43
-checkpoint_interval: 1200
-seed_policy: "PolicyPeaks"
-model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime/model.ckpt-687329"
-model_name: "convstack_3d.ConvStack3DFFNModel"
-model_args: "{\\"depth\\": 9, \\"fov_size\\": [55, 37, 17], \\"deltas\\": [9,6,3]}"
-segmentation_output_dir: "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
-inference_options {
-  init_activation: 0.95
-  pad_value: 0.05
-  move_threshold: 0.90
-  min_boundary_dist { x: 5 y: 5 z: 1}
-  segment_threshold: 0.6
-  min_segment_size: 1000
-  disco_seed_threshold: 0.005
-}'''
-#%%
-# config = '''image {
-#  hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
-# }
-# image_mean: 136
-# image_stddev: 55
-# checkpoint_interval: 1200
-# seed_policy: "PolicyPeaks"
-# model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_WF_Longtime/model.ckpt-214465"
-# model_name: "convstack_3d.ConvStack3DFFNModel"
-# model_args: "{\\"depth\\": 9, \\"fov_size\\": [77, 51, 23], \\"deltas\\": [15,10,5]}"
-# segmentation_output_dir: "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_Longtime_point"
-# inference_options {
-#   init_activation: 0.95
-#   pad_value: 0.05
-#   move_threshold: 0.90
-#   min_boundary_dist { x: 5 y: 5 z: 1}
-#   segment_threshold: 0.6
-#   min_segment_size: 10000
-#   disco_seed_threshold: 0.005
-# }'''
-# seed_list = [(1080, 860, 72), (1616, 1872, 43), (612, 1528, 92), (616, 180, 92),  (144, 712, 43), (400, 168, 45), (1332, 248, 45), (120, 700,45)]  # in xyz order
-# downsample_factor =2
-# canvas_bbox = [(0, 0, 0), (175, 1058, 1180)]
-#%%
-# config = '''image {
-#  hdf5: "/home/morganlab/Documents/Sample1_branch109/grayscale_branch.h5:raw"
-# }
-# image_mean: 140
-# image_stddev: 43
-# checkpoint_interval: 1200
-# seed_policy: "PolicyPeaks"
-# model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime_Mov/model.ckpt-953997"
-# model_name: "convstack_3d.ConvStack3DFFNModel"
-# model_args: "{\\"depth\\": 9, \\"fov_size\\": [37, 25, 15], \\"deltas\\": [8,6,2]}"
-# segmentation_output_dir: "/home/morganlab/Documents/Sample1_branch109/Autoseg/Longtime_Mov_point"
-# inference_options {
-#   init_activation: 0.95
-#   pad_value: 0.05
-#   move_threshold: 0.90
-#   min_boundary_dist { x: 5 y: 5 z: 1}
-#   segment_threshold: 0.6
-#   min_segment_size: 10000
-#   disco_seed_threshold: 0.005
-# }'''
-
-seed_list = [(707, 353, 385), (371, 478, 384), (259, 391, 386), (88,264,333), (830, 894, 333), (502,462,278), (878, 256, 278)]
-downsample_factor =1 # Mip level 0, df=1;  Mip level 1 df =2
-canvas_bbox = [(0, 0, 0), (441, 1024, 1024)]
-#%%
-#
-# config = '''image {
-#  hdf5: "/home/morganlab/Documents/Sample1_branch109/grayscale_branch_upsp.h5:raw"
-# }
-# image_mean: 139
-# image_stddev: 38
-# checkpoint_interval: 1200
-# seed_policy: "PolicyPeaks"
-# model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime_Mov/model.ckpt-1455967"
-# model_name: "convstack_3d.ConvStack3DFFNModel"
-# model_args: "{\\"depth\\": 9, \\"fov_size\\": [37, 25, 15], \\"deltas\\": [8,6,2]}"
-# segmentation_output_dir: "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_Mov_point"
-# inference_options {
-#   init_activation: 0.95
-#   pad_value: 0.05
-#   move_threshold: 0.90
-#   min_boundary_dist { x: 5 y: 5 z: 1}
-#   segment_threshold: 0.6
-#   min_segment_size: 10000
-#   disco_seed_threshold: 0.005
-# }'''
-
-seed_list = [(707, 353, 385), (371, 478, 384), (259, 391, 386), (88,264,333), (830, 894, 333), (502,462,278), (878, 256, 278)]
-downsample_factor = 0.5 # Mip level 0, df=1;  Mip level 1 df =2
-canvas_bbox = [(0, 0, 0), (441, 2048, 2048)]
-
 request = inference_pb2.InferenceRequest()
 _ = text_format.Parse(config, request)
 if not gfile.Exists(request.segmentation_output_dir):
@@ -208,7 +117,7 @@ runner.start(request)
 canvas, alignment = runner.make_canvas(canvas_bbox[0], canvas_bbox[1]) # like (0, 0, 0), (175, 1058, 1180)
 for id, start_point in enumerate(seed_list):
     label = id + 1
-    pos = (int(start_point[2]), int(start_point[1]//downsample_factor), int(start_point[0]//downsample_factor))
+    pos = (int(start_point[2]-corner[2]), int((start_point[1]-corner[1])//downsample_factor), int((start_point[0]-corner[0])//downsample_factor))
     canvas.log_info('Starting segmentation at %r (zyx)', pos)
     num_iters = canvas.segment_at(pos,)  # zyx
                     # dynamic_image=inference.DynamicImage(),
