@@ -32,51 +32,51 @@ import logging
 import logging.config
 logger = logging.getLogger(__name__)
 # logging.config.fileConfig(json.load(open('configs/logging.json')), disable_existing_loggers=False)
-logging.config.dictConfig({
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "standard": {
-            "format": "%(asctime)s [%(filename)s: %(funcName)s(): %(lineno)d] %(message)s"
-        },
-    },
-    "handlers": {
-        "default": {
-            "level":"INFO",
-            "class":"logging.StreamHandler",
-        },
-        "console": {
-            "class": "logging.StreamHandler",
-            "level": "INFO",
-            "formatter": "standard",
-            "stream": "ext://sys.stdout"
-        },
-        "logfile": {
-            "class": "logging.FileHandler",
-            "level": "INFO",
-            "formatter": "standard",
-            "filename": "inference_log_new.log",
-            "encoding": "utf8"
-        }
-    },
-    "loggers": {
-        "": {
-            "handlers": ["console", "logfile"],
-            "level": "INFO",
-            "propagate": True
-        }
-    }
-})
-logging.info("Logger prepared! ")
-
 FLAGS = flags.FLAGS
-
 flags.DEFINE_string('bounding_box', None,
                     'BoundingBox proto in text format defining the area '
                     'to segmented.')
+flags.DEFINE_string('logfile_name', "inference_log1.log", "Log file to write the log instantaneously")
+FLAGS = flags.FLAGS
 
 
 def main(unused_argv):
+  logging.config.dictConfig({
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "standard": {
+                "format": "%(asctime)s [%(filename)s: %(funcName)s(): %(lineno)d] %(message)s"
+            },
+        },
+        "handlers": {
+            "default": {
+                "level": "INFO",
+                "class": "logging.StreamHandler",
+            },
+            "console": {
+                "class": "logging.StreamHandler",
+                "level": "INFO",
+                "formatter": "standard",
+                "stream": "ext://sys.stdout"
+            },
+            "logfile": {
+                "class": "logging.FileHandler",
+                "level": "INFO",
+                "formatter": "standard",
+                "filename": FLAGS.logfile_name,
+                "encoding": "utf8"
+            }
+        },
+        "loggers": {
+            "": {
+                "handlers": ["console", "logfile"],
+                "level": "INFO",
+                "propagate": True
+            }
+        }
+    })
+  logging.info("Logger prepared! ")
   request = inference_flags.request_from_flags()  # Parsed structure from flag
 
   if not gfile.Exists(request.segmentation_output_dir):

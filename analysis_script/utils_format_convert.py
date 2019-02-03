@@ -94,13 +94,29 @@ def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape
     f.close() 
     return image_stacks
 
+def read_image_vol_from_h5(h5path,):
+    # h5path= r"C:\Users\MorganLab\Documents\Binxu Notes\ffn-master\third_party\neuroproof_examples\validation_sample\grayscale_maps.h5",
+    #         'r')
+    fmap = h5py.File(h5path, 'r')
+    graymap = fmap['raw']
+    graymap_array = graymap[:, :, :]
+    # pxl_vals = np.unique(graymap_array)
+    return graymap_array
+
+def read_segmentation_from_h5(h5path,):
+    # r"C:\Users\MorganLab\Documents\Binxu Notes\ffn-master\third_party\neuroproof_examples\validation_sample\groundtruth.h5"
+    fseg = h5py.File(h5path, 'r')
+    segments = fseg['stack']
+    segment_array = segments[:,:,:]
+    # seg_ids = np.unique(segment_array)
+    return segment_array
 
 if __name__=="__main__":
     path = "C:\\Users\\MorganLab\\Documents\\LGNs1_P32_smallHighres\\"
     stack_n = 175
     EM_name_pattern = "tweakedImageVolume2_LRexport_s%03d.png"
     raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
-    EM_stack = convert_image_stack_to_h5(path=path, pattern=, stack_n=stack_n, output="grayscale_maps_LR.h5")
+    EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output="grayscale_maps_LR.h5")
     seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
                                             stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
                                             output="groundtruth_LR.h5")

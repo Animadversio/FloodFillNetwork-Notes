@@ -14,7 +14,7 @@
 # ==============================================================================
 """Runs FFN inference
 This simple script aims at run a less sophisticated inference from several preselected seeds
-and inspect the single seed segmentation result. 
+and inspect the single seed segmentation result.
 """
 
 import os

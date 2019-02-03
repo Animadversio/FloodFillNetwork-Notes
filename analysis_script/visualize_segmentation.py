@@ -1,5 +1,5 @@
 """
-Utilities to visualize masks from `canvas` object, segmentation, or
+Utilities to visualize masks, seeds from `canvas` object, segmentation, or
 any volume numpy array
 """
 import numpy as np
