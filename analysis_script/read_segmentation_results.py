@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Read and Export the Segmentation files to VAST
+and calculate simple statistics of segmentation
 """
 
 import numpy as np
@@ -13,12 +14,9 @@ from os.path import isdir, join
 import os
 from scipy import ndimage
 from scipy.misc import imresize
-logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
+logging.getLogger().setLevel(logging.INFO)  # set the information level to show INFO logs
 
-#%% 
-# testSegLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.npz'
-# testProbLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.prob'
-
+#%%
 def load_segmentation_output(output_dir, corner):
     testSegLoc = storage.subvolume_path(output_dir, corner, 'npz')
     testProbLoc = storage.subvolume_path(output_dir, corner, 'prob')
@@ -27,17 +25,6 @@ def load_segmentation_output(output_dir, corner):
     data_prob = np.load(testProbLoc)
     qprob = data_prob['qprob']
     return segmentation, qprob
-
-seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_success2/'  # Longterm wide field, lowthreshold file
-# '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
-corner = (0, 0, 0)
-segmentation, qprob = load_segmentation_output(seg_dir, corner)
-#%%
-plt.figure()
-plt.imshow(segmentation[80, :, :])
-plt.show()
-#%%
-# idx, cnts=np.unique(segmentation[125,:,:],return_counts=True)
 #%%
 def visualize_supervoxel_size_dist():
     idx, cnts = np.unique(segmentation, return_counts=True)
@@ -55,10 +42,8 @@ def visualize_supervoxel_size_dist():
         print("Too many labels, more than the import maximum of VAST %d " % 2 ** 16)
         logging.warning("Too many labels %d, more than the import maximum of VAST %d " % (len(idx), 2 ** 16))
     return idx, cnts
-idx, cnts = visualize_supervoxel_size_dist()
 
-#%% Export
-#%%
+#%% Export segmentation
 def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix='tif', resize=1):
     '''Turn a segmentation(numpy ndarray) into importable tif or png files
 
@@ -92,11 +77,26 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
             plt.imshow(out_img)
             plt.show()
         plt.close()
-#%%
-exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_full2'\
-    # "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
-    # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
-export_segmentation_to_VAST(exportLoc, segmentation, resize=1)  # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
-#%%
-# tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)
-# canvas.
+
+if __name__=="__main__":
+    # testSegLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.npz'
+    # testProbLoc = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/seg-0_0_0.prob'
+    seg_dir = '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_success2/'  # Longterm wide field, lowthreshold file
+    # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_WF_cluster/'
+    corner = (0, 0, 0)
+    segmentation, qprob = load_segmentation_output(seg_dir, corner)
+    #%%
+    plt.figure()
+    plt.imshow(segmentation[80, :, :])
+    plt.show()
+    #%%
+    # idx, cnts=np.unique(segmentation[125,:,:],return_counts=True)
+    idx, cnts = visualize_supervoxel_size_dist()
+    #%%
+    exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_full2'\
+        # "/home/morganlab/Documents/Sample1_branch109/Autoseg/UpSp_Longtime_point"
+        # '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_full'
+    export_segmentation_to_VAST(exportLoc, segmentation, resize=1)  # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
+    #%%
+    # tmp = plt.imread(exportLoc+"seg_%03d.tif"%10)
+    # canvas.

@@ -13,8 +13,8 @@
 # limitations under the License.
 # ==============================================================================
 """Runs FFN inference
-This script aims at run inference from several preselected seeds
-and inspect the single seed segemtation result.
+This simple script aims at run a less sophisticated inference from several preselected seeds
+and inspect the single seed segmentation result. 
 """
 
 import os
@@ -78,8 +78,8 @@ from ffn.inference import inference_pb2
 from ffn.inference import storage
 from scipy.special import expit, logit
 
-corner = (0,0,0)
-downsample_factor =1
+corner = (0, 0, 0)
+downsample_factor = 1
 #%%
 # Model on LGN of mice
 # "models/LR_model_Longtime/model.ckpt-264380"
@@ -104,7 +104,7 @@ inference_options {
   disco_seed_threshold: 0.005
 }'''
 seed_list = [(1080, 860, 72), (1616, 1872, 43), (612, 1528, 92), (616, 180, 92),  (144, 712, 43), (400, 168, 45), (1332, 248, 45), (120, 700,45)]  # in xyz order
-downsample_factor =2
+downsample_factor = 2
 canvas_bbox = [(0, 0, 0), (175, 1058, 1180)]
 
 #%%
@@ -148,7 +148,7 @@ for id, start_point in enumerate(seed_list):
 counter_path = os.path.join(request.segmentation_output_dir, 'counters.txt')
 if not gfile.Exists(counter_path):
     runner.counters.dump(counter_path)
- #%%
+#%%
 corner = (0,0,0)
 seg_path = storage.segmentation_path(
         request.segmentation_output_dir, corner)

@@ -2,10 +2,8 @@
 """
 Created on Fri Dec 14 18:02:48 2018
 
-@author: MorganLab
-"""
-
-'''Usage
+@author: Binxu@MorganLab
+Usage
 from utils_format_convert import convert_image_stack_to_h5,convert_raw_seg_stack_to_h5
 
 path="C:\\Users\\MorganLab\\Documents\\LGNs1_P32_smallHighres\\"
@@ -18,7 +16,7 @@ seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
 
 
 You will find the h5 files in the `path` ! 
-'''
+"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -95,4 +93,15 @@ def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape
     fstack[:] = image_stacks
     f.close() 
     return image_stacks
-    
+
+
+if __name__=="__main__":
+    path = "C:\\Users\\MorganLab\\Documents\\LGNs1_P32_smallHighres\\"
+    stack_n = 175
+    EM_name_pattern = "tweakedImageVolume2_LRexport_s%03d.png"
+    raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
+    EM_stack = convert_image_stack_to_h5(path=path, pattern=, stack_n=stack_n, output="grayscale_maps_LR.h5")
+    seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
+                                            stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
+                                            output="groundtruth_LR.h5")
+    pass

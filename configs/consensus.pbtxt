@@ -1,0 +1,15 @@
+segmentation1 {
+    directory:
+    threshold:
+    split_cc:
+    min_size:
+}
+segmentation2{
+    directory:
+    threshold:
+    split_cc:
+    min_size:
+}
+segmentation_output_dir: ""
+type: CONSENSUS_SPLIT
+split_min_size: 5000
