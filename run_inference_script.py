@@ -23,6 +23,7 @@ import time
 from google.protobuf import text_format
 from absl import app
 from absl import flags
+import ast
 from tensorflow import gfile
 import numpy as np
 import sys
@@ -107,6 +108,8 @@ seed_list = [(1080, 860, 72), (1616, 1872, 43), (612, 1528, 92), (616, 180, 92),
 downsample_factor = 2
 canvas_bbox = [(0, 0, 0), (175, 1058, 1180)]
 
+#%%
+ast.literal_eval()
 #%%
 request = inference_pb2.InferenceRequest()
 _ = text_format.Parse(config, request)

@@ -1,5 +1,7 @@
 from absl import flags
 from absl import app
+import matplotlib as mpl
+mpl.use('Agg')
 from analysis_script.read_segmentation_results import load_segmentation_output, visualize_supervoxel_size_dist, \
     export_segmentation_to_VAST, export_composite_image
 from analysis_script.utils_format_convert import read_image_vol_from_h5
@@ -18,12 +20,12 @@ flags.DEFINE_string('bounding_box', None,
                     'to segmented.')
 FLAGS = flags.FLAGS
 
-def main():
+def main(unused_argv):
     seg_dir = FLAGS.seg_dir  # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR_Longtime_success2/'  # Longterm wide field, lowthreshold file
     corner = (0, 0, 0)
     segmentation, qprob = load_segmentation_output(seg_dir, corner)
     # %%
-    idx, cnts = visualize_supervoxel_size_dist(segmentation, save_dir=FLAGS.seg_output_dir, save_fig=True)
+    idx, cnts = visualize_supervoxel_size_dist(segmentation, save_dir=FLAGS.seg_export_dir, save_fig=True, show_fig=False)
     # %%
     # exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_full2'
     export_segmentation_to_VAST(FLAGS.seg_export_dir, segmentation, resize=FLAGS.resize)

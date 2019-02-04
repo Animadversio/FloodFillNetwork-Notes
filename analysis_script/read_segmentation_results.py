@@ -41,6 +41,7 @@ def visualize_supervoxel_size_dist(segmentation, show_fig=True, save_fig=True, s
     plt.xlabel("log10(voxel number)")
     plt.ylabel("supervoxel count")
     if save_fig:
+        os.makedirs(save_dir, exist_ok=True)
         plt.savefig(join(save_dir, "segment_dist.png"))
     if show_fig:
         plt.show()
@@ -57,7 +58,8 @@ def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix
     resize: is used in case the segmentation is done on a **Higher resolution** than the VAST volume
         then the segmentation has to be resized (downsampled) to be imported into VAST
         if ffn is run on a lower resolution image then VAST volume, then VAST can import it.
-
+    suffix: can be either tif or png but seems png will result in the background painted as a huge voxel
+        TODO: Solve this format problem
     Use the G,B bytes in tif image to code integer label
     Example:
     exportLoc = '/home/morganlab/Documents/Autoseg_result/LGN_Autoseg_Mov_point'
@@ -95,6 +97,7 @@ def export_composite_image(segmentation, image_stack, export_dir, suffix="png",
     else:
         image_stack = image_stack[bbox[0][0]:bbox[1][0], bbox[0][1]:bbox[1][1], bbox[0][2]:bbox[1][2]]
         assert segmentation.shape == image_stack.shape
+    os.makedirs(export_dir, exist_ok=True)
     stack_n = image_stack.shape[0]
     for z in range(stack_n):
         export_img = np.zeros((segmentation.shape[1], segmentation.shape[2], 3), dtype=np.uint8)
