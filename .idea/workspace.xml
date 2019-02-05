@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/LGN_DATA_training_code.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generate_h5_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_inference_from_seed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proc_segmentation_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/proc_segmentation_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_inference_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_inference_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_code.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_code.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +17,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="17298">
               <caret line="995" column="6" selection-start-line="995" selection-start-column="6" selection-end-line="995" selection-end-column="6" />
               <folding>
                 <element signature="e#701#739#0" expanded="true" />
@@ -33,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_inference_from_seed.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
+            <state relative-caret-position="72">
               <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="19" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -45,11 +41,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_inference_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
+            <state relative-caret-position="1152">
               <caret line="75" selection-start-line="75" selection-end-line="79" selection-end-column="38" />
               <folding>
                 <element signature="e#826#835#0" expanded="true" />
-                <element signature="e#1238#2139#0" />
               </folding>
             </state>
           </provider>
@@ -58,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
+            <state relative-caret-position="486">
               <caret line="27" selection-start-line="27" selection-end-line="27" selection-end-column="38" />
               <folding>
                 <element signature="e#1540#2574#0" />
@@ -67,20 +62,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1317">
-              <caret line="26" column="59" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="59" />
+            <state relative-caret-position="1837">
+              <caret line="128" column="18" lean-forward="true" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="234">
+              <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
               </folding>
@@ -171,7 +166,6 @@
         <option value="$PROJECT_DIR$/train_multi_GPUs.py" />
         <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/misc/mnist_replica.py" />
-        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
         <option value="$PROJECT_DIR$/ffn/inference/executor.py" />
         <option value="$PROJECT_DIR$/train_multi_GPU_sync.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py" />
@@ -186,12 +180,13 @@
         <option value="$PROJECT_DIR$/ren_inference_from_seed.py" />
         <option value="$PROJECT_DIR$/run_inference_from_seed.py" />
         <option value="$PROJECT_DIR$/generate_h5_file.py" />
+        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="405" />
-    <option name="y" value="258" />
+    <option name="x" value="147" />
+    <option name="y" value="187" />
     <option name="width" value="2407" />
     <option name="height" value="1182" />
   </component>
@@ -200,6 +195,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,7 +237,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -425,7 +420,8 @@
       <workItem from="1547777832478" duration="839000" />
       <workItem from="1547942996830" duration="20832000" />
       <workItem from="1548023123579" duration="56132000" />
-      <workItem from="1548620990625" duration="88714000" />
+      <workItem from="1548620990625" duration="90661000" />
+      <workItem from="1549325817787" duration="2479000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -574,11 +570,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549068645574</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Add new console programs! And script ensemble">
+      <created>1549323444712</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1549323444712</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246712000" />
+    <option name="totallyTimeSpent" value="251138000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -590,9 +593,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="405" y="258" width="2407" height="1182" extended-state="0" />
+    <frame x="147" y="187" width="2407" height="1182" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19424461" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19593737" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -605,16 +608,16 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.305967" side_tool="true" visible="true" weight="0.4215501" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49960256" weight="0.32852808" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.694033" visible="true" weight="0.4215501" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.30723655" side_tool="true" visible="true" weight="0.4215501" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4993652" weight="0.32797733" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.69276345" visible="true" weight="0.4215501" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.95424837" visible="true" weight="0.39695302" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.95261437" visible="true" weight="0.3977994" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.045751635" side_tool="true" visible="true" weight="0.39695302" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.04738562" side_tool="true" visible="true" weight="0.3977994" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,7 +635,9 @@
     <MESSAGE value="Add reference code about Parallel GPU training !" />
     <MESSAGE value="Change scripts" />
     <MESSAGE value="Arrange the code and script" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arrange the code and script" />
+    <MESSAGE value="Add new console programs! And script ensemble" />
+    <MESSAGE value="Add normalization code when importing image stacks. &#10;Debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add normalization code when importing image stacks. &#10;Debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,16 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="995" column="6" selection-start-line="995" selection-start-column="6" selection-end-line="995" selection-end-column="6" />
-          <folding>
-            <element signature="e#701#739#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1022,9 +1017,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17298">
+          <caret line="995" column="6" selection-start-line="995" selection-start-column="6" selection-end-line="995" selection-end-column="6" />
+          <folding>
+            <element signature="e#701#739#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_inference_from_seed.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="72">
           <caret line="20" selection-start-line="20" selection-end-line="20" selection-end-column="19" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1032,9 +1037,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_inference_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="75" selection-start-line="75" selection-end-line="79" selection-end-column="38" />
+          <folding>
+            <element signature="e#826#835#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
+        <state relative-caret-position="486">
           <caret line="27" selection-start-line="27" selection-end-line="27" selection-end-column="38" />
           <folding>
             <element signature="e#1540#2574#0" />
@@ -1042,31 +1057,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1317">
-          <caret line="26" column="59" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_inference_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="75" selection-start-line="75" selection-end-line="79" selection-end-column="38" />
-          <folding>
-            <element signature="e#826#835#0" expanded="true" />
-            <element signature="e#1238#2139#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="234">
+          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
           <folding>
             <element signature="e#0#74#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1837">
+          <caret line="128" column="18" lean-forward="true" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="18" />
         </state>
       </provider>
     </entry>

@@ -998,10 +998,12 @@ Find the ROI cube, export segments,
 On Cluster get the images, gen h5 file
 Do saturated or sparse segmentaion
 
-
+New cube 
 22660 : 21636, 
 15388 : 14364, 
 0
+
+
 ```bash
 python3 generate_h5_file.py \
  --stack_n 152 --name_pattern "IxD_W002_invert2_2_export_s%03d.png" --path "/home/morganlab/Documents/ixP11LGN" --output_name "grayscale_ixP11_1.h5"
