@@ -214,8 +214,8 @@ def split_segmentation_by_intersection(a, b, min_size):
       TypeError: if `x` does not have uint64 dtype
       ValueError: if `x.max() > 2**32-1`.
     """
-    if x.dtype != np.uint64:
-      raise TypeError
+    # if x.dtype != np.uint64:
+    #   raise TypeError
     max_uint32 = 2**32 - 1
     max_id = x.max()
     orig_values_map = None

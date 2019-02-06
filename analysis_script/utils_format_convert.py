@@ -1,3 +1,4 @@
+#%%
 # -*- coding: utf-8 -*-
 """
 Created on Fri Dec 14 18:02:48 2018
@@ -110,14 +111,32 @@ def read_segmentation_from_h5(h5path,):
     segment_array = segments[:,:,:]
     # seg_ids = np.unique(segment_array)
     return segment_array
-
+#%%
+def normalize_img_stack(path, output, EM_stack, upper = 205, lower = 80):
+    low_p = np.percentile(EM_stack, 5, axis=[1,2])
+    high_p = np.percentile(EM_stack, 95, axis=[1,2])
+    scaler = (upper-lower) / (high_p - low_p)
+    shift = lower - (low_p*scaler)
+    norm_img = scaler.reshape((-1,1,1)) * EM_stack + shift.reshape((-1,1,1))
+    print("max: %.2f, min: %.2f after scaling"%(norm_img.max(), norm_img.min()))
+    int_img = np.clip(norm_img, 0, 255, )
+    int_img = int_img.astype('uint8')
+    img_shape = EM_stack.shape
+    f = h5py.File(join(path, output), "w")
+    fstack=f.create_dataset("raw", img_shape, dtype='uint8') # Note they only take int64 input
+    fstack[:] = int_img
+    f.close()
+    return int_img
+#%%
 if __name__=="__main__":
-    path = "C:\\Users\\MorganLab\\Documents\\LGNs1_P32_smallHighres\\"
-    stack_n = 175
-    EM_name_pattern = "tweakedImageVolume2_LRexport_s%03d.png"
-    raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
+    path = "/home/morganlab/Documents/ixP11LGN"
+    stack_n = 152
+    EM_name_pattern = "IxD_W002_invert2_2_export_s%03d.png"# "tweakedImageVolume2_LRexport_s%03d.png"
+    #raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
     EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output="grayscale_maps_LR.h5")
-    seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
-                                            stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
-                                            output="groundtruth_LR.h5")
+    # seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
+    #                                         stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
+    #                                         output="groundtruth_LR.h5")
+
+    normalize_img_stack(path, "grayscale_ixP11_1_norm.h5", EM_stack)
     pass
