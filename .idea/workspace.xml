@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/proc_segmentation_script.py" afterDir="false" />
+    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="Debug the visualizing script!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/visualize_segmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/visualize_segmentation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_inference_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_inference_script.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +53,7 @@
           <entry key="pbtxt" value="5" />
           <entry key="proto" value="14" />
           <entry key="pstat" value="4" />
-          <entry key="py" value="104" />
+          <entry key="py" value="107" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
@@ -70,8 +64,8 @@
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="PROTO" value="15" />
           <entry key="Profiler Session" value="4" />
-          <entry key="Python" value="98" />
-          <entry key="Scratch" value="7" />
+          <entry key="Python" value="99" />
+          <entry key="Scratch" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -79,18 +73,19 @@
           <entry key="Python Console" value="880" />
           <entry key="pbtxt" value="37" />
           <entry key="proto" value="16" />
-          <entry key="py" value="7398" />
+          <entry key="py" value="7434" />
+          <entry key="run_inference" value="56" />
           <entry key="scratch" value="21" />
           <entry key="scratch_2" value="4" />
-          <entry key="txt" value="522" />
+          <entry key="txt" value="552" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="523" />
+          <entry key="PLAIN_TEXT" value="553" />
           <entry key="PROTO" value="52" />
-          <entry key="Python" value="6653" />
-          <entry key="Scratch" value="1650" />
+          <entry key="Python" value="6709" />
+          <entry key="Scratch" value="1686" />
         </counts>
       </usages-collector>
     </session>
@@ -130,11 +125,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+            <state relative-caret-position="198">
+              <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -143,14 +138,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_inference.py">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+            <state>
               <folding>
-                <element signature="e#762#771#0" expanded="true" />
-                <element signature="e#1541#2575#0" />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="165" column="43" selection-start-line="165" selection-start-column="43" selection-end-line="165" selection-end-column="43" />
+              <folding>
+                <element signature="e#105#114#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis_script/DataFormat_convert.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="59" column="10" lean-forward="true" selection-start-line="57" selection-end-line="59" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -250,7 +264,6 @@
         <option value="$PROJECT_DIR$/ffn/inference/storage.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
         <option value="$PROJECT_DIR$/run_resegment.py" />
         <option value="$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py" />
         <option value="$PROJECT_DIR$/train_multi_GPUs.py" />
@@ -268,6 +281,7 @@
         <option value="$PROJECT_DIR$/run_inference.py" />
         <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
         <option value="$PROJECT_DIR$/proc_segmentation_script.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
       </list>
     </option>
   </component>
@@ -278,10 +292,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="33" />
-    <option name="y" value="23" />
-    <option name="width" value="1407" />
-    <option name="height" value="877" />
+    <option name="x" value="1440" />
+    <option name="y" value="-18" />
+    <option name="width" value="1920" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -757,7 +771,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549175700947</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Debug the visualizing script!">
+      <created>1549228818881</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1549228818881</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -773,10 +794,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="33" y="23" width="1407" height="877" extended-state="6" />
+    <frame x="1440" y="-18" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19483395" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14132762" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -787,11 +808,11 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3292232" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3292232" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32875264" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.47216275" side_tool="true" weight="0.43868923" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.5278373" visible="true" weight="0.3067885" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.5278373" visible="true" weight="0.24841438" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -799,7 +820,7 @@
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.5462012" weight="0.0" />
       <window_info anchor="right" id="Database" order="4" show_stripe_button="false" weight="0.3299712" />
       <window_info anchor="right" id="R Packages" order="5" show_stripe_button="false" weight="0.3299712" />
-      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="6" sideWeight="0.45379877" side_tool="true" visible="true" weight="0.2199262" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="6" sideWeight="0.45379877" side_tool="true" visible="true" weight="0.15952891" />
       <window_info anchor="right" auto_hide="true" id="R Graphics" internal_type="SLIDING" order="7" show_stripe_button="false" type="SLIDING" weight="0.3299712" />
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" />
     </layout>
@@ -835,6 +856,32 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -847,7 +894,8 @@
     <MESSAGE value="New Cifar10 files" />
     <MESSAGE value="Write multi_GPU_sync training code!" />
     <MESSAGE value="Change the scipts to module like, thus they can be imported ! &#10;And Write the Consensus segmentation pbtxt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change the scipts to module like, thus they can be imported ! &#10;And Write the Consensus segmentation pbtxt" />
+    <MESSAGE value="Debug the visualizing script!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug the visualizing script!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -935,13 +983,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-113">
@@ -1056,16 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1854">
-          <caret line="103" column="28" lean-forward="true" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
-          <folding>
-            <element signature="e#105#114#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1219,13 +1250,6 @@
     <entry file="file://$PROJECT_DIR$/ffn/utils/png_to_h5.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/DataFormat_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference_flags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-129" />
@@ -1286,17 +1310,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
-          <folding>
-            <element signature="e#762#771#0" expanded="true" />
-            <element signature="e#1541#2575#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_inference_script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -1329,10 +1342,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        <state relative-caret-position="198">
+          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
+          <folding>
+            <element signature="e#762#771#0" expanded="true" />
+            <element signature="e#1541#2575#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/DataFormat_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="59" column="10" lean-forward="true" selection-start-line="57" selection-end-line="59" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="165" column="43" selection-start-line="165" selection-start-column="43" selection-end-line="165" selection-end-column="43" />
+          <folding>
+            <element signature="e#105#114#0" expanded="true" />
           </folding>
         </state>
       </provider>
