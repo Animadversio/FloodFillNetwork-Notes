@@ -49,7 +49,7 @@ def compute_consensus_for_segmentations(v1, v2, request):
     # segments, so we do not know a priori how many bits will be needed for
     # the IDs.
     segmentation.split_segmentation_by_intersection(v1, v2,
-                                                    request.split_min_size)
+                                                    request.split_min_size)  # note v1, v2 should be uint64 here
     v1 = segmentation.reduce_id_bits(v1)
   else:
     raise ValueError('Unsupported mode: %s' % request.type)

@@ -1002,7 +1002,7 @@ New cube
 22660 : 21636, 
 15388 : 14364, 
 0
-
+(10818, 7182, 0)
 
 ```bash
 python3 generate_h5_file.py \
@@ -1010,3 +1010,108 @@ python3 generate_h5_file.py \
 
 ```
 IxD_W002_invert2_2_export
+
+
+## Consensus Segmentation
+```python
+config = """
+segmentation1 {
+    directory: "/home/morganlab/Documents/ixP11LGN/p11_1_exp2/"
+    threshold: 0.6
+    split_cc: 1
+    min_size: 5000
+}
+segmentation2 {
+    directory: "/home/morganlab/Documents/ixP11LGN/p11_1_exp3/"
+    threshold: 0.6
+    split_cc: 1
+    min_size: 5000
+}
+segmentation_output_dir: "/home/morganlab/Documents/ixP11LGN/p11_1_consensus_2_3/"
+type: CONSENSUS_SPLIT
+split_min_size: 5000
+"""
+#%%
+corner = (0,0,0)
+consensus_req = consensus_pb2.ConsensusRequest()
+_ = text_format.Parse(config, consensus_req)
+cons_seg, origin = consensus.compute_consensus(corner, consensus_req)
+#%%
+seg_path = storage.segmentation_path(consensus_req.segmentation_output_dir, corner)
+storage.save_subvolume(cons_seg, origin, seg_path)
+```
+
+
+```log
+WARNING: Logging before flag parsing goes to stderr.
+I0205 16:14:11.289180 140550458976064 consensus.py:78] consensus: mem[start] = 236 MiB
+I0205 16:14:13.579145 140550458976064 storage.py:430] loading segmentation from: /home/morganlab/Documents/ixP11LGN/p11_1_exp2/0/0/seg-0_0_0.npz
+I0205 16:14:13.579325 140550458976064 storage.py:433] thresholding at 0.600000
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/storage.py:256: RuntimeWarning: invalid value encountered in less
+  labels[prob < threshold] = 0
+I0205 16:14:17.194858 140550458976064 storage.py:442] clean up with split_cc=True, min_size=5000
+I0205 16:15:09.224370 140550458976064 consensus.py:82] consensus: v1 data loaded
+I0205 16:15:11.271337 140550458976064 storage.py:430] loading segmentation from: /home/morganlab/Documents/ixP11LGN/p11_1_exp3/0/0/seg-0_0_0.npz
+I0205 16:15:11.272299 140550458976064 storage.py:433] thresholding at 0.600000
+I0205 16:15:14.597897 140550458976064 storage.py:442] clean up with split_cc=True, min_size=5000
+I0205 16:15:59.285499 140550458976064 consensus.py:84] consensus: v2 data loaded
+I0205 16:15:59.286098 140550458976064 consensus.py:87] consensus: mem[data loaded] = 2674 MiB
+```
+
+
+## Neuroglancer view
+```json
+{
+  "layers": [
+    {
+      "source": "python://150f129bda96d98541dc64e4ae76e73a253a11da.9f56c8c1868ccd7752c32d6ca8117fcceb8619c6",
+      "type": "segmentation",
+      "selectedAlpha": 0.05,
+      "saturation": 0.81,
+      "segments": [
+        "11720",
+        "166055",
+        "181071",
+        "300398",
+        "314827",
+        "394367",
+        "449220",
+        "545077",
+        "545620",
+        "545642"
+      ],
+      "name": "Consensus_segment"
+    }
+  ],
+  "navigation": {
+    "pose": {
+      "position": {
+        "voxelSize": [
+          8,
+          8,
+          40
+        ],
+        "voxelCoordinates": [
+          516.708984375,
+          706.7274780273438,
+          114.35738372802734
+        ]
+      }
+    },
+    "zoomFactor": 8
+  },
+  "perspectiveOrientation": [
+    0.8222200870513916,
+    -0.23166555166244507,
+    0.48113077878952026,
+    0.19697305560112
+  ],
+  "perspectiveZoom": 117.91924196067077,
+  "selectedLayer": {
+    "layer": "Consensus_segment",
+    "visible": true
+  },
+  "layout": "4panel"
+}
+```
+
