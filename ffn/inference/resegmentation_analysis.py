@@ -16,17 +16,19 @@
 
 import re
 
-import google3
+# import google3
 import numpy as np
 from scipy import ndimage
 
-from google3.pyglib import gfile
-from google3.pyglib import logging
-
-from google3.research.neuromancer.segmentation.ffn import resegmentation_pb2
-from google3.research.neuromancer.segmentation.ffn import storage
-from google3.research.neuromancer.segmentation.python import pywrapsegment_util
-
+# from google3.pyglib import gfile
+# from google3.pyglib import logging
+from tensorflow import gfile
+import logging
+# from google3.research.neuromancer.segmentation.ffn import resegmentation_pb2
+# from google3.research.neuromancer.segmentation.ffn import storage
+# from google3.research.neuromancer.segmentation.python import pywrapsegment_util
+from . import resegmentation_pb2
+from . import storage
 
 class InvalidBaseSegmentatonError(Exception):
   pass
@@ -124,7 +126,7 @@ def evaluate_endpoint_resegmentation(filename, seg_volstore,
   sr = result.segmentation_radius
   sr.z, sr.y, sr.x = resegmentation_radius
 
-  with gfile.Open(filename, 'r') as f:
+  with gfile.Open(filename, 'rb') as f:  # change to 'rb' to be compatible with py3
     data = np.load(f)
     prob = storage.dequantize_probability(data['probs'])
     prob = np.nan_to_num(prob)  # nans indicate unvisited voxels
@@ -160,7 +162,7 @@ def evaluate_endpoint_resegmentation(filename, seg_volstore,
 def evaluate_pair_resegmentation(filename, seg_volstore,
                                  resegmentation_radius,
                                  analysis_radius,
-                                 threshold=0.5):
+                                 threshold=0.5, sampling=(8, 8, 8)):
   """Evaluates segment pair resegmentation.
 
   Args:
@@ -171,6 +173,7 @@ def evaluate_pair_resegmentation(filename, seg_volstore,
         analysis
     threshold: threshold at which to create objects from the predicted
         object map
+    sampling: voxel size as tuple or list in zyx order
 
   Returns:
     PairResegmentationResult proto
@@ -191,7 +194,7 @@ def evaluate_pair_resegmentation(filename, seg_volstore,
   sr = result.segmentation_radius
   sr.z, sr.y, sr.x = resegmentation_radius
 
-  with gfile.Open(filename, 'r') as f:
+  with gfile.Open(filename, 'rb') as f:
     data = np.load(f)
     prob = storage.dequantize_probability(data['probs'])
     prob = np.nan_to_num(prob)  # nans indicate unvisited voxels
@@ -221,10 +224,13 @@ def evaluate_pair_resegmentation(filename, seg_volstore,
   r = result.eval.radius
   r.z, r.y, r.x = analysis_r
 
-  seg = seg_volstore[0,
-                     (z - analysis_r[0]):(z + analysis_r[0] + 1),
-                     (y - analysis_r[1]):(y + analysis_r[1] + 1),
-                     (x - analysis_r[2]):(x + analysis_r[2] + 1)][0, ...]
+  # seg = seg_volstore[0,
+  #                    (z - analysis_r[0]):(z + analysis_r[0] + 1),
+  #                    (y - analysis_r[1]):(y + analysis_r[1] + 1),
+  #                    (x - analysis_r[2]):(x + analysis_r[2] + 1)][0, ...]
+  seg = seg_volstore[(z - analysis_r[0]):(z + analysis_r[0] + 1),
+        (y - analysis_r[1]):(y + analysis_r[1] + 1),
+        (x - analysis_r[2]):(x + analysis_r[2] + 1)]  # fix the incompatibility
   seg1 = seg == id1
   seg2 = seg == id2
   result.eval.num_voxels_a = int(np.sum(seg1))
@@ -234,9 +240,9 @@ def evaluate_pair_resegmentation(filename, seg_volstore,
     raise InvalidBaseSegmentatonError()
 
   # Record information about the size of the original segments.
-  sampling = (seg_volstore.info.pixelsize.z,
-              seg_volstore.info.pixelsize.y,
-              seg_volstore.info.pixelsize.x)
+  # sampling = (seg_volstore.info.pixelsize.z,
+  #             seg_volstore.info.pixelsize.y,
+  #             seg_volstore.info.pixelsize.x)
   result.eval.max_edt_a = float(
       ndimage.distance_transform_edt(seg1, sampling=sampling).max())
   result.eval.max_edt_b = float(

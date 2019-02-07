@@ -1058,8 +1058,223 @@ I0205 16:15:59.285499 140550458976064 consensus.py:84] consensus: v2 data loaded
 I0205 16:15:59.286098 140550458976064 consensus.py:87] consensus: mem[data loaded] = 2674 MiB
 ```
 
+## Agglomeration
+
+Resegmentation log, 6 min for 2 pairs! 
+```log
+I0206 18:32:01.959901 139806330058560 resegmentation.py:309] processing 0/2
+I0206 18:32:01.961467 139806330058560 inference.py:1011] Process subvolume: array([ 72, 382, 472])
+I0206 18:32:01.963613 139806330058560 inference.py:1029] Requested bounds are array([ 72, 382, 472]) + array([ 41, 401, 401])
+I0206 18:32:01.964161 139806330058560 inference.py:1030] Destination bounds are array([ 72, 382, 472]) + array([ 41, 401, 401])
+I0206 18:32:01.964603 139806330058560 inference.py:1031] Fetch bounds are array([ 72, 382, 472]) + array([ 41, 401, 401])
+I0206 18:32:01.978317 139806330058560 inference.py:1046] Fetched image of size (41, 401, 401) prior to transform
+I0206 18:32:01.978958 139806330058560 inference.py:1056] Image data loaded, shape: (41, 401, 401).
+I0206 18:32:02.004559 139806330058560 inference.py:301] Registered as client 0.
+I0206 18:32:02.004800 139797045683968 executor.py:198] client 0 starting
+I0206 18:32:02.004930 139806330058560 inference.py:559] [cl 0] Loading initial segmentation from (zyx) array([ 72, 382, 472]):array([113, 783, 873])
+I0206 18:32:02.586472 139806330058560 inference.py:559] [cl 0] Segmentation loaded, shape: (41, 401, 401). Canvas segmentation is (41, 401, 401)
+I0206 18:32:02.586751 139806330058560 inference.py:559] [cl 0] Segmentation cropped to: (41, 401, 401)
+I0206 18:32:02.620084 139806330058560 inference.py:559] [cl 0] Max restored ID is: 165.
+I0206 18:32:02.654965 139806330058560 resegmentation.py:212] processing object 0
+I0206 18:32:03.959067 139806330058560 inference.py:559] [cl 0] EDT computation done
+I0206 18:32:03.965220 139806330058560 inference.py:559] [cl 0] .. starting segmentation at (xyz): 265 221 11
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:423: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  self.seed[[slice(s, e) for s, e in zip(start, end)]])  # Slice out a cube around pos with `_input_seed_size`
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:384: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  img = self.image[[slice(s, e) for s, e in zip(start, end)]]
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:456: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  old_seed = self.seed[sel]
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:460: RuntimeWarning: invalid value encountered in greater_equal
+  np.sum((old_seed >= logit(0.8)) & (logits < th_max)))
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:474: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  self.seed[sel] = logits  # only place, that update `seed` segmentation and seg_prob is not updated
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/movement.py:80: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  face_prob = prob_map[face_sel]  # restrict to one face of cube
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/inference.py:551: RuntimeWarning: invalid value encountered in greater_equal
+  np.sum(self.seed >= self.options.segment_threshold)))
+I0206 18:32:08.585219 139806330058560 inference.py:559] [cl 0] Iteration #: 100, Segmented Voxels: 206276
+I0206 18:32:12.290488 139806330058560 inference.py:559] [cl 0] Iteration #: 200, Segmented Voxels: 285557
+I0206 18:32:16.090435 139806330058560 inference.py:559] [cl 0] Iteration #: 300, Segmented Voxels: 351474
+I0206 18:32:20.224900 139806330058560 inference.py:559] [cl 0] Iteration #: 400, Segmented Voxels: 422152
+I0206 18:32:24.477809 139806330058560 inference.py:559] [cl 0] Iteration #: 500, Segmented Voxels: 469347
+I0206 18:32:28.268579 139806330058560 inference.py:559] [cl 0] Iteration #: 600, Segmented Voxels: 481011
+I0206 18:32:31.916016 139806330058560 inference.py:559] [cl 0] Iteration #: 700, Segmented Voxels: 513203
+I0206 18:32:35.605421 139806330058560 inference.py:559] [cl 0] Iteration #: 800, Segmented Voxels: 521899
+I0206 18:32:39.267745 139806330058560 inference.py:559] [cl 0] Iteration #: 900, Segmented Voxels: 545950
+I0206 18:32:42.913712 139806330058560 inference.py:559] [cl 0] Iteration #: 1000, Segmented Voxels: 570146
+I0206 18:32:46.572585 139806330058560 inference.py:559] [cl 0] Iteration #: 1100, Segmented Voxels: 580942
+I0206 18:32:50.209533 139806330058560 inference.py:559] [cl 0] Iteration #: 1200, Segmented Voxels: 606072
+I0206 18:32:53.863352 139806330058560 inference.py:559] [cl 0] Iteration #: 1300, Segmented Voxels: 626096
+I0206 18:32:57.535719 139806330058560 inference.py:559] [cl 0] Iteration #: 1400, Segmented Voxels: 657488
+I0206 18:33:01.241122 139806330058560 inference.py:559] [cl 0] Iteration #: 1500, Segmented Voxels: 678360
+I0206 18:33:04.937316 139806330058560 inference.py:559] [cl 0] Iteration #: 1600, Segmented Voxels: 698420
+I0206 18:33:08.618413 139806330058560 inference.py:559] [cl 0] Iteration #: 1700, Segmented Voxels: 727582
+I0206 18:33:12.320817 139806330058560 inference.py:559] [cl 0] Iteration #: 1800, Segmented Voxels: 749795
+I0206 18:33:16.072740 139806330058560 inference.py:559] [cl 0] Iteration #: 1900, Segmented Voxels: 771904
+I0206 18:33:19.754729 139806330058560 inference.py:559] [cl 0] Iteration #: 2000, Segmented Voxels: 844908
+I0206 18:33:23.441378 139806330058560 inference.py:559] [cl 0] Iteration #: 2100, Segmented Voxels: 881565
+I0206 18:33:27.122524 139806330058560 inference.py:559] [cl 0] Iteration #: 2200, Segmented Voxels: 925475
+I0206 18:33:30.796905 139806330058560 inference.py:559] [cl 0] Iteration #: 2300, Segmented Voxels: 1023819
+I0206 18:33:34.443420 139806330058560 inference.py:559] [cl 0] Iteration #: 2400, Segmented Voxels: 1091043
+/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/resegmentation.py:256: RuntimeWarning: invalid value encountered in greater_equal
+  segmented_voxels = np.nansum((crop_prob >= options.segment_threshold) &
+I0206 18:33:36.594700 139806330058560 resegmentation.py:212] processing object 1
+I0206 18:33:37.896921 139806330058560 inference.py:559] [cl 0] EDT computation done
+I0206 18:33:37.903310 139806330058560 inference.py:559] [cl 0] .. starting segmentation at (xyz): 212 193 17
+I0206 18:33:41.552881 139806330058560 inference.py:559] [cl 0] Iteration #: 100, Segmented Voxels: 195243
+I0206 18:33:45.251270 139806330058560 inference.py:559] [cl 0] Iteration #: 200, Segmented Voxels: 260936
+I0206 18:33:48.952684 139806330058560 inference.py:559] [cl 0] Iteration #: 300, Segmented Voxels: 318202
+I0206 18:33:52.889891 139806330058560 inference.py:559] [cl 0] Iteration #: 400, Segmented Voxels: 381532
+I0206 18:33:57.027353 139806330058560 inference.py:559] [cl 0] Iteration #: 500, Segmented Voxels: 449131
+I0206 18:34:00.712187 139806330058560 inference.py:559] [cl 0] Iteration #: 600, Segmented Voxels: 504687
+I0206 18:34:04.492268 139806330058560 inference.py:559] [cl 0] Iteration #: 700, Segmented Voxels: 542135
+I0206 18:34:08.284849 139806330058560 inference.py:559] [cl 0] Iteration #: 800, Segmented Voxels: 579431
+I0206 18:34:12.100232 139806330058560 inference.py:559] [cl 0] Iteration #: 900, Segmented Voxels: 625836
+I0206 18:34:15.917274 139806330058560 inference.py:559] [cl 0] Iteration #: 1000, Segmented Voxels: 628852
+I0206 18:34:19.583982 139806330058560 inference.py:559] [cl 0] Iteration #: 1100, Segmented Voxels: 661594
+I0206 18:34:23.348087 139806330058560 inference.py:559] [cl 0] Iteration #: 1200, Segmented Voxels: 662423
+I0206 18:34:27.066484 139806330058560 inference.py:559] [cl 0] Iteration #: 1300, Segmented Voxels: 688875
+I0206 18:34:30.799643 139806330058560 inference.py:559] [cl 0] Iteration #: 1400, Segmented Voxels: 702507
+I0206 18:34:34.639780 139806330058560 inference.py:559] [cl 0] Iteration #: 1500, Segmented Voxels: 731850
+I0206 18:34:38.368188 139806330058560 inference.py:559] [cl 0] Iteration #: 1600, Segmented Voxels: 744189
+I0206 18:34:42.081923 139806330058560 inference.py:559] [cl 0] Iteration #: 1700, Segmented Voxels: 782433
+I0206 18:34:45.784733 139806330058560 inference.py:559] [cl 0] Iteration #: 1800, Segmented Voxels: 816755
+I0206 18:34:49.447582 139806330058560 inference.py:559] [cl 0] Iteration #: 1900, Segmented Voxels: 851787
+I0206 18:34:53.101301 139806330058560 inference.py:559] [cl 0] Iteration #: 2000, Segmented Voxels: 886757
+I0206 18:34:56.730261 139806330058560 inference.py:559] [cl 0] Iteration #: 2100, Segmented Voxels: 923218
+I0206 18:35:00.417783 139806330058560 inference.py:559] [cl 0] Iteration #: 2200, Segmented Voxels: 947516
+I0206 18:35:04.045861 139806330058560 inference.py:559] [cl 0] Iteration #: 2300, Segmented Voxels: 964339
+I0206 18:35:07.680531 139806330058560 inference.py:559] [cl 0] Iteration #: 2400, Segmented Voxels: 977303
+I0206 18:35:11.360903 139806330058560 inference.py:559] [cl 0] Iteration #: 2500, Segmented Voxels: 981504
+I0206 18:35:15.026548 139806330058560 inference.py:559] [cl 0] Iteration #: 2600, Segmented Voxels: 1006441
+I0206 18:35:18.677943 139806330058560 inference.py:559] [cl 0] Iteration #: 2700, Segmented Voxels: 1039574
+I0206 18:35:22.364867 139806330058560 inference.py:559] [cl 0] Iteration #: 2800, Segmented Voxels: 1041076
+I0206 18:35:26.065589 139806330058560 inference.py:559] [cl 0] Iteration #: 2900, Segmented Voxels: 1083364
+I0206 18:35:29.726141 139806330058560 inference.py:559] [cl 0] Iteration #: 3000, Segmented Voxels: 1093235
+I0206 18:35:33.371828 139806330058560 inference.py:559] [cl 0] Iteration #: 3100, Segmented Voxels: 1109261
+I0206 18:35:37.099467 139806330058560 inference.py:559] [cl 0] Iteration #: 3200, Segmented Voxels: 1145835
+I0206 18:35:38.338817 139806330058560 inference.py:559] [cl 0] saving results to /home/morganlab/Documents/Autoseg_result/Autoseg_exp7/reseg/120-1279_at_672_582_92.npz
+I0206 18:35:38.864521 139806330058560 inference.py:559] [cl 0] .. save complete
+I0206 18:35:38.864814 139806330058560 inference.py:305] Deregistering client 0
+I0206 18:35:38.872232 139797045683968 executor.py:200] client 0 terminating
+I0206 18:35:38.878596 139806330058560 resegmentation.py:309] processing 1/2
+I0206 18:35:38.879193 139806330058560 inference.py:1011] Process subvolume: array([ 72, 364, 489])
+I0206 18:35:38.879605 139806330058560 inference.py:1029] Requested bounds are array([ 72, 364, 489]) + array([ 41, 401, 401])
+I0206 18:35:38.879776 139806330058560 inference.py:1030] Destination bounds are array([ 72, 364, 489]) + array([ 41, 401, 401])
+I0206 18:35:38.879914 139806330058560 inference.py:1031] Fetch bounds are array([ 72, 364, 489]) + array([ 41, 401, 401])
+I0206 18:35:38.887682 139806330058560 inference.py:1046] Fetched image of size (41, 401, 401) prior to transform
+I0206 18:35:38.887874 139806330058560 inference.py:1056] Image data loaded, shape: (41, 401, 401).
+I0206 18:35:38.903476 139806330058560 inference.py:301] Registered as client 0.
+I0206 18:35:38.903738 139797045683968 executor.py:198] client 0 starting
+I0206 18:35:38.903888 139806330058560 inference.py:559] [cl 0] Loading initial segmentation from (zyx) array([ 72, 364, 489]):array([113, 765, 890])
+I0206 18:35:39.367937 139806330058560 inference.py:559] [cl 0] Segmentation loaded, shape: (41, 401, 401). Canvas segmentation is (41, 401, 401)
+I0206 18:35:39.368168 139806330058560 inference.py:559] [cl 0] Segmentation cropped to: (41, 401, 401)
+I0206 18:35:39.401217 139806330058560 inference.py:559] [cl 0] Max restored ID is: 169.
+I0206 18:35:39.434974 139806330058560 resegmentation.py:212] processing object 0
+I0206 18:35:40.730197 139806330058560 inference.py:559] [cl 0] EDT computation done
+I0206 18:35:40.736429 139806330058560 inference.py:559] [cl 0] .. starting segmentation at (xyz): 195 211 17
+I0206 18:35:44.455511 139806330058560 inference.py:559] [cl 0] Iteration #: 100, Segmented Voxels: 195214
+I0206 18:35:48.192401 139806330058560 inference.py:559] [cl 0] Iteration #: 200, Segmented Voxels: 251386
+I0206 18:35:52.051831 139806330058560 inference.py:559] [cl 0] Iteration #: 300, Segmented Voxels: 292887
+I0206 18:35:55.997452 139806330058560 inference.py:559] [cl 0] Iteration #: 400, Segmented Voxels: 330098
+I0206 18:35:59.647700 139806330058560 inference.py:559] [cl 0] Iteration #: 500, Segmented Voxels: 434297
+I0206 18:36:03.333142 139806330058560 inference.py:559] [cl 0] Iteration #: 600, Segmented Voxels: 530689
+I0206 18:36:07.026841 139806330058560 inference.py:559] [cl 0] Iteration #: 700, Segmented Voxels: 585259
+I0206 18:36:10.694053 139806330058560 inference.py:559] [cl 0] Iteration #: 800, Segmented Voxels: 654152
+I0206 18:36:14.382555 139806330058560 inference.py:559] [cl 0] Iteration #: 900, Segmented Voxels: 701054
+I0206 18:36:18.068037 139806330058560 inference.py:559] [cl 0] Iteration #: 1000, Segmented Voxels: 738034
+I0206 18:36:21.877722 139806330058560 inference.py:559] [cl 0] Iteration #: 1100, Segmented Voxels: 768872
+I0206 18:36:25.645387 139806330058560 inference.py:559] [cl 0] Iteration #: 1200, Segmented Voxels: 785271
+I0206 18:36:29.366058 139806330058560 inference.py:559] [cl 0] Iteration #: 1300, Segmented Voxels: 811875
+I0206 18:36:33.126028 139806330058560 inference.py:559] [cl 0] Iteration #: 1400, Segmented Voxels: 838952
+I0206 18:36:36.952694 139806330058560 inference.py:559] [cl 0] Iteration #: 1500, Segmented Voxels: 879850
+I0206 18:36:40.765382 139806330058560 inference.py:559] [cl 0] Iteration #: 1600, Segmented Voxels: 919767
+I0206 18:36:44.506174 139806330058560 inference.py:559] [cl 0] Iteration #: 1700, Segmented Voxels: 945769
+I0206 18:36:48.288006 139806330058560 inference.py:559] [cl 0] Iteration #: 1800, Segmented Voxels: 976492
+I0206 18:36:52.050613 139806330058560 inference.py:559] [cl 0] Iteration #: 1900, Segmented Voxels: 1013283
+I0206 18:36:55.743161 139806330058560 inference.py:559] [cl 0] Iteration #: 2000, Segmented Voxels: 1031615
+I0206 18:36:59.395627 139806330058560 inference.py:559] [cl 0] Iteration #: 2100, Segmented Voxels: 1060529
+I0206 18:37:03.040572 139806330058560 inference.py:559] [cl 0] Iteration #: 2200, Segmented Voxels: 1134972
+I0206 18:37:04.475396 139806330058560 resegmentation.py:212] processing object 1
+I0206 18:37:05.784681 139806330058560 inference.py:559] [cl 0] EDT computation done
+I0206 18:37:05.790725 139806330058560 inference.py:559] [cl 0] .. starting segmentation at (xyz): 197 191 14
+I0206 18:37:09.458373 139806330058560 inference.py:559] [cl 0] Iteration #: 100, Segmented Voxels: 191989
+I0206 18:37:13.147021 139806330058560 inference.py:559] [cl 0] Iteration #: 200, Segmented Voxels: 246861
+I0206 18:37:16.838764 139806330058560 inference.py:559] [cl 0] Iteration #: 300, Segmented Voxels: 318094
+I0206 18:37:20.534349 139806330058560 inference.py:559] [cl 0] Iteration #: 400, Segmented Voxels: 394901
+I0206 18:37:24.305977 139806330058560 inference.py:559] [cl 0] Iteration #: 500, Segmented Voxels: 451629
+I0206 18:37:28.027674 139806330058560 inference.py:559] [cl 0] Iteration #: 600, Segmented Voxels: 518831
+I0206 18:37:31.799351 139806330058560 inference.py:559] [cl 0] Iteration #: 700, Segmented Voxels: 549045
+I0206 18:37:35.549641 139806330058560 inference.py:559] [cl 0] Iteration #: 800, Segmented Voxels: 583314
+I0206 18:37:39.239378 139806330058560 inference.py:559] [cl 0] Iteration #: 900, Segmented Voxels: 645962
+I0206 18:37:42.967864 139806330058560 inference.py:559] [cl 0] Iteration #: 1000, Segmented Voxels: 695797
+I0206 18:37:46.704822 139806330058560 inference.py:559] [cl 0] Iteration #: 1100, Segmented Voxels: 762824
+I0206 18:37:50.432867 139806330058560 inference.py:559] [cl 0] Iteration #: 1200, Segmented Voxels: 770380
+I0206 18:37:54.129934 139806330058560 inference.py:559] [cl 0] Iteration #: 1300, Segmented Voxels: 780273
+I0206 18:37:57.816927 139806330058560 inference.py:559] [cl 0] Iteration #: 1400, Segmented Voxels: 799492
+I0206 18:38:01.570694 139806330058560 inference.py:559] [cl 0] Iteration #: 1500, Segmented Voxels: 810775
+I0206 18:38:05.300662 139806330058560 inference.py:559] [cl 0] Iteration #: 1600, Segmented Voxels: 816133
+I0206 18:38:09.105823 139806330058560 inference.py:559] [cl 0] Iteration #: 1700, Segmented Voxels: 787169
+I0206 18:38:10.061874 139806330058560 inference.py:559] [cl 0] saving results to /home/morganlab/Documents/Autoseg_result/Autoseg_exp7/reseg/1279-1235_at_689_564_92.npz
+I0206 18:38:10.520101 139806330058560 inference.py:559] [cl 0] .. save complete
+I0206 18:38:10.520249 139806330058560 inference.py:305] Deregistering client 0
+I0206 18:38:10.527390 139797045683968 executor.py:200] client 0 terminating
+```
+
+Sample output protobuf! 
+```protobuf
+point {
+  x: 672
+  y: 582
+  z: 92
+}
+id_a: 120
+id_b: 1279
+segmentation_radius {
+  x: 200
+  y: 200
+  z: 20
+}
+eval {
+  radius {
+    x: 200
+    y: 200
+    z: 20
+  }
+  iou: 0.1778547167778015
+  from_a {
+    origin {
+      x: 737
+      y: 603
+      z: 83
+    }
+    num_voxels: 1140842
+    deleted_voxels: 116363
+    segment_a_consistency: 0.8300750255584717
+    segment_b_consistency: 0.9587254524230957
+    max_edt: 292.0616455078125
+  }
+  from_b {
+    origin {
+      x: 684
+      y: 575
+      z: 89
+    }
+    num_voxels: 1179308
+    deleted_voxels: 143220
+    segment_a_consistency: 0.8942198753356934
+    segment_b_consistency: 0.9706785678863525
+    max_edt: 260.2229919433594
+  }
+  max_edt_a: 150.2131805419922
+  max_edt_b: 117.72850036621094
+  num_voxels_a: 190896
+  num_voxels_b: 30285
+}
+```
 
 ## Neuroglancer view
+Much faster and much better to visualize and examine neuron!!!!
 ```json
 {
   "layers": [

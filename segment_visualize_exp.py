@@ -20,10 +20,10 @@ import neuroglancer
 # if args.static_content_url:
 #     neuroglancer.set_static_content_source(url=args.static_content_url)
 #%%
-f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp2/0/0/seg-0_0_0.npz")
+f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp4/0/0/seg-0_0_0.npz")
 v1 = f['segmentation']
 f.close()
-f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp3/0/0/seg-0_0_0.npz")
+f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp5/0/0/seg-0_0_0.npz")
 v2 = f['segmentation']
 f.close()
 f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_consensus_2_3/0/0/seg-0_0_0.npz")
@@ -44,6 +44,22 @@ with viewer.txn() as s:
             # offset=(200, 300, 150),
             voxel_size=s.voxel_size,
         ),)
+    s.layers.append(
+        name='seg_exp4',
+        layer=neuroglancer.LocalVolume(
+            data=v1,
+            # offset is in nm, not voxels
+            # offset=(200, 300, 150),
+            voxel_size=s.voxel_size,
+        ), )
+    s.layers.append(
+        name='seg_exp5',
+        layer=neuroglancer.LocalVolume(
+            data=v2,
+            # offset is in nm, not voxels
+            # offset=(200, 300, 150),
+            voxel_size=s.voxel_size,
+        ), )
     s.layers.append(
         name='EM_image',
         layer=neuroglancer.LocalVolume(

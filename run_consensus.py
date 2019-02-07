@@ -57,3 +57,5 @@ f=np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp3/0/0/seg-0_0_0.npz")
 v2 = f['segmentation']
 f.close()
 v1 = consensus.compute_consensus_for_segmentations(v1, v2, consensus_req)
+
+#%%
