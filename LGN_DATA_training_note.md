@@ -991,7 +991,7 @@ python3 run_inference_from_seed.py \
 
 ### Tensorboard Visualization 
 cd /home/morganlab/Downloads/ffn-master/models/
-tensorboard --logdir Norm:LR_model_Longtime,Mov:LR_model_Longtime_Mov,SF:LR_model_Longtime_SF_Deep,WF:LR_model_WF_Longtime
+tensorboard --logdir Norm:LR_model_Longtime,Mov:LR_model_Longtime_Mov,SF:LR_model_Longtime_SF_Deep,WF:LR_model_WF_Longtime,SF_Cl:LR_model_Longtime_SF_Deep_cluster
 
 
 Find the ROI cube, export segments, 

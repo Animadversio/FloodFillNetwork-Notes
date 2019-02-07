@@ -149,11 +149,12 @@ def worker_func(id_pair):
 from contextlib import closing
 pair_list = list(pair_array_sym)
 # pool = mp.Pool(processes=6) # mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
-with closing(mp.Pool(processes=6)) as pool:
-    result = pool.map_async(worker_func, pair_list)
+# with closing(mp.Pool(processes=6)) as pool:
+#     result = pool.map(worker_func, pair_list)
 #%%
-# result = []*
-# for i, pair in enumerate(pair_list):
+result = [[]]*len(pair_list)
+for i, pair in enumerate(pair_list):
+    result[i] = worker_func(pair)
 
 pickle.dump(result, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 

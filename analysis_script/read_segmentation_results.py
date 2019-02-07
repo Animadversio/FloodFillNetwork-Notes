@@ -49,7 +49,7 @@ def visualize_supervoxel_size_dist(segmentation, show_fig=True, save_fig=True, s
     if len(idx) > 2 ** 16:
         print("Too many labels, more than the import maximum of VAST %d " % 2 ** 16)
         logging.warning("Too many labels %d, more than the import maximum of VAST %d " % (len(idx), 2 ** 16))
-    return idx, cnts
+    return idx, cnts # background has already gone!
 
 #%% Export segmentation
 def export_segmentation_to_VAST(export_dir, segmentation, show_fig=False, suffix='tif', resize=1):
