@@ -1,4 +1,4 @@
-from analysis_script.utils_format_convert import convert_image_stack_to_h5
+from analysis_script.utils_format_convert import convert_image_stack_to_h5, normalize_img_stack
 from absl import app
 from absl import flags
 import numpy as np
@@ -20,6 +20,7 @@ def main(unused):
     EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, beg_n=beg_n,
                                      output=FLAGS.output_name)
     print("mean: %.2f, std: %.2f"% (EM_stack.mean(), EM_stack.std()))
+    normalize_img_stack(path, "grayscale_ixP11_1_norm.h5", EM_stack)
 
 if __name__=="__main__":
     app.run(main)

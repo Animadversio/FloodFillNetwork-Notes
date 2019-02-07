@@ -1330,3 +1330,11 @@ Much faster and much better to visualize and examine neuron!!!!
 }
 ```
 
+## New Tissue segmentation stiching trial
+14512, 14392
+12464, 16560
+12344, 16440
+
+
+
+Pipeline

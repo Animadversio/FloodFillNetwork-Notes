@@ -131,12 +131,12 @@ def normalize_img_stack(path, output, EM_stack, upper = 205, lower = 80):
 if __name__=="__main__":
     path = "/home/morganlab/Documents/ixP11LGN"
     stack_n = 152
-    EM_name_pattern = "IxD_W002_invert2_2_export_s%03d.png"# "tweakedImageVolume2_LRexport_s%03d.png"
+    EM_name_pattern = "IxD_W002_invert2_2_large_export_s%03d.png"# "tweakedImageVolume2_LRexport_s%03d.png"
     #raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
-    EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output="grayscale_maps_LR.h5")
+    EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output="grayscale_ixP11_2.h5")
     # seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
     #                                         stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
     #                                         output="groundtruth_LR.h5")
 
-    normalize_img_stack(path, "grayscale_ixP11_1_norm.h5", EM_stack)
+    normalize_img_stack(path, "grayscale_ixP11_2_norm.h5", EM_stack)
     pass
