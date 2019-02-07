@@ -1329,7 +1329,56 @@ Much faster and much better to visualize and examine neuron!!!!
   "layout": "4panel"
 }
 ```
-
+```
+point {
+  x: 689
+  y: 564
+  z: 92
+}
+id_a: 1279
+id_b: 1235
+segmentation_radius {
+  x: 200
+  y: 200
+  z: 20
+}
+eval {
+  radius {
+    x: 100
+    y: 100
+    z: 20
+  }
+  iou: 0.5057328939437866
+  from_a {
+    origin {
+      x: 684
+      y: 575
+      z: 89
+    }
+    num_voxels: 633969
+    deleted_voxels: 70039
+    segment_a_consistency: 0.9667491912841797
+    segment_b_consistency: 0.9637969732284546
+    max_edt: 256.0
+  }
+  from_b {
+    origin {
+      x: 686
+      y: 555
+      z: 86
+    }
+    num_voxels: 633441
+    deleted_voxels: 77611
+    segment_a_consistency: 0.9596499800682068
+    segment_b_consistency: 0.999223530292511
+    max_edt: 211.36697387695312
+  }
+  max_edt_a: 117.72850036621094
+  max_edt_b: 110.86929321289062
+  num_voxels_a: 30285
+  num_voxels_b: 10303
+}
+```
 ## New Tissue segmentation stiching trial
 14512, 14392
 12464, 16560

@@ -31,14 +31,16 @@ metric = metric[::-1]  # in z y x order
 
 #
 #
-ResultPath = "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/0/0/"
+ResultPath = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp7/0/0/"
+#    "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/0/0/"
     # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/0/0/"
     # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
 # if len(sys.argv)>1:
 #     ResultPath = sys.argv[1]
 # "/Users/binxu/Connectomics_Code/results/LGN/"
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/'
-output_path = "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
+output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp7/"
+# "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/"
 # if len(sys.argv)>2:
 #     output_path = sys.argv[2]
@@ -118,7 +120,7 @@ def find_projection_point(seg_a, seg_b, metric = [30, 12, 8]):
 
 #%%
 def worker_func(id_pair):
-    global composite_map_sh, BASE, metric
+    global  BASE, metric
     cur_idx1, cur_idx2 = id_pair[0], id_pair[1]
     if cur_idx1 == cur_idx2 or cur_idx1 * cur_idx2 == 0:
         return []  # ignore the overlap with background and samething overlap
@@ -144,9 +146,15 @@ def worker_func(id_pair):
         return []
 
 #%% parallelize the program
+from contextlib import closing
 pair_list = list(pair_array_sym)
-pool = mp.Pool(processes=mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
-result = pool.map(worker_func, pair_list)
+# pool = mp.Pool(processes=6) # mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
+with closing(mp.Pool(processes=6)) as pool:
+    result = pool.map_async(worker_func, pair_list)
+#%%
+# result = []*
+# for i, pair in enumerate(pair_list):
+
 pickle.dump(result, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 
 #%%
