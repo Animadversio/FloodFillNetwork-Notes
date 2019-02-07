@@ -103,6 +103,23 @@ class PolicyPeaks(BaseSeedPolicy):
   Runs a 3d Sobel filter to detect edges in the raw data, followed
   by a distance transform and peak finding to identify seed points.
   """
+  def __init__(self, canvas, reverse=False, **kwargs):
+    """Initialize settings.
+
+    Args:
+      canvas: inference Canvas object.
+      min_distance: forwarded to peak_local_max.
+      threshold_abs: forwarded to peak_local_max.
+      sort_cmp: the cmp function to use for sorting seed coordinates.
+      **kwargs: forwarded to base.
+
+    For compatibility with original version, min_distance=3, threshold_abs=0,
+    sort=False.
+    """
+    super(PolicyPeaks, self).__init__(canvas, **kwargs)
+    # self.min_distance = min_distance
+    # self.threshold_abs = threshold_abs
+    self.reverse = reverse # False for ascending, True for descending seeds
 
   def _init_coords(self):
     logging.info('peaks: starting')
@@ -142,7 +159,11 @@ class PolicyPeaks(BaseSeedPolicy):
     # After skimage upgrade to 0.13.0 peak_local_max returns peaks in
     # descending order, versus ascending order previously.  Sort ascending to
     # maintain historic behavior.
-    idxs = np.array(sorted((z, y, x) for z, y, x in idxs))
+    idxs = np.array(sorted([(z, y, x) for z, y, x in idxs], reverse=self.reverse))
+    if self.reverse:
+      logging.info('peaks: Sorted in descending order')
+    else:
+      logging.info('peaks: Sorted in ascending order')
 
     logging.info('peaks: found %d local maxima', idxs.shape[0])
     self.coords = idxs
@@ -161,7 +182,7 @@ class PolicyPeaks2d(BaseSeedPolicy):
       descending=lambda x, y: -cmp(x, y),
   )
 
-  def __init__(self, canvas, min_distance=7, threshold_abs=2.5,
+  def __init__(self, canvas, min_distance=7, threshold_abs=2.5, reverse=False,
                sort_cmp='ascending', **kwargs):
     """Initialize settings.
 
@@ -179,6 +200,7 @@ class PolicyPeaks2d(BaseSeedPolicy):
     self.min_distance = min_distance
     self.threshold_abs = threshold_abs
     self.sort_cmp = self._SORT_CMP[sort_cmp]
+    self.reverse = reverse
 
   def _init_coords(self):
     logging.info('2d peaks: starting')
@@ -223,9 +245,16 @@ class PolicyPeaks2d(BaseSeedPolicy):
                    idxs.shape[0], z)
       self.coords = np.concatenate((self.coords, idxs)) if z != 0 else idxs
 
-    self.coords = np.array(
-        sorted([(z, y, x) for z, y, x in self.coords], cmp=self.sort_cmp))
+    # self.coords = np.array(  # Changed @Feb.7th to compatible with Python3
+    #     sorted([(z, y, x) for z, y, x in self.coords], cmp=self.sort_cmp))
 
+    self.coords = np.array(
+      sorted([(z, y, x) for z, y, x in self.coords], reverse=self.reverse))
+    if self.reverse:
+      logging.info('peaks: Sorted in descending order')
+    else:
+      logging.info('peaks: Sorted in ascending order')
+    
     logging.info('2d peaks: found %d total local maxima', self.coords.shape[0])
 
 

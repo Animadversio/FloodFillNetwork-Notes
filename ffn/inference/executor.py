@@ -126,7 +126,7 @@ class ThreadingBatchExecutor(BatchExecutor):
   if the batch size is 1.
   """
 
-  def __init__(self, model, session, counters, batch_size, expected_clients=4):
+  def __init__(self, model, session, counters, batch_size, expected_clients=1):
     super(ThreadingBatchExecutor, self).__init__(model, session, counters,
                                                  batch_size)
     self._lock = threading.Lock()

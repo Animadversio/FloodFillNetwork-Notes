@@ -1110,7 +1110,7 @@ class Runner(object):
     return canvas, alignment
 
   def set_pixelsize(self, pixelsize):
-    '''Set pixel size in order of (x,y,z)'''
+    '''Set pixel size in order of (x,y,z) @Added by Binxu'''
     self.pixelsize = list(pixelsize)
     logging.info('Volume pixel size set as x:%d nm y:%d nm z:%d nm' % (pixelsize[0],pixelsize[1],pixelsize[2]))
 

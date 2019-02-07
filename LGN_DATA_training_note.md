@@ -250,7 +250,7 @@ Finished !! 8 hours for the bigger model!
 Run!!
 
 Local Run inference! 
-``` 
+```bash
 source ~/virtenvs/test1/bin/activate
 export Request='image {
  hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
@@ -953,7 +953,7 @@ python3 proc_segmentation_script.py \
 ```
 
 
-```bash 
+```bash   
 export Request='image {
  hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR(copy).h5:raw"
 }
@@ -1387,3 +1387,54 @@ eval {
 
 
 Pipeline
+
+## Change seed policy
+```bash
+source ~/virtenvs/test1/bin/activate
+export Request='image {
+ hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
+}
+image_mean: 128
+image_stddev: 33
+checkpoint_interval: 1200
+seed_policy: "PolicyPeaks2d"
+seed_policy_args: "{ \"sort_cmp\": \"descending\"}"
+model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime/model.ckpt-5339851"
+model_name: "convstack_3d.ConvStack3DFFNModel"
+model_args: "{\"depth\": 9, \"fov_size\": [55, 37, 17], \"deltas\": [9,6,3]}"
+segmentation_output_dir: "/home/morganlab/Downloads/ffn-master/results/LGN/tmp2"
+inference_options {
+  init_activation: 0.95
+  pad_value: 0.05
+  move_threshold: 0.95
+  min_boundary_dist { x: 3 y: 3 z: 1}
+  segment_threshold: 0.5
+  min_segment_size: 1000
+}'
+cd PycharmProjects/FloodFillNetwork-Notes/
+python3 run_inference.py \
+  --inference_request="$Request" \
+  --bounding_box 'start { x:0 y:0 z:0 } size { x:1180 y:1058 z:175 }' 
+```
+```bash
+export Request='image {
+ hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw"
+}
+image_mean: 128
+image_stddev: 33
+checkpoint_interval: 1200
+seed_policy: "PolicyPeaks"
+seed_policy_args: "{ \"reverse\": 1}"
+model_checkpoint_path: "/home/morganlab/Downloads/ffn-master/models/LR_model_Longtime/model.ckpt-5339851"
+model_name: "convstack_3d.ConvStack3DFFNModel"
+model_args: "{\"depth\": 9, \"fov_size\": [55, 37, 17], \"deltas\": [9,6,3]}"
+segmentation_output_dir: "/home/morganlab/Downloads/ffn-master/results/LGN/tmp2"
+inference_options {
+  init_activation: 0.95
+  pad_value: 0.05
+  move_threshold: 0.95
+  min_boundary_dist { x: 3 y: 3 z: 1}
+  segment_threshold: 0.5
+  min_segment_size: 1000
+}'
+```

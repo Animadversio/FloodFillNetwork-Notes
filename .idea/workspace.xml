@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/visualize_segmentation_script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LR_WF_training_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LR_training_script.bash" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LR_training_script.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/inference/storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/storage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/segment_visualize_exp.py" beforeDir="false" afterPath="$PROJECT_DIR$/neuroglancer_segment_visualize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ffn/inference/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/executor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ffn/inference/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ffn/inference/seed.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/seed.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,13 +20,43 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="1129" column="36" selection-start-line="1129" selection-start-column="20" selection-end-line="1129" selection-end-column="36" />
+              <folding>
+                <element signature="e#701#739#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="57" column="30" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="30" />
+            <state relative-caret-position="-1108">
+              <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
               <folding>
                 <element signature="e#695#733#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="499">
+              <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="376">
+              <caret line="264" column="34" selection-start-line="264" selection-start-column="18" selection-end-line="264" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -55,19 +80,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="254" column="47" lean-forward="true" selection-start-line="254" selection-start-column="47" selection-end-line="254" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/visualize_segmentation_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+            <state relative-caret-position="811">
+              <caret line="49" column="76" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -99,18 +115,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" selection-end-line="41" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -122,13 +126,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>exec</find>
-      <find>ps_tasks</find>
-      <find>prepare_ffn</find>
-      <find>replica</find>
-      <find>sess</find>
-      <find>get_summ</find>
-      <find>_load_model_checkpoint</find>
       <find>rest</find>
       <find>device</find>
       <find>saver</find>
@@ -151,6 +148,13 @@
       <find>stop_executor</find>
       <find>Process subvolume</find>
       <find>request.image</find>
+      <find>MaskConfig</find>
+      <find>MaskCon</find>
+      <find>mask</find>
+      <find>reverse</find>
+      <find>seed_policy_args</find>
+      <find>sort</find>
+      <find>seed_p</find>
       <find>split</find>
     </findStrings>
     <replaceStrings>
@@ -177,7 +181,6 @@
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation.py" />
         <option value="$PROJECT_DIR$/configs/resegment_example.pbtxt" />
         <option value="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" />
-        <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference_pb2.py" />
         <option value="$PROJECT_DIR$/ffn/inference/movement.py" />
         <option value="$PROJECT_DIR$/ffn_inference_demo.ipynb" />
@@ -186,11 +189,9 @@
         <option value="$PROJECT_DIR$/analysis_script/visualize_seed.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/cifar10_multi_gpu.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/asynch_training_example.py" />
-        <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
         <option value="$PROJECT_DIR$/train_multi_GPUs.py" />
         <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/misc/mnist_replica.py" />
-        <option value="$PROJECT_DIR$/ffn/inference/executor.py" />
         <option value="$PROJECT_DIR$/train_multi_GPU_sync.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py" />
         <option value="$PROJECT_DIR$/analysis_script/visualize_segmentation.py" />
@@ -217,12 +218,15 @@
         <option value="$PROJECT_DIR$/ffn/inference/storage.py" />
         <option value="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" />
         <option value="$PROJECT_DIR$/visualize_segmentation_script.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/executor.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="199" />
-    <option name="y" value="373" />
+    <option name="x" value="59" />
+    <option name="y" value="311" />
     <option name="width" value="2407" />
     <option name="height" value="1182" />
   </component>
@@ -509,7 +513,7 @@
       <workItem from="1548023123579" duration="56132000" />
       <workItem from="1548620990625" duration="90661000" />
       <workItem from="1549325817787" duration="22616000" />
-      <workItem from="1549506945001" duration="7310000" />
+      <workItem from="1549506945001" duration="9969000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -707,11 +711,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549508894961</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Add notes and change visualization code">
+      <created>1549580039739</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1549580039739</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="278585000" />
+    <option name="totallyTimeSpent" value="281244000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -723,7 +734,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="199" y="373" width="2407" height="1182" extended-state="0" />
+    <frame x="59" y="311" width="2407" height="1182" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1853576" />
@@ -774,7 +785,8 @@
     <MESSAGE value="Rename the note" />
     <MESSAGE value="Add notes and generate new h5 files" />
     <MESSAGE value="Add notes and change resegmentation proto file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add notes and change resegmentation proto file" />
+    <MESSAGE value="Add notes and change visualization code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add notes and change visualization code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -827,13 +839,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/training/optimizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/training/mask.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1080">
@@ -1132,16 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/executor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="244" column="16" selection-start-line="244" selection-start-column="16" selection-end-line="244" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1169,16 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="844" column="45" selection-start-line="844" selection-start-column="35" selection-end-line="844" selection-end-column="51" />
-          <folding>
-            <element signature="e#701#739#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
@@ -1192,16 +1177,6 @@
           <caret line="127" selection-start-line="127" selection-end-line="127" />
           <folding>
             <element signature="e#105#114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="57" column="30" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="30" />
-          <folding>
-            <element signature="e#695#733#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1237,20 +1212,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="254" column="47" lean-forward="true" selection-start-line="254" selection-start-column="47" selection-end-line="254" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/visualize_segmentation_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+        <state relative-caret-position="811">
+          <caret line="49" column="76" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="1129" column="36" selection-start-line="1129" selection-start-column="20" selection-end-line="1129" selection-end-column="36" />
+          <folding>
+            <element signature="e#701#739#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="264" column="34" selection-start-line="264" selection-start-column="18" selection-end-line="264" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/executor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="128" column="77" selection-start-line="128" selection-start-column="77" selection-end-line="128" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1108">
+          <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
+          <folding>
+            <element signature="e#695#733#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
         </state>
       </provider>
     </entry>
