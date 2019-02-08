@@ -2,29 +2,31 @@ import numpy as np
 import matplotlib.pylab as plt
 import neuroglancer
 from analysis_script.utils_format_convert import read_image_vol_from_h5
+from ffn.inference.storage import subvolume_path
 #%%
-f = np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp8/0/0/seg-0_0_0.npz")
+seg_dir = "/Users/binxu/Connectomics_Code/results/LGN/p11_1_exp8" # "/home/morganlab/Documents/ixP11LGN/p11_1_exp8"
+f = np.load(subvolume_path(seg_dir, (0, 0, 0), 'npz'))
 v1 = f['segmentation']
 f.close()
-f = np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp8/0/448/seg-0_448_0.npz")
+f = np.load(subvolume_path(seg_dir, (0, 448, 0), 'npz'))
 v2 = f['segmentation']
 f.close()
-f = np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp8/448/0/seg-448_0_0.npz")
+f = np.load(subvolume_path(seg_dir, (0, 0, 448), 'npz'))
 v3 = f['segmentation']
 f.close()
-f = np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp8/448/448/seg-448_448_0.npz")
+f = np.load(subvolume_path(seg_dir, (0, 448, 448), 'npz'))
 v4 = f['segmentation']
 f.close()
 #%%
 
 
-plt.imshow(v1[:,-32,:])
+plt.imshow(v1[:,-33:-30,:])
 plt.show()
-plt.imshow(v2[:,32,:])
+plt.imshow(v2[:,31:34,:])
 plt.show()
 #%%
 BASE = int(v1.max()+1)
-composite_map = v1[:,-32,:] + v2[:,32,:] * BASE # note the label width
+composite_map = v1[:, -35:-29, :] + v2[:, 29:35, :] * BASE # note the label width
 compo_idx, cnt = np.unique(composite_map, return_counts=True)
 #%%
 idx2, idx1 = np.divmod(compo_idx, BASE)
@@ -57,13 +59,19 @@ consensus_merge = list(set(merge_list_1) & set(merge_list_2))
 consensus_size_list = [(size_list_1[merge_list_1.index(pair)], size_list_2[merge_list_2.index(pair)] ) for pair in consensus_merge]
 #%%
 threshold = 100 # minimum size for threshold
-mask = [1 if (size_pair[1] > threshold & size_pair[0]>threshold) else 0 for size_pair in consensus_size_list]
+mask = [1 if (size_pair[1] > threshold and size_pair[0]>threshold) else 0 for size_pair in consensus_size_list]
 #%% merge and remap index
-
-
-
+merge_array = np.array(consensus_merge)
+merge_array_filt = merge_array[np.array(mask, dtype=bool), :]
+overlap_size_array = np.array(consensus_size_list)[np.array(mask, dtype=bool)]
+overlap_size_array = overlap_size_array[:, 1]  # to 1d array
 #%%
-image_stack = read_image_vol_from_h5("/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5")
+v2_new = v2 + BASE  # remap by offset
+for id1, id2 in merge_array_filt[:, :]:
+    v2_new[v2_new == id2 + BASE] = id1  # merge. (background is merged in this step)
+#%%
+image_stack = read_image_vol_from_h5("/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_1_norm.h5")
+# ""/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5")
 #%%
 viewer = neuroglancer.Viewer()
 with viewer.txn() as s:
@@ -87,7 +95,7 @@ with viewer.txn() as s:
     s.layers.append(
         name='seg_exp8-3',
         layer=neuroglancer.LocalVolume(
-            data=v2,
+            data=v2_new,
             # offset is in nm, not voxels
             offset=(0, 3584, 0),
             voxel_size=s.voxel_size,
