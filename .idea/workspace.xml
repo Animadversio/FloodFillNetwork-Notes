@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/inference/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/executor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/inference/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ffn/inference/seed.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/seed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_h5_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_h5_file.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,41 +32,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1108">
-              <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
-              <folding>
-                <element signature="e#695#733#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="264" column="34" selection-start-line="264" selection-start-column="18" selection-end-line="264" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_inference.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="630">
@@ -80,12 +45,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visualize_segmentation_script.py">
+        <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="49" column="76" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
+            <state relative-caret-position="504">
+              <caret line="47" column="13" selection-start-line="47" selection-end-line="47" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_consensus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,23 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
-              <folding>
-                <element signature="e#1#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
-              <folding>
-                <element signature="e#129#147#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="72">
+              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="5" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -211,8 +182,6 @@
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation_pb2.py" />
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" />
         <option value="$PROJECT_DIR$/run_resegment.py" />
-        <option value="$PROJECT_DIR$/generate_h5_file.py" />
-        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
         <option value="$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py" />
         <option value="$PROJECT_DIR$/segment_visualize_exp.py" />
         <option value="$PROJECT_DIR$/ffn/inference/storage.py" />
@@ -221,12 +190,15 @@
         <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
         <option value="$PROJECT_DIR$/ffn/inference/executor.py" />
         <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
+        <option value="$PROJECT_DIR$/generate_h5_file.py" />
+        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
+        <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="59" />
-    <option name="y" value="311" />
+    <option name="x" value="153" />
+    <option name="y" value="190" />
     <option name="width" value="2407" />
     <option name="height" value="1182" />
   </component>
@@ -342,7 +314,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.resegment_seed_generation_ED">
+  <component name="RunManager" selected="Python.utils_format_convert">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -454,9 +426,6 @@
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis_script" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -481,8 +450,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.resegment_seed_generation_ED" />
         <item itemvalue="Python.utils_format_convert" />
+        <item itemvalue="Python.resegment_seed_generation_ED" />
         <item itemvalue="Python.segment_visualize_exp" />
         <item itemvalue="Python.example" />
         <item itemvalue="Python.scratch_2" />
@@ -513,7 +482,7 @@
       <workItem from="1548023123579" duration="56132000" />
       <workItem from="1548620990625" duration="90661000" />
       <workItem from="1549325817787" duration="22616000" />
-      <workItem from="1549506945001" duration="9969000" />
+      <workItem from="1549506945001" duration="14468000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -718,11 +687,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549580039739</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add seed reversing mechanism!">
+      <created>1549582693947</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1549582693947</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="281244000" />
+    <option name="totallyTimeSpent" value="285743000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -734,10 +710,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="59" y="311" width="2407" height="1182" extended-state="0" />
+    <frame x="153" y="190" width="2407" height="1182" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1853576" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1853576" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="TypeScript" order="0" />
@@ -753,7 +729,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.31231487" side_tool="true" visible="true" weight="0.33809525" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49920508" weight="0.32928678" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4993652" weight="0.32797733" />
-      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.68768513" visible="true" weight="0.33809525" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="13" sideWeight="0.68768513" visible="true" weight="0.33809525" />
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -786,7 +762,8 @@
     <MESSAGE value="Add notes and generate new h5 files" />
     <MESSAGE value="Add notes and change resegmentation proto file" />
     <MESSAGE value="Add notes and change visualization code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add notes and change visualization code" />
+    <MESSAGE value="Add seed reversing mechanism!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add seed reversing mechanism!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -839,15 +816,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/training/mask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1080">
-          <folding>
-            <element signature="e#713#751#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1086,16 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_consensus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_pb2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -1120,13 +1078,6 @@
           <folding>
             <element signature="e#710#719#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
@@ -1157,13 +1108,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="97" column="4" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
@@ -1191,37 +1135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
-          <folding>
-            <element signature="e#1#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="90" column="51" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="51" />
-          <folding>
-            <element signature="e#762#771#0" expanded="true" />
-            <element signature="e#1540#2574#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualize_segmentation_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="49" column="76" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
@@ -1231,9 +1144,6 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
       <provider selected="true" editor-type-id="text-editor">
@@ -1249,9 +1159,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="254" column="9" lean-forward="true" selection-start-line="254" selection-start-column="9" selection-end-line="254" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualize_segmentation_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="49" column="76" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="126" column="23" lean-forward="true" selection-start-line="126" selection-start-column="23" selection-end-line="127" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="90" column="51" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="51" />
+          <folding>
+            <element signature="e#762#771#0" expanded="true" />
+            <element signature="e#1540#2574#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1108">
+        <state relative-caret-position="2618">
           <caret line="286" column="21" selection-start-line="286" selection-start-column="21" selection-end-line="286" selection-end-column="21" />
           <folding>
             <element signature="e#695#733#0" expanded="true" />
@@ -1259,10 +1211,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+    <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
+        <state relative-caret-position="504">
+          <caret line="47" column="13" selection-start-line="47" selection-end-line="47" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_consensus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="5" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="51" column="33" lean-forward="true" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

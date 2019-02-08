@@ -254,7 +254,7 @@ class PolicyPeaks2d(BaseSeedPolicy):
       logging.info('peaks: Sorted in descending order')
     else:
       logging.info('peaks: Sorted in ascending order')
-    
+
     logging.info('2d peaks: found %d total local maxima', self.coords.shape[0])
 
 

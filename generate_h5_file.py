@@ -20,7 +20,7 @@ def main(unused):
     EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, beg_n=beg_n,
                                      output=FLAGS.output_name)
     print("mean: %.2f, std: %.2f"% (EM_stack.mean(), EM_stack.std()))
-    normalize_img_stack(path, "grayscale_ixP11_1_norm.h5", EM_stack)
+    normalize_img_stack(path, "grayscale_ixP11_3_norm.h5", EM_stack)
 
 if __name__=="__main__":
     app.run(main)
