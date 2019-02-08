@@ -40,7 +40,7 @@ for id2 in idx2_set:
     overlap_size = overlap_cnt[i]
     merge_list_2.append((id1, id2))
     size_list_2.append(overlap_size)
-    #%%
+#%%
 merge_list_1 = []
 size_list_1 = []
 idx1_set = set(idx1)
@@ -53,8 +53,17 @@ for id1 in idx1_set:
     merge_list_1.append((id1, id2))
     size_list_1.append(overlap_size)
 #%%
-image_stack = read_image_vol_from_h5("/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5")
+consensus_merge = list(set(merge_list_1) & set(merge_list_2))
+consensus_size_list = [(size_list_1[merge_list_1.index(pair)], size_list_2[merge_list_2.index(pair)] ) for pair in consensus_merge]
+#%%
+threshold = 100 # minimum size for threshold
+mask = [1 if (size_pair[1] > threshold & size_pair[0]>threshold) else 0 for size_pair in consensus_size_list]
+#%% merge and remap index
 
+
+
+#%%
+image_stack = read_image_vol_from_h5("/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5")
 #%%
 viewer = neuroglancer.Viewer()
 with viewer.txn() as s:
