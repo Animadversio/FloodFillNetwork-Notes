@@ -19,6 +19,7 @@ import pickle
 import multiprocessing as mp
 import ctypes
 from os.path import join
+import argparse
 #%% General Settings
 
 metric = [8, 12, 30]  # voxel size in x,y,z order in nm
@@ -31,19 +32,26 @@ metric = metric[::-1]  # in z y x order
 
 #
 #
-ResultPath = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp7/0/0/"
-#    "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/0/0/"
+ResultPath = "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/0/0/"
     # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/0/0/"
     # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
-# if len(sys.argv)>1:
-#     ResultPath = sys.argv[1]
 # "/Users/binxu/Connectomics_Code/results/LGN/"
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/'
-output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp7/"
-# "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
+output_path = "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/"
-# if len(sys.argv)>2:
-#     output_path = sys.argv[2]
+ap = argparse.ArgumentParser()
+ap.add_argument(
+    '--seg_path',
+    help='')
+ap.add_argument(
+    '--output_path', help='Obtain the Neuroglancer client code from the specified URL.')
+args = ap.parse_args()
+if args.seg_path:
+    ResultPath = args.seg_path
+if args.output_path:
+    output_path = args.output_path
+elif args.seg_path:
+    output_path = args.seg_path
 testSegLoc = ResultPath + "seg-0_0_0.npz"
 testProbLoc = ResultPath + 'seg-0_0_0.prob'
 
@@ -120,7 +128,7 @@ def find_projection_point(seg_a, seg_b, metric = [30, 12, 8]):
 
 #%%
 def worker_func(id_pair):
-    global  BASE, metric
+    global composite_map_sh, BASE, metric, segmentation
     cur_idx1, cur_idx2 = id_pair[0], id_pair[1]
     if cur_idx1 == cur_idx2 or cur_idx1 * cur_idx2 == 0:
         return []  # ignore the overlap with background and samething overlap
@@ -132,6 +140,7 @@ def worker_func(id_pair):
     for i in range(coord_a.shape[1]):
         dist_mat[i, :] = np.sqrt(np.sum((metric * (coord_b - coord_a[:, [i]])) ** 2, axis=0))
     (i, j) = np.unravel_index(dist_mat.argmin(), dist_mat.shape)
+    del seg_a, seg_b, coord_a, coord_b
     near_coord_a = coord_a[:, i]
     near_coord_b = coord_b[:, j]
     if dist_mat[i, j] < dist_threshold:
@@ -148,14 +157,15 @@ def worker_func(id_pair):
 #%% parallelize the program
 from contextlib import closing
 pair_list = list(pair_array_sym)
-# pool = mp.Pool(processes=6) # mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
-# with closing(mp.Pool(processes=6)) as pool:
-#     result = pool.map(worker_func, pair_list)
-#%%
-result = [[]]*len(pair_list)
-for i, pair in enumerate(pair_list):
-    result[i] = worker_func(pair)
-
+pool = mp.Pool(processes=2, maxtasksperchild=2)#mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
+result = pool.map(worker_func, pair_list)
+with closing( mp.Pool(processes=2, maxtasksperchild=2)) as pool:
+    result = pool.imap_unordered(worker_func, pair_list)
+pool.close()
+print("closed pool")
+print("joining pool")
+pool.join()
+print("joined pool")
 pickle.dump(result, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 
 #%%

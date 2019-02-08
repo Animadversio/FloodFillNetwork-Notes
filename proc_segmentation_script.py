@@ -34,7 +34,7 @@ def main(unused_argv):
     if FLAGS.visualize:
         image_stack = read_image_vol_from_h5(FLAGS.imageh5_dir)
         export_composite_image(segmentation, image_stack, FLAGS.render_dir, suffix="png",
-                               alpha=0.2, resize=1, bbox=[(0,0,0), (175,1058,1180)])
+                               alpha=0.2, resize=1, bbox=[(0,0,0), (175,1058,1180)]) # FIXME add parser for bbox
 #%%
 if __name__=="__main__":
     app.run(main)

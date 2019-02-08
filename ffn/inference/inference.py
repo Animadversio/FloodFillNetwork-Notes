@@ -916,7 +916,7 @@ class Runner(object):
     self.saver = tf.train.Saver()
     self._load_model_checkpoint(request.model_checkpoint_path)
     # load the saved checkpoint information into self.model
-    self.executor.start_server()
+    self.executor.start_server()  # start server  and  start client later
 
   def make_restrictor(self, corner, subvol_size, image, alignment):
     """Builds a MovementRestrictor object."""
