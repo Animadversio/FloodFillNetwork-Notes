@@ -1388,7 +1388,7 @@ eval {
 
 Pipeline
 
-## Change seed policy
+## Change seed policy and add reverse seed order
 ```bash
 source ~/virtenvs/test1/bin/activate
 export Request='image {
@@ -1438,3 +1438,11 @@ inference_options {
   min_segment_size: 1000
 }'
 ```
+
+Not really successful!! Lots of spill over and stuff
+
+
+model.ckpt-5339851 is really  a disaster!!! It has too much spill over!!!! Cannot use! 
+
+branch_upsp, the problem is many seeds are weak but not rejected. Results in a very fragmented segmentation 
+
