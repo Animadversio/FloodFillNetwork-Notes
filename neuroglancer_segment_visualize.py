@@ -35,6 +35,8 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
             f = np.load(subvolume_path(seg_dir, corner, 'npz'))
             vol = f['segmentation']
             f.close()
+            if vol.dtype == np.uint8:
+                vol = np.uint64(vol)  # add this in case the system think vol is a image
             seg_list.append( (name, corner, vol.copy()) )
     else:
         for name, spec in seg_dict.items():
@@ -46,6 +48,8 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                 f = np.load(subvolume_path(seg_dir, corner, 'npz'))
                 vol = f['segmentation']
                 f.close()
+            if vol.dtype == np.uint8:
+                vol = np.uint64(vol)
             seg_list.append((name, corner, vol.copy()))
     if type(image_stack) is str:
         assert '.h5' in image_stack

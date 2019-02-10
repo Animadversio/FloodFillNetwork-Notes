@@ -41,7 +41,12 @@ def run_save_consensus(config, corners):
     else:
         return result
 
-
+ap = argparse.ArgumentParser()
+ap.add_argument(
+    '--config',
+    help='config proto of ')
+ap.add_argument(
+    '--corners', help='Obtain the Neuroglancer client code from the specified URL.')
 #%%
 #%%
 if __name__=="__main__":
@@ -63,13 +68,6 @@ if __name__=="__main__":
     split_min_size: 5000
     """
     corners = (0, 0, 0)
-
-    ap = argparse.ArgumentParser()
-    ap.add_argument(
-        '--config',
-        help='config proto of ')
-    ap.add_argument(
-        '--corners', help='Obtain the Neuroglancer client code from the specified URL.')
     args = ap.parse_args()
     if args.config:
         config = args.config

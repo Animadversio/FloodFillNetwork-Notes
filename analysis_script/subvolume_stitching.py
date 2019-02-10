@@ -70,6 +70,9 @@ size = (152, 512, 512)
 size2 = (152, 512, 512)
 overlap_d = 3
 def _overlap_selection(corner1, corner2, size, size2=None, overlap_d=3):
+    '''Return the middle of overlap subvolume to do next overlap analysis
+    :return : sel1 sel2 2 slice object that can send into v1 v2
+    '''
     if size2==None:
         size2 = size
     if corner1[0] == corner2[0] and corner1[2] == corner2[2]:  # junction in y axis
@@ -157,15 +160,15 @@ def merge_segment(v1, v2, corner1, corner2, size, size2=None, overlap_d=3, thres
     merge_array_filt = merge_array[np.array(mask, dtype=bool), :]
     overlap_size_array = np.array(consensus_size_list)[np.array(mask, dtype=bool)]
     overlap_size_array = overlap_size_array[:, 1]  # to 1d array
-    v2_new = v2 + BASE  # remap by offset
+    global_shift = BASE
+    v2_new = v2 + global_shift  # remap by offset
     for id1, id2 in merge_array_filt[:, :]:
-        v2_new[v2_new == id2 + BASE] = id1  # merge. (background is merged in this step)
+        v2_new[v2_new == id2 + global_shift] = id1  # merge. (background is merged in this step)
     return merge_array_filt, overlap_size_array, v2_new
 #%%
 merge_array, overlap_size_array, v2_new = merge_segment(v1, v2, (0,0,0),(0,448,0),size=(152,512,512))
 #%%
 seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_3_exp1/"
-
 x_step = 448
 y_step = 448
 x_num = 2
@@ -193,14 +196,102 @@ def local_y_sel(i):
     if i==0:  return slice(0, -y_margin)
     elif i==y_num-1:  return slice(y_margin, None)
     else:  return slice(y_margin, -y_margin)
-
+#%%
 full_segment = np.zeros((size[0], y_num * y_step + 2 * y_margin, x_num * x_step + 2 * x_margin),dtype=np.uint16)
 for i in range(x_num):
     for j in range(y_num):
-        f = np.load(subvolume_path(seg_dir, (0, j*y_step, i*x_step), 'npz'))
+        corner = (0, j*y_step, i*x_step)
+        f = np.load(subvolume_path(seg_dir, corner, 'npz'))
         vol = f['segmentation']
         f.close()
+        if i==0:
+            pass
+        else:
+            corner1 = (0, j*y_step, (i - 1)*x_step)
+            f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
+            v1 = f['segmentation']
+            f.close()
+            merge_array, overlap_size_array, vol_new = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+            vol = vol_new
+        if j==0:
+            pass
+        else:
+            corner1 = (0, (j - 1)*y_step, i*x_step)
+            f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
+            v1 = f['segmentation']
+            f.close()
+            merge_array, overlap_size_array, vol_new = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+            vol = vol_new
         full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
+
+#%%
+seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_3_exp1/"
+x_step = 448
+y_step = 448
+x_num = 2
+y_num = 2
+size = (152, 512, 512)
+x_margin = (size[2] - x_step)//2
+y_margin = (size[1] - y_step)//2
+import networkx
+
+# Generate segment list and merge_pair list!
+seg_id_dict = []
+merge_pair_list = []
+for i in range(x_num):
+    for j in range(y_num):
+        corner = (0, j*y_step, i*x_step)
+        f = np.load(subvolume_path(seg_dir, corner, 'npz'))
+        vol = f['segmentation']
+        f.close()
+        idx_list = np.unique(vol)
+        seg_id_dict.extend([(i, j, label) for label in idx_list])
+        if i == 0:
+            pass
+        else:
+            corner1 = (0, j*y_step, (i - 1)*x_step)
+            f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
+            v1 = f['segmentation']
+            f.close()
+            merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+            merge_pair_list.extend(
+                [[seg_id_dict.index((i - 1, j, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
+        if j == 0:
+            pass
+        else:
+            corner1 = (0, (j - 1)*y_step, i*x_step)
+            f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
+            v1 = f['segmentation']
+            f.close()
+            merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+            merge_pair_list.extend(
+                [[seg_id_dict.index((i, j - 1, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
+        # full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
+#%% find the network component in this global network!
+
+segment_graph = networkx.Graph()
+segment_graph.add_edges_from(merge_pair_list)
+segment_graph.add_nodes_from(range(len(seg_id_dict)))
+final_idx = []
+for component in networkx.connected_components(segment_graph):
+    final_idx.append(min(component))
+
+#%%
+full_segment = np.zeros((size[0], y_num * y_step + 2 * y_margin, x_num * x_step + 2 * x_margin), dtype=np.uint32)
+for i in range(x_num):
+    for j in range(y_num):
+        corner = (0, j*y_step, i*x_step)
+        f = np.load(subvolume_path(seg_dir, corner, 'npz'))
+        vol = f['segmentation']
+        f.close()
+        idx_list = np.unique(vol)
+        for id_loc in idx_list:
+            id_glob = seg_id_dict.index((i, j, id_loc))
+            equiv_group = networkx.node_connected_component(segment_graph, id_glob)
+            id_glob = min(equiv_group)
+            vol[vol == id_loc] = id_glob
+        full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
+
 
 #%%
 seg_dict = {"seg_full": {"corner": (0, 0, 0), "vol": full_segment}
@@ -252,70 +343,3 @@ overlap_size_array = overlap_size_array[:, 1]  # to 1d array
 v2_new = v2 + BASE  # remap by offset
 for id1, id2 in merge_array_filt[:, :]:
     v2_new[v2_new == id2 + BASE] = id1  # merge. (background is merged in this step)
-#%%
-image_stack = read_image_vol_from_h5("/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_1_norm.h5")
-# ""/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5")
-#%%
-viewer = neuroglancer.Viewer()
-with viewer.txn() as s:
-    s.voxel_size = [8, 8, 40]
-    # s.layers.append(
-    #     name='consensus_segmentation',
-    #     layer=neuroglancer.LocalVolume(
-    #         data=cons_seg,
-    #         # offset is in nm, not voxels
-    #         # offset=(200, 300, 150),
-    #         voxel_size=s.voxel_size,
-    #     ),)
-    s.layers.append(
-        name='seg_exp8',
-        layer=neuroglancer.LocalVolume(
-            data=v1,
-            # offset is in nm, not voxels
-            # offset=(200, 300, 150),
-            voxel_size=s.voxel_size,
-        ), )
-    s.layers.append(
-        name='seg_exp8-3',
-        layer=neuroglancer.LocalVolume(
-            data=v2_new,
-            # offset is in nm, not voxels
-            offset=(0, 3584, 0),
-            voxel_size=s.voxel_size,
-        ), )
-    s.layers.append(
-        name='seg_exp8-2',
-        layer=neuroglancer.LocalVolume(
-            data=v3,
-            # offset is in nm, not voxels
-            offset=(3584, 0, 0),
-            voxel_size=s.voxel_size,
-        ), )
-    s.layers.append(
-        name='seg_exp8-4',
-        layer=neuroglancer.LocalVolume(
-            data=v4,
-            # offset is in nm, not voxels
-            offset=(3584, 3584, 0),
-            voxel_size=s.voxel_size,
-        ), )
-    s.layers.append(
-        name='EM_image',
-        layer=neuroglancer.LocalVolume(
-            data=image_stack,
-            voxel_size=s.voxel_size,
-        ), )
-#         shader="""
-# void main() {
-#   emitRGB(vec3(toNormalized(getDataValue(0)),
-#                toNormalized(getDataValue(1)),
-#                toNormalized(getDataValue(2))));
-# }
-# """)
-#     s.layers.append(
-#         name='b', layer=neuroglancer.LocalVolume(
-#             data=v2,
-#             voxel_size=s.voxel_size,
-#         ))
-
-print(viewer)
