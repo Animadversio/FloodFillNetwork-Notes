@@ -1693,4 +1693,8 @@ UnboundLocalError: local variable 'dist_mat' referenced before assignment
 
 
 
-12 core, takes 30 min to process 400-500 points
+12 core, takes 30 min to process > 2400 points
+
+Approximately 3-4 hours for all segments points
+
+24 core 30 min only half the points 

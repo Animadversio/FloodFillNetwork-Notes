@@ -29,7 +29,6 @@ output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"#
 # "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/"
 
-#
 ap = argparse.ArgumentParser()
 ap.add_argument(
     '--seg_path', help='')
@@ -141,7 +140,7 @@ if memory_check:
 pair_list = list(pair_array_sym)
 # mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
 with closing(mp.Pool(processes=mp.cpu_count())) as pool: #  mp.cpu_count()//2
-    result = pool.imap(worker_func, pair_list, chunksize=100)  # returns a generator _unordered
+    result = pool.imap(worker_func, pair_list, chunksize=50)  # returns a generator _unordered
 # result_list = list(result)
 # pickle.dump(result_list, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 
