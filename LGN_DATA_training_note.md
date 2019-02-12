@@ -1446,3 +1446,251 @@ model.ckpt-5339851 is really  a disaster!!! It has too much spill over!!!! Canno
 
 branch_upsp, the problem is many seeds are weak but not rejected. Results in a very fragmented segmentation 
 
+```bash
+python3 train.py \
+--train_coords /home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/tf_record_file_LR \
+--data_volumes LGN_LR:/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5:raw \
+--label_volumes LGN_LR:/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/groundtruth_LR.h5:stack \
+--train_dir /home/morganlab/Downloads/ffn-master/models/LR_model_Longtime \
+--model_name convstack_3d.ConvStack3DFFNModel \
+--model_args "{\"depth\": 9, \"fov_size\": [55, 37, 17], \"deltas\": [9,6,3]}" \
+--image_mean 138 \
+--image_stddev 55 \
+--permutable_axes 0
+```
+
+## Resegment and Agglomeration 
+
+12 CPUs chunksize=4 15:40 start 
+~ 2G memory
+No memory leakage!
+~ 13min or so 
+
+Consistently, the `imap` works for testing_LR volume without increase in memory, even with 24 process running the code. 
+but does not in testing_exp12, exp12 will result in serious memory problem 
+
+
+Use imap 24 core  chunksize=1, start 18min total
+
+
+/usr/bin/python3.6 /home/morganlab/pycharm-2018.3.1/helpers/pydev/pydevconsole.py --mode=client --port=41871
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/morganlab/Documents/neuroglancer', '/home/morganlab/PycharmProjects/FloodFillNetwork-Notes'])
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+Type "copyright", "credits" or "license" for more information.
+IPython 5.5.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+PyDev console: using IPython 5.5.0
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+runfile('/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py', wdir='/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/analysis_script')
+[17983] At start Memory usage: 1248052 (kb)
+[17983] After cast type Memory usage: 2373812 (kb)
+Pairs to process 10087.
+[17983] Before starting Pool Memory usage: 5688284 (kb)
+[17983] Before writing down Memory usage: 5688284 (kb)
+[18087] After calculate segment Memory usage: 3938496 (kb)
+[18088] After calculate segment Memory usage: 3938576 (kb)
+[18088] After fetching coordinates Memory usage: 3940044 (kb)
+[18087] After fetching coordinates Memory usage: 3938960 (kb)
+[18085] After calculate segment Memory usage: 3938524 (kb)
+[18086] After calculate segment Memory usage: 3938560 (kb)
+[18087] After dist_mat Memory usage: 4597812 (kb)
+{id_a:18 id_b:395 point {[array([ 13, 109, 277])]} } min dist 8.0 
+[18087] After calculate segment Memory usage: 4598152 (kb)
+[18085] After fetching coordinates Memory usage: 3939468 (kb)
+[18086] After fetching coordinates Memory usage: 4184636 (kb)
+[18086] After calculate segment Memory usage: 4184636 (kb)
+[18087] After fetching coordinates Memory usage: 4598152 (kb)
+[18087] After calculate segment Memory usage: 4598152 (kb)
+[18085] After dist_mat Memory usage: 5024656 (kb)
+{id_a:1 id_b:3 point {[array([  0,   3, 675])]} } min dist 8.0 
+[18086] After fetching coordinates Memory usage: 4184636 (kb)
+[18087] After fetching coordinates Memory usage: 4598152 (kb)
+[18085] After calculate segment Memory usage: 5024808 (kb)
+[18085] After fetching coordinates Memory usage: 5024808 (kb)
+[18088] After dist_mat Memory usage: 8090784 (kb)
+{id_a:27 id_b:258 point {[array([   0,  138, 1113])]} } min dist 24.0 
+[18088] After calculate segment Memory usage: 8091016 (kb)
+[18088] After fetching coordinates Memory usage: 8091016 (kb)
+[18086] After dist_mat Memory usage: 35733208 (kb)
+{id_a:33 id_b:523 point {[array([ 31, 176,  86])]} } min dist 30.0 
+[18086] After calculate segment Memory usage: 35733468 (kb)
+[18086] After fetching coordinates Memory usage: 35733468 (kb)
+[18185] After calculate segment Memory usage: 3938592 (kb)
+[18185] After fetching coordinates Memory usage: 3965780 (kb)
+[18088] After dist_mat Memory usage: 29290416 (kb)
+[18085] After dist_mat Memory usage: 24712160 (kb)
+{id_a:1 id_b:7 point {[array([  6,  15, 703])]} } min dist 8.0 
+{id_a:27 id_b:411 point {[array([   6,  151, 1080])]} } min dist 8.0 
+[18085] After calculate segment Memory usage: 24712160 (kb)
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18085] After fetching coordinates Memory usage: 24712160 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+[18085] After dist_mat Memory usage: 24712160 (kb)
+{id_a:1 id_b:410 point {[array([  6,   5, 682])]} } min dist 8.0 
+[18085] After calculate segment Memory usage: 24712160 (kb)
+[18085] After fetching coordinates Memory usage: 24712160 (kb)
+[18085] After dist_mat Memory usage: 24712160 (kb)
+[18088] After dist_mat Memory usage: 29290416 (kb)
+{id_a:2 id_b:3 point {[array([  0,   2, 602])]} } min dist 8.0 
+[18085] After calculate segment Memory usage: 24712160 (kb)
+{id_a:27 id_b:425 point {[array([  29,  109, 1067])]} } min dist 26.8 
+[18085] After fetching coordinates Memory usage: 24712160 (kb)
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+[18185] After dist_mat Memory usage: 30764180 (kb)
+{id_a:39 id_b:713 point {[array([ 49, 142, 539])]} } min dist 32.3 
+[18088] After dist_mat Memory usage: 29290416 (kb)
+{id_a:27 id_b:563 point {[array([  36,  114, 1059])]} } min dist 16.0 
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18185] After calculate segment Memory usage: 30764368 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+[18185] After fetching coordinates Memory usage: 30764368 (kb)
+[18185] After calculate segment Memory usage: 30764368 (kb)
+[18185] After fetching coordinates Memory usage: 30764368 (kb)
+[18085] After dist_mat Memory usage: 24712160 (kb)
+{id_a:2 id_b:410 point {[array([  0,   2, 570])]} } min dist 8.0 
+[18085] After calculate segment Memory usage: 24712160 (kb)
+[18085] After fetching coordinates Memory usage: 24712160 (kb)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py", line 91, in worker_func
+    dist_mat = np.zeros((coord_a.shape[1], coord_b.shape[1]))
+MemoryError
+"""
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/IPython/core/interactiveshell.py", line 2882, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "<ipython-input-2-d24af42ab27a>", line 1, in <module>
+    runfile('/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py', wdir='/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/analysis_script')
+  File "/home/morganlab/pycharm-2018.3.1/helpers/pydev/_pydev_bundle/pydev_umd.py", line 198, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "/home/morganlab/pycharm-2018.3.1/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py", line 187, in <module>
+    for result_vec, id_pair in zip(result, pair_list):
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 342, in <genexpr>
+    return (item for chunk in result for item in chunk)
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 761, in next
+    raise value
+MemoryError
+[18085] After calculate segment Memory usage: 24712160 (kb)
+[18085] After fetching coordinates Memory usage: 24712160 (kb)
+[18357] After calculate segment Memory usage: 3938988 (kb)
+[18088] After dist_mat Memory usage: 29290416 (kb)
+[18357] After fetching coordinates Memory usage: 4046440 (kb)
+[18357] After calculate segment Memory usage: 4046440 (kb)
+{id_a:27 id_b:886 point {[array([  70,  130, 1054])]} } min dist 8.0 
+[18357] After fetching coordinates Memory usage: 4046440 (kb)
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+[18088] After dist_mat Memory usage: 29290416 (kb)
+{id_a:27 id_b:932 point {[array([  76,  141, 1075])]} } min dist 28.8 
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+[18088] After dist_mat Memory usage: 29290416 (kb)
+{id_a:27 id_b:972 point {[array([  88,  134, 1078])]} } min dist 31.0 
+[18088] After calculate segment Memory usage: 29290416 (kb)
+[18088] After fetching coordinates Memory usage: 29290416 (kb)
+Process finished with exit code 0
+
+
+
+
+
+
+/usr/bin/python3.6 /home/morganlab/pycharm-2018.3.1/helpers/pydev/pydevconsole.py --mode=client --port=45531
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/morganlab/Documents/neuroglancer', '/home/morganlab/PycharmProjects/FloodFillNetwork-Notes'])
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+Type "copyright", "credits" or "license" for more information.
+IPython 5.5.0 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+PyDev console: using IPython 5.5.0
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+runfile('/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py', wdir='/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/analysis_script')
+[18981] At start Memory usage: 1255496 (kb)
+[18981] After cast type Memory usage: 2372384 (kb)
+Pairs to process 10087.
+[18981] Before starting Pool Memory usage: 5686664 (kb)
+[18981] Before writing down Memory usage: 5686664 (kb)
+[19206] After calculate segment Memory usage: 3938452 (kb)
+[19207] After calculate segment Memory usage: 3938348 (kb)
+[19206] After fetching coordinates Memory usage: 3938788 (kb)
+[19207] After fetching coordinates Memory usage: 3939904 (kb)
+[19205] After calculate segment Memory usage: 3938484 (kb)
+[19204] After calculate segment Memory usage: 3938484 (kb)
+[19206] After dist_mat Memory usage: 4597760 (kb)
+[19204] After fetching coordinates Memory usage: 3939148 (kb)
+[19206] Before printing Memory usage: 4597760 (kb)
+[19205] After fetching coordinates Memory usage: 4184532 (kb)
+[19206] After calculate segment Memory usage: 4597760 (kb)
+[19205] After calculate segment Memory usage: 4184532 (kb)
+[19204] After dist_mat Memory usage: 5024508 (kb)
+[19206] After fetching coordinates Memory usage: 4597760 (kb)
+[19204] Before printing Memory usage: 5024508 (kb)
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py", line 108, in worker_func
+    print("{id_a:%d id_b:%d point {%s} } min dist %.1f \n" % (cur_idx1, cur_idx2, str(com_vec), dist_mat[i, j]))
+UnboundLocalError: local variable 'dist_mat' referenced before assignment
+"""
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/IPython/core/interactiveshell.py", line 2882, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "<ipython-input-2-d24af42ab27a>", line 1, in <module>
+    runfile('/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py', wdir='/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/analysis_script')
+  File "/home/morganlab/pycharm-2018.3.1/helpers/pydev/_pydev_bundle/pydev_umd.py", line 198, in runfile
+    pydev_imports.execfile(filename, global_vars, local_vars)  # execute the script
+  File "/home/morganlab/pycharm-2018.3.1/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
+    exec(compile(contents+"\n", file, 'exec'), glob, loc)
+  File "/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/resegment_seed_generation_ED.py", line 191, in <module>
+    for result_vec, id_pair in zip(result, pair_list):
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 342, in <genexpr>
+    return (item for chunk in result for item in chunk)
+  File "/usr/lib/python3.6/multiprocessing/pool.py", line 761, in next
+    raise value
+UnboundLocalError: local variable 'dist_mat' referenced before assignment
+[19205] After fetching coordinates Memory usage: 4184532 (kb)
+[19204] After calculate segment Memory usage: 5024508 (kb)
+[19204] After fetching coordinates Memory usage: 5024508 (kb)
+[19207] After dist_mat Memory usage: 8090612 (kb)
+[19207] Before printing Memory usage: 8090768 (kb)
+[19207] After calculate segment Memory usage: 8090768 (kb)
+[19207] After fetching coordinates Memory usage: 8090768 (kb)
+[19204] After dist_mat Memory usage: 30764892 (kb)
+[19204] Before printing Memory usage: 30764976 (kb)
+[19440] After calculate segment Memory usage: 3938784 (kb)
+[19440] After fetching coordinates Memory usage: 4539736 (kb)
+[19440] After calculate segment Memory usage: 4539736 (kb)
+[19440] After fetching coordinates Memory usage: 4539736 (kb)
+[19444] After calculate segment Memory usage: 3938832 (kb)
+[19444] After fetching coordinates Memory usage: 3970172 (kb)
+
+
+
+
+
+
+
+12 core, takes 30 min to process 400-500 points
