@@ -19,7 +19,7 @@ dist_threshold = 50  # maximum distance in nm to be considered valid pair
 threshold = 50  # minimum overlap to be consider a pair
 move_vec = (5, 5, 3)
 
-seg_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"#"/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/"
+seg_path = "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12" # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"#"/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/" #
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/0/0/"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
@@ -103,19 +103,23 @@ def worker_func(id_pair):
         print('[%d] After calculate segment Memory usage: %s (kb)' % (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
     composite_mask  = composite_map == cur_idx1 + BASE * cur_idx2
     if not composite_mask.sum() == 0:
-        full_mask = np.zeros(segmentation.shape, dtype=np.bool)
-        full_mask[_sel(-vz), _sel(-vx), _sel(-vy)] += composite_mask
-        full_mask[_sel(vz), _sel(vx), _sel(vy)] += composite_mask
-        com1 = ndimage.measurements.center_of_mass(full_mask)
+        index_list = np.array(composite_mask.nonzero())
+        com1 = index_list.mean(axis=1) + np.array([vz, vy, vx])//2
+        # full_mask = np.zeros(segmentation.shape, dtype=np.bool)
+        # full_mask[_sel(-vz), _sel(-vx), _sel(-vy)] += composite_mask
+        # full_mask[_sel(vz), _sel(vx), _sel(vy)] += composite_mask
+        # com1 = ndimage.measurements.center_of_mass(full_mask)
         com1 = [int(i) for i in com1]
     else:
         com1 = None
     composite_mask  = composite_map == cur_idx2 + BASE * cur_idx1
     if not composite_mask.sum() == 0:
-        full_mask = np.zeros(segmentation.shape, dtype=np.bool)
-        full_mask[_sel(-vz), _sel(-vx), _sel(-vy)] += composite_mask
-        full_mask[_sel(vz), _sel(vx), _sel(vy)] += composite_mask
-        com2 = ndimage.measurements.center_of_mass(full_mask)
+        # full_mask = np.zeros(segmentation.shape, dtype=np.bool)
+        # full_mask[_sel(-vz), _sel(-vx), _sel(-vy)] += composite_mask
+        # full_mask[_sel(vz), _sel(vx), _sel(vy)] += composite_mask
+        # com2 = ndimage.measurements.center_of_mass(full_mask)
+        index_list = np.array(composite_mask.nonzero())
+        com2 = index_list.mean(axis=1) + np.array([vz, vy, vx]) // 2
         com2 = [int(i) for i in com2]
     else:
         com2 = None
@@ -144,7 +148,6 @@ with closing(mp.Pool(processes=mp.cpu_count())) as pool: #  mp.cpu_count()//2
 # result_list = list(result)
 # pickle.dump(result_list, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 
-#%%
 if memory_check:
     print('[%d] Before writing down Memory usage: %s (kb)' %
       (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
