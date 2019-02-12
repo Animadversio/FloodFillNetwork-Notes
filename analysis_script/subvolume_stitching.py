@@ -265,6 +265,15 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
     return full_segment, segment_graph
 
 if __name__=="__main__":
+    # Example usage
+    seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_1_exp10_consensus_rev/"
+    full_segment, segment_graph = stitich_subvolume_grid(seg_dir, x_step=448, y_step=448, x_num=2, y_num=2,
+                                                         size=(152, 512, 512),
+                                                         output_dir="/home/morganlab/Documents/ixP11LGN/p11_1_exp10_full")
+    seg_dict = {"seg_full": {"corner": (0, 0, 0), "vol": full_segment}}
+    image_dir = "/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5"
+    neuroglancer_visualize(seg_dict, image_dir)
+
     #%% Experiment 1
     seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_3_exp1/"
     full_segment, segment_graph = stitich_subvolume_grid(seg_dir, x_step=448, y_step=448, x_num=2, y_num = 2, size=(152, 512, 512))
