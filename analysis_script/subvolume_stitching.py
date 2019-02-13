@@ -292,7 +292,7 @@ if __name__=="__main__":
     image_dir = "/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_1_norm.h5"
     neuroglancer_visualize(seg_dict, image_dir)
     #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    #%%
+    #%% Garbage sites!!!!!
     BASE = int(v1.max()+1)
     composite_map = v1[:, -35,-29, :] + v2[:, 29:35, :] * BASE # note the label width
     compo_idx, cnt = np.unique(composite_map, return_counts=True)

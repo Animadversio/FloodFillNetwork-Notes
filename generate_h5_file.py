@@ -17,10 +17,12 @@ def main(unused):
     EM_name_pattern = FLAGS.name_pattern# "tweakedImageVolume2_LRexport_s%03d.png"
     stack_n = FLAGS.stack_n
     # raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
+    output_name = FLAGS.output_name
     EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, beg_n=beg_n,
-                                     output=FLAGS.output_name)
+                                     output=output_name)
     print("mean: %.2f, std: %.2f"% (EM_stack.mean(), EM_stack.std()))
-    normalize_img_stack(path, "grayscale_ixP11_3_norm.h5", EM_stack)
+    norm_output_name = output_name[:output_name.find('.h5')]+"_norm.h5"
+    normalize_img_stack(path, norm_output_name, EM_stack)
 
 if __name__=="__main__":
     app.run(main)

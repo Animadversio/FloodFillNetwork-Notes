@@ -1698,3 +1698,34 @@ UnboundLocalError: local variable 'dist_mat' referenced before assignment
 Approximately 3-4 hours for all segments points
 
 24 core 30 min only half the points 
+
+## Make new well aligned (affine align with SIFT)
+
+p11_4
+Overall coordinate 
+14400, 15072
+20328, 10160
+
+After alignment and cropping
+size of volume 
+( 2414, 2222, 152) 
+
+Note if the transform is not recorded, then the inverse transform is too hard to obtain. 
+And the segement done on local subvolumes will be unable to mapped back to total volume
+
+
+I0212 19:43:59.986612 139901798192960 resegmentation_analysis.py:93] processing: /home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg/21-547_at_870_167_64.npz
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/IPython/core/interactiveshell.py", line 2882, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "<ipython-input-54-b80e88eabae5>", line 7, in <module>
+    seg, reseg_r_zyx, analysis_r_zyx, sampling=voxelsize_zyx)
+  File "/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/ffn/inference/resegmentation_analysis.py", line 199, in evaluate_pair_resegmentation
+    prob = storage.dequantize_probability(data['probs'])
+  File "/home/morganlab/.local/lib/python3.6/site-packages/numpy/lib/npyio.py", line 251, in __getitem__
+    bytes = self.zip.open(key)
+  File "/usr/lib/python3.6/zipfile.py", line 1396, in open
+    raise BadZipFile("Bad magic number for file header")
+zipfile.BadZipFile: Bad magic number for file header
+
+processing and evaluation is quick 10 min 3000 point pairs

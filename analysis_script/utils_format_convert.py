@@ -129,16 +129,24 @@ def normalize_img_stack(path, output, EM_stack, upper = 205, lower = 80):
     return int_img
 #%%
 if __name__=="__main__":
-    path = "/home/morganlab/Documents/ixP11LGN"
+    path = "/home/morganlab/Documents/ixP11LGN/IxD_W002_invert2_4_large_export"
     stack_n = 152
-    EM_name_pattern = "IxD_W002_invert2_3_large_export_s%03d.png"
+    EM_name_pattern = "p11_4_align_SIFT%03d.png"
+    output_name = "grayscale_ixP11_4_align.h5"
+    #"IxD_W002_invert2_3_large_export_s%03d.png"
     #"IxD_W002_invert2_2_large_export_s%03d.png"# "tweakedImageVolume2_LRexport_s%03d.png"
     #raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
-    EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output="grayscale_ixP11_3.h5")
+    EM_stack = convert_image_stack_to_h5(path=path, pattern=EM_name_pattern, stack_n=stack_n, output=output_name)
     # seg_stack = convert_raw_seg_stack_to_h5(path=path, raw_pattern=raw_name_pattern,
     #                                         stack_n=stack_n, raw_shape=(1072, 1184), img_shape=EM_stack.shape[1:],
     #                                         output="groundtruth_LR.h5")
 
     print("mean: %.2f, std: %.2f" % (EM_stack.mean(), EM_stack.std()))
-    normalize_img_stack(path, "grayscale_ixP11_3_norm.h5", EM_stack)
+    norm_output_name = output_name[:output_name.find('.h5')] + "_norm.h5"
+    normalize_img_stack(path, norm_output_name, EM_stack)
     pass
+#%%
+    from neuroglancer_segment_visualize import neuroglancer_visualize
+    h5_name = join(path, norm_output_name)
+    neuroglancer_visualize({}, h5_name)
+
