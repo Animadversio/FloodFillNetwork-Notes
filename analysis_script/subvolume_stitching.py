@@ -73,6 +73,7 @@ import ffn.inference.storage as storage
 # overlap_d = 3
 def _overlap_selection(corner1, corner2, size, size2=None, overlap_d=3):
     '''Return the middle of overlap subvolume to do next overlap analysis
+    :parameter overlap_d : it's actually the overlap_r not d
     :return : sel1 sel2 2 slice object that can send into v1 v2
     '''
     if size2==None:
@@ -81,39 +82,39 @@ def _overlap_selection(corner1, corner2, size, size2=None, overlap_d=3):
         if corner2[1] > corner1[1] and corner1[1] + size[1] > corner2[1]:
             assert ( corner1[1] + size[1] - corner2[1] )%2 == 0
             halfwid = ( corner1[1] + size[1] - corner2[1] )//2
-            sel1 = (slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d), slice(None))
-            sel2 = (slice(None), slice(halfwid - overlap_d, halfwid + overlap_d), slice(None))
+            sel1 = (slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d + 1), slice(None))
+            sel2 = (slice(None), slice(halfwid - overlap_d, halfwid + overlap_d  + 1), slice(None))
         elif corner1[1] > corner2[1] and corner2[1] + size[1] > corner1[1]:
             assert (corner2[1] + size[1] - corner1[1]) % 2 == 0
             halfwid = (corner2[1] + size[1] - corner1[1]) // 2
-            sel1 = (slice(None), slice(halfwid - overlap_d, halfwid + overlap_d), slice(None))
-            sel2 = (slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d), slice(None))
+            sel1 = (slice(None), slice(halfwid - overlap_d, halfwid + overlap_d + 1), slice(None))
+            sel2 = (slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d+ 1), slice(None))
         else:
             return ([],[],[]), ([],[],[])
     elif corner1[0] == corner2[0] and corner1[1] == corner2[1]:  # junction in x axis
         if corner2[2] > corner1[2] and corner1[2] + size[2] > corner2[2]:
             assert ( corner1[2] + size[2] - corner2[2] )%2 == 0
             halfwid = ( corner1[2] + size[2] - corner2[2] )//2
-            sel1 = (slice(None), slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d))
-            sel2 = (slice(None), slice(None), slice(halfwid - overlap_d, halfwid + overlap_d))
+            sel1 = (slice(None), slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d + 1))
+            sel2 = (slice(None), slice(None), slice(halfwid - overlap_d, halfwid + overlap_d + 1))
         elif corner1[2] > corner2[2] and corner2[2] + size[2] > corner1[2]:
             assert (corner2[2] + size[2] - corner1[2]) % 2 == 0
             halfwid = (corner2[2] + size[2] - corner1[2]) // 2
-            sel1 = (slice(None), slice(None), slice(halfwid - overlap_d, halfwid + overlap_d))
-            sel2 = (slice(None), slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d))
+            sel1 = (slice(None), slice(None), slice(halfwid - overlap_d, halfwid + overlap_d + 1))
+            sel2 = (slice(None), slice(None), slice(-halfwid - overlap_d, -halfwid + overlap_d + 1))
         else:
             return ([],[],[]), ([],[],[])
     elif corner1[1] == corner2[1] and corner1[2] == corner2[2]:  # junction in z axis
         if corner2[0] > corner1[0] and corner1[0] + size[0] > corner2[0]:
             assert ( corner1[0] + size[0] - corner2[0] )%2 == 0
             halfwid = ( corner1[0] + size[0] - corner2[0] )//2
-            sel1 = (slice(-halfwid - overlap_d, -halfwid + overlap_d), slice(None), slice(None))
-            sel2 = (slice(halfwid - overlap_d, halfwid + overlap_d), slice(None), slice(None))
+            sel1 = (slice(-halfwid - overlap_d, -halfwid + overlap_d + 1), slice(None), slice(None))
+            sel2 = (slice(halfwid - overlap_d, halfwid + overlap_d + 1), slice(None), slice(None))
         elif corner1[0] > corner2[0] and corner2[0] + size[0] > corner1[0]:
             assert (corner2[0] + size[0] - corner1[0]) % 2 == 0
             halfwid = (corner2[0] + size[0] - corner1[0]) // 2
-            sel1 = (slice(halfwid - overlap_d, halfwid + overlap_d), slice(None), slice(None))
-            sel2 = (slice(-halfwid - overlap_d, -halfwid + overlap_d), slice(None), slice(None))
+            sel1 = (slice(halfwid - overlap_d, halfwid + overlap_d + 1), slice(None), slice(None))
+            sel2 = (slice(-halfwid - overlap_d, -halfwid + overlap_d + 1), slice(None), slice(None))
         else:
             return ([],[],[]), ([],[],[])
     else:
@@ -172,14 +173,16 @@ def merge_segment(v1, v2, corner1, corner2, size, size2=None, overlap_d=3, thres
 #%%
 # merge_array, overlap_size_array, v2_new = merge_segment(v1, v2, (0,0,0),(0,448,0),size=(152,512,512))
 #%% Generate segment list and merge_pair list!
-def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_dir=None):
+def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_corner = (0,0,0), output_dir=None,
+                           overlap_d=3, overlap_thr=100):
     x_margin = (size[2] - x_step) // 2
     y_margin = (size[1] - y_step) // 2
     seg_id_dict = []
     merge_pair_list = []
     for i in range(x_num):
         for j in range(y_num):
-            corner = (0, j*y_step, i*x_step)
+            shift = (0, j*y_step, i*x_step)
+            corner = tuple([shift[i] + start_corner[i] for i in range(3)])
             f = np.load(subvolume_path(seg_dir, corner, 'npz'))
             vol = f['segmentation']
             f.close()
@@ -188,21 +191,23 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
             if i == 0:
                 pass
             else:
-                corner1 = (0, j*y_step, (i - 1)*x_step)
+                shift1 = (0, j*y_step, (i - 1)*x_step)
+                corner1 = tuple([shift1[i] + start_corner[i] for i in range(3)])
                 f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
                 v1 = f['segmentation']
                 f.close()
-                merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+                merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=overlap_d, threshold=overlap_thr)
                 merge_pair_list.extend(
                     [[seg_id_dict.index((i - 1, j, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
             if j == 0:
                 pass
             else:
-                corner1 = (0, (j - 1)*y_step, i*x_step)
+                shift1 = (0, (j - 1)*y_step, i*x_step)
+                corner1 = tuple([shift1[i] + start_corner[i] for i in range(3)])
                 f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
                 v1 = f['segmentation']
                 f.close()
-                merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=3, threshold=100)
+                merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=overlap_d, threshold=overlap_thr)
                 merge_pair_list.extend(
                     [[seg_id_dict.index((i, j - 1, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
             # full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
@@ -220,7 +225,7 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
         elif i == x_num - 1:
             return slice((x_num - 1) * x_step + x_margin, x_num * x_step + 2 * x_margin)
         else:
-            return slice((i - 1) * x_step + x_margin, i * x_step - x_margin)
+            return slice(i * x_step + x_margin, (i + 1) * x_step + x_margin)
 
     def global_y_sel(i):
         if i == 0:
@@ -228,7 +233,7 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
         elif i == y_num - 1:
             return slice((y_num - 1) * y_step + y_margin, y_num * y_step + 2 * y_margin)
         else:
-            return slice((i - 1) * y_step + y_margin, i * y_step - y_margin)
+            return slice(i * y_step + y_margin, (i + 1) * y_step + y_margin)
 
     def local_x_sel(i):
         if i == 0:
@@ -248,7 +253,8 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
     full_segment = np.zeros((size[0], y_num * y_step + 2 * y_margin, x_num * x_step + 2 * x_margin), dtype=np.uint32)
     for i in range(x_num):
         for j in range(y_num):
-            corner = (0, j*y_step, i*x_step)
+            shift = (0, j * y_step, i * x_step)
+            corner = tuple([shift[i] + start_corner[i] for i in range(3)])
             f = np.load(subvolume_path(seg_dir, corner, 'npz'))
             vol = f['segmentation']
             f.close()
@@ -260,8 +266,8 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, output_d
                 vol[vol == id_loc] = id_glob
             full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
     if output_dir:
-        seg_path = storage.segmentation_path(output_dir, (0, 0, 0) )  # FIXME: Use beg_corner instead
-        storage.save_subvolume(full_segment, (0, 0, 0), seg_path)
+        seg_path = storage.segmentation_path(output_dir, start_corner )  # FIXME: Use beg_corner instead
+        storage.save_subvolume(full_segment, start_corner, seg_path)
     return full_segment, segment_graph
 
 if __name__=="__main__":

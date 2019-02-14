@@ -4,7 +4,7 @@ import time
 
 import numpy as np
 import matplotlib.pylab as plt
-
+import sys
 from absl import app
 from absl import flags
 from tensorflow import gfile
@@ -17,8 +17,7 @@ from ffn.inference import inference
 from ffn.inference import inference_flags
 from ffn.inference import resegmentation
 from ffn.inference import resegmentation_analysis
-from ffn.inference.resegmentation_analysis import IncompleteResegmentationError, InvalidBaseSegmentatonError
-from zipfile import BadZipFile
+
 from analysis_script.utils_format_convert import read_image_vol_from_h5
 from ffn.inference.storage import subvolume_path
 from neuroglancer_segment_visualize import neuroglancer_visualize
@@ -82,7 +81,13 @@ segment_graph = networkx.Graph()
 proto_list = []
 reseg_dir = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg" # reseg_req.output_directory
 savefile_list = os.listdir(reseg_dir)
+idx = np.unique(seg)
+idx = idx[1:]
+segment_graph.add_nodes_from(idx)
 #%%
+from ffn.inference.resegmentation_analysis import IncompleteResegmentationError, InvalidBaseSegmentatonError
+from zipfile import BadZipFile
+t0 = time.time()
 for filename in savefile_list:
     try:
         result_proto = resegmentation_analysis.evaluate_pair_resegmentation(join(reseg_dir, filename),
@@ -95,18 +100,25 @@ for filename in savefile_list:
         logging.info("Invalid Base Segmentation error in file %s." % filename)
     except BadZipFile:
         logging.warning("This zip file %s is broken, raise magic number error ." % filename)
+    except:
+        logging.warning("Some other error happened!! %s" % sys.exc_info()[0])
+
+print(time.time()-t0, 's')
 #%%
-idx = np.unique(seg)
-idx = idx[1:]
-segment_graph.add_nodes_from(idx)
 #%%
 strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.5]  # filter the edges here!!!!
 connect_segment_graph = networkx.Graph()
 connect_segment_graph.add_nodes_from(idx)
 connect_segment_graph.add_edges_from(strong_edge)
 #%%
+import pickle
+# pickle.dump(result_proto, open(join(reseg_dir, "proto_summary.pkl"), "wb"))
+
+pickle.dump(segment_graph, open(join(reseg_dir, "segment_graph.pkl"), "wb"))
+
+#%%
 for component in networkx.connected_components(connect_segment_graph):
-    if len(component)>1:
+    if len(component) > 1:
         print(component)
 
 
