@@ -61,6 +61,35 @@ def make_labels_contiguous(labels):
   relabeled = relabel[0, labels2d]
   return relabeled.toarray().reshape(labels.shape), zip(orig_ids, new_ids)
 
+def relabel_volume(labels, new_label_list):
+  """Relabels 'labels' so that its ID space is dense.
+
+  If N is the number of unique ids in 'labels', the new IDs will cover the range
+  [0..N-1].
+
+  Args:
+    labels: ndarray of segment IDs
+    new_label_list: new label for each [0, N-1] label
+
+  Returns:
+    tuple of:
+      ndarray of dense segment IDs
+      list of (old_id, new_id) pairs
+  """
+  orig_ids = np.unique(labels)
+  new_ids = np.array(new_label_list)
+  assert len(new_ids) == len(orig_ids)
+  # A sparse matrix is required so that arbitrarily large IDs can be used as
+  # input. The first dimension of the matrix is dummy and has a size of 1 (the
+  # first coordinate is fixed at 0).
+  row_indices = np.zeros_like(orig_ids)
+  col_indices = orig_ids
+  relabel = scipy.sparse.csr_matrix((new_ids, (row_indices, col_indices)))
+  # Index with a 2D array so that the output is a sparse matrix.
+  labels2d = labels.reshape(1, labels.size)
+  relabeled = relabel[0, labels2d]
+  return relabeled.toarray().reshape(labels.shape), zip(orig_ids, new_ids)
+
 
 def clear_dust(data, min_size=10):
   """Removes small objects from a segmentation array.

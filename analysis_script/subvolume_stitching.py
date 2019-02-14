@@ -7,6 +7,7 @@ from neuroglancer_segment_visualize import neuroglancer_visualize
 from run_consensus import run_save_consensus
 import networkx
 import ffn.inference.storage as storage
+from ffn.inference.segmentation import relabel_volume
 #%%
 # seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_1_exp10" # "/Users/binxu/Connectomics_Code/results/LGN/p11_1_exp8" # "/home/morganlab/Documents/ixP11LGN/p11_1_exp8"
 # f = np.load(subvolume_path(seg_dir, (0, 0, 0), 'npz'))
@@ -220,7 +221,9 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
         final_idx.append(min(component))
     #%%
     def global_x_sel(i):
-        if i == 0:
+        if i == 0 and x_num == 1:
+            return slice(None)
+        elif i == 0:
             return slice(0, x_step + x_margin)
         elif i == x_num - 1:
             return slice((x_num - 1) * x_step + x_margin, x_num * x_step + 2 * x_margin)
@@ -228,7 +231,9 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
             return slice(i * x_step + x_margin, (i + 1) * x_step + x_margin)
 
     def global_y_sel(i):
-        if i == 0:
+        if i == 0 and y_num == 1:
+            return slice(None)
+        elif i == 0:
             return slice(0, y_step + y_margin)
         elif i == y_num - 1:
             return slice((y_num - 1) * y_step + y_margin, y_num * y_step + 2 * y_margin)
@@ -236,7 +241,9 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
             return slice(i * y_step + y_margin, (i + 1) * y_step + y_margin)
 
     def local_x_sel(i):
-        if i == 0:
+        if i == 0 and x_num == 1:
+            return slice(None)
+        elif i == 0:
             return slice(0, -x_margin)
         elif i == x_num - 1:
             return slice(x_margin, None)
@@ -244,7 +251,9 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
             return slice(x_margin, -x_margin)
 
     def local_y_sel(i):
-        if i == 0:
+        if i == 0 and y_num == 1:
+            return slice(None)
+        elif i == 0:
             return slice(0, -y_margin)
         elif i == y_num - 1:
             return slice(y_margin, None)
@@ -259,21 +268,27 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
             vol = f['segmentation']
             f.close()
             idx_list = np.unique(vol)
-            for id_loc in idx_list:
-                id_glob = seg_id_dict.index((i, j, id_loc))
-                equiv_group = networkx.node_connected_component(segment_graph, id_glob)
-                id_glob = min(equiv_group)
-                vol[vol == id_loc] = id_glob
-            full_segment[:, global_y_sel(j), global_x_sel(i)] = vol[:, local_y_sel(j), local_x_sel(i)]
+            idx_glob_list = [min( networkx.node_connected_component(segment_graph, seg_id_dict.index((i, j, id_loc))))
+                             for id_loc in idx_list]
+            # for id_loc in idx_list:
+            #     id_glob = seg_id_dict.index((i, j, id_loc))
+            #     equiv_group = networkx.node_connected_component(segment_graph, id_glob)
+            #     id_glob = min(equiv_group)
+            #     vol[vol == id_loc] = id_glob
+            # FIX bug!!!! The code above may make the voxel id change multiple times!! Make error!!!
+            relabel_vol, label_pair = relabel_volume(vol, idx_glob_list)
+            full_segment[:, global_y_sel(j), global_x_sel(i)] = relabel_vol[:, local_y_sel(j), local_x_sel(i)]
+
     if output_dir:
-        seg_path = storage.segmentation_path(output_dir, start_corner )  # FIXME: Use beg_corner instead
+        seg_path = storage.segmentation_path(output_dir, start_corner)  # FIXED: Use beg_corner instead
         storage.save_subvolume(full_segment, start_corner, seg_path)
-    return full_segment, segment_graph
+    return full_segment, segment_graph, seg_id_dict
+
 
 if __name__=="__main__":
     # Example usage
     seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_1_exp10_consensus_rev/"
-    full_segment, segment_graph = stitich_subvolume_grid(seg_dir, x_step=448, y_step=448, x_num=2, y_num=2,
+    full_segment, segment_graph, seg_id_dict = stitich_subvolume_grid(seg_dir, x_step=448, y_step=448, x_num=2, y_num=2,
                                                          size=(152, 512, 512),
                                                          output_dir="/home/morganlab/Documents/ixP11LGN/p11_1_exp10_full")
     seg_dict = {"seg_full": {"corner": (0, 0, 0), "vol": full_segment}}
