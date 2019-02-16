@@ -1729,3 +1729,19 @@ Traceback (most recent call last):
 zipfile.BadZipFile: Bad magic number for file header
 
 processing and evaluation is quick 10 min 3000 point pairs
+
+
+## New volume
+
+Extract from VAST: IxD_W002_invert2.vsv
+11184, 22256
+24656, 31808
+
+Use Fiji to Align!
+
+
+
+Use Python script to normalize and stitch into a h5 fi
+
+mean: 138.36, std: 37.90
+

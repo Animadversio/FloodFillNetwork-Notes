@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resegment_agglomeration.py" beforeDir="false" afterPath="$PROJECT_DIR$/resegment_agglomeration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_consensus.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_consensus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +24,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resegment_agglomeration.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="-54">
               <caret line="24" selection-start-line="24" selection-end-line="24" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3690">
+              <caret line="277" column="100" selection-start-line="277" selection-start-column="100" selection-end-line="277" selection-end-column="100" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -34,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_consensus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="1">
               <caret line="37" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -44,34 +55,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="109" column="62" lean-forward="true" selection-start-line="109" selection-start-column="62" selection-end-line="109" selection-end-column="62" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="36" column="26" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="26" />
+            <state relative-caret-position="87">
+              <caret line="134" column="33" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="33" />
               <folding>
                 <element signature="e#725#756#0" expanded="true" />
               </folding>
@@ -80,13 +67,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="82">
+              <caret line="175" column="80" lean-forward="true" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
               <folding>
-                <element signature="e#695#733#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
             </state>
           </provider>
         </entry>
@@ -94,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="738">
+            <state relative-caret-position="447">
               <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
               <folding>
                 <element signature="e#129#147#0" expanded="true" />
@@ -106,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" selection-start-line="8" selection-end-line="26" />
+            <state relative-caret-position="126">
+              <caret line="67" column="9" lean-forward="true" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -138,7 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SegmentationLayer</find>
       <find>VolumeStore</find>
       <find>seg_volstore</find>
       <find>pywrapsegment_util</find>
@@ -168,6 +168,7 @@
       <find>screenshot</find>
       <find>relab</find>
       <find>corner2</find>
+      <find>connected c</find>
     </findStrings>
     <replaceStrings>
       <replace>DIVSTR</replace>
@@ -208,7 +209,6 @@
         <option value="$PROJECT_DIR$/run_inference_script.py" />
         <option value="$PROJECT_DIR$/ren_inference_from_seed.py" />
         <option value="$PROJECT_DIR$/run_inference_from_seed.py" />
-        <option value="$PROJECT_DIR$/ffn/inference/segmentation.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
         <option value="$USER_HOME$/Documents/neuroglancer/python/examples/example.py" />
         <option value="$PROJECT_DIR$/ffn/inference/consensus.py" />
@@ -228,20 +228,21 @@
         <option value="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" />
         <option value="$PROJECT_DIR$/run_resegment.py" />
         <option value="$PROJECT_DIR$/generate_h5_file.py" />
-        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
         <option value="$PROJECT_DIR$/run_resegment_script.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py" />
         <option value="$PROJECT_DIR$/resegment_agglomeration.py" />
         <option value="$PROJECT_DIR$/run_consensus.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/segmentation.py" />
         <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py" />
+        <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="219" />
-    <option name="y" value="235" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="520" />
+    <option name="y" value="329" />
     <option name="width" value="2378" />
     <option name="height" value="1203" />
   </component>
@@ -333,7 +334,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.p11_4_proc">
+  <component name="RunManager" selected="Python.utils_format_convert">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -445,9 +446,6 @@
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis_script" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -472,8 +470,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.p11_4_proc" />
         <item itemvalue="Python.utils_format_convert" />
+        <item itemvalue="Python.p11_4_proc" />
         <item itemvalue="Python.resegment_seed_generation_Center_Mass" />
         <item itemvalue="Python.resegment_seed_generation_ED" />
         <item itemvalue="Python.scratch_4" />
@@ -509,7 +507,7 @@
       <workItem from="1549924033740" duration="5611000" />
       <workItem from="1549929927960" duration="370000" />
       <workItem from="1549930537819" duration="35409000" />
-      <workItem from="1550101151485" duration="4386000" />
+      <workItem from="1550101151485" duration="20197000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -777,11 +775,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550025566047</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Add agglomeration code, debug the subvolume stitching code. Add relabel to run_consensus">
+      <created>1550106906907</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1550106906908</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Debug the subvolume stitching program">
+      <created>1550187462478</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1550187462478</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="368903000" />
+    <option name="totallyTimeSpent" value="384714000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -793,10 +805,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
+    <frame x="281" y="163" width="2378" height="1203" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18044515" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19451585" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="TypeScript" order="0" sideWeight="0.49960256" weight="0.3295107" />
@@ -809,25 +821,23 @@
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49960256" weight="0.32928678" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3255167" side_tool="true" visible="true" weight="0.411315" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.32562125" side_tool="true" visible="true" weight="0.5023343" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4985062" weight="0.32894737" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4993652" weight="0.32797733" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="13" sideWeight="0.6744833" visible="true" weight="0.411315" />
+      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.67437875" visible="true" weight="0.5023343" />
       <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.9441559" visible="true" weight="0.27027026" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.9418386" visible="true" weight="0.29134533" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.055844154" side_tool="true" visible="true" weight="0.27027026" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.05816135" side_tool="true" visible="true" weight="0.29134533" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add notes" />
-    <MESSAGE value="Fix bug on parallel partition computing ! &#10;Add scripts and codes" />
     <MESSAGE value="Add notes to inference and resegmentation&#10;Add script for inference and notes" />
     <MESSAGE value="Debug the parallel resegmentation code" />
     <MESSAGE value="Add seed visualizetion &#10;Add notes" />
@@ -851,7 +861,9 @@
     <MESSAGE value="Finish the tissue stitching process." />
     <MESSAGE value="Add new resegment point generation algorithm" />
     <MESSAGE value="Add resegment agglomeration code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add resegment agglomeration code" />
+    <MESSAGE value="Add agglomeration code, debug the subvolume stitching code. Add relabel to run_consensus" />
+    <MESSAGE value="Debug the subvolume stitching program" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug the subvolume stitching program" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -886,6 +898,11 @@
           <line>82</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py</url>
+          <line>275</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -904,11 +921,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/inference/consensus_pb2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-594" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configs/consensus.pbtxt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1156,13 +1168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="125" column="94" lean-forward="true" selection-start-line="125" selection-start-column="94" selection-end-line="125" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_resegment_script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1244,29 +1249,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resegment_agglomeration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" selection-start-line="24" selection-end-line="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
-          <folding>
-            <element signature="e#129#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="8" column="43" selection-start-line="3" selection-end-line="8" selection-end-column="43" />
           <folding>
             <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resegment_agglomeration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="24" selection-start-line="24" selection-end-line="24" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="67" column="9" lean-forward="true" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1281,39 +1286,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="e#725#756#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="109" column="62" lean-forward="true" selection-start-line="109" selection-start-column="62" selection-end-line="109" selection-end-column="62" />
+        <state relative-caret-position="3690">
+          <caret line="277" column="100" selection-start-line="277" selection-start-column="100" selection-end-line="277" selection-end-column="100" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
+    <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" selection-start-line="8" selection-end-line="26" />
+        <state relative-caret-position="447">
+          <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#129#147#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_consensus.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="1">
           <caret line="37" selection-start-line="37" selection-end-line="37" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1321,13 +1316,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="134" column="33" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="33" />
+          <folding>
+            <element signature="e#725#756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
+        <state relative-caret-position="82">
+          <caret line="175" column="80" lean-forward="true" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
         </state>
       </provider>
     </entry>

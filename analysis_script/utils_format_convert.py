@@ -129,10 +129,10 @@ def normalize_img_stack(path, output, EM_stack, upper = 205, lower = 80):
     return int_img
 #%%
 if __name__=="__main__":
-    path = "/home/morganlab/Documents/ixP11LGN/IxD_W002_invert2_4_large_export"
+    path = "/home/morganlab/Documents/ixP11LGN/p11_5_EM/"# "/home/morganlab/Documents/ixP11LGN/IxD_W002_invert2_4_large_export"
     stack_n = 152
-    EM_name_pattern = "p11_4_align_SIFT%03d.png"
-    output_name = "grayscale_ixP11_4_align.h5"
+    EM_name_pattern = "p11_5_EM_%03d.png"# "p11_4_align_SIFT%03d.png"
+    output_name = "grayscale_ixP11_5_align.h5"
     #"IxD_W002_invert2_3_large_export_s%03d.png"
     #"IxD_W002_invert2_2_large_export_s%03d.png"# "tweakedImageVolume2_LRexport_s%03d.png"
     #raw_name_pattern = "Segmentation1-LX_8-14.vsseg_LRexport_s%03d_1184x1072_16bpp.raw"
