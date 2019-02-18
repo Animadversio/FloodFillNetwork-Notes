@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tissue_classify/Unet_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="175" column="80" lean-forward="true" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
+            <state relative-caret-position="333">
+              <caret line="175" column="80" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -78,16 +77,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tissue_classify/Unet_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="-180">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -95,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+            <state relative-caret-position="-3">
+              <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
               <folding>
                 <element signature="e#129#147#0" expanded="true" />
               </folding>
@@ -108,21 +119,9 @@
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="67" column="9" lean-forward="true" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
+              <caret line="67" column="9" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="8" column="43" selection-start-line="3" selection-end-line="8" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#70#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -186,7 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ffn/inference/resegmentation.py" />
         <option value="$PROJECT_DIR$/configs/resegment_example.pbtxt" />
         <option value="$PROJECT_DIR$/analysis_script/ResegmentGeneration.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference_pb2.py" />
@@ -237,12 +235,13 @@
         <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py" />
         <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
+        <option value="$PROJECT_DIR$/tissue_classify/Unet_model.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="520" />
-    <option name="y" value="329" />
+    <option name="x" value="464" />
+    <option name="y" value="437" />
     <option name="width" value="2378" />
     <option name="height" value="1203" />
   </component>
@@ -262,25 +261,6 @@
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
               <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis_script" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="ffn" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="ffn" type="462c0819:PsiDirectoryNode" />
-              <item name="inference" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
@@ -507,7 +487,7 @@
       <workItem from="1549924033740" duration="5611000" />
       <workItem from="1549929927960" duration="370000" />
       <workItem from="1549930537819" duration="35409000" />
-      <workItem from="1550101151485" duration="20197000" />
+      <workItem from="1550101151485" duration="21858000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -789,11 +769,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550187462478</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Debug the subvolume stitching program">
+      <created>1550276864033</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1550276864033</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="384714000" />
+    <option name="totallyTimeSpent" value="386375000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -805,7 +792,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="281" y="163" width="2378" height="1203" extended-state="0" />
+    <frame x="464" y="437" width="2378" height="1203" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19451585" />
@@ -921,13 +908,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/configs/consensus.pbtxt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="14" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/consensus.proto">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -1269,7 +1249,7 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="67" column="9" lean-forward="true" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
+          <caret line="67" column="9" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -1296,16 +1276,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="51" column="51" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
-          <folding>
-            <element signature="e#129#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_consensus.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1">
@@ -1326,10 +1296,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding>
+            <element signature="e#129#147#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tissue_classify/Unet_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="175" column="80" lean-forward="true" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
+        <state relative-caret-position="333">
+          <caret line="175" column="80" selection-start-line="175" selection-start-column="80" selection-end-line="175" selection-end-column="80" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -1338,13 +1335,6 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
-        </state>
-      </provider>
     </entry>
   </component>
 </project>
