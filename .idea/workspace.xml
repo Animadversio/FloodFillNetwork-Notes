@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ffn/utils/proofreading.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/utils/bounding_box.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/utils/bounding_box.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +13,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$pixel_classifier2D.coverage" NAME="pixel_classifier2D Coverage Results" MODIFIED="1550626877237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tissue_classify" />
-    <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$data_prep.coverage" NAME="data_prep Coverage Results" MODIFIED="1550624712302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tissue_classify" />
+    <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$data_prep.coverage" NAME="data_prep Coverage Results" MODIFIED="1550704044472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tissue_classify" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$run_consensus.coverage" NAME="run_consensus Coverage Results" MODIFIED="1549402202108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$p11_4_proc.coverage" NAME="p11_4_proc Coverage Results" MODIFIED="1550100985310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$resegment_seed_generation_ED.coverage" NAME="resegment_seed_generation_ED Coverage Results" MODIFIED="1549930925645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis_script" />
@@ -48,37 +46,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-412">
-              <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
+            <state relative-caret-position="395">
+              <caret line="204" column="123" selection-start-line="204" selection-start-column="123" selection-end-line="204" selection-end-column="123" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ffn/utils/proofreading.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1530">
-              <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
-              <folding>
-                <element signature="e#63#101#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/utils/bounding_box.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="37" />
-              <folding>
-                <element signature="e#884#922#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,22 +61,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tissue_classify/data_prep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1944">
-              <caret line="147" column="34" selection-start-line="147" selection-start-column="34" selection-end-line="147" selection-end-column="34" />
+            <state relative-caret-position="482">
+              <caret line="414" column="30" lean-forward="true" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="30" />
               <folding>
                 <element signature="e#102#196#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build_coordinates.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="69" column="53" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="53" />
-              <folding>
-                <element signature="e#262#300#0" expanded="true" />
+                <element signature="e#3392#6383#0" />
+                <element signature="e#6456#9432#0" />
               </folding>
             </state>
           </provider>
@@ -121,19 +85,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+        <entry file="file://$PROJECT_DIR$/ffn/utils/proofreading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="97" column="26" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/training/models/convstack_3d.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="66" column="61" lean-forward="true" selection-start-line="66" selection-start-column="61" selection-end-line="66" selection-end-column="61" />
+            <state relative-caret-position="708">
+              <caret line="245" selection-start-line="245" selection-end-line="245" />
             </state>
           </provider>
         </entry>
@@ -247,18 +202,18 @@
         <option value="$PROJECT_DIR$/ffn/training/models/convstack_3d.py" />
         <option value="$PROJECT_DIR$/tissue_classify/pixel_classifier.py" />
         <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
-        <option value="$PROJECT_DIR$/tissue_classify/data_prep.py" />
         <option value="$PROJECT_DIR$/ffn/utils/bounding_box.py" />
         <option value="$PROJECT_DIR$/ffn/utils/proofreading.py" />
+        <option value="$PROJECT_DIR$/tissue_classify/data_prep.py" />
         <option value="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="316" />
-    <option name="y" value="190" />
-    <option name="width" value="2397" />
-    <option name="height" value="1218" />
+    <option name="x" value="257" />
+    <option name="y" value="152" />
+    <option name="width" value="2378" />
+    <option name="height" value="1203" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -369,7 +324,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pixel_classifier2D">
+  <component name="RunManager" selected="Python.data_prep">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -440,9 +395,6 @@
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tissue_classify" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -503,16 +455,16 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.data_prep" />
-      <item itemvalue="Python.p11_4_proc" />
-      <item itemvalue="Python.pixel_classifier2D" />
-      <item itemvalue="Python.resegment_seed_generation_Center_Mass" />
       <item itemvalue="Python.utils_format_convert" />
+      <item itemvalue="Python.resegment_seed_generation_Center_Mass" />
+      <item itemvalue="Python.p11_4_proc" />
+      <item itemvalue="Python.data_prep" />
+      <item itemvalue="Python.pixel_classifier2D" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.pixel_classifier2D" />
         <item itemvalue="Python.data_prep" />
+        <item itemvalue="Python.pixel_classifier2D" />
         <item itemvalue="Python.utils_format_convert" />
         <item itemvalue="Python.p11_4_proc" />
         <item itemvalue="Python.resegment_seed_generation_Center_Mass" />
@@ -548,7 +500,7 @@
       <workItem from="1549924033740" duration="5611000" />
       <workItem from="1549929927960" duration="370000" />
       <workItem from="1549930537819" duration="35409000" />
-      <workItem from="1550101151485" duration="47770000" />
+      <workItem from="1550101151485" duration="59884000" />
     </task>
     <task id="LOCAL-00001" summary="Add notes">
       <created>1544465649698</created>
@@ -865,11 +817,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550627141650</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Merge the classifier and add proofreading">
+      <created>1550682662633</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1550682662633</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Merge the classifier and add proofreading">
+      <created>1550705170745</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1550705170745</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412287000" />
+    <option name="totallyTimeSpent" value="424401000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,6 +848,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18044515" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -890,30 +857,29 @@
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49682036" weight="0.28593272" />
       <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49523053" weight="0.39908257" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4900636" weight="0.39831805" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49960256" weight="0.32928678" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.32670906" side_tool="true" visible="true" weight="0.411315" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3338633" side_tool="true" visible="true" weight="0.4671254" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4985062" weight="0.32894737" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4993652" weight="0.32797733" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="13" sideWeight="0.6732909" visible="true" weight="0.411315" />
-      <window_info anchor="bottom" id="Inspection Results" order="14" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4991431" weight="0.3277311" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.66613674" visible="true" weight="0.4671254" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.9441559" visible="true" weight="0.27027026" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.9440459" visible="true" weight="0.27027026" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.055844154" side_tool="true" visible="true" weight="0.27027026" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.055954088" side_tool="true" visible="true" weight="0.27027026" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add inference script" />
     <MESSAGE value="Add inference script, visualization script" />
     <MESSAGE value="Add logging setting to enable log into file while out put to console" />
     <MESSAGE value="Add reference code about Parallel GPU training !" />
@@ -938,7 +904,8 @@
     <MESSAGE value="Add tissue classifier" />
     <MESSAGE value="Tissue classifier built up!" />
     <MESSAGE value="Debug the tissue classifier" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debug the tissue classifier" />
+    <MESSAGE value="Merge the classifier and add proofreading" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge the classifier and add proofreading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1359,16 +1326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/training/models/convstack_3d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
@@ -1376,57 +1333,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="33" column="55" lean-forward="true" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="55" />
-          <folding>
-            <element signature="e#1#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="69" column="53" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="53" />
-          <folding>
-            <element signature="e#262#300#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="97" column="26" selection-start-line="97" selection-start-column="4" selection-end-line="97" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tissue_classify/data_prep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="147" column="34" selection-start-line="147" selection-start-column="34" selection-end-line="147" selection-end-column="34" />
-          <folding>
-            <element signature="e#102#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-412">
-          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1440,12 +1350,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="33" column="55" lean-forward="true" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="55" />
+          <folding>
+            <element signature="e#1#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/utils/proofreading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530">
-          <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
+        <state relative-caret-position="708">
+          <caret line="245" selection-start-line="245" selection-end-line="245" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
-            <element signature="e#63#101#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="69" column="53" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="53" />
+          <folding>
+            <element signature="e#262#300#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tissue_classify/data_prep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="414" column="30" lean-forward="true" selection-start-line="414" selection-start-column="30" selection-end-line="414" selection-end-column="30" />
+          <folding>
+            <element signature="e#102#196#0" expanded="true" />
+            <element signature="e#3392#6383#0" />
+            <element signature="e#6456#9432#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="204" column="123" selection-start-line="204" selection-start-column="123" selection-end-line="204" selection-end-column="123" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

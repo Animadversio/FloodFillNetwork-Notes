@@ -202,7 +202,7 @@ class pixel_classifier_2d(object):
         conv4 = Conv2D(16, 3, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(pool3)
         print("conv4 shape:", conv4.shape)
         # conv4 = Flatten()(conv4)
-        fc = Conv2D(512, 4, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(conv4)
+        fc = Conv2D(16, 4, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(conv4)
         print("fc shape:", fc.shape)
         output = Conv2D(6, 1, activation='softmax', padding='valid', kernel_initializer='he_normal')(fc)
         # fc = Flatten()(fc)
