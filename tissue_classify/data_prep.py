@@ -122,7 +122,7 @@ class pixel_classify_data_proc(object):
         print("Finished collecting and shuffling ")
 
         print("Start fetching image patches.")
-        imgdatas = np.ndarray((n_samples, self.x_size, self.y_size, 1), dtype=np.uint8)
+        imgdatas = np.ndarray((n_samples, self.y_size, self.x_size, 1), dtype=np.uint8)
         imglabels = np.ndarray((n_samples, 1), dtype=np.uint8)
 
         for i in range(len(train_indexes)):
