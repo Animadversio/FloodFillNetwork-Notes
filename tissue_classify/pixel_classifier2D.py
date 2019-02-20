@@ -29,12 +29,13 @@ from keras.utils import np_utils
 class pixel_classifier_2d(object):
 
     def __init__(self, img_rows=65, img_cols=65,
-                 proj_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Models/",
+                 proj_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/",
                 train_data_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/"):
 
         self.img_rows = img_rows
         self.img_cols = img_cols
         self.proj_dir = proj_dir
+        self.model_dir = join(proj_dir, 'Models/')
         self.train_data_dir = train_data_dir
 
     def load_traindata(self):
@@ -94,16 +95,19 @@ class pixel_classifier_2d(object):
         print("conv1 shape:", conv1.shape)
         pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
         print("pool1 shape:", pool1.shape)
+        pool1 = BatchNormalization()(pool1)
 
         conv2 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool1)
         print("conv2 shape:", conv2.shape)
         pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
         print("pool2 shape:", pool2.shape)
+        pool2 = BatchNormalization()(pool2)
 
         conv3 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool2)
         print("conv3 shape:", conv3.shape)
         pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
         print("pool3 shape:", pool3.shape)
+        pool3 = BatchNormalization()(pool3)
 
         conv4 = Conv2D(16, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool3)
         print("conv4 shape:", conv4.shape)
@@ -133,7 +137,25 @@ class pixel_classifier_2d(object):
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
         pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
-        ckpt_path = join(self.proj_dir, pattern)
+        ckpt_path = join(self.model_dir, pattern)
+        model_checkpoint = ModelCheckpoint(ckpt_path, monitor='loss', verbose=1, save_best_only=True)
+        # model.load_weights('unet_LGN_mb.hdf5')
+        print("Weight value loaded")
+        print('Fitting model...')
+        model.fit(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
+                  callbacks=[model_checkpoint])
+
+    def train_generator(self):
+        print("loading data")
+        imgs_train, labels_train = self.load_traindata()  # label_train is a vector of same length
+        onehot_labels = np_utils.to_categorical(labels_train, num_classes=6)
+        # imgs_test = self.load_testdata()
+        print("loading data done")
+        model = self.get_net()
+        print("got network")
+        # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
+        pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
+        ckpt_path = join(self.model_dir, pattern)
         model_checkpoint = ModelCheckpoint(ckpt_path, monitor='loss', verbose=1, save_best_only=True)
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
@@ -237,8 +259,9 @@ class pixel_classifier_2d(object):
 
 #%%
 if __name__ == '__main__':
-    pc2 = pixel_classifier_2d(img_rows=65, img_cols=65, train_data_dir="/scratch/binxu.wang/tissue_classifier",
-                              proj_dir="/scratch/binxu.wang/tissue_classifier/Models")
+    pc2 = pixel_classifier_2d(img_rows=65, img_cols=65,)
+                              # train_data_dir="/scratch/binxu.wang/tissue_classifier",
+                              # proj_dir="/scratch/binxu.wang/tissue_classifier")
     # network train
     pc2.train()
     # network inference
