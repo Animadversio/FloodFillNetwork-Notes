@@ -14,7 +14,7 @@ ks.backend.set_session(sess)
 import numpy as np
 
 from keras.models import *
-from keras.layers import Input, merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D, add, concatenate, Dense, Flatten
+from keras.layers import Input, merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D, add, concatenate, Dense, Flatten, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from keras.optimizers import *
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
@@ -54,16 +54,20 @@ class pixel_classifier_2d(object):
         print("conv1 shape:", conv1.shape)
         pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
         print("pool1 shape:", pool1.shape)
+        pool1 = BatchNormalization()(pool1)
 
         conv2 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool1)
         print("conv2 shape:", conv2.shape)
         pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
         print("pool2 shape:", pool2.shape)
+        pool2 = BatchNormalization()(pool2)
+
 
         conv3 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool2)
         print("conv3 shape:", conv3.shape)
         pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
         print("pool3 shape:", pool3.shape)
+        pool3 = BatchNormalization()(pool3)
 
         conv4 = Conv2D(16, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool3)
         print("conv4 shape:", conv4.shape)
@@ -125,7 +129,7 @@ class pixel_classifier_2d(object):
         onehot_labels = np_utils.to_categorical(labels_train, num_classes=6)
         # imgs_test = self.load_testdata()
         print("loading data done")
-        model = self.get_full_conv_net()
+        model = self.get_net()
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
         pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
@@ -134,7 +138,7 @@ class pixel_classifier_2d(object):
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
         print('Fitting model...')
-        model.fit(imgs_train, onehot_labels, batch_size=32, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
+        model.fit(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
                   callbacks=[model_checkpoint])
 
     # test the network with test dataset
