@@ -76,11 +76,11 @@ def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape
     stack_n=175, raw_shape=(1072,1184), img_shape=(1058, 1180), output="groundtruth_LR.h5")
     '''
     print("Raw Data stack shape: ")
-    print((stack_n,*raw_shape,))
-    image_stacks = np.zeros((stack_n,*raw_shape), dtype=in_dtype)
+    print((stack_n, *raw_shape,))
+    image_stacks = np.zeros((stack_n, *raw_shape), dtype=in_dtype)
     for i in range(beg_n, beg_n + stack_n):
         # img = plt.imread((join(path,raw_pattern)) % (i))
-        data_from_raw = np.fromfile((join(path,raw_pattern)) % (i), dtype=in_dtype)
+        data_from_raw = np.fromfile((join(path, raw_pattern)) % (i), dtype=in_dtype)
         data_from_raw.shape = raw_shape
         image_stacks[i,:,:] = data_from_raw
         plt.imshow(data_from_raw)
@@ -90,16 +90,16 @@ def convert_raw_seg_stack_to_h5(path, raw_pattern, stack_n, raw_shape, img_shape
     image_stacks = image_stacks[:,:img_shape[0],:img_shape[1]]  # crop to same size
     print("Image stack shape: ", image_stacks.shape)
     f = h5py.File(join(path, output), "w")
-    fstack=f.create_dataset("stack", (stack_n,*img_shape,), dtype=out_dtype) # Note they only take int64 input
+    fstack=f.create_dataset("stack", (stack_n, *img_shape,), dtype=out_dtype) # Note they only take int64 input
     fstack[:] = image_stacks
     f.close() 
     return image_stacks
 
-def read_image_vol_from_h5(h5path,):
+def read_image_vol_from_h5(h5path, dataset_name='raw'):
     # h5path= r"C:\Users\MorganLab\Documents\Binxu Notes\ffn-master\third_party\neuroproof_examples\validation_sample\grayscale_maps.h5",
     #         'r')
     fmap = h5py.File(h5path, 'r')
-    graymap = fmap['raw']
+    graymap = fmap[dataset_name]
     graymap_array = graymap[:, :, :]
     # pxl_vals = np.unique(graymap_array)
     return graymap_array

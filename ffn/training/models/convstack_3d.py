@@ -36,7 +36,7 @@ def _predict_object_mask(net, depth=9):
 
     for i in range(1, depth):
       with tf.name_scope('residual%d' % i):
-        in_net = net
+        in_net = net  # skip connection ! add input directly to output
         net = tf.nn.relu(net)
         net = conv(net, scope='conv%d_a' % i)
         net = conv(net, scope='conv%d_b' % i, activation_fn=None)
