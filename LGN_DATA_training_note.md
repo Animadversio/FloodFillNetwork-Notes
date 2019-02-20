@@ -1745,3 +1745,49 @@ Use Python script to normalize and stitch into a h5 fi
 
 mean: 138.36, std: 37.90
 
+
+
+## Training tissue classififer
+
+
+Training Window 
+7000, 12864
+13280, 17744
+
+X 3140, Y 2440!, Z 152
+
+Test Window
+16378, 17464
+24987, 21747
+Try network on 
+Mip level1 
+Mip level 3
+
+
+
+FoV
+256 256 
+128 128
+
+
+## Tissue type classification 
+
+
+Training 65, 65
+Inference 
+
+65 
+(3,3)
+63
+(2,2)
+31
+(3,3)
+29
+(2,2)
+14
+(3,3)
+12
+(2,2)
+6
+(3,3)
+4

@@ -26,6 +26,7 @@ flags.DEFINE_string('bounding_box', None,
                     'to segmented.')
 flags.DEFINE_bool('visualize', False, 'Output rendered files (segmentation composite with image)')
 flags.DEFINE_float('resize', 1.0, '')
+flags.DEFINE_bool('stat_only', True, 'No Output rendered files (segmentation composite with image)')
 FLAGS = flags.FLAGS
 
 def main(unused_argv):
@@ -46,17 +47,20 @@ def main(unused_argv):
     idx, cnts = visualize_supervoxel_size_dist(segmentation, save_dir=export_dir, save_fig=True, show_fig=False)
     print("Supervoxel statistics visualization complete!")
     print("Labels count:%d, Mean size:%d, Median size:%d" % (len(idx), np.nanmean(cnts), np.nanmedian(cnts)))
-    # %%
-    export_segmentation_to_VAST(export_dir, segmentation, resize=FLAGS.resize)
-    # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
-    print("Export to VAST complete!")
-    #%%
-    if FLAGS.visualize:
-        imageh5_dir, dataset_name = request.image.hdf5.split(":")
-        image_stack = read_image_vol_from_h5(imageh5_dir)
-        export_composite_image(segmentation, image_stack, export_dir, suffix="png",
-                               alpha=0.2, resize=1, bbox=[corner, up_corner])
-        print("Export rendered image complete!")
+    if FLAGS.stat_only:
+        return
+    else:
+        # %%
+        export_segmentation_to_VAST(export_dir, segmentation, resize=FLAGS.resize)
+        # canvas.segmentation  segmentation  np.nan_to_num(canvas.seed>0.6)
+        print("Export to VAST complete!")
+        #%%
+        if FLAGS.visualize:
+            imageh5_dir, dataset_name = request.image.hdf5.split(":")
+            image_stack = read_image_vol_from_h5(imageh5_dir)
+            export_composite_image(segmentation, image_stack, export_dir, suffix="png",
+                                   alpha=0.2, resize=1, bbox=[corner, up_corner])
+            print("Export rendered image complete!")
 #%%
 if __name__=="__main__":
     app.run(main)

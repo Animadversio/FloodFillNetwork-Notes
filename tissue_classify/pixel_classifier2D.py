@@ -21,31 +21,30 @@ from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras import backend as keras
 from tissue_classify.data_prep import pixel_classify_data_proc
 from keras.utils import np_utils
-
-
-# Note merge is deprecated in Keras 2, add, concatenate is used
-def merge(input, mode='concat', concat_axis=3):
-    return concatenate(input, axis=concat_axis)
-
+#%%
+# # Note merge is deprecated in Keras 2, add, concatenate is used
+# def merge(input, mode='concat', concat_axis=3):
+#     return concatenate(input, axis=concat_axis)
 
 class pixel_classifier_2d(object):
 
     def __init__(self, img_rows=65, img_cols=65,
-                 proj_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Models/"):
+                 proj_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Models/",
+                train_data_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/"):
 
         self.img_rows = img_rows
         self.img_cols = img_cols
         self.proj_dir = proj_dir
+        self.train_data_dir = train_data_dir
 
     def load_traindata(self):
-        processor = pixel_classify_data_proc(self.img_rows, self.img_cols)
+        processor = pixel_classify_data_proc(self.img_rows, self.img_cols, proj_dir=self.train_data_dir)
         imgs_train, labels_train = processor.load_train_data()
         return imgs_train, labels_train
 
     def load_testdata(self):
-
-        mydata = pixel_classify_data_proc(self.img_rows, self.img_cols)
-        imgs_test = mydata.load_test_data()
+        processor = pixel_classify_data_proc(self.img_rows, self.img_cols, proj_dir=self.train_data_dir)
+        imgs_test = processor.load_test_data()
         return imgs_test
 
     def get_net(self):
@@ -84,14 +83,49 @@ class pixel_classifier_2d(object):
 
         return model
 
+    def get_full_conv_net(self):
+        # define pixel classifier network structure with 2D input patches
+        inputs = Input((self.img_rows, self.img_cols, 1))
+        conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
+        print("conv1 shape:", conv1.shape)
+        pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
+        print("pool1 shape:", pool1.shape)
+
+        conv2 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool1)
+        print("conv2 shape:", conv2.shape)
+        pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
+        print("pool2 shape:", pool2.shape)
+
+        conv3 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool2)
+        print("conv3 shape:", conv3.shape)
+        pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
+        print("pool3 shape:", pool3.shape)
+
+        conv4 = Conv2D(16, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(pool3)
+        print("conv4 shape:", conv4.shape)
+        # conv4 = Flatten()(conv4)
+        fc = Conv2D(16, 4, activation='relu', padding='valid', kernel_initializer='he_normal')(conv4)
+        print("fc shape:", fc.shape)
+        output = Conv2D(6, 1, activation='softmax', kernel_initializer='he_normal')(fc)  # by default softmax to -1 axis
+        print("output shape:", output.shape)
+        output = Flatten()(output)
+        # output = Dense(units=6, activation='softmax')(fc)
+        print("output shape:", output.shape)
+        model = Model(input=inputs, output=output)
+
+        model.compile(optimizer=Adam(lr=1e-4), loss='categorical_crossentropy',
+                      metrics=['accuracy'])  # , options = run_opts)
+        # loss function `binary_crossentropy` or `categorical_crossentropy` here seems binary
+        return model
+
     # train the network with train dataset
     def train(self):
         print("loading data")
         imgs_train, labels_train = self.load_traindata()  # label_train is a vector of same length
         onehot_labels = np_utils.to_categorical(labels_train, num_classes=6)
-        imgs_test = self.load_testdata()
+        # imgs_test = self.load_testdata()
         print("loading data done")
-        model = self.get_net()
+        model = self.get_full_conv_net()
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
         pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
@@ -100,7 +134,7 @@ class pixel_classifier_2d(object):
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
         print('Fitting model...')
-        model.fit(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
+        model.fit(imgs_train, onehot_labels, batch_size=32, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
                   callbacks=[model_checkpoint])
 
     # test the network with test dataset
@@ -121,6 +155,39 @@ class pixel_classifier_2d(object):
         # create new folder to store the results
         np.save(join(self.proj_dir, "LGN_train/trainborders/imgs_mask_test.npy"), imgs_mask_test)
 
+    def get_inference_model(self):
+        print("Getting inference model. ")
+        inputs = Input((self.img_rows, self.img_cols, 1))
+        conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
+        print("conv1 shape:", conv1.shape)
+        pool1 = MaxPooling2D(pool_size=(2, 2), strides=(1, 1), padding='valid')(conv1)
+        print("pool1 shape:", pool1.shape)
+
+        conv2 = Conv2D(64, 3, activation='relu', dilation_rate=(2, 2), padding='valid', kernel_initializer='he_normal')(pool1)
+        print("conv2 shape:", conv2.shape)
+        pool2 = MaxPooling2D(pool_size=(3, 3), strides=(1, 1))(conv2) # No
+        print("pool2 shape:", pool2.shape)
+
+        conv3 = Conv2D(64, 3, activation='relu', dilation_rate=(4, 4), padding='valid', kernel_initializer='he_normal')(pool2)
+        print("conv3 shape:", conv3.shape)
+        pool3 = MaxPooling2D(pool_size=(5, 5), strides=(1, 1))(conv3)
+        print("pool3 shape:", pool3.shape)
+
+        conv4 = Conv2D(16, 3, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(pool3)
+        print("conv4 shape:", conv4.shape)
+        # conv4 = Flatten()(conv4)
+        fc = Conv2D(512, 4, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(conv4)
+        print("fc shape:", fc.shape)
+        output = Conv2D(6, 1, activation='softmax', padding='valid', kernel_initializer='he_normal')(fc)
+        # fc = Flatten()(fc)
+        print("output shape:", output.shape)
+        model = Model(input=inputs, output=output)
+
+        model.compile(optimizer=Adam(lr=1e-4), loss='categorical_crossentropy',
+                      metrics=['accuracy'])  # , options = run_opts)
+        # loss function `binary_crossentropy` or `categorical_crossentropy` here seems binary
+
+        return model
     # def inference(self):
     #
     # def save_img(self):
@@ -166,7 +233,8 @@ class pixel_classifier_2d(object):
 
 #%%
 if __name__ == '__main__':
-    pc2 = pixel_classifier_2d(img_rows=65, img_cols=65)
+    pc2 = pixel_classifier_2d(img_rows=65, img_cols=65, train_data_dir="/scratch/binxu.wang/tissue_classifier",
+                              proj_dir="/scratch/binxu.wang/tissue_classifier/Models")
     # network train
     pc2.train()
     # network inference

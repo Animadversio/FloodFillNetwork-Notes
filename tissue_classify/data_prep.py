@@ -115,16 +115,16 @@ class pixel_classify_data_proc(object):
             n_sample_list[k] = min(v, n_samp_per_label)
             if n_samp_per_label > v:
                 print("Warning: not enough sample (%d) for label %d, use %d sample instead"% (n_samp_per_label, k, v))
-
+        # Quite slow
         print("Start collecting and shuffling ")
         train_indexes = np.concatenate([np.resize(np.random.permutation(v), (n_sample_list[k], 2)) for k, v in indices.items()], axis=0)
-        np.random.shuffle(indices)
+        np.random.shuffle(indices)  # slow!!!
         print("Finished collecting and shuffling ")
 
         print("Start fetching image patches.")
         imgdatas = np.ndarray((len(train_indexes), self.y_size, self.x_size, 1), dtype=np.uint8)
         imglabels = np.ndarray((len(train_indexes), 1), dtype=np.uint8)
-
+        # Super-fast below!
         for i in range(len(train_indexes)):
             # each size of 512x512 with overlap to avoid stich issues
             vol_i, coord_idx = train_indexes[i]
@@ -149,8 +149,6 @@ class pixel_classify_data_proc(object):
 
     def load_test_data(self):
         return
-
-#%%
 
 #%%
 if __name__ == "__main__":

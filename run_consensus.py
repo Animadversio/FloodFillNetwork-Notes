@@ -34,7 +34,8 @@ def run_save_consensus(config, corners):
     result = []
     for corner in corner_list:
         cons_seg, origin = consensus.compute_consensus(corner, consensus_req)
-        relabel_cons_seg, relabel_map = make_labels_contiguous(cons_seg)  # if we just relabel and discard the mapping relationship
+        relabel_cons_seg, relabel_map = make_labels_contiguous(cons_seg)
+        # if we just relabel and discard the mapping relationship
 
         seg_path = storage.segmentation_path(consensus_req.segmentation_output_dir, corner)
         storage.save_subvolume(relabel_cons_seg, origin, seg_path)
