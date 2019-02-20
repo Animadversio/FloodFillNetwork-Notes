@@ -122,8 +122,8 @@ class pixel_classify_data_proc(object):
         print("Finished collecting and shuffling ")
 
         print("Start fetching image patches.")
-        imgdatas = np.ndarray((n_samples, self.y_size, self.x_size, 1), dtype=np.uint8)
-        imglabels = np.ndarray((n_samples, 1), dtype=np.uint8)
+        imgdatas = np.ndarray((len(train_indexes), self.y_size, self.x_size, 1), dtype=np.uint8)
+        imglabels = np.ndarray((len(train_indexes), 1), dtype=np.uint8)
 
         for i in range(len(train_indexes)):
             # each size of 512x512 with overlap to avoid stich issues
@@ -143,7 +143,9 @@ class pixel_classify_data_proc(object):
         print('Saving to .npy files done.')
 
     def load_train_data(self):
-        return
+        imgdatas = np.load(self.npy_path + '/imgs_train.npy')
+        imglabels = np.load(self.npy_path + '/labels_train.npy')
+        return imgdatas, imglabels
 
     def load_test_data(self):
         return

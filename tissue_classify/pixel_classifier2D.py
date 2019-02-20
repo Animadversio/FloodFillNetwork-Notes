@@ -31,17 +31,16 @@ def merge(input, mode='concat', concat_axis=3):
 class pixel_classifier_2d(object):
 
     def __init__(self, img_rows=65, img_cols=65,
-                 proj_dir="/home/morganlab/PycharmProjects/3C-LSTM-UNet/membrane_detection/"):
+                 proj_dir="/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Models/"):
 
         self.img_rows = img_rows
         self.img_cols = img_cols
         self.proj_dir = proj_dir
 
     def load_traindata(self):
-
-        mydata = pixel_classify_data_proc(self.img_rows, self.img_cols)
-        imgs_train, imgs_mask_train = mydata.load_train_data()
-        return imgs_train, imgs_mask_train
+        processor = pixel_classify_data_proc(self.img_rows, self.img_cols)
+        imgs_train, labels_train = processor.load_train_data()
+        return imgs_train, labels_train
 
     def load_testdata(self):
 
@@ -95,8 +94,9 @@ class pixel_classifier_2d(object):
         model = self.get_net()
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
-        pattern = "net_LGN_mb-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
-        model_checkpoint = ModelCheckpoint(pattern, monitor='loss', verbose=1, save_best_only=True)
+        pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
+        ckpt_path = join(self.proj_dir, pattern)
+        model_checkpoint = ModelCheckpoint(ckpt_path, monitor='loss', verbose=1, save_best_only=True)
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
         print('Fitting model...')
@@ -164,11 +164,11 @@ class pixel_classifier_2d(object):
     #             result.save(join(self.proj_dir, "LGN_train/trainborders/test_%04d.png" % (i // (x_num * y_num))))
     #             Imag = np.ndarray((x2[-1], y2[-1], 1), dtype=np.uint8)
 
-
+#%%
 if __name__ == '__main__':
-    pc2 = pixel_classifier_2d(img_rows=128, img_cols=128)
+    pc2 = pixel_classifier_2d(img_rows=65, img_cols=65)
     # network train
     pc2.train()
     # network inference
-    pc2.load_trained_model()
-    pc2.save_img()
+    # pc2.load_trained_model()
+    # pc2.save_img()
