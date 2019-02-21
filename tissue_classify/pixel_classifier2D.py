@@ -185,6 +185,7 @@ class pixel_classifier_2d(object):
         return model
 
     def get_inference_model(self, infer_rows=100, infer_cols=100):
+        """Transfer the weights learnt in the single output model into this patch output model"""
         print("Getting inference model. ")
         inputs = Input((infer_rows, infer_cols, 1))
         conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
@@ -230,8 +231,64 @@ class pixel_classifier_2d(object):
         inference_model = self.get_inference_model(infer_rows, infer_cols)
         inference_model.set_weights(model.get_weights())
         return inference_model
-    # def inference(self):
-    #
+
+def inference_on_image(img, inference_model):
+    '''General function to infer on whole image by pixel wise inference'''
+    out_shape = inference_model.output_shape[1:-1]
+    in_shape = inference_model.input_shape[1:-1]
+    in_y, in_x = in_shape
+    out_y, out_x = out_shape
+    if (not (in_y - out_y) % 2 == 0) or (not (in_x - out_x) % 2 == 0):
+        print("warning: margin is not integer")
+    pady = np.int(np.ceil((in_y - out_y) / 2))
+    padx = np.int(np.ceil((in_x - out_x) / 2))
+    # pad the image
+    pad_img = np.pad(img, ((pady, pady), (padx, padx)), 'reflect')
+    size_y, size_x = pad_img.shape
+    # get the image into stack
+    img_stack = []
+    coord_list = []
+
+    step_y = out_y
+    step_x = out_x
+    csr_y = 0
+    csr_x = 0
+    x_reset_flag = False
+    y_end_flag = False
+    while True:
+        # append
+        img_stack.append(pad_img[csr_y:csr_y + in_y, csr_x:csr_x + in_x])
+        coord_list.append((csr_y, csr_x))  # note no pad in output image!
+
+        # moving decision
+        if x_reset_flag and y_end_flag:
+            break
+        elif x_reset_flag:  # return
+            csr_x = 0
+            csr_y += step_y
+            x_reset_flag = False
+        else:
+            csr_x += step_x
+
+        # modify move
+        if csr_x + in_x > size_x or csr_x + out_x > size_x - 2 * padx:
+            csr_x = size_x - 2 * padx - out_x
+            x_reset_flag = True
+        if csr_y + in_y > size_y or csr_y + out_y > size_y - 2 * pady:
+            csr_y = size_y - 2 * pady - out_y
+            y_end_flag = True
+    # send the stack to model for prediction
+    img_stack = np.array(img_stack)
+    img_stack.shape = img_stack.shape + (1,)
+    y_prob_stack = inference_model.predict(img_stack)
+    y_label_stack = np.squeeze(y_prob_stack.argmax(axis=-1))
+    # reorder the tile images
+    label_map = np.zeros(img.shape, dtype=np.uint8)
+    for i, (csr_y, csr_x) in enumerate(coord_list):
+        label_map[csr_y: csr_y + out_y, csr_x: csr_x + out_x] = y_label_stack[i, :, :]
+
+    return label_map
+
     # def save_img(self):
     #     # should change with respect to image size
     #     print("array to image")
