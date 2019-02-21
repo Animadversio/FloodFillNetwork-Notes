@@ -137,7 +137,7 @@ class pixel_classifier_2d(object):
         onehot_labels = np_utils.to_categorical(labels_train, num_classes=6)
         # imgs_test = self.load_testdata()
         print("loading data done")
-        model = self.get_net()
+        model = self.get_full_conv_net()
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
         pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
@@ -149,23 +149,21 @@ class pixel_classifier_2d(object):
         model.fit(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
                   callbacks=[model_checkpoint])
 
-    def train_generator(self):
+    def train_generator(self, generator, valid_generator, **kwargs):
         print("loading data")
-        imgs_train, labels_train = self.load_traindata()  # label_train is a vector of same length
-        onehot_labels = np_utils.to_categorical(labels_train, num_classes=6)
         # imgs_test = self.load_testdata()
         print("loading data done")
-        model = self.get_net()
+        model = self.get_full_conv_net()
         print("got network")
         # checkponit to store the network parameter as .hdf5 file, change the name for different files saved
-        pattern = "net_soma-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
+        pattern = "net_soma_ds-{epoch:02d}-{val_acc:.2f}.hdf5"  # -{epoch:02d}-{val_acc:.2f}
         ckpt_path = join(self.model_dir, pattern)
         model_checkpoint = ModelCheckpoint(ckpt_path, monitor='loss', verbose=1, save_best_only=True)
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
         print('Fitting model...')
-        model.fit_generator(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
-                  callbacks=[model_checkpoint])
+        model.fit_generator(generator, validation_data=valid_generator, epochs=20, verbose=1, shuffle=True,
+                  callbacks=[model_checkpoint], **kwargs)
 
     # test the network with test dataset
     def load_trained_model(self, checkpoint_path=None):
