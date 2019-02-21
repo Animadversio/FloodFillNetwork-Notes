@@ -60,7 +60,7 @@ class pixel_classify_data_proc(object):
         self.margin = ((self.x_size - 1)//2, (self.y_size - 1)//2, 0)
 
 
-    def prepare_volume(self, training_data_dict, save=False):
+    def prepare_volume(self, training_data_dict, save=True):
         '''Make images into ndarray and save as h5 file'''
         for vol, spec in training_data_dict.items():
             if "h5_dir" in spec:
@@ -69,6 +69,11 @@ class pixel_classify_data_proc(object):
                 if "pattern" in spec:
                     pattern = join(self.data_path, spec["pattern"]+"*."+self.img_type)
                     volume = image_stack_to_vol(pattern)
+                    if save:
+                        f = h5py.File(join(self.npy_path, vol+"_EM.h5"), "w")
+                        fstack = f.create_dataset("raw", volume.shape, dtype='uint8')  # Note they only take int64 input
+                        fstack[:] = volume
+                        f.close()
                 else:
                     return
             if "seg_h5_dir" in spec:
@@ -77,11 +82,15 @@ class pixel_classify_data_proc(object):
                 if "seg_pattern" in spec:
                     seg_pattern = join(self.label_path, spec["seg_pattern"] + "*." + self.img_type)
                     label_vol = image_stack_to_vol(seg_pattern)
+                    if save:
+                        f = h5py.File(join(self.npy_path, vol+"_seg.h5"), "w")
+                        fstack = f.create_dataset("raw", volume.shape, dtype='uint8')  # Note they only take int64 input
+                        fstack[:] = volume
+                        f.close()
                 else:
                     return
             assert volume.shape == label_vol.shape
-            self.vol_data_pair.append( (volume, label_vol))
-
+            self.vol_data_pair.append((volume, label_vol))
 
     def create_train_data(self, n_samples=16000000):
         ''' Data are defaultly loaded as images in the `data_path` '''
@@ -345,7 +354,7 @@ class pixel_classify_data_generator(keras.utils.Sequence):
 
     def get_volome(self, vol_dict):
         for name, (path, ds_name) in vol_dict.items():
-            self.vol_handle_list.append( (h5py.File(path, "r"), ds_name) )
+            self.vol_handle_list.append((h5py.File(path, "r"), ds_name) )
         return
 
     def __len__(self):
@@ -406,8 +415,11 @@ if __name__ == "__main__":
     #     "soma": {"pattern": "Soma_s", "seg_pattern": "IxD_W002_invert2_tissuetype_BX_soma.vsseg_export_s"}})
     # processor.create_train_data()
     processor = pixel_classify_data_proc(65, 65)
-    processor.prepare_volume(
-        {"soma": {"h5_dir": "Train_dataset/soma_EM.h5", "seg_h5_dir": "Train_dataset/soma_seg.h5", }})
+    processor.prepare_volume(training_data_dict={
+       "soma": {"pattern": "Soma_s", "seg_pattern": "IxD_W002_invert2_tissuetype_BX_soma.vsseg_export_s"}})
+
+    # processor.prepare_volume(
+    #     {"soma": {"h5_dir": "Train_dataset/soma_EM.h5", "seg_h5_dir": "Train_dataset/soma_seg.h5", }})
     processor.create_train_coordinate()
 
     # generator = pixel_classify_data_generator(np.arange(1000),
