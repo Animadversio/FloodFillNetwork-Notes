@@ -14,7 +14,7 @@ ks.backend.set_session(sess)
 import numpy as np
 
 from keras.models import *
-from keras.layers import Input, merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D, add, concatenate, Dense, Flatten, BatchNormalization
+from keras.layers import Input, merge, Conv2D, MaxPooling2D, UpSampling2D, Dropout, Cropping2D, add, concatenate, Dense, Flatten, Lambda, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from keras.optimizers import *
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
@@ -25,6 +25,10 @@ from keras.utils import np_utils
 # # Note merge is deprecated in Keras 2, add, concatenate is used
 # def merge(input, mode='concat', concat_axis=3):
 #     return concatenate(input, axis=concat_axis)
+
+def dilate_pool(input, pool_size=(2,2), pooling_type="MAX", padding="VALID", dilation_rate=(1, 1), strides=(1,1)):
+    return tf.nn.pool(input, pool_size, pooling_type, padding, dilation_rate=dilation_rate, strides=strides)
+
 
 class pixel_classifier_2d(object):
 
@@ -160,15 +164,12 @@ class pixel_classifier_2d(object):
         # model.load_weights('unet_LGN_mb.hdf5')
         print("Weight value loaded")
         print('Fitting model...')
-        model.fit(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
+        model.fit_generator(imgs_train, onehot_labels, batch_size=16, epochs=20, verbose=1, validation_split=0.2, shuffle=True,
                   callbacks=[model_checkpoint])
 
     # test the network with test dataset
     def load_trained_model(self, checkpoint_path=None):
-        print("loading data")
-        imgs_test = self.load_testdata()
-        print("loading data done")
-        model = self.get_net()
+        model = self.get_full_conv_net()
         print("got network")
         # load checkpoint to store the network parameter as .hdf5 file, change the name for different files saved
         if checkpoint_path==None:
@@ -176,28 +177,39 @@ class pixel_classifier_2d(object):
         model_checkpoint = ModelCheckpoint(checkpoint_path, monitor='loss', verbose=1, save_best_only=True)
         model.load_weights(checkpoint_path)
         print('load trained model')
-        print('predict test data')
-        imgs_mask_test = model.predict(imgs_test, batch_size=5, verbose=1)
-        # create new folder to store the results
-        np.save(join(self.proj_dir, "LGN_train/trainborders/imgs_mask_test.npy"), imgs_mask_test)
+        # print("loading data")
+        # imgs_test = self.load_testdata()
+        # print("loading data done")
+        # print('predict test data')
+        # imgs_mask_test = model.predict(imgs_test, batch_size=5, verbose=1)
+        # # create new folder to store the results
+        # np.save(join(self.proj_dir, "LGN_train/trainborders/imgs_mask_test.npy"), imgs_mask_test)
+        return model
 
-    def get_inference_model(self):
+    def get_inference_model(self, infer_rows=100, infer_cols=100):
         print("Getting inference model. ")
-        inputs = Input((self.img_rows, self.img_cols, 1))
+        inputs = Input((infer_rows, infer_cols, 1))
         conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
         print("conv1 shape:", conv1.shape)
         pool1 = MaxPooling2D(pool_size=(2, 2), strides=(1, 1), padding='valid')(conv1)
         print("pool1 shape:", pool1.shape)
+        pool1 = BatchNormalization()(pool1)
 
         conv2 = Conv2D(64, 3, activation='relu', dilation_rate=(2, 2), padding='valid', kernel_initializer='he_normal')(pool1)
         print("conv2 shape:", conv2.shape)
-        pool2 = MaxPooling2D(pool_size=(3, 3), strides=(1, 1))(conv2) # No
+        pool2 = Lambda(dilate_pool, arguments={'pool_size': (2, 2), 'dilation_rate': (2, 2), 'strides':(1,1),
+                                               'padding': "VALID", })(conv2)
+        # pool2 = MaxPooling2D(pool_size=(3, 3), strides=(1, 1))(conv2) # No
         print("pool2 shape:", pool2.shape)
+        pool2 = BatchNormalization()(pool2)
 
         conv3 = Conv2D(64, 3, activation='relu', dilation_rate=(4, 4), padding='valid', kernel_initializer='he_normal')(pool2)
         print("conv3 shape:", conv3.shape)
-        pool3 = MaxPooling2D(pool_size=(5, 5), strides=(1, 1))(conv3)
+        pool3 = Lambda(dilate_pool, arguments={'pool_size': (2, 2), 'dilation_rate': (4, 4), 'strides': (1, 1),
+                                               'padding': "VALID", })(conv3)
+        # pool3 = MaxPooling2D(pool_size=(5, 5), strides=(1, 1))(conv3)
         print("pool3 shape:", pool3.shape)
+        pool3 = BatchNormalization()(pool3)
 
         conv4 = Conv2D(16, 3, activation='relu', dilation_rate=(8, 8), padding='valid', kernel_initializer='he_normal')(pool3)
         print("conv4 shape:", conv4.shape)
@@ -214,6 +226,12 @@ class pixel_classifier_2d(object):
         # loss function `binary_crossentropy` or `categorical_crossentropy` here seems binary
 
         return model
+
+    def transfer_weight_to_inference(self, ckpt_path, infer_rows=201, infer_cols=201):
+        model = self.load_trained_model(checkpoint_path=ckpt_path)
+        inference_model = self.get_inference_model(infer_rows, infer_cols)
+        inference_model.set_weights(model.get_weights())
+        return inference_model
     # def inference(self):
     #
     # def save_img(self):
@@ -264,6 +282,9 @@ if __name__ == '__main__':
                               # proj_dir="/scratch/binxu.wang/tissue_classifier")
     # network train
     pc2.train()
+
+    inference_model = pc2.get_inference_model()
     # network inference
     # pc2.load_trained_model()
     # pc2.save_img()
+    model = pc2.load_trained_model("/Users/binxu/Connectomics_Code/tissue_classifier/Models/net_soma-01-0.89.hdf5")
