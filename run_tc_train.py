@@ -73,17 +73,17 @@ def zero_corrected_countless(data):
 #          "label_path":"/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/labels_train_ds.npy",
 #          "coord_path":"/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/imgs_coords_ds.npy",
 #          "vol_dict":{"Soma_DS": ("/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/Soma_DS_EM.h5", 'raw')},}
-param = {"use_coord": True,
-         "label_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/labels_train_ds.npy",
-         "coord_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/imgs_coords_ds.npy",
-         "vol_dict": {"Soma_DS": ("/scratch/binxu.wang/tissue_classifier/Train_dataset/Soma_DS_EM.h5", 'raw')}}
-generator = pixel_classify_data_generator(np.arange(int(6000000*0.8)), **param)
-valid_generator = pixel_classify_data_generator(np.arange(int(6000000*0.8),None), **param)
+# param = {"use_coord": True,
+#          "label_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/labels_train_ds.npy",
+#          "coord_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/imgs_coords_ds.npy",
+#          "vol_dict": {"Soma_DS": ("/scratch/binxu.wang/tissue_classifier/Train_dataset/Soma_DS_EM.h5", 'raw')}}
+# generator = pixel_classify_data_generator(np.arange(int(6000000*0.8)), **param)
+# valid_generator = pixel_classify_data_generator(np.arange(int(6000000*0.8),None), **param)
 #%%
-from tissue_classify.pixel_classifier2D import pixel_classifier_2d
+from tissue_classify.pixel_classifier2D import pixel_classifier_2d,inference_on_image
 ps2 = pixel_classifier_2d(65, 65,
                           proj_dir="/scratch/binxu.wang/tissue_classifier/")
-ps2.train_generator(generator, valid_generator, use_multiprocessing=True, workers=4)
+# ps2.train_generator(generator, valid_generator, )#use_multiprocessing=True, workers=4)
 
 #%%
 ckpt_path = max(iglob(join(ps2.model_dir, '*')), key=os.path.getctime)
@@ -98,11 +98,14 @@ img_dir = "/scratch/binxu.wang/tissue_classifier/Train_Img/"
 out_dir = "/scratch/binxu.wang/tissue_classifier/Train_Result/"
 img_list = sorted(glob(img_dir+"Soma_s*DS.png"))
 for img_name in img_list:
+    print("Process ", img_name)
     im = Image.open(img_name).convert('L')
     label_map = inference_on_image(np.array(im), inference_model)
+    print("Label finish ", img_name)
     seg = Image.fromarray(label_map)
     out_img = Image.merge("HSV", (seg.point(lut=lut), seg.point(lut=lut), im))
     _, filename = os.path.split(img_name)
     out_img.convert("RGB").save(
         out_dir+filename[:filename.find(".")]+"_label.png")
+    print("Merge finish ", img_name)
 # out_img.convert("RGB").save("/Users/binxu/Connectomics_Code/tissue_classifier/Train_Img/Soma_s091_label.png")
