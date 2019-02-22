@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="Add notes">
+    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffn/inference/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/ffn/inference/inference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_tc_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_inference.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_tc_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="110" column="111" lean-forward="true" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
+            <state>
+              <caret line="110" column="111" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
               <folding>
                 <element signature="e#1#32#0" expanded="true" />
               </folding>
@@ -38,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1542">
+            <state relative-caret-position="18">
               <caret line="1057" column="117" selection-start-line="1057" selection-start-column="117" selection-end-line="1057" selection-end-column="117" />
               <folding>
                 <element signature="e#701#739#0" expanded="true" />
@@ -50,17 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2655">
+            <state relative-caret-position="635">
               <caret line="196" column="27" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/h5py/_hl/selections.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="424" selection-start-line="424" selection-end-line="424" />
             </state>
           </provider>
         </entry>
@@ -68,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="360" column="28" selection-start-line="360" selection-start-column="28" selection-end-line="360" selection-end-column="28" />
+            <state relative-caret-position="907">
+              <caret line="361" column="57" lean-forward="true" selection-start-line="361" selection-start-column="49" selection-end-line="361" selection-end-column="57" />
               <folding>
                 <element signature="e#695#733#0" expanded="true" />
               </folding>
@@ -77,14 +67,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="147" selection-start-line="147" selection-end-line="147" />
+            <state relative-caret-position="493">
+              <caret line="108" column="22" lean-forward="true" selection-start-line="106" selection-start-column="2" selection-end-line="108" selection-end-column="22" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#725#756#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
             </state>
           </provider>
         </entry>
@@ -92,11 +91,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73">
-              <caret line="157" column="65" lean-forward="true" selection-start-line="157" selection-start-column="65" selection-end-line="157" selection-end-column="65" />
+            <state relative-caret-position="-591">
+              <caret line="107" column="21" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="359">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
-                <element signature="e#993#1002#0" expanded="true" />
-                <element signature="e#1416#2317#0" />
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="503">
+              <caret line="210" selection-start-line="181" selection-start-column="2" selection-end-line="182" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Requesting executor shutdown</find>
       <find>stop_server</find>
       <find>stop_executor</find>
       <find>Process subvolume</find>
@@ -143,6 +161,7 @@
       <find>Mask</find>
       <find>Infer</find>
       <find>connect</find>
+      <find>clear</find>
     </findStrings>
     <replaceStrings>
       <replace>DIVSTR</replace>
@@ -202,7 +221,6 @@
         <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py" />
         <option value="$PROJECT_DIR$/tissue_classify/Unet_model.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py" />
         <option value="$PROJECT_DIR$/tissue_classify/tissue_training_data.py" />
         <option value="$PROJECT_DIR$/ffn/training/models/convstack_3d.py" />
         <option value="$PROJECT_DIR$/tissue_classify/pixel_classifier.py" />
@@ -215,19 +233,21 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
         <option value="$PROJECT_DIR$/run_tc_inference.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="142" />
-    <option name="width" value="2378" />
-    <option name="height" value="1240" />
+    <option name="x" value="242" />
+    <option name="width" value="2289" />
+    <option name="height" value="1205" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -277,7 +297,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -496,21 +515,8 @@
       <workItem from="1549929927960" duration="370000" />
       <workItem from="1549930537819" duration="35409000" />
       <workItem from="1550101151485" duration="61176000" />
-      <workItem from="1550722112058" duration="15725000" />
-    </task>
-    <task id="LOCAL-00002" summary="Add notes">
-      <created>1544484558606</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1544484558606</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Add notes">
-      <created>1544494570598</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1544494570599</updated>
+      <workItem from="1550722112058" duration="15779000" />
+      <workItem from="1550793339589" duration="10149000" />
     </task>
     <task id="LOCAL-00004" summary="Add notes">
       <created>1544494653518</created>
@@ -841,11 +847,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550725120450</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Add notes to mask system&#10;Add inference code">
+      <created>1550793252752</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1550793252752</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Add notes to mask system&#10;Add inference code">
+      <created>1550794519368</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1550794519369</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="441418000" />
+    <option name="totallyTimeSpent" value="451621000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -857,9 +877,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="25" y="244" width="2378" height="1240" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1958012" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18282989" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="TypeScript" order="0" sideWeight="0.49960256" weight="0.3295107" />
@@ -872,24 +893,23 @@
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49960256" weight="0.32928678" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.33547556" side_tool="true" visible="true" weight="0.55144405" />
-      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4985062" weight="0.32894737" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.33704293" side_tool="true" visible="true" weight="0.4671254" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49801272" weight="0.32874617" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4991431" weight="0.3277311" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.66452444" visible="true" weight="0.55144405" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.6629571" visible="true" weight="0.4671254" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.9416499" visible="true" weight="0.26992288" />
+      <window_info anchor="right" x="965" y="371" width="629" height="697" id="SciView" order="3" sideWeight="0.93830705" visible="true" weight="0.25" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.0583501" side_tool="true" visible="true" weight="0.26992288" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.061692968" side_tool="true" visible="true" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add logging setting to enable log into file while out put to console" />
     <MESSAGE value="Add reference code about Parallel GPU training !" />
     <MESSAGE value="Change scripts" />
     <MESSAGE value="Arrange the code and script" />
@@ -914,7 +934,8 @@
     <MESSAGE value="Debug the tissue classifier" />
     <MESSAGE value="Merge the classifier and add proofreading" />
     <MESSAGE value="Debug the generator training system&#10;Add downsampling functionality&#10;Make the generator work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debug the generator training system&#10;Add downsampling functionality&#10;Make the generator work" />
+    <MESSAGE value="Add notes to mask system&#10;Add inference code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add notes to mask system&#10;Add inference code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,16 +1003,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference_flags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-          <folding>
-            <element signature="e#711#749#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="463">
@@ -1171,16 +1182,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="134" column="33" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="33" />
-          <folding>
-            <element signature="e#725#756#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/read_segmentation_results.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3">
@@ -1262,16 +1263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tissue_classify/data_prep.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="501">
@@ -1329,23 +1320,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="110" column="111" lean-forward="true" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
-          <folding>
-            <element signature="e#1#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="91" column="4" lean-forward="true" selection-start-line="91" selection-start-column="4" selection-end-line="94" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configs/inference_training_sample2.pbtxt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1371,6 +1345,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="110" column="111" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
+          <folding>
+            <element signature="e#1#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/IPython/core/interactiveshell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="2910" column="27" selection-start-line="2910" selection-start-column="27" selection-end-line="2910" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/h5py/_hl/selections.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
@@ -1378,20 +1369,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="157" column="65" lean-forward="true" selection-start-line="157" selection-start-column="65" selection-end-line="157" selection-end-column="65" />
-          <folding>
-            <element signature="e#993#1002#0" expanded="true" />
-            <element signature="e#1416#2317#0" />
-          </folding>
+        <state relative-caret-position="635">
+          <caret line="196" column="27" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1542">
+        <state relative-caret-position="18">
           <caret line="1057" column="117" selection-start-line="1057" selection-start-column="117" selection-end-line="1057" selection-end-column="117" />
           <folding>
             <element signature="e#701#739#0" expanded="true" />
@@ -1401,28 +1388,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="360" column="28" selection-start-line="360" selection-start-column="28" selection-end-line="360" selection-end-column="28" />
+        <state relative-caret-position="907">
+          <caret line="361" column="57" lean-forward="true" selection-start-line="361" selection-start-column="49" selection-end-line="361" selection-end-column="57" />
           <folding>
             <element signature="e#695#733#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2655">
-          <caret line="196" column="27" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="27" />
+        <state relative-caret-position="493">
+          <caret line="108" column="22" lean-forward="true" selection-start-line="106" selection-start-column="2" selection-end-line="108" selection-end-column="22" />
+          <folding>
+            <element signature="e#725#756#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="147" selection-start-line="147" selection-end-line="147" />
+        <state relative-caret-position="503">
+          <caret line="210" selection-start-line="181" selection-start-column="2" selection-end-line="182" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-591">
+          <caret line="107" column="21" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
         </state>
       </provider>
     </entry>

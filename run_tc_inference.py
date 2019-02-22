@@ -137,31 +137,76 @@ import scipy.ndimage as ndimage
 import skimage.measure
 #%% clear all small islands
 background_label = [0]
-merge = True
-labels = np.unique(label_volume)
-binary_mask = np.zeros(label_volume.shape, dtype=np.bool)
+min_size = 1000000
+def clear_small_island(label_volume, background_label=[0], min_size=1000000):
+    labels = np.unique(label_volume)
+    binary_mask = np.zeros(label_volume.shape, dtype=np.bool)
 
-# for label in labels:
-#     if label in background_label:
-#         continue
-#     binary_mask = np.logical_or(label_volume == label, binary_mask)
-valid_labels = np.setdiff1d(labels, background_label)
-binary_mask = np.in1d(label_volume, valid_labels).reshape(label_volume.shape)
+    # for label in labels:
+    #     if label in background_label:
+    #         continue
+    #     binary_mask = np.logical_or(label_volume == label, binary_mask)
+    valid_labels = np.setdiff1d(labels, background_label)
+    binary_mask = np.in1d(label_volume, valid_labels).reshape(label_volume.shape)
+    print("Get merge mask.")
+    #%%
+
+    isld_label_array, n_islands = ndimage.label(binary_mask) # skimage.measure.label(binary_mask, connectivity=1)
+    print("%d islands found." % n_islands)
+    #%%
+    isld_labels, isld_sizes = np.unique(isld_label_array, return_counts=True)
+
+    # large_isld_mask = np.zeros(label_volume.shape, dtype=np.bool)
+    small = isld_labels[isld_sizes < min_size]
+    print("Apply threshold %d, %d islands left, size %s." % (min_size, sum(isld_sizes > min_size), str(isld_sizes[isld_sizes > min_size])))
+    small_mask = np.in1d(isld_label_array, small).reshape(isld_label_array.shape)
+    large_mask_array = label_volume.copy()
+    large_mask_array[small_mask] = 0
+    return large_mask_array
+#%%
+plt.imshow(large_mask_array[40, :, :])
+plt.show()
 #%%
 
+f = h5py.File("/home/morganlab/Documents/ixP11LGN/EM_data/mask/grayscale_ixP11_5_align_soma_mask.h5", "w")
+fstack = f.create_dataset("mask", (1,) + label_volume.shape, dtype='uint8', compression="gzip")  # Note they only take int64 input
+fstack[0, :] = large_mask_array
+f.close()
+
+#%%
 # ndimage.median_filter
 # skimage.measure
 
-isld_label_array, n_islands = ndimage.label(binary_mask)# skimage.measure.label(binary_mask, connectivity=1)
 #%%
-isld_labels, isld_sizes = np.unique(isld_label_array, return_counts=True)
 
-large_isld_mask = np.zeros(label_volume.shape, dtype=np.bool)
+# plt.histogram(image_stack[40,:,:].flat)
+# plt.show()
+
+
+def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, up_outlier=245, low_outlier=30):
+    low_p = []
+    high_p = []
+    for img in EM_stack:
+        img1d = img.flatten()
+        img1d = img1d[np.logical_and(img1d < up_outlier, img1d > low_outlier)]
+        low_p.append(np.percentile(img1d, 5))
+        high_p.append(np.percentile(img1d, 95))
+    low_p = np.array(low_p)
+    high_p = np.array(high_p)
+    # low_p = np.percentile(EM_stack, 5, axis=[1,2])
+    # high_p = np.percentile(EM_stack, 95, axis=[1,2])
+    scaler = (upper-lower) / (high_p - low_p)
+    shift = lower - (low_p*scaler)
+    norm_img = scaler.reshape((-1,1,1)) * EM_stack + shift.reshape((-1,1,1))
+    print("max: %.2f, min: %.2f after scaling"%(norm_img.max(), norm_img.min()))
+    int_img = np.clip(norm_img, 0, 255, )
+    int_img = int_img.astype('uint8')
+    img_shape = EM_stack.shape
+    f = h5py.File(join(path, output), "w")
+    fstack=f.create_dataset("raw", img_shape, dtype='uint8', compression="gzip") # Note they only take int64 input
+    fstack[:] = int_img
+    f.close()
+    return int_img
+
 #%%
-min_size = 1000000
-small = isld_labels[isld_sizes < min_size]
-small_mask = np.in1d(isld_label_array, small).reshape(isld_label_array.shape)
-large_mask_array = label_volume.copy()
-large_mask_array[small_mask] = 0
-#%%
-plt.imshow(large_mask_array[20, :, :])
+norm_img = normalize_img_stack_with_mask("/home/morganlab/Documents/ixP11LGN/EM_data", "grayscale_ixP11_5_align_norm_new.h5", image_stack)
