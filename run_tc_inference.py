@@ -133,22 +133,35 @@ f.close()
 
 #%% median filter the z direction
 
-
+import scipy.ndimage as ndimage
+import skimage.measure
 #%% clear all small islands
 background_label = [0]
 merge = True
 labels = np.unique(label_volume)
 binary_mask = np.zeros(label_volume.shape, dtype=np.bool)
 
-for label in labels:
-    if label in background_label:
-        continue
-    binary_mask = np.logical_or(label_volume == label, binary_mask)
-
+# for label in labels:
+#     if label in background_label:
+#         continue
+#     binary_mask = np.logical_or(label_volume == label, binary_mask)
+valid_labels = np.setdiff1d(labels, background_label)
+binary_mask = np.in1d(label_volume, valid_labels).reshape(label_volume.shape)
 #%%
-import scipy.ndimage as ndimage
-import skimage.measure
+
 # ndimage.median_filter
 # skimage.measure
 
-isld_label_array, n_islands = skimage.measure.label(binary_mask, connectivity=1)
+isld_label_array, n_islands = ndimage.label(binary_mask)# skimage.measure.label(binary_mask, connectivity=1)
+#%%
+isld_labels, isld_sizes = np.unique(isld_label_array, return_counts=True)
+
+large_isld_mask = np.zeros(label_volume.shape, dtype=np.bool)
+#%%
+min_size = 1000000
+small = isld_labels[isld_sizes < min_size]
+small_mask = np.in1d(isld_label_array, small).reshape(isld_label_array.shape)
+large_mask_array = label_volume.copy()
+large_mask_array[small_mask] = 0
+#%%
+plt.imshow(large_mask_array[20, :, :])
