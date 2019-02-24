@@ -19,13 +19,17 @@ dist_threshold = 50  # maximum distance in nm to be considered valid pair
 threshold = 50  # minimum overlap to be consider a pair
 move_vec = (5, 5, 3)
 
-seg_path = "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12" # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"#"/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/"
-# "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/" #
+seg_path = "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12"
+# "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
+# "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/"
+# "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/0/0/"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
 # "/Users/binxu/Connectomics_Code/results/LGN/"
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/'
-output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"# '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/' # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
+output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
+# '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/'
+# "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
 # "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
 # "/Users/binxu/Connectomics_Code/results/LGN/testing_LR/"
 
@@ -33,7 +37,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument(
     '--seg_path', help='')
 ap.add_argument(
-    '--output_path', help='Obtain the Neuroglancer client code from the specified URL.')
+    '--output_path', help='Output the files')
 args = ap.parse_args()
 if args.seg_path:
     seg_path = args.seg_path
@@ -97,11 +101,11 @@ def worker_func(id_pair):
     cur_idx1, cur_idx2 = id_pair[0], id_pair[1]
     if cur_idx1 == cur_idx2 or cur_idx1 * cur_idx2 == 0:
         return []  # ignore the overlap with background and samething overlap
-    seg_a = segmentation == cur_idx1
-    seg_b = segmentation == cur_idx2
+    # seg_a = segmentation == cur_idx1
+    # seg_b = segmentation == cur_idx2
     if memory_check:
         print('[%d] After calculate segment Memory usage: %s (kb)' % (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
-    composite_mask  = composite_map == cur_idx1 + BASE * cur_idx2
+    composite_mask = composite_map == cur_idx1 + BASE * cur_idx2
     if not composite_mask.sum() == 0:
         index_list = np.array(composite_mask.nonzero())
         com1 = index_list.mean(axis=1) + np.array([vz, vy, vx])//2

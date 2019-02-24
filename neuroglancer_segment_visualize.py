@@ -11,6 +11,10 @@ import numpy as np
 from analysis_script.utils_format_convert import read_image_vol_from_h5
 import neuroglancer
 from ffn.inference.storage import subvolume_path
+import os
+import re
+from  os.path import join
+from ffn.inference.storage import subvolume_path
 #%%
 # ap = argparse.ArgumentParser()
 # ap.add_argument(
@@ -73,7 +77,7 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                     EM_stack = spec["vol"]
                 else:
                     assert '.h5' in spec["vol"]
-                    EM_stack = read_image_vol_from_h5(image_stack)
+                    EM_stack = read_image_vol_from_h5(spec["vol"])
             if "corner" in spec:
                 corner=spec["corner"]
             if "size" in spec:
@@ -108,6 +112,36 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
     print(viewer)
     return viewer
 
+def generate_seg_dict_from_dir(seg_dir, seg_name="seg"):
+    '''Get all the subvolumes for neuroglancer to visualize! '''
+    fn_list = sorted(os.listdir(seg_dir))
+    corner_list = []
+    for name in fn_list:
+        if "Autoseg" in name or "counters" in name:
+            continue
+        cur_path = join(seg_dir, name)
+        if os.path.isdir(cur_path):
+            cur_x = int(name)
+            for name_y in sorted(os.listdir(cur_path)):
+                cur_path2 = join(cur_path, name_y)
+                if os.path.isdir(cur_path2):
+                    cur_y = int(name_y)
+                    for fn in sorted(os.listdir(cur_path2)):
+                        match = re.search("seg-%d_%d_(.*).npz" % (cur_x, cur_y), fn, )
+                        if not match==None:
+                            name_z = match.group(1)
+                            cur_z = int(name_z)
+                            if os.path.exists(subvolume_path(seg_dir, (cur_z, cur_y, cur_x), 'npz')):
+                                corner_list.append((cur_z, cur_y, cur_x))
+        else:
+            continue
+    corner_list = sorted(corner_list)
+    seg_dict = {}
+    seg_dict["seg_dir"] = seg_dir
+    for i, corner in enumerate(corner_list):
+        patch_name = seg_name +"-%d"%(i+1)
+        seg_dict[patch_name] = {"corner": corner}
+    return seg_dict
 
 #%%
 if __name__=="__main__":

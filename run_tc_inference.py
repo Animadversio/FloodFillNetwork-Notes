@@ -4,6 +4,9 @@ import matplotlib.pylab as plt
 from tissue_classify.pixel_classifier2D import pixel_classifier_2d, inference_on_image
 from scipy.misc import imresize
 from PIL import Image
+import os
+from os.path import join
+from glob import iglob, glob
 #%%
 img_dir = "/Users/binxu/Connectomics_Code/tissue_classifier/Train_Img/"
 img = plt.imread(img_dir+"Soma_s092.png") # "Soma_s081_DS.png"
@@ -115,7 +118,7 @@ vol_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/grayscale_ixP11_5_align.h5
 out_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/mask/"
 label_volume = proc_vol(vol_dir, out_dir, downsample_factor=2, dataset='raw')
 
-#%%
+#%% Mask post processing
 import h5py
 f = h5py.File("/home/morganlab/Documents/ixP11LGN/EM_data/mask/grayscale_ixP11_5_align_label1.h5", "w")
 fstack = f.create_dataset("mask", (1,) + label_volume.shape, dtype='uint8')  # Note they only take int64 input
@@ -178,75 +181,20 @@ fstack[0, :] = large_mask_array
 f.close()
 
 #%%
-# ndimage.median_filter
-# skimage.measure
-
-#%%
 
 # plt.histogram(image_stack[40,:,:].flat)
 # plt.show()
 
-def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, up_outlier=245, low_outlier=30):
-    ''' Discard outlier when doing percentile matching.
-    (In case a large area of black/white irregularity will affect the percentile and change the
-     overall intensity/ contrast)
-     '''
-    low_p = []
-    high_p = []
-    for img in EM_stack:
-        img1d = img.flatten()
-        img1d = img1d[np.logical_and(img1d < up_outlier, img1d > low_outlier)]
-        low_p.append(np.percentile(img1d, 5))
-        high_p.append(np.percentile(img1d, 95))
-    low_p = np.array(low_p)
-    high_p = np.array(high_p)
-    # low_p = np.percentile(EM_stack, 5, axis=[1,2])
-    # high_p = np.percentile(EM_stack, 95, axis=[1,2])
-    scaler = (upper-lower) / (high_p - low_p)
-    shift = lower - (low_p*scaler)
-    norm_img = scaler.reshape((-1, 1, 1)) * EM_stack + shift.reshape((-1, 1, 1))
-    print("max: %.2f, min: %.2f after scaling"%(norm_img.max(), norm_img.min()))
-    int_img = np.clip(norm_img, 0, 255, )
-    int_img = int_img.astype('uint8')
-    img_shape = EM_stack.shape
-    f = h5py.File(join(path, output), "w")
-    fstack=f.create_dataset("raw", img_shape, dtype='uint8') # Note they only take int64 input
-    fstack[:] = int_img
-    f.close()
-    return int_img
-
+from analysis_script.image_preprocess import normalize_img_stack_with_mask,down_sample_img_stack
 #%%
 norm_img = normalize_img_stack_with_mask("/home/morganlab/Documents/ixP11LGN/EM_data", "grayscale_ixP11_5_align_norm_new1.h5", image_stack)
-
-#%% Downsampling image
-
-from skimage.measure import block_reduce
-def down_sample_img_stack(path, output, EM_stack, filter_func=np.median, scale=(2, 2)):
-    """Use block reduce to apply median filter to image stack for each layer
-    :param scale is the block shape, must be integer tuple. (can be adjusted to get 3d block reduce)"""
-    if type(EM_stack) is str:
-        vol_dir = join(path, EM_stack)
-        f = h5py.File(vol_dir, 'r')
-        image_stack = f['raw']
-        EM_stack = image_stack[:]
-        f.close()
-    ds_image_stack = []
-    for img in EM_stack:
-        ds_img = block_reduce(img, scale, filter_func)
-        ds_image_stack.append(ds_img)
-        # Image.fromarray(ds_img).show()
-    ds_image_stack = np.array(ds_image_stack)
-    print("Shape after downsampling %s" % str(ds_image_stack.shape))
-    f = h5py.File(join(path, output), "w")
-    fstack=f.create_dataset("raw", ds_image_stack.shape, dtype='uint8') # Note they only take int64 input
-    fstack[:] = ds_image_stack
-    f.close()
-    return ds_image_stack
 #%%
 ds_image_stack = down_sample_img_stack(path="/home/morganlab/Documents/ixP11LGN/EM_data/",
                         output="grayscale_ixP11_5_align_norm_new_ds.h5",
                         EM_stack="grayscale_ixP11_5_align_norm_new.h5", )
 #%%
+
+from skimage.measure import block_reduce
 # def clever_func(block, axis):
 #     # axis unused on purpose
 #     if len(block.shape) == 4:
