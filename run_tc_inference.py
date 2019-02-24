@@ -83,7 +83,7 @@ def proc_vol(vol_dir, out_dir, downsample_factor=1, dataset='raw'):
     label_volume = np.zeros(image_stack.shape, dtype=np.uint8)
     for zid, img in enumerate(image_stack):
         print("Process %03d"%zid)
-        label_map = inference_on_image(img, inference_model)
+        # label_map = inference_on_image(img, inference_model)
 
         if not downsample_factor == 1:
             ds_size = tuple(int(i // downsample_factor) for i in img.shape)
@@ -93,7 +93,9 @@ def proc_vol(vol_dir, out_dir, downsample_factor=1, dataset='raw'):
                 # im = im.crop((0, 0, new_size[0], new_size[1]))
             else:
                 new_size = img.shape
+            # Downsampling image to feed into labler
             label_map = inference_on_image(imresize(img, float(1/downsample_factor)), inference_model)
+            # Upsampling image back to fit the volume
             label_volume[zid, 0:new_size[0], 0:new_size[1]] = imresize(label_map, float(downsample_factor))
         else:
             label_map = inference_on_image(img, inference_model)
@@ -184,6 +186,7 @@ f.close()
 
 
 def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, up_outlier=245, low_outlier=30):
+    ''' Discard outlier when doing percentile matching! '''
     low_p = []
     high_p = []
     for img in EM_stack:
@@ -203,10 +206,50 @@ def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, u
     int_img = int_img.astype('uint8')
     img_shape = EM_stack.shape
     f = h5py.File(join(path, output), "w")
-    fstack=f.create_dataset("raw", img_shape, dtype='uint8', compression="gzip") # Note they only take int64 input
+    fstack=f.create_dataset("raw", img_shape, dtype='uint8') # Note they only take int64 input
     fstack[:] = int_img
     f.close()
     return int_img
 
 #%%
-norm_img = normalize_img_stack_with_mask("/home/morganlab/Documents/ixP11LGN/EM_data", "grayscale_ixP11_5_align_norm_new.h5", image_stack)
+norm_img = normalize_img_stack_with_mask("/home/morganlab/Documents/ixP11LGN/EM_data", "grayscale_ixP11_5_align_norm_new1.h5", image_stack)
+
+#%% Downsampling image
+
+from skimage.measure import block_reduce
+def down_sample_img_stack(path, output, EM_stack, filter_func=np.median, scale=(2, 2)):
+    if type(EM_stack) is str:
+        vol_dir = join(path, EM_stack)
+        f = h5py.File(vol_dir, 'r')
+        image_stack = f['raw']
+        EM_stack = image_stack[:]
+        f.close()
+    ds_image_stack = []
+    for img in EM_stack:
+        ds_img = block_reduce(img, scale, filter_func)
+        ds_image_stack.append(ds_img)
+        # Image.fromarray(ds_img).show()
+    ds_image_stack = np.array(ds_image_stack)
+    print("Shape after downsampling %s" % str(ds_image_stack.shape))
+    f = h5py.File(join(path, output), "w")
+    fstack=f.create_dataset("raw", ds_image_stack.shape, dtype='uint8') # Note they only take int64 input
+    fstack[:] = ds_image_stack
+    f.close()
+    return ds_image_stack
+#%%
+ds_image_stack = down_sample_img_stack(path="/home/morganlab/Documents/ixP11LGN/EM_data/",
+                        output="grayscale_ixP11_5_align_norm_new_ds.h5",
+                        EM_stack="grayscale_ixP11_5_align_norm_new.h5", )
+#%%
+# def clever_func(block, axis):
+#     # axis unused on purpose
+#     if len(block.shape) == 4:
+#         return np.mean(block, axis=(2, 3))
+#     else:
+#         return block
+ds_img = block_reduce(norm_img[0, :, :], (2, 2), np.median)
+Image.fromarray(ds_img).show()
+
+#%%
+Image.fromarray(ds_image_stack[20, :, :]).show()
+

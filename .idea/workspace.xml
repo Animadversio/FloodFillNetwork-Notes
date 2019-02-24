@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/connect_with_knossos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_tc_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_inference.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,6 +20,7 @@
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$p11_4_proc.coverage" NAME="p11_4_proc Coverage Results" MODIFIED="1550100985310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$resegment_seed_generation_ED.coverage" NAME="resegment_seed_generation_ED Coverage Results" MODIFIED="1549930925645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/analysis_script" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$.coverage" NAME=" Coverage Results" MODIFIED="1550626182914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$scratch_6.coverage" NAME="scratch_6 Coverage Results" MODIFIED="1550969371654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/FloodFillNetwork_Notes$scratch_4.coverage" NAME="scratch_4 Coverage Results" MODIFIED="1549761810564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
   </component>
   <component name="FileEditorManager">
@@ -25,7 +28,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_tc_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="1008">
               <caret line="110" column="111" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
               <folding>
                 <element signature="e#1#32#0" expanded="true" />
@@ -35,64 +38,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+        <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1057" column="117" selection-start-line="1057" selection-start-column="117" selection-end-line="1057" selection-end-column="117" />
+            <state relative-caret-position="82">
+              <caret line="181" column="37" lean-forward="true" selection-start-line="181" selection-start-column="37" selection-end-line="181" selection-end-column="37" />
               <folding>
-                <element signature="e#701#739#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="196" column="27" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="907">
-              <caret line="361" column="57" lean-forward="true" selection-start-line="361" selection-start-column="49" selection-end-line="361" selection-end-column="57" />
-              <folding>
-                <element signature="e#695#733#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="108" column="22" lean-forward="true" selection-start-line="106" selection-start-column="2" selection-end-line="108" selection-end-column="22" />
-              <folding>
-                <element signature="e#725#756#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+            <state relative-caret-position="289">
+              <caret line="102" column="36" lean-forward="true" selection-start-line="100" selection-start-column="4" selection-end-line="102" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-591">
-              <caret line="107" column="21" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
+            <state relative-caret-position="216">
+              <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+              <folding>
+                <element signature="e#4#74#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,11 +73,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="509">
+              <caret line="57" column="53" lean-forward="true" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
+                <marker date="1550974707130" expanded="true" signature="5019:5255" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/connect_with_knossos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="815">
+              <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file:///usr/local/lib/python3.6/dist-packages/knossos_utils-0.1-py3.6-linux-x86_64.egg/knossos_utils/knossosdataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1311">
+              <caret line="1907" column="11" lean-forward="true" selection-start-line="1907" selection-start-column="11" selection-end-line="1907" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python3.6/dist-packages/knossos_utils-0.1-py3.6-linux-x86_64.egg/knossos_utils/mergelist_tools_fallback.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -112,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="210" selection-start-line="181" selection-start-column="2" selection-end-line="182" selection-end-column="12" />
+            <state relative-caret-position="563">
+              <caret line="241" column="66" selection-start-line="241" selection-start-column="34" selection-end-line="241" selection-end-column="66" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -132,11 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stop_server</find>
-      <find>stop_executor</find>
-      <find>Process subvolume</find>
-      <find>request.image</find>
-      <find>MaskConfig</find>
       <find>MaskCon</find>
       <find>mask</find>
       <find>reverse</find>
@@ -162,6 +161,11 @@
       <find>Infer</find>
       <find>connect</find>
       <find>clear</find>
+      <find>i</find>
+      <find>our</find>
+      <find>overlay</find>
+      <find>annotation_str</find>
+      <find>gen_mergelist</find>
     </findStrings>
     <replaceStrings>
       <replace>DIVSTR</replace>
@@ -171,6 +175,7 @@
       <replace>y_size</replace>
       <replace>processor</replace>
       <replace>self.vol_data_pair</replace>
+      <replace>j</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -183,8 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/misc/mnist_replica.py" />
         <option value="$PROJECT_DIR$/train_multi_GPU_sync.py" />
         <option value="$PROJECT_DIR$/analysis_script/visualize_segmentation.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/LGN_train_vol_proc.py" />
@@ -218,7 +221,6 @@
         <option value="$PROJECT_DIR$/resegment_agglomeration.py" />
         <option value="$PROJECT_DIR$/run_consensus.py" />
         <option value="$PROJECT_DIR$/ffn/inference/segmentation.py" />
-        <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py" />
         <option value="$PROJECT_DIR$/tissue_classify/Unet_model.py" />
         <option value="$PROJECT_DIR$/tissue_classify/tissue_training_data.py" />
@@ -233,7 +235,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
         <option value="$PROJECT_DIR$/ffn/inference/inference.py" />
         <option value="$PROJECT_DIR$/run_tc_inference.py" />
+        <option value="$PROJECT_DIR$/analysis_script/subvolume_stitching.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py" />
+        <option value="$PROJECT_DIR$/connect_with_knossos.py" />
       </list>
     </option>
   </component>
@@ -335,7 +340,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_5">
+  <component name="RunManager" selected="Python.scratch_6">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -372,28 +377,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tissue_classify/data_prep.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="p11_4_proc" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ffn-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/p11_4_proc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -446,6 +429,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="scratch_6" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ffn-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="utils_format_convert" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ffn-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -470,18 +475,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.utils_format_convert" />
-      <item itemvalue="Python.p11_4_proc" />
       <item itemvalue="Python.data_prep" />
       <item itemvalue="Python.pixel_classifier2D" />
       <item itemvalue="Python.scratch_5" />
+      <item itemvalue="Python.scratch_6" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.scratch_6" />
         <item itemvalue="Python.scratch_5" />
         <item itemvalue="Python.data_prep" />
         <item itemvalue="Python.pixel_classifier2D" />
         <item itemvalue="Python.utils_format_convert" />
-        <item itemvalue="Python.p11_4_proc" />
       </list>
     </recent_temporary>
   </component>
@@ -516,14 +521,7 @@
       <workItem from="1549930537819" duration="35409000" />
       <workItem from="1550101151485" duration="61176000" />
       <workItem from="1550722112058" duration="15779000" />
-      <workItem from="1550793339589" duration="10149000" />
-    </task>
-    <task id="LOCAL-00004" summary="Add notes">
-      <created>1544494653518</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1544494653518</updated>
+      <workItem from="1550793339589" duration="38285000" />
     </task>
     <task id="LOCAL-00005" summary="Add notes">
       <created>1544577079916</created>
@@ -861,11 +859,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550794519369</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Add notes to mask system&#10;Add inference code">
+      <created>1550808761496</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1550808761496</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="451621000" />
+    <option name="totallyTimeSpent" value="479757000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -885,25 +890,25 @@
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="TypeScript" order="0" sideWeight="0.49960256" weight="0.3295107" />
       <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49602544" weight="0.28593272" />
+      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49562797" weight="0.28593272" />
       <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4900636" weight="0.39831805" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4892687" weight="0.39831805" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49960256" weight="0.32928678" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.33704293" side_tool="true" visible="true" weight="0.4671254" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.33783785" side_tool="true" visible="true" weight="0.24541284" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49801272" weight="0.32874617" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4991431" weight="0.3277311" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.6629571" visible="true" weight="0.4671254" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="14" sideWeight="0.6621622" visible="true" weight="0.24541284" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="965" y="371" width="629" height="697" id="SciView" order="3" sideWeight="0.93830705" visible="true" weight="0.25" />
+      <window_info anchor="right" x="965" y="371" width="629" height="697" id="SciView" order="3" sideWeight="0.93819654" visible="true" weight="0.3481717" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.061692968" side_tool="true" visible="true" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.061803445" side_tool="true" visible="true" weight="0.3481717" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -970,16 +975,21 @@
           <line>82</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py</url>
-          <line>275</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>exist_mat[j+1, i+1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>exist_mat[j, i+1]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>self.npy_path</expression-string>
         <language-id>Python</language-id>
@@ -1003,46 +1013,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="254" column="9" lean-forward="true" selection-start-line="254" selection-start-column="9" selection-end-line="254" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="47" column="13" selection-start-line="47" selection-end-line="47" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/neuroglancer/python/neuroglancer/json_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-460">
-          <caret selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.6/dist-packages/neuroglancer/trackable_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/neuroglancer/python/neuroglancer/viewer_state.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1242" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/neuroglancer/python/neuroglancer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/neuroglancer/python/neuroglancer/tool/video_tool.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1867">
@@ -1166,16 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="67" column="9" selection-start-line="64" selection-end-line="67" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="277" column="100" selection-start-line="277" selection-start-column="100" selection-end-line="277" selection-end-column="100" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -1345,16 +1305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="110" column="111" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
-          <folding>
-            <element signature="e#1#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3/dist-packages/IPython/core/interactiveshell.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1386,16 +1336,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="907">
-          <caret line="361" column="57" lean-forward="true" selection-start-line="361" selection-start-column="49" selection-end-line="361" selection-end-column="57" />
-          <folding>
-            <element signature="e#695#733#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -1406,37 +1346,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="12" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="210" selection-start-line="181" selection-start-column="2" selection-end-line="182" selection-end-column="12" />
+        <state relative-caret-position="563">
+          <caret line="241" column="66" selection-start-line="241" selection-start-column="34" selection-end-line="241" selection-end-column="66" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+    <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-591">
-          <caret line="107" column="21" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
+        <state relative-caret-position="245">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#695#733#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
+    <entry file="file://$USER_HOME$/.local/lib/python3.6/site-packages/h5py/_hl/files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="245">
+          <caret line="316" selection-start-line="316" selection-end-line="316" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324">
+          <caret line="105" column="9" selection-start-line="105" selection-start-column="9" selection-end-line="105" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+        <state relative-caret-position="289">
+          <caret line="102" column="36" lean-forward="true" selection-start-line="100" selection-start-column="4" selection-end-line="102" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <element signature="e#4#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="110" column="111" selection-start-line="110" selection-start-column="111" selection-end-line="110" selection-end-column="111" />
+          <folding>
+            <element signature="e#1#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="181" column="37" lean-forward="true" selection-start-line="181" selection-start-column="37" selection-end-line="181" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="57" column="53" lean-forward="true" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1550974707130" expanded="true" signature="5019:5255" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/dist-packages/knossos_utils-0.1-py3.6-linux-x86_64.egg/knossos_utils/mergelist_tools_fallback.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connect_with_knossos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="815">
+          <caret line="46" column="23" lean-forward="true" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.6/dist-packages/knossos_utils-0.1-py3.6-linux-x86_64.egg/knossos_utils/knossosdataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="1907" column="11" lean-forward="true" selection-start-line="1907" selection-start-column="11" selection-end-line="1907" selection-end-column="11" />
         </state>
       </provider>
     </entry>

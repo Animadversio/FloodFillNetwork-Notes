@@ -8,6 +8,7 @@ from run_consensus import run_save_consensus
 import networkx
 import ffn.inference.storage as storage
 from ffn.inference.segmentation import relabel_volume
+import os
 #%%
 # seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_1_exp10" # "/Users/binxu/Connectomics_Code/results/LGN/p11_1_exp8" # "/home/morganlab/Documents/ixP11LGN/p11_1_exp8"
 # f = np.load(subvolume_path(seg_dir, (0, 0, 0), 'npz'))
@@ -176,24 +177,38 @@ def merge_segment(v1, v2, corner1, corner2, size, size2=None, overlap_d=3, thres
 #%% Generate segment list and merge_pair list!
 def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_corner = (0,0,0), output_dir=None,
                            overlap_d=3, overlap_thr=100):
+    """Update on Feb.23rd allow non-exist patch"""
     x_margin = (size[2] - x_step) // 2
     y_margin = (size[1] - y_step) // 2
     seg_id_dict = []
     merge_pair_list = []
+    exist_mat = np.zeros((y_num + 2, x_num + 2), dtype=np.bool)  # shape of the grid with 1 pad
+    exist_mat[1:-1, 1:-1] = 1
     for i in range(x_num):
         for j in range(y_num):
             shift = (0, j*y_step, i*x_step)
             corner = tuple([shift[i] + start_corner[i] for i in range(3)])
-            f = np.load(subvolume_path(seg_dir, corner, 'npz'))
-            vol = f['segmentation']
-            f.close()
-            idx_list = np.unique(vol)
-            seg_id_dict.extend([(i, j, label) for label in idx_list])
+            if os.path.exists(subvolume_path(seg_dir, corner, 'npz')):
+                f = np.load(subvolume_path(seg_dir, corner, 'npz'))
+                vol = f['segmentation']
+                f.close()
+                idx_list = np.unique(vol)
+                seg_id_dict.extend([(i, j, label) for label in idx_list])
+            else:
+                exist_mat[j+1, i+1] = False
+                vol = np.zeros(size, dtype=np.uint16)
+                print("Warn: Subvolume at %s not exists." % str(corner))
+                seg_id_dict.extend([(i, j, 0)])
+
             if i == 0:
                 pass
+            elif not exist_mat[j+1, i] or not exist_mat[j+1, i+1]:
+                merge_pair_list.extend(
+                    [[seg_id_dict.index((i - 1, j, 0)), seg_id_dict.index((i, j, 0))]])  # equalize the 0 background
             else:
-                shift1 = (0, j*y_step, (i - 1)*x_step)
+                shift1 = (0, j * y_step, (i - 1) * x_step)
                 corner1 = tuple([shift1[i] + start_corner[i] for i in range(3)])
+
                 f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
                 v1 = f['segmentation']
                 f.close()
@@ -202,12 +217,16 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
                     [[seg_id_dict.index((i - 1, j, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
             if j == 0:
                 pass
+            elif not exist_mat[j, i+1] or not exist_mat[j+1, i+1]:
+                merge_pair_list.extend(
+                    [[seg_id_dict.index((i, j - 1, 0)), seg_id_dict.index((i, j, 0))]])
             else:
                 shift1 = (0, (j - 1)*y_step, i*x_step)
                 corner1 = tuple([shift1[i] + start_corner[i] for i in range(3)])
                 f = np.load(subvolume_path(seg_dir, corner1, 'npz'))
                 v1 = f['segmentation']
                 f.close()
+
                 merge_array, overlap_size_array, _ = merge_segment(v1, vol, corner1, corner, size, overlap_d=overlap_d, threshold=overlap_thr)
                 merge_pair_list.extend(
                     [[seg_id_dict.index((i, j - 1, id1)), seg_id_dict.index((i, j, id2))] for id1, id2 in merge_array])
@@ -220,48 +239,80 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
     for component in networkx.connected_components(segment_graph):
         final_idx.append(min(component))
     #%%
-    def global_x_sel(i):
-        if i == 0 and x_num == 1:
-            return slice(None)
-        elif i == 0:
-            return slice(0, x_step + x_margin)
-        elif i == x_num - 1:
-            return slice((x_num - 1) * x_step + x_margin, x_num * x_step + 2 * x_margin)
-        else:
-            return slice(i * x_step + x_margin, (i + 1) * x_step + x_margin)
+    def global_x_sel(j, i):
+        start = i * x_step + x_margin
+        end = (i + 1) * x_step + x_margin
+        if not exist_mat[j+1, i]:
+            start -= x_margin
+        if not exist_mat[j+1, i+2]:
+            end += x_margin
+        return slice(start, end)
+        # if i == 0 and x_num == 1:
+        #     return slice(None)
+        # elif i == 0:
+        #     return slice(0, x_step + x_margin)
+        # elif i == x_num - 1:
+        #     return slice((x_num - 1) * x_step + x_margin, x_num * x_step + 2 * x_margin)
+        # else:
 
-    def global_y_sel(i):
-        if i == 0 and y_num == 1:
-            return slice(None)
-        elif i == 0:
-            return slice(0, y_step + y_margin)
-        elif i == y_num - 1:
-            return slice((y_num - 1) * y_step + y_margin, y_num * y_step + 2 * y_margin)
-        else:
-            return slice(i * y_step + y_margin, (i + 1) * y_step + y_margin)
 
-    def local_x_sel(i):
-        if i == 0 and x_num == 1:
-            return slice(None)
-        elif i == 0:
-            return slice(0, -x_margin)
-        elif i == x_num - 1:
-            return slice(x_margin, None)
-        else:
-            return slice(x_margin, -x_margin)
 
-    def local_y_sel(i):
-        if i == 0 and y_num == 1:
-            return slice(None)
-        elif i == 0:
-            return slice(0, -y_margin)
-        elif i == y_num - 1:
-            return slice(y_margin, None)
-        else:
-            return slice(y_margin, -y_margin)
+    def global_y_sel(j, i):
+        start = j * y_step + y_margin
+        end = (j + 1) * y_step + y_margin
+        if not exist_mat[j, i+1]:
+            start -= y_margin
+        if not exist_mat[j+2, i+1]:
+            end += y_margin
+        return slice(start, end)
+        # if i == 0 and y_num == 1:
+        #     return slice(None)
+        # elif i == 0:
+        #     return slice(0, y_step + y_margin)
+        # elif i == y_num - 1:
+        #     return slice((y_num - 1) * y_step + y_margin, y_num * y_step + 2 * y_margin)
+        # else:
+        #     return slice(i * y_step + y_margin, (i + 1) * y_step + y_margin)
+
+    def local_x_sel(j, i):
+        start = x_margin
+        end = x_step + x_margin
+        if not exist_mat[j + 1, i]:
+            start -= x_margin
+        if not exist_mat[j + 1, i + 2]:
+            end += x_margin
+        return slice(start, end)
+        # if i == 0 and x_num == 1:
+        #     return slice(None)
+        # elif i == 0:
+        #     return slice(0, -x_margin)
+        # elif i == x_num - 1:
+        #     return slice(x_margin, None)
+        # else:
+        #     return slice(x_margin, -x_margin)
+
+    def local_y_sel(j, i):
+        start = y_margin
+        end = y_step + y_margin
+        if not exist_mat[j, i+1]:
+            start -= y_margin
+        if not exist_mat[j+2, i+1]:
+            end += y_margin
+        return slice(start, end)
+        # if i == 0 and y_num == 1:
+        #     return slice(None)
+        # elif i == 0:
+        #     return slice(0, -y_margin)
+        # elif i == y_num - 1:
+        #     return slice(y_margin, None)
+        # else:
+        #     return slice(y_margin, -y_margin)
+
     full_segment = np.zeros((size[0], y_num * y_step + 2 * y_margin, x_num * x_step + 2 * x_margin), dtype=np.uint32)
     for i in range(x_num):
         for j in range(y_num):
+            if not exist_mat[j+1, i+1]:
+                continue
             shift = (0, j * y_step, i * x_step)
             corner = tuple([shift[i] + start_corner[i] for i in range(3)])
             f = np.load(subvolume_path(seg_dir, corner, 'npz'))
@@ -275,9 +326,9 @@ def stitich_subvolume_grid(seg_dir, x_step, y_step, x_num, y_num, size, start_co
             #     equiv_group = networkx.node_connected_component(segment_graph, id_glob)
             #     id_glob = min(equiv_group)
             #     vol[vol == id_loc] = id_glob
-            # FIX bug!!!! The code above may make the voxel id change multiple times!! Make error!!!
+            # FIX bug!!!! The code above may make the voxel id change multiple times!! Make error merging in result!!!!
             relabel_vol, label_pair = relabel_volume(vol, idx_glob_list)
-            full_segment[:, global_y_sel(j), global_x_sel(i)] = relabel_vol[:, local_y_sel(j), local_x_sel(i)]
+            full_segment[:, global_y_sel(j, i), global_x_sel(j, i)] = relabel_vol[:, local_y_sel(j, i), local_x_sel(j, i)]
 
     if output_dir:
         seg_path = storage.segmentation_path(output_dir, start_corner)  # FIXED: Use beg_corner instead
