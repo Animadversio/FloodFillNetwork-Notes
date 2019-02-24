@@ -4,9 +4,6 @@ import matplotlib.pylab as plt
 from tissue_classify.pixel_classifier2D import pixel_classifier_2d, inference_on_image
 from scipy.misc import imresize
 from PIL import Image
-from glob import glob, iglob
-from os.path import join, getctime
-import os
 #%%
 img_dir = "/Users/binxu/Connectomics_Code/tissue_classifier/Train_Img/"
 img = plt.imread(img_dir+"Soma_s092.png") # "Soma_s081_DS.png"
