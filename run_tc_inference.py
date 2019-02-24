@@ -8,7 +8,7 @@ from PIL import Image
 img_dir = "/Users/binxu/Connectomics_Code/tissue_classifier/Train_Img/"
 img = plt.imread(img_dir+"Soma_s092.png") # "Soma_s081_DS.png"
 img = np.uint8(img[:, :, 0]*255)
-#%%
+#%% Inference on single image
 pc2 = pixel_classifier_2d(img_rows=65, img_cols=65,)
 inference_model = pc2.transfer_weight_to_inference("/Users/binxu/Connectomics_Code/tissue_classifier/Models/net_soma_ds-02-0.97.hdf5")
 label_map = inference_on_image(img, inference_model)
@@ -30,14 +30,15 @@ pc2 = pixel_classifier_2d(img_rows=65, img_cols=65, proj_dir="/home/morganlab/Do
 ckpt_path = max(iglob(join(pc2.model_dir, '*')), key=os.path.getctime)
 inference_model = pc2.transfer_weight_to_inference(ckpt_path)
 #%%
-
-
 # "/Users/binxu/Connectomics_Code/tissue_classifier/Train_Img/Soma_s091.png"
 downsample_factor = 2
 img_pattern = "Soma_test_s*.png"
 img_dir = "/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Test_Img/" # "/scratch/binxu.wang/tissue_classifier/Train_Img/"
 out_dir = "/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Test_Result/"# "/scratch/binxu.wang/tissue_classifier/Train_Result/"
 def proc_img_dir(img_dir, img_pattern, out_dir, downsample_factor):
+    """
+    Note the model is usually trained on downsampled image so the downsample factor is usually 2
+    """
     lut = [0] * 256
     lut[2] = 100
     lut[3] = 50
@@ -81,7 +82,6 @@ def proc_vol(vol_dir, out_dir, downsample_factor=1, dataset='raw'):
     for zid, img in enumerate(image_stack):
         print("Process %03d"%zid)
         # label_map = inference_on_image(img, inference_model)
-
         if not downsample_factor == 1:
             ds_size = tuple(int(i // downsample_factor) for i in img.shape)
             if any([not i%downsample_factor==0 for i in img.shape]):
@@ -105,7 +105,6 @@ def proc_vol(vol_dir, out_dir, downsample_factor=1, dataset='raw'):
             join(out_dir, filename[:filename.find(".")]+"_label%03d.png"%zid))
         print("Merge finish %03d" % zid)
     # Post_processing
-
     f = h5py.File(join(out_dir, filename[:filename.find(".")]+"_label.h5"), "w")
     fstack = f.create_dataset("mask", (1,) + label_volume.shape, dtype='uint8')  # Note they only take int64 input
     fstack[0, :] = label_volume
@@ -138,9 +137,15 @@ import skimage.measure
 background_label = [0]
 min_size = 1000000
 def clear_small_island(label_volume, background_label=[0], min_size=1000000):
-    labels = np.unique(label_volume)
-    binary_mask = np.zeros(label_volume.shape, dtype=np.bool)
+    """ Utility to select large islands (like soma) in label_volume and filter out small ones.
+    min_size can be adjusted w.r.t. volume size and ds factor
 
+    Consider the labels different from the background mask as a whole (like Soma and Nucleus)
+    Discard all connected component smaller than min_size
+    """
+    labels = np.unique(label_volume)
+    # binary_mask = np.zeros(label_volume.shape, dtype=np.bool)
+    # Naive way of doing so
     # for label in labels:
     #     if label in background_label:
     #         continue
@@ -181,9 +186,11 @@ f.close()
 # plt.histogram(image_stack[40,:,:].flat)
 # plt.show()
 
-
 def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, up_outlier=245, low_outlier=30):
-    ''' Discard outlier when doing percentile matching! '''
+    ''' Discard outlier when doing percentile matching.
+    (In case a large area of black/white irregularity will affect the percentile and change the
+     overall intensity/ contrast)
+     '''
     low_p = []
     high_p = []
     for img in EM_stack:
@@ -197,7 +204,7 @@ def normalize_img_stack_with_mask(path, output, EM_stack, upper=196, lower=80, u
     # high_p = np.percentile(EM_stack, 95, axis=[1,2])
     scaler = (upper-lower) / (high_p - low_p)
     shift = lower - (low_p*scaler)
-    norm_img = scaler.reshape((-1,1,1)) * EM_stack + shift.reshape((-1,1,1))
+    norm_img = scaler.reshape((-1, 1, 1)) * EM_stack + shift.reshape((-1, 1, 1))
     print("max: %.2f, min: %.2f after scaling"%(norm_img.max(), norm_img.min()))
     int_img = np.clip(norm_img, 0, 255, )
     int_img = int_img.astype('uint8')
@@ -215,6 +222,8 @@ norm_img = normalize_img_stack_with_mask("/home/morganlab/Documents/ixP11LGN/EM_
 
 from skimage.measure import block_reduce
 def down_sample_img_stack(path, output, EM_stack, filter_func=np.median, scale=(2, 2)):
+    """Use block reduce to apply median filter to image stack for each layer
+    :param scale is the block shape, must be integer tuple. (can be adjusted to get 3d block reduce)"""
     if type(EM_stack) is str:
         vol_dir = join(path, EM_stack)
         f = h5py.File(vol_dir, 'r')

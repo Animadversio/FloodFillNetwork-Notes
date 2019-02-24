@@ -1,3 +1,7 @@
+"""
+Commandline application of process image sequence into h5 dataset
+"""
+
 from analysis_script.utils_format_convert import convert_image_stack_to_h5, normalize_img_stack
 from absl import app
 from absl import flags

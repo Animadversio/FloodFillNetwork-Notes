@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="Add inference code and online training code">
+    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connect_with_knossos.py" beforeDir="false" afterPath="$PROJECT_DIR$/connect_with_knossos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_h5_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_h5_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neuroglancer_segment_visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/neuroglancer_segment_visualize.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_tc_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_inference.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_tc_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +62,7 @@
           <entry key="pbtxt" value="5" />
           <entry key="proto" value="14" />
           <entry key="pstat" value="4" />
-          <entry key="py" value="139" />
+          <entry key="py" value="144" />
           <entry key="sql" value="2" />
         </counts>
       </usages-collector>
@@ -68,28 +73,28 @@
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="PROTO" value="15" />
           <entry key="Profiler Session" value="4" />
-          <entry key="Python" value="124" />
+          <entry key="Python" value="129" />
           <entry key="Scratch" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="2687" />
+          <entry key="Python Console" value="2727" />
           <entry key="dummy" value="23" />
           <entry key="pbtxt" value="37" />
           <entry key="proto" value="16" />
-          <entry key="py" value="13349" />
+          <entry key="py" value="16013" />
           <entry key="run_inference" value="56" />
           <entry key="scratch" value="21" />
           <entry key="scratch_2" value="4" />
-          <entry key="txt" value="809" />
+          <entry key="txt" value="814" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="833" />
+          <entry key="PLAIN_TEXT" value="838" />
           <entry key="PROTO" value="52" />
-          <entry key="Python" value="10972" />
+          <entry key="Python" value="13676" />
           <entry key="Scratch" value="5145" />
         </counts>
       </usages-collector>
@@ -110,19 +115,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/movement.py">
+        <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-402">
-              <caret line="246" column="6" selection-start-line="246" selection-start-column="6" selection-end-line="246" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/storage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1522">
-              <caret line="358" lean-forward="true" selection-start-line="358" selection-end-line="358" />
+            <state relative-caret-position="19">
+              <caret line="247" column="98" selection-start-line="247" selection-start-column="98" selection-end-line="247" selection-end-column="98" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#2421#4283#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,38 +139,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4320">
-              <caret line="280" column="12" selection-start-line="280" selection-start-column="12" selection-end-line="280" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#9084#11397#0" />
-                <marker date="1550738143846" expanded="true" signature="11574:11805" ph="..." />
-                <marker date="1550738143846" expanded="true" signature="13811:13838" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_tc_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="55" lean-forward="true" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+            <state>
               <folding>
                 <element signature="e#1#32#0" expanded="true" />
+                <element signature="e#149#1203#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="158" column="14" selection-start-line="158" selection-start-column="14" selection-end-line="158" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -178,8 +154,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            <state relative-caret-position="4049">
+              <caret line="225" column="99" selection-start-line="225" selection-start-column="99" selection-end-line="225" selection-end-column="99" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -188,22 +164,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/tissue_inference.py">
+        <entry file="file://$PROJECT_DIR$/connect_with_knossos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="119" selection-start-line="119" selection-end-line="119" />
+            <state relative-caret-position="165">
+              <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tissue_classify/data_prep.py">
+        <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="374" column="25" lean-forward="true" selection-start-line="374" selection-start-column="25" selection-end-line="374" selection-end-column="25" />
+            <state relative-caret-position="18">
+              <caret line="1" column="65" selection-start-line="1" selection-start-column="65" selection-end-line="1" selection-end-column="65" />
+              <folding>
+                <element signature="e#0#95#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="113" column="25" selection-start-line="113" selection-start-column="25" selection-end-line="113" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -258,10 +246,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
-        <option value="$PROJECT_DIR$/ffn/training/model.py" />
-        <option value="$PROJECT_DIR$/ffn/training/models/convstack_3d.py" />
-        <option value="$PROJECT_DIR$/compute_partitions.py" />
         <option value="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" />
         <option value="$PROJECT_DIR$/FFN_reading_notes.md" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
@@ -304,11 +288,15 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
         <option value="$PROJECT_DIR$/visualize_segmentation_script.py" />
         <option value="$PROJECT_DIR$/tissue_classify/data_prep.py" />
-        <option value="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/tissue_inference.py" />
-        <option value="$PROJECT_DIR$/run_tc_train.py" />
-        <option value="$PROJECT_DIR$/run_tc_inference.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
+        <option value="$PROJECT_DIR$/ffn/inference/seed.py" />
+        <option value="$PROJECT_DIR$/generate_h5_file.py" />
+        <option value="$PROJECT_DIR$/neuroglancer_segment_visualize.py" />
+        <option value="$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py" />
+        <option value="$PROJECT_DIR$/run_tc_train.py" />
+        <option value="$PROJECT_DIR$/connect_with_knossos.py" />
+        <option value="$PROJECT_DIR$/run_tc_inference.py" />
       </list>
     </option>
   </component>
@@ -350,13 +338,7 @@
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="ffn" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="ffn" type="462c0819:PsiDirectoryNode" />
-              <item name="inference" type="462c0819:PsiDirectoryNode" />
+              <item name="analysis_script" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
@@ -866,7 +848,14 @@
       <option name="project" value="LOCAL" />
       <updated>1550771482930</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Merge">
+      <created>1551033283153</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1551033283153</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -898,9 +887,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32767624" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.47216275" side_tool="true" weight="0.43868923" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15851852" side_tool="true" weight="0.39033943" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.5278373" weight="0.39033943" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.8414815" weight="0.39033943" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -988,7 +977,8 @@
     <MESSAGE value="Change the classifier" />
     <MESSAGE value="Debug the classifier. Add dilated max-pooling and the performance is correct!!" />
     <MESSAGE value="Add inference code and online training code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add inference code and online training code" />
+    <MESSAGE value="Merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1071,23 +1061,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/misc/cifar10_input.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4342">
-          <caret line="251" column="55" selection-start-line="251" selection-start-column="55" selection-end-line="251" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/misc/mnist_replica.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="13" column="51" lean-forward="true" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
-          <folding>
-            <element signature="e#1729#1767#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/misc/asynch_training_example.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1228,13 +1201,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/resegment_seed_generation_ED.py" />
-    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2844">
-          <caret line="164" column="5" lean-forward="true" selection-start-line="161" selection-start-column="16" selection-end-line="164" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resegment_seed_generation_ED.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
@@ -1332,33 +1298,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4320">
-          <caret line="280" column="12" selection-start-line="280" selection-start-column="12" selection-end-line="280" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#9084#11397#0" />
-            <marker date="1550738143846" expanded="true" signature="11574:11805" ph="..." />
-            <marker date="1550738143846" expanded="true" signature="13811:13838" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/tissue_inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
           <caret line="119" selection-start-line="119" selection-end-line="119" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -1396,6 +1339,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4875">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="65" selection-start-line="1" selection-start-column="65" selection-end-line="1" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="113" column="25" selection-start-line="113" selection-start-column="25" selection-end-line="113" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tissue_classify/pixel_classifier2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="247" column="98" selection-start-line="247" selection-start-column="98" selection-end-line="247" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#2421#4283#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="774">
@@ -1406,20 +1384,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
+    <entry file="file://$PROJECT_DIR$/connect_with_knossos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="55" lean-forward="true" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+        <state relative-caret-position="165">
+          <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
           <folding>
-            <element signature="e#1#32#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/seed.py">
+    <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="158" column="14" selection-start-line="158" selection-start-column="14" selection-end-line="158" selection-end-column="14" />
+        <state relative-caret-position="4049">
+          <caret line="225" column="99" selection-start-line="225" selection-start-column="99" selection-end-line="225" selection-end-column="99" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_tc_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#1#32#0" expanded="true" />
+            <element signature="e#149#1203#0" />
+          </folding>
         </state>
       </provider>
     </entry>

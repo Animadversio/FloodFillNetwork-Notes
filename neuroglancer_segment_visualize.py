@@ -1,4 +1,9 @@
-
+"""
+Utility function to visualize a bunch of segmentations overlaid on EM stack
+Useful for inspecting the quality of EM stack (alignment, contrast), and the quality
+of segmentation.
+Can  render some neurite branches to 3d quite fast.
+"""
 from __future__ import print_function
 
 import argparse
@@ -50,13 +55,36 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                 f.close()
             if vol.dtype == np.uint8:
                 vol = np.uint64(vol)
-            seg_list.append((name, corner, vol.copy()))
+            seg_list.append((name, corner, vol)) # .copy()
+
+    EM_stack_name = 'EM_image'
+    corner = (0, 0, 0)
     if type(image_stack) is str:
         assert '.h5' in image_stack
-        image_stack = read_image_vol_from_h5(image_stack)
+        EM_stack = read_image_vol_from_h5(image_stack)
+    elif type(image_stack) is np.ndarray:
+        EM_stack = image_stack
+    elif type(image_stack) is dict:
+        assert len(image_stack) == 1
+        for name, spec in image_stack.items():
+            EM_stack_name = name
+            if "vol" in spec:
+                if type(spec["vol"]) is np.ndarray:
+                    EM_stack = spec["vol"]
+                else:
+                    assert '.h5' in spec["vol"]
+                    EM_stack = read_image_vol_from_h5(image_stack)
+            if "corner" in spec:
+                corner=spec["corner"]
+            if "size" in spec:
+                # crop the image with size
+                end_corner = tuple([corner[i]+spec["size"][i] for i in range(3)])
+                EM_stack = EM_stack[corner[0]:end_corner[0],
+                              corner[1]:end_corner[1],
+                              corner[2]:end_corner[2]]
     else:
-        assert type(image_stack) is np.ndarray
-
+        raise TypeError
+    seg_list.append((EM_stack_name, corner, EM_stack))
 
     viewer = neuroglancer.Viewer()
     with viewer.txn() as s:
@@ -66,16 +94,16 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                 name=name,
                 layer=neuroglancer.LocalVolume(
                     data=vol,
-                    # offset is in nm, not voxels
+                    # offset is in nm, not voxels, also note the difference in sequence x, y, z
                     offset=(corner[2]*voxel_size[0], corner[1]*voxel_size[1], corner[0]*voxel_size[2]),
                     voxel_size=s.voxel_size,
                 ), )
-        s.layers.append(
-            name='EM_image',
-            layer=neuroglancer.LocalVolume(
-                data=image_stack,
-                voxel_size=s.voxel_size,
-            ), )
+        # s.layers.append(
+        #     name=EM_stack_name,
+        #     layer=neuroglancer.LocalVolume(
+        #         data=EM_stack,
+        #         voxel_size=s.voxel_size,
+        #     ), )
 
     print(viewer)
     return viewer
@@ -83,7 +111,7 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
 
 #%%
 if __name__=="__main__":
-    # %%
+    # %% raw neuroglancer function example
     f = np.load("/home/morganlab/Documents/ixP11LGN/p11_1_exp4/0/0/seg-0_0_0.npz")
     v1 = f['segmentation']
     f.close()
@@ -107,7 +135,7 @@ if __name__=="__main__":
     # f.close()
     # %%
     image_stack = read_image_vol_from_h5("/home/morganlab/Documents/ixP11LGN/grayscale_ixP11_2_norm.h5")
-    # %%
+    # %% Original function
     viewer = neuroglancer.Viewer()
     with viewer.txn() as s:
         s.voxel_size = [8, 8, 40]
