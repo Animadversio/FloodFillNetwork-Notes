@@ -1,3 +1,7 @@
+"""
+Specify the model for
+"""
+
 import os
 from os.path import join
 
@@ -27,6 +31,8 @@ from keras.utils import np_utils
 #     return concatenate(input, axis=concat_axis)
 
 def dilate_pool(input, pool_size=(2,2), pooling_type="MAX", padding="VALID", dilation_rate=(1, 1), strides=(1,1)):
+    """Since keras does not implement dilated pooling itself,
+    Wrap around tensorflow dilated pooling function instead"""
     return tf.nn.pool(input, pool_size, pooling_type, padding, dilation_rate=dilation_rate, strides=strides)
 
 
@@ -53,7 +59,7 @@ class pixel_classifier_2d(object):
         return imgs_test
 
     def get_net(self):
-        # define pixel classifier network structure with 2D input patches
+        '''define pixel classifier network structure with 2D input patches (Deprecated! )'''
         inputs = Input((self.img_rows, self.img_cols, 1))
         conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
         print("conv1 shape:", conv1.shape)
@@ -93,7 +99,9 @@ class pixel_classifier_2d(object):
         return model
 
     def get_full_conv_net(self):
-        # define pixel classifier network structure with 2D input patches
+        '''define pixel classifier network structure with 2D input patches
+        Use fully convolutional network for easy generalization to multi-pixel inference model
+        '''
         inputs = Input((self.img_rows, self.img_cols, 1))
         conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
         print("conv1 shape:", conv1.shape)
@@ -150,6 +158,9 @@ class pixel_classifier_2d(object):
                   callbacks=[model_checkpoint])
 
     def train_generator(self, generator, valid_generator, **kwargs):
+        """Alternative of train! Use generator to load sample during training
+        More memory friendly
+        """
         print("loading data")
         # imgs_test = self.load_testdata()
         print("loading data done")
@@ -167,6 +178,7 @@ class pixel_classifier_2d(object):
 
     # test the network with test dataset
     def load_trained_model(self, checkpoint_path=None):
+        """Load checkpoint into model"""
         model = self.get_full_conv_net()
         print("got network")
         # load checkpoint to store the network parameter as .hdf5 file, change the name for different files saved
@@ -185,7 +197,13 @@ class pixel_classifier_2d(object):
         return model
 
     def get_inference_model(self, infer_rows=100, infer_cols=100):
-        """Transfer the weights learnt in the single output model into this patch output model"""
+        """ Transfer the weights learnt in the single output model into this patch output model
+        The architecture translation rule between 2 model, see
+        https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7493487
+        EFFICIENT CONVOLUTIONAL NEURAL NETWORKS FOR PIXELWISE CLASSIFICATION ON HETEROGENEOUS HARDWARE SYSTEMS
+
+        infer_rows, infer_cols can be arbitrarily large as long as GPU memory is enough
+        """
         print("Getting inference model. ")
         inputs = Input((infer_rows, infer_cols, 1))
         conv1 = Conv2D(64, 3, activation='relu', padding='valid', kernel_initializer='he_normal')(inputs)
@@ -227,6 +245,7 @@ class pixel_classifier_2d(object):
         return model
 
     def transfer_weight_to_inference(self, ckpt_path, infer_rows=201, infer_cols=201):
+        """ Transfer the weights learnt in the single output model into this patch output model"""
         model = self.load_trained_model(checkpoint_path=ckpt_path)
         inference_model = self.get_inference_model(infer_rows, infer_cols)
         inference_model.set_weights(model.get_weights())
