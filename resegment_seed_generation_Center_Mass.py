@@ -12,6 +12,7 @@ import argparse
 from ffn.inference.storage import subvolume_path
 import resource
 import scipy.ndimage as ndimage
+import ast
 #%%
 memory_check = False
 metric = [8, 12, 30]  # voxel size in x,y,z order in nm
@@ -38,6 +39,12 @@ ap.add_argument(
     '--seg_path', help='')
 ap.add_argument(
     '--output_path', help='Output the files')
+ap.add_argument(
+    '--corner', help='the corner used in the path to fetch segmentation')
+ap.add_argument(
+    '--size', help='')
+ap.add_argument(
+    '--offset', help='the starting corner in subvolume of seg (currently w.r.t the corner, relative cordinate   )')
 args = ap.parse_args()
 if args.seg_path:
     seg_path = args.seg_path
@@ -45,16 +52,31 @@ if args.output_path:
     output_path = args.output_path
 elif args.seg_path:
     output_path = args.seg_path
-
+if args.corner:
+    corner = ast.literal_eval(args.corner)
+else:
+    corner = (0, 0, 0)
+if args.size:
+    size = ast.literal_eval(args.size)
+else:
+    size = None
+if args.offset:
+    offset = ast.literal_eval(args.offset)
+else:
+    offset = (0, 0, 0)
 metric = np.array(metric)
 metric = metric.reshape((-1, 1))  # reshape to ensure the computation below
 metric = metric[::-1]  # in z y x order
 
 #%%
 print('[%d] At start Memory usage: %s (kb)' % (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
-data = np.load(subvolume_path(seg_path, (0, 0, 0), 'npz'))
+data = np.load(subvolume_path(seg_path, corner, 'npz'))
 segmentation = data['segmentation']
 data.close()
+if not size==None:
+    segmentation = segmentation[offset[0]:offset[0]+size[0], offset[1]:offset[1]+size[1], offset[2]:offset[2]+size[2]]
+    if np.any([offset[i]+size[i] > segmentation.shape[i] for i in range(3)]):
+        print("Warning: fetching subvolume out of bound!!!")
 segmentation = segmentation.astype(np.int)  # make sure full byte width, or BASE * will outflow
 print('[%d] After cast type Memory usage: %s (kb)' %
       (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
