@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/analysis_script/image_preprocess.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neuroglancer_segment_visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/neuroglancer_segment_visualize.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" beforeDir="false" afterPath="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_tc_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_inference.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="64" column="14" lean-forward="true" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+            <state relative-caret-position="612">
+              <caret line="139" column="19" lean-forward="true" selection-start-line="139" selection-start-column="19" selection-end-line="139" selection-end-column="19" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#6104#6234#0" />
@@ -54,12 +50,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/image_preprocess.py">
+        <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="30" column="109" lean-forward="true" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="109" />
+            <state relative-caret-position="522">
+              <caret line="176" selection-start-line="176" selection-end-line="336" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_consensus.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="78" column="48" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,24 +85,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="184" column="43" lean-forward="true" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
+            <state relative-caret-position="1980">
+              <caret line="164" selection-start-line="164" selection-end-line="164" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1551048606349" expanded="true" signature="5142:5378" ph="..." />
+                <marker date="1551049861432" expanded="true" signature="5142:5378" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="193" column="62" lean-forward="true" selection-start-line="193" selection-start-column="62" selection-end-line="193" selection-end-column="62" />
+            <state relative-caret-position="401">
+              <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -233,11 +241,11 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
         <option value="$PROJECT_DIR$/connect_with_knossos.py" />
         <option value="$PROJECT_DIR$/neuroglancer_segment_visualize.py" />
-        <option value="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" />
         <option value="$PROJECT_DIR$/analysis_script/image_preprocess.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_6_proc.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py" />
         <option value="$PROJECT_DIR$/run_tc_inference.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py" />
+        <option value="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" />
       </list>
     </option>
   </component>
@@ -527,21 +535,7 @@
       <workItem from="1549930537819" duration="35409000" />
       <workItem from="1550101151485" duration="61176000" />
       <workItem from="1550722112058" duration="15779000" />
-      <workItem from="1550793339589" duration="49340000" />
-    </task>
-    <task id="LOCAL-00007" summary="Add notes">
-      <created>1544750912540</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1544750912540</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Fix bug on parallel partition computing ! &#10;Add scripts and codes">
-      <created>1547579945184</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1547579945184</updated>
+      <workItem from="1550793339589" duration="51736000" />
     </task>
     <task id="LOCAL-00009" summary="Add notes to inference and resegmentation&#10;Add script for inference and notes">
       <created>1547615254554</created>
@@ -872,11 +866,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551038204933</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Organize the code and &#10;Debug the system add notes">
+      <created>1551049306790</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1551049306790</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Write Parallelized resegmentation code!">
+      <created>1551050576266</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1551050576266</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490812000" />
+    <option name="totallyTimeSpent" value="493208000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -889,7 +897,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18282989" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -921,8 +928,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change scripts" />
-    <MESSAGE value="Arrange the code and script" />
     <MESSAGE value="Add new console programs! And script ensemble" />
     <MESSAGE value="Add normalization code when importing image stacks. &#10;Debug" />
     <MESSAGE value="Add consensus code &#10;Debug the storage im compatibility&#10;Add Neuroglancer visualization" />
@@ -946,7 +951,9 @@
     <MESSAGE value="Debug the generator training system&#10;Add downsampling functionality&#10;Make the generator work" />
     <MESSAGE value="Add notes to mask system&#10;Add inference code" />
     <MESSAGE value="Add KNOSSOS interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add KNOSSOS interface" />
+    <MESSAGE value="Organize the code and &#10;Debug the system add notes" />
+    <MESSAGE value="Write Parallelized resegmentation code!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Write Parallelized resegmentation code!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1024,13 +1031,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/analysis_script/visualize_segmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -1280,26 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1916">
-          <caret line="181" column="37" lean-forward="true" selection-start-line="181" selection-start-column="37" selection-end-line="181" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="79" column="65" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="65" />
-          <folding>
-            <element signature="e#238#275#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ffn/inference/segmentation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1015">
@@ -1344,18 +1324,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="64" column="14" lean-forward="true" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#6104#6234#0" />
-            <element signature="e#6672#6801#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1370,16 +1338,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-769">
           <caret line="105" column="9" selection-start-line="105" selection-start-column="9" selection-end-line="105" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_consensus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="48" column="16" lean-forward="true" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1420,12 +1378,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1422">
+          <caret line="79" column="65" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="65" />
+          <folding>
+            <element signature="e#238#275#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proc_segmentation_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/analysis_script/image_preprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
+        <state relative-caret-position="540">
           <caret line="30" column="109" lean-forward="true" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="109" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="139" column="19" lean-forward="true" selection-start-line="139" selection-start-column="19" selection-end-line="139" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#6104#6234#0" />
+            <element signature="e#6672#6801#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_script/subvolume_stitching.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="176" selection-start-line="176" selection-end-line="336" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_consensus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="78" column="48" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1442,21 +1461,11 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/p11_5_proc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="184" column="43" lean-forward="true" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
+        <state relative-caret-position="1980">
+          <caret line="164" selection-start-line="164" selection-end-line="164" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1551048606349" expanded="true" signature="5142:5378" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="193" column="62" lean-forward="true" selection-start-line="193" selection-start-column="62" selection-end-line="193" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1551049861432" expanded="true" signature="5142:5378" ph="..." />
           </folding>
         </state>
       </provider>
