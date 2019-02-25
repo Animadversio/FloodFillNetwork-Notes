@@ -57,7 +57,7 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                 f = np.load(subvolume_path(seg_dir, corner, 'npz'))
                 vol = f['segmentation']
                 f.close()
-            if vol.dtype == np.uint8:
+            if vol.dtype == np.uint8: # if not change it will be identified as EM images
                 vol = np.uint64(vol)
             seg_list.append((name, corner, vol)) # .copy()
 
@@ -66,8 +66,10 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
     if type(image_stack) is str:
         assert '.h5' in image_stack
         EM_stack = read_image_vol_from_h5(image_stack)
+        seg_list.append((EM_stack_name, corner, EM_stack))
     elif type(image_stack) is np.ndarray:
         EM_stack = image_stack
+        seg_list.append((EM_stack_name, corner, EM_stack))
     elif type(image_stack) is dict:
         assert len(image_stack) == 1
         for name, spec in image_stack.items():
@@ -86,9 +88,12 @@ def neuroglancer_visualize(seg_dict, image_stack, voxel_size=(8, 8, 40)):
                 EM_stack = EM_stack[corner[0]:end_corner[0],
                               corner[1]:end_corner[1],
                               corner[2]:end_corner[2]]
+        seg_list.append((EM_stack_name, corner, EM_stack))
+
+    elif image_stack is None:
+        pass
     else:
         raise TypeError
-    seg_list.append((EM_stack_name, corner, EM_stack))
 
     viewer = neuroglancer.Viewer()
     with viewer.txn() as s:
@@ -135,6 +140,10 @@ def generate_seg_dict_from_dir(seg_dir, seg_name="seg"):
                                 corner_list.append((cur_z, cur_y, cur_x))
         else:
             continue
+    if seg_dir[-1] == '/':
+        seg_name = os.path.split(seg_dir[:-1])[1]
+    else:
+        seg_name = os.path.split(seg_dir)[1]
     corner_list = sorted(corner_list)
     seg_dict = {}
     seg_dict["seg_dir"] = seg_dir
@@ -142,6 +151,28 @@ def generate_seg_dict_from_dir(seg_dir, seg_name="seg"):
         patch_name = seg_name +"-%d"%(i+1)
         seg_dict[patch_name] = {"corner": corner}
     return seg_dict
+
+def merge_seg_dicts(seg_dict_list):
+    output_dict = {}
+    for seg_dict in seg_dict_list:
+        if "seg_dir" in seg_dict:
+            seg_dir = seg_dict["seg_dir"]
+            for name, spec in seg_dict.items():
+                if name=="seg_dir":
+                    continue
+                spec["seg_dir"] = seg_dir
+                output_dict[name] = spec
+        else:
+            for name, spec in seg_dict.items():
+                output_dict[name] = spec
+    return output_dict
+
+def generate_seg_dict_from_dir_list(path, seg_dir_list):
+    dict_list = []
+    for seg_dir_name in seg_dir_list:
+        cur_dir = join(path, seg_dir_name)
+        dict_list.append(generate_seg_dict_from_dir(cur_dir, seg_name=seg_dir_name))
+    return merge_seg_dicts(dict_list)
 
 #%%
 if __name__=="__main__":
