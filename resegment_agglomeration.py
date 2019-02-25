@@ -67,6 +67,8 @@ req = reseg_req.inference
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%% Evaluation of resegmentation network
 
+
+
 reseg_r_zyx = [reseg_req.radius.z, reseg_req.radius.y, reseg_req.radius.x]
 analysis_r_zyx = [reseg_req.analysis_radius.z, reseg_req.analysis_radius.y, reseg_req.analysis_radius.x]
 # seg_dir = subvolume_path(reseg_req.inference.segmentation_output_dir, (0, 0, 0), 'npz')
