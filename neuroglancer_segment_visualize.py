@@ -15,6 +15,9 @@ import os
 import re
 from  os.path import join
 from ffn.inference.storage import subvolume_path
+from ffn.utils.proofreading import GraphUpdater, ObjectReview
+import networkx as nx
+
 #%%
 # ap = argparse.ArgumentParser()
 # ap.add_argument(
@@ -173,6 +176,17 @@ def generate_seg_dict_from_dir_list(path, seg_dir_list):
         cur_dir = join(path, seg_dir_name)
         dict_list.append(generate_seg_dict_from_dir(cur_dir, seg_name=seg_dir_name))
     return merge_seg_dicts(dict_list)
+
+
+class GraphUpdater_show(GraphUpdater):
+    def set_init_state(self):
+        self.viewer = neuroglancer_visualize(self.seg_dict, self.img_dir)
+
+    def __init__(self, graph, objects, bad, seg_dict, img_dir):
+        self.seg_dict = seg_dict
+        self.img_dir = img_dir
+        super(GraphUpdater_show, self).__init__(graph, objects, bad)
+
 
 #%%
 if __name__=="__main__":
