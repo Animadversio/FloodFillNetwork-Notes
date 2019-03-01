@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/utils_format_convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/p11_6_proc.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/p11_6_proc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resegment_agglomeration.py" beforeDir="false" afterPath="$PROJECT_DIR$/resegment_agglomeration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" beforeDir="false" afterPath="$PROJECT_DIR$/resegment_seed_generation_Center_Mass.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_resegment.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_resegment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_tc_inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_tc_inference.py" afterDir="false" />
-    </list>
+    <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +72,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_resegment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
+            <state relative-caret-position="1494">
               <caret line="83" column="28" lean-forward="true" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="28" />
               <folding>
                 <element signature="e#105#114#0" expanded="true" />
@@ -550,14 +541,7 @@
       <workItem from="1550722112058" duration="15779000" />
       <workItem from="1550793339589" duration="52149000" />
       <workItem from="1551126038186" duration="24277000" />
-      <workItem from="1551390369850" duration="12058000" />
-    </task>
-    <task id="LOCAL-00013" summary="Debug the parallel resegmentation code">
-      <created>1548022942597</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1548022942597</updated>
+      <workItem from="1551390369850" duration="12701000" />
     </task>
     <task id="LOCAL-00014" summary="Debug the parallel resegmentation code">
       <created>1548176981359</created>
@@ -895,11 +879,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551214905846</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Add example and code for resegmentation parallelize">
+      <created>1551404477701</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1551404477702</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="529956000" />
+    <option name="totallyTimeSpent" value="530599000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -944,7 +935,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add normalization code when importing image stacks. &#10;Debug" />
     <MESSAGE value="Add consensus code &#10;Debug the storage im compatibility&#10;Add Neuroglancer visualization" />
     <MESSAGE value="Debug the resegmentation_analysis code &#10;Solve several issue and change some socket problem&#10;Add training note" />
     <MESSAGE value="Rename the note" />
@@ -969,7 +959,8 @@
     <MESSAGE value="Organize the code and &#10;Debug the system add notes" />
     <MESSAGE value="Write Parallelized resegmentation code!" />
     <MESSAGE value="Update the neuroglancer visualization pipeline" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update the neuroglancer visualization pipeline" />
+    <MESSAGE value="Add example and code for resegmentation parallelize" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add example and code for resegmentation parallelize" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1487,7 +1478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run_resegment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="1494">
           <caret line="83" column="28" lean-forward="true" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="28" />
           <folding>
             <element signature="e#105#114#0" expanded="true" />
