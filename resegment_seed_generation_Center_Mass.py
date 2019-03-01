@@ -9,18 +9,24 @@ import ctypes
 import os
 from os.path import join
 import argparse
-from ffn.inference.storage import subvolume_path
+from analysis_script.utils_format_convert import subvolume_path
 import resource
 import scipy.ndimage as ndimage
 import ast
+from ffn.utils import bounding_box_pb2
+from google.protobuf import text_format
 #%%
 memory_check = False
-metric = [8, 12, 30]  # voxel size in x,y,z order in nm
+metric = [8, 8, 40]  # voxel size in x,y,z order in nm
 dist_threshold = 50  # maximum distance in nm to be considered valid pair
 threshold = 50  # minimum overlap to be consider a pair
 move_vec = (5, 5, 3)
-
-seg_path = "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12"
+size = (152, 550, 550)
+corner = (0, 0, 0)
+offset = (0, 0, 0)
+worker_n = mp.cpu_count()
+seg_path = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full"
+# "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
@@ -28,7 +34,7 @@ seg_path = "/Users/binxu/Connectomics_Code/results/LGN/testing_exp12"
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/"
 # "/Users/binxu/Connectomics_Code/results/LGN/"
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/0/0/'
-output_path = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
+output_path = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/"
 # '/home/morganlab/Downloads/ffn-master/results/LGN/testing_LR/'
 # "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/"
 # "/scratch/binxu.wang/ffn-Data/results/LGN/testing_LR/"
@@ -40,34 +46,49 @@ ap.add_argument(
 ap.add_argument(
     '--output_path', help='Output the files')
 ap.add_argument(
+    '--worker_n', help='Output the files')
+ap.add_argument(
     '--corner', help='the corner used in the path to fetch segmentation')
 ap.add_argument(
     '--size', help='')
 ap.add_argument(
-    '--offset', help='the starting corner in subvolume of seg (currently w.r.t the corner, relative cordinate   )')
+    '--offset', help='the starting corner in subvolume of seg (currently w.r.t the corner, relative cordinate  )')
+ap.add_argument(
+    '--bounding_box', help='Bounding box setting will overwrite the offset and size setting ')
+
 args = ap.parse_args()
 if args.seg_path:
     seg_path = args.seg_path
-if args.output_path:
-    output_path = args.output_path
-elif args.seg_path:
-    output_path = args.seg_path
 if args.corner:
     corner = ast.literal_eval(args.corner)
 else:
     corner = (0, 0, 0)
-if args.size:
-    size = ast.literal_eval(args.size)
+if args.output_path:
+    output_path = args.output_path
+elif args.seg_path:
+    output_path = args.seg_path
+if args.worker_n:
+    worker_n = args.worker_n
+if args.bounding_box:
+    bbox = bounding_box_pb2.BoundingBox()  # bounding box structure
+    text_format.Parse(args.bounding_box, bbox)
+    offset = (bbox.start.z, bbox.start.y, bbox.start.x)
+    size = (bbox.size.z, bbox.size.y, bbox.size.x)
 else:
-    size = None
-if args.offset:
-    offset = ast.literal_eval(args.offset)
-else:
-    offset = (0, 0, 0)
+    if args.offset:
+        offset = ast.literal_eval(args.offset)
+    else:
+        offset = (0, 0, 0)
+    if args.size:
+        size = ast.literal_eval(args.size)
+    else:
+        size = None
+#%%
 metric = np.array(metric)
 metric = metric.reshape((-1, 1))  # reshape to ensure the computation below
 metric = metric[::-1]  # in z y x order
-
+for path in [output_path]:
+    os.makedirs(path, exist_ok=True)
 #%%
 print('[%d] At start Memory usage: %s (kb)' % (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
 data = np.load(subvolume_path(seg_path, corner, 'npz'))
@@ -169,7 +190,7 @@ if memory_check:
       (os.getpid(), resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
 pair_list = list(pair_array_sym)
 # mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
-with closing(mp.Pool(processes=mp.cpu_count())) as pool: #  mp.cpu_count()//2
+with closing(mp.Pool(processes=worker_n)) as pool: #  mp.cpu_count()//2
     result = pool.imap(worker_func, pair_list, chunksize=50)  # returns a generator _unordered
 # result_list = list(result)
 # pickle.dump(result_list, open(join(output_path, 'seed_result.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
@@ -182,13 +203,15 @@ seed_dict = {}
 for result_vec, id_pair in zip(result, pair_list):
     print(id_pair)
     cur_idx1, cur_idx2 = id_pair[0], id_pair[1]
-
     for vec in result_vec:
         if not vec==None:
+            vec = [vec[i] + corner[i] + offset[i] for i in range(3)]  # translate into global coordinate for the volume
             seed_dict[(cur_idx1, cur_idx2)] = seed_dict.get((cur_idx1, cur_idx2), []) + [vec]
-pickle.dump(seed_dict, open(join(output_path, 'seed_dict.pkl'), 'wb'), pickle.HIGHEST_PROTOCOL)
 # Write the pb file
-file = open(join(output_path, "resegment_point_list.txt"), "w")
+reseg_corner = [corner[i] + offset[i] for i in range(3)]
+pickle.dump(seed_dict, open(join(output_path, 'seed_dict_%d_%d_%d.pkl' % (reseg_corner[2], reseg_corner[1], reseg_corner[0])), 'wb'), pickle.HIGHEST_PROTOCOL)  # should store more information into pkl file
+output_fn = "point_list_%d_%d_%d.txt" % (reseg_corner[2], reseg_corner[1], reseg_corner[0])
+file = open(join(output_path, output_fn), "w")
 for pair in seed_dict:
     for pnt in seed_dict[pair]:
         file.write("points {id_a:%d id_b:%d point {x: %d y: %d z: %d} } \n" % (pair[0], pair[1], pnt[2], pnt[1], pnt[0]))
@@ -199,3 +222,4 @@ print("closed pool")
 print("joining pool")
 pool.join()
 print("joined pool")
+

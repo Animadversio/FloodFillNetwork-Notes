@@ -28,21 +28,8 @@ import ast
 logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 # # reload(inference)
 # reload(resegmentation_analysis)
-
-#%%
-ap = argparse.ArgumentParser()
-ap.add_argument(
-    '--config',
-    help='config proto of resegment')
-ap.add_argument(
-    '--config_path',
-    help='path of config proto file of resegment')
-
-ap.add_argument(
-    '--pixelsize', help='pixelsize tuple in x,y,z order in nm')
-#%%
-if __name__=="__main__":
-    config = """inference {
+#%% default example of resegmentation protobuf
+config = """inference {
         image {
           hdf5: "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR(copy).h5:raw"
         }
@@ -75,6 +62,22 @@ if __name__=="__main__":
     segment_recovery_fraction: 0.4
     analysis_radius {x: 200 y: 200 z: 20}
     """
+
+#%%
+ap = argparse.ArgumentParser()
+ap.add_argument(
+    '--config',
+    help='config proto of resegment')
+ap.add_argument(
+    '--config_path',
+    help='path of config proto file of resegment')
+ap.add_argument(
+    '--point_path',
+    help='path of point list proto file of resegment')
+ap.add_argument(
+    '--pixelsize', help='pixelsize tuple in x,y,z order in nm')
+#%%
+if __name__=="__main__":
     pixelsize = (8, 12, 30)
     args = ap.parse_args()
     if args.config:
@@ -83,6 +86,11 @@ if __name__=="__main__":
         f = open(args.config_path, "r")
         config = f.read()
         f.close()
+    if args.point_path:
+        f = open(args.point_path, "r")
+        point_list = f.read()
+        f.close()
+        config += '\n' + point_list
     if args.pixelsize:
         pixelsize = ast.literal_eval(args.pixelsize)
     reseg_req = inference_pb2.ResegmentationRequest()

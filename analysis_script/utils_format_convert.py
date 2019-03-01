@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as color
 import h5py
 from os.path import join
+import os
 
 def convert_image_stack_to_h5(path, pattern, stack_n, beg_n=0, output = "grayscale_maps_zyx.h5"):
     ''' 
@@ -127,6 +128,21 @@ def normalize_img_stack(path, output, EM_stack, upper = 205, lower = 80):
     fstack[:] = int_img
     f.close()
     return int_img
+
+def subvolume_path(output_dir, corner, suffix):
+  """Returns path to a file with FFN subvolume data.
+
+  Args:
+    output_dir: directory containing subvolume data
+    corner: (z, y, x) subvolume corner
+    suffix: file suffix
+
+  Returns:
+    subvolume file path (string)
+  """
+  return os.path.join(
+      output_dir, str(corner[2]), str(corner[1]),
+      'seg-%s.%s' % ('_'.join([str(x) for x in corner[::-1]]), suffix))
 #%%
 if __name__=="__main__":
     path = "/home/morganlab/Documents/ixP11LGN/p11_5_EM/"# "/home/morganlab/Documents/ixP11LGN/IxD_W002_invert2_4_large_export"

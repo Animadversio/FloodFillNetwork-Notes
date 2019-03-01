@@ -20,7 +20,7 @@ from ffn.inference import resegmentation_analysis
 
 from analysis_script.utils_format_convert import read_image_vol_from_h5
 from ffn.inference.storage import subvolume_path
-from neuroglancer_segment_visualize import neuroglancer_visualize
+from neuroglancer_segment_visualize import neuroglancer_visualize, GraphUpdater_show
 import neuroglancer
 from importlib import reload
 from os.path import join
@@ -28,7 +28,7 @@ import logging
 import networkx
 logging.getLogger().setLevel(logging.INFO) # set the information level to show INFO logs
 
-
+#%%
 config='''inference {
     image {
       hdf5: "/scratch/binxu.wang/ffn-Data/LGN_DATA/grayscale_maps_LR.h5:raw"
@@ -108,16 +108,24 @@ for filename in savefile_list:
 print(time.time()-t0, 's')
 #%%
 #%%
-strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.5]  # filter the edges here!!!!
+strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.8]  # filter the edges here!!!!
 connect_segment_graph = networkx.Graph()
-connect_segment_graph.add_nodes_from(idx)
+connect_segment_graph.add_nodes_from(segment_graph.nodes)
 connect_segment_graph.add_edges_from(strong_edge)
 #%%
 import pickle
 # pickle.dump(result_proto, open(join(reseg_dir, "proto_summary.pkl"), "wb"))
 
 pickle.dump(segment_graph, open(join(reseg_dir, "segment_graph.pkl"), "wb"))
-
+#%%
+reseg_dir =  "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg"
+import pickle
+segment_graph = pickle.load(open(join(reseg_dir, "segment_graph.pkl"), "rb"))
+strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.8]  # filter the edges here!!!!
+connect_segment_graph = networkx.Graph()
+connect_segment_graph.add_nodes_from(segment_graph.nodes)
+connect_segment_graph.add_edges_from(strong_edge)
+#%%
 #%%
 for component in networkx.connected_components(connect_segment_graph):
     if len(component) > 1:
@@ -139,4 +147,6 @@ seg_dict = {
             "seg_12": {"seg_dir": "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12"},
             }
 image_dir = "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5"
-viewer = neuroglancer_visualize(seg_dict, image_dir)
+# viewer = neuroglancer_visualize(seg_dict, image_dir)
+#%%
+graph_undater = GraphUpdater_show(segment_graph, list(segment_graph.nodes), [], seg_dict, image_dir)

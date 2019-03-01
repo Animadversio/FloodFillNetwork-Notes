@@ -20,10 +20,12 @@ print("mean: %.2f, std: %.2f" % (norm_EM_stack.mean(), norm_EM_stack.std()))
 #%% Check image stack
 from neuroglancer_segment_visualize import neuroglancer_visualize
 h5_name = join(path, norm_output_name)
-neuroglancer_visualize({}, norm_EM_stack)
+neuroglancer_visualize({}, "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align.h5")
 #%% ##############################################################
 #%% Make masks for tissue types
-
+#%%
+import h5py
+f = h5py.File("/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align.h5", 'r')
 
 #%% ##############################################################
 #%% Do inference online
@@ -116,12 +118,15 @@ viewer = neuroglancer_visualize(seg_dict, img_dir)
 
 
 
+
+
 #%% ##############################################################
 #%% Manual Agglomeration
 #%% ##############################################################
 from ffn.utils.proofreading import GraphUpdater, ObjectReview
 import networkx as nx
 from neuroglancer_segment_visualize import GraphUpdater_show
+
 # class GraphUpdater_show(GraphUpdater):
 #     def set_init_state(self):
 #         self.viewer = neuroglancer_visualize(self.seg_dict, self.img_dir)
@@ -143,15 +148,13 @@ graph_update = GraphUpdater_show(graph, objects, [], {'seg':{"vol":segmentation}
 
 #%%
 image_size = (152, 4474, 2383)
-full_segment[: ,:, 4474:] = 0
-full_segment[: ,2383:, :] = 0
+full_segment[:, :, 4474:] = 0
+full_segment[:, 2383:, :] = 0
 
 #%%##############################################################
 #%% Output to KNOSSOS to do manual merging
 #%%##############################################################
-
 import knossos_utils
-from ffn.inference.storage import subvolume_path
 import numpy as np
 img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
 kns_dataset = knossos_utils.KnossosDataset()
