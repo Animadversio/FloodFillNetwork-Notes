@@ -104,3 +104,4 @@ if __name__=="__main__":
     runner.set_pixelsize(pixelsize)
     # seg_canvas1 = runner.run((0, 0, 0), (1000, 1000, 175))
     resegmentation.process(reseg_req, runner)
+    runner.stop_executor()

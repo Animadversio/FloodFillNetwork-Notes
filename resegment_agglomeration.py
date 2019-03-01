@@ -131,9 +131,6 @@ for component in networkx.connected_components(connect_segment_graph):
     if len(component) > 1:
         print(component)
 
-
-
-
 #%%
 # result_proto = resegmentation_analysis.evaluate_pair_resegmentation("/home/morganlab/Documents/Autoseg_result/Autoseg_exp7/reseg/120-1279_at_672_582_92.npz",
 #                                                                     seg, [20, 200, 200], [20, 200, 200], sampling=[30, 12, 8])
