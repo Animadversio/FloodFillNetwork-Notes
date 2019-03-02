@@ -60,33 +60,76 @@ max_retry_iters: 10
 segment_recovery_fraction: 0.6
 analysis_radius {x: 35 y: 35 z: 10}
 '''
+#%%
+ap = argparse.ArgumentParser()
+ap.add_argument(
+    '--config',
+    help='config proto of resegment')
+ap.add_argument(
+    '--config_path',
+    help='path of config proto file of resegment')
+ap.add_argument(
+    '--seg_dir',
+    help='path of point segmentation')
+ap.add_argument(
+    '--reseg_dir',
+    help='path of point list proto file of resegment')
+ap.add_argument(
+    '--output_dir',
+    help='path of point list proto file of resegment')
+ap.add_argument(
+    '--pixelsize', help='pixelsize tuple in x,y,z order in nm')
+#%%
+args = ap.parse_args()
+if args.config:
+    config = args.config
+elif args.config_path:
+    f = open(args.config_path, "r")
+    config = f.read()
+    f.close()
+else:
+    config = config
 reseg_req = inference_pb2.ResegmentationRequest()
 _ = text_format.Parse(config, reseg_req)
 req = reseg_req.inference
 
+if args.seg_dir:
+    seg_dir = args.seg_dir
+else:
+    seg_dir = req.init_segmentation.npz.split(':')[0]
+if args.reseg_dir:
+    reseg_dir = args.reseg_dir
+else:
+    reseg_dir = reseg_req.output_directory
+if args.output_dir:
+    output_dir = args.output_dir
+else:
+    output_dir = reseg_dir
+
+if args.pixelsize:
+    pixelsize = ast.literal_eval(args.pixelsize)
+    voxelsize_zyx = list(pixelsize[::-1])
+else:
+    voxelsize_zyx = [40, 8, 8]
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #%% Evaluation of resegmentation network
-
-
-
 reseg_r_zyx = [reseg_req.radius.z, reseg_req.radius.y, reseg_req.radius.x]
 analysis_r_zyx = [reseg_req.analysis_radius.z, reseg_req.analysis_radius.y, reseg_req.analysis_radius.x]
 # seg_dir = subvolume_path(reseg_req.inference.segmentation_output_dir, (0, 0, 0), 'npz')
-seg_dir = subvolume_path("/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12", (0, 0, 0), 'npz')
-voxelsize_zyx = [30, 12, 8]
-
+# seg_dir = subvolume_path("/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12", (0, 0, 0), 'npz')
 f = np.load(seg_dir)
 seg = f['segmentation'] # load the segmentation for evaluation
 f.close()
 #%%
 segment_graph = networkx.Graph()
 proto_list = []
+proto_string_list = []
 reseg_dir = "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg" # reseg_req.output_directory
 savefile_list = os.listdir(reseg_dir)
 idx = np.unique(seg)
-idx = idx[1:]
+idx = idx[1:]  # leave out background
 segment_graph.add_nodes_from(idx)
-#%%
+#%% Single processor version
 from ffn.inference.resegmentation_analysis import IncompleteResegmentationError, InvalidBaseSegmentatonError
 from zipfile import BadZipFile
 t0 = time.time()
@@ -95,6 +138,7 @@ for filename in savefile_list:
         result_proto = resegmentation_analysis.evaluate_pair_resegmentation(join(reseg_dir, filename),
                                 seg, reseg_r_zyx, analysis_r_zyx, sampling=voxelsize_zyx)
         proto_list.append(result_proto)
+        proto_string_list.append(result_proto.SerializeToString())
         segment_graph.add_weighted_edges_from([(result_proto.id_a, result_proto.id_b, result_proto.eval.iou)])
     except IncompleteResegmentationError:
         logging.info("Resegmentation incomplete error in file %s." % filename)
@@ -105,8 +149,9 @@ for filename in savefile_list:
     except:
         logging.warning("Some other error happened!! %s" % sys.exc_info()[0])
 
-print(time.time()-t0, 's')
+print("Spent all", time.time()-t0, 's')
 #%%
+
 #%%
 strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.8]  # filter the edges here!!!!
 connect_segment_graph = networkx.Graph()
@@ -114,8 +159,7 @@ connect_segment_graph.add_nodes_from(segment_graph.nodes)
 connect_segment_graph.add_edges_from(strong_edge)
 #%%
 import pickle
-# pickle.dump(result_proto, open(join(reseg_dir, "proto_summary.pkl"), "wb"))
-
+pickle.dump(proto_string_list, open(join(reseg_dir, "proto_summary.pkl"), "wb"))
 pickle.dump(segment_graph, open(join(reseg_dir, "segment_graph.pkl"), "wb"))
 #%%
 reseg_dir =  "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg"
@@ -131,9 +175,6 @@ for component in networkx.connected_components(connect_segment_graph):
     if len(component) > 1:
         print(component)
 
-
-
-
 #%%
 # result_proto = resegmentation_analysis.evaluate_pair_resegmentation("/home/morganlab/Documents/Autoseg_result/Autoseg_exp7/reseg/120-1279_at_672_582_92.npz",
 #                                                                     seg, [20, 200, 200], [20, 200, 200], sampling=[30, 12, 8])
@@ -143,9 +184,7 @@ for component in networkx.connected_components(connect_segment_graph):
 
 
 #%% In situ visualization
-seg_dict = {
-            "seg_12": {"seg_dir": "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12"},
-            }
+seg_dict = {"seg_12": {"seg_dir": "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12"},}
 image_dir = "/home/morganlab/Downloads/ffn-master/third_party/LGN_DATA/grayscale_maps_LR.h5"
 # viewer = neuroglancer_visualize(seg_dict, image_dir)
 #%%
