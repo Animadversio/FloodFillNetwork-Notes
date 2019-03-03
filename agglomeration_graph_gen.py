@@ -190,7 +190,7 @@ for result_proto_str in result:
         proto_cnt += 1
         # print(proto_cnt, '\n')
         proto_string_list.append(result_proto_str)
-        result_proto = PairResegmentationResult.FromString(result_proto_str)
+        result_proto = PairResegmentationResult.FromString(result_proto_str)    
         # proto_list.append(result_proto)
         segment_graph.add_weighted_edges_from([(result_proto.id_a, result_proto.id_b, result_proto.eval.iou)])
         if proto_cnt % 100 == 0:

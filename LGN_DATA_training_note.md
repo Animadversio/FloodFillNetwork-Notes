@@ -1803,3 +1803,25 @@ extracted from VAST
 18320, 22144
 
 4468, 2373
+
+
+## New volume Kasthuri 11 Opendataset
+
+Make the config file and run this download code
+```
+[Default]
+protocol = https
+host = api.boss.neurodata.io
+token = e300e909333dc834e2c7f1dac87a13e83e907234
+```
+```bash
+ndpull --config_file neurodata.cfg --collection  kasthuri  --experiment  kasthuri11 --channel image --x 4000 14000 --y 15000 20000 --z 500 900 --outdir .
+```
+
+use Fiji to preprocess downscaling, use python code to convert that into h5 volume. Examine with 
+
+Image stack shape: 
+(400, 2500, 5000)
+mean: 175.88, std: 47.30
+max: 260.85, min: -93.39 after scaling
+mean: 147.48, std: 38.87

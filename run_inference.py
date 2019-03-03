@@ -93,8 +93,8 @@ def main(unused_argv):
   counter_path = os.path.join(request.segmentation_output_dir, 'counters.txt')
   if not gfile.Exists(counter_path):
     runner.counters.dump(counter_path)
-
+  runner.stop_executor()
 
 if __name__ == '__main__':
   app.run(main)
-  runner.stop_executor()
+
