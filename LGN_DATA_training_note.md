@@ -1825,3 +1825,15 @@ Image stack shape:
 mean: 175.88, std: 47.30
 max: 260.85, min: -93.39 after scaling
 mean: 147.48, std: 38.87
+
+After screening the left model is 
+Exp1: Clear boundary, too much merge, small fibers are good! 
+Exp2: 
+exp3: Blurry boundary! not clear! hard to use! 
+
+Longtime_SF_Deep/model.ckpt-15005144
+exp1-2: Many merge of large branches! Fibers are good 
+
+Longtime/model.ckpt-14501471
+exp1-18 : Large branches are clear and distinct ! lose some fibers and some not solid filling ! 
+are good points! Their consensus is quite good ! 18 is quite good at decerning large boundaries, 2 is good at small fibers quite good match ! 
