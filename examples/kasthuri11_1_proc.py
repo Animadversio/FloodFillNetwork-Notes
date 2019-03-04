@@ -40,9 +40,16 @@ import glob
 #%% ##############################################################
 #%% view results
 seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
-                                seg_dir_list=["kasthuri_1_exp1-%d"%i for i in range(1,21)])
+                                seg_dir_list=["kasthuri_1_exp1-%d"% i for i in range(1,21)])
 img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
+#%% view results
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
+                                seg_dir_list=["kasthuri_1_exp1-%d"% i for i in range(1, 55)])
+img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
+viewer = neuroglancer_visualize(seg_dict, img_dir)
+
+
 #%%
 seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixP11LGN/",
                                 seg_dir_list=["p11_6_exp1-1", "p11_6_exp1-2", "p11_6_exp1-21", "p11_6_exp1-22",

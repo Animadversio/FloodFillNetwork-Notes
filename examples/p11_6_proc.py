@@ -4,7 +4,7 @@ from os.path import join
 import numpy as np
 from ffn.inference.storage import subvolume_path
 from neuroglancer_segment_visualize import neuroglancer_visualize, generate_seg_dict_from_dir, generate_seg_dict_from_dir_list
-
+from ffn.inference.segmentation import relabel_volume
 #%% ##############################################################
 #%% make dataset
 path = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM"
@@ -118,8 +118,44 @@ viewer = neuroglancer_visualize(seg_dict, img_dir)
 
 
 
-
-
+#%% ##############################################################
+#%% See agglomeration
+#%% ##############################################################
+from os.path import join
+import numpy as np
+import pickle
+import networkx as nx
+from time import time
+from ffn.inference.resegmentation_pb2 import PairResegmentationResult
+seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/"
+# load the Serialized proto list data
+pkl = pickle.load(open(join(seg_dir, 'agglomeration/proto_summary.pkl'), 'rb'))
+segment_graph = pickle.load(open(join(seg_dir, 'agglomeration/segment_graph.pkl'), 'rb'))
+connect_segment_graph = pickle.load(open(join(seg_dir, 'agglomeration/connect_segment_graph.pkl'), 'rb'))
+#%%
+proto = PairResegmentationResult()
+proto_list = map(proto.FromString, pkl,)  # iterable generator of proto_list
+#%%
+t0 = time()
+f = np.load(subvolume_path(seg_dir,(0,0,0),'npz'))
+seg = f['segmentation']
+f.close()
+idx_list = np.unique(seg)  # not very quick
+assert idx_list[0] == 0
+# idx_list = idx_list[1:]
+idx_merge_list = np.zeros(len(idx_list), dtype=np.uint16) # [min(nx.node_connected_component(connect_segment_graph, idx)) for idx in idx_list]
+for component in nx.connected_components(connect_segment_graph): # this is really quick!
+    new_lab = min(component)
+    for idx in component:
+        idx_merge_list[np.where(idx_list == idx)] = new_lab
+print("Spent %f s" % (time()-t0))  # 50s for single cpu running
+#%%
+relabel_vol, label_pair = relabel_volume(seg, idx_merge_list, idx_list)
+print("Spent %f s" % (time()-t0))  # 180s for a single cpu running
+#%%
+seg_dict = {"Original":{'vol':seg, 'corner':(0, 0, 0)}, "merge": {'vol': relabel_vol, 'corner':(0,0,0)}}
+image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+viewer = neuroglancer_visualize(seg_dict, image_dir)
 #%% ##############################################################
 #%% Manual Agglomeration
 #%% ##############################################################
@@ -136,14 +172,15 @@ from neuroglancer_segment_visualize import GraphUpdater_show
 #         self.img_dir = img_dir
 #         super(GraphUpdater_show, self).__init__(graph, objects, bad)
 
-graph = nx.Graph()
+# graph = nx.Graph()
 seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
 segmentation = seg["segmentation"]
 seg.close()
 objects, cnts = np.unique(segmentation, return_counts=True)
 objects = objects
-image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/grayscale_ixP11_5_align_norm_new.h5"
-graph_update = GraphUpdater_show(graph, objects, [], {'seg':{"vol":segmentation}, }, image_dir)
+image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+graph_update = GraphUpdater_show(connect_segment_graph, objects, [], {'seg': {"vol": segmentation}, }, image_dir)
+
 #%%
 
 #%%
