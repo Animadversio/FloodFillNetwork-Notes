@@ -119,7 +119,7 @@ viewer = neuroglancer_visualize(seg_dict, img_dir)
 
 
 #%% ##############################################################
-#%% See agglomeration
+#%% Visualize the agglomeration graph
 #%% ##############################################################
 from os.path import join
 import numpy as np
@@ -149,7 +149,7 @@ for component in nx.connected_components(connect_segment_graph): # this is reall
     for idx in component:
         idx_merge_list[np.where(idx_list == idx)] = new_lab
 print("Spent %f s" % (time()-t0))  # 50s for single cpu running
-#%%
+#% Relabel the volume
 relabel_vol, label_pair = relabel_volume(seg, idx_merge_list, idx_list)
 print("Spent %f s" % (time()-t0))  # 180s for a single cpu running
 #%%
