@@ -1837,3 +1837,19 @@ exp1-2: Many merge of large branches! Fibers are good
 Longtime/model.ckpt-14501471
 exp1-18 : Large branches are clear and distinct ! lose some fibers and some not solid filling ! 
 are good points! Their consensus is quite good ! 18 is quite good at decerning large boundaries, 2 is good at small fibers quite good match ! 
+
+## IPL image stack! 
+For un-aligned dataset
+Image stack shape: 
+(78, 4839, 5146)
+mean: 131.75, std: 48.68
+max: 259.49, min: -50.65 after scaling
+mean: 133.48, std: 38.16
+
+
+For aligned dataset
+Image stack shape: 
+(78, 4839, 5146)
+mean: 131.17, std: 48.65
+max: 260.86, min: -54.71 after scaling
+mean: 132.87, std: 38.63
