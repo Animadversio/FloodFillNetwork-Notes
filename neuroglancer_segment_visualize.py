@@ -125,7 +125,7 @@ def generate_seg_dict_from_dir(seg_dir, seg_name="seg"):
     fn_list = sorted(os.listdir(seg_dir))
     corner_list = []
     for name in fn_list:
-        if "Autoseg" in name or "counters" in name:
+        if "Autoseg" in name or "counters" in name or "reseg" in name or (not name.isdigit()):
             continue
         cur_path = join(seg_dir, name)
         if os.path.isdir(cur_path):
