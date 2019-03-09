@@ -87,6 +87,9 @@ ap.add_argument(
     '--output_dir',
     help='path of point list proto file of resegment')
 ap.add_argument(
+    '--worker_n',
+    help='')
+ap.add_argument(
     '--pixelsize', help='pixelsize tuple in x,y,z order in nm')
 #%%
 args = ap.parse_args()
@@ -114,6 +117,10 @@ if args.output_dir:
 else:
     output_dir = reseg_dir
 os.makedirs(output_dir, exist_ok=True)
+if args.worker_n:
+    worker_n = int(args.worker_n)
+else:
+    worker_n = mp.cpu_count()
 # [30, 12, 8]
 if args.pixelsize:
     pixelsize = ast.literal_eval(args.pixelsize)
@@ -166,13 +173,13 @@ def worker_func(filename):
         raise KeyboardInterrupt
     except:
         logging.warning("Some other error happened!! %s" % sys.exc_info()[0])
-    return
+    return 
 #%%
 savefile_list = glob.glob(join(reseg_dir,"*.npz"))
 raw_cnt = len(savefile_list)
 print("Total %d files to be processed" % raw_cnt)
 # savefile_list = os.listdir(reseg_dir)
-worker_n = mp.cpu_count()  # the code above does not work in Python 2.x but do in 3.6
+#  the code above does not work in Python 2.x but do in 3.6
 with closing(mp.Pool(processes=worker_n)) as pool: #  mp.cpu_count()//2
     result = pool.imap_unordered(worker_func, savefile_list, chunksize=100)  # returns a generator _unordered
 print("Started making the pool")
@@ -195,6 +202,11 @@ for result_proto_str in result:
         segment_graph.add_weighted_edges_from([(result_proto.id_a, result_proto.id_b, result_proto.eval.iou)])
         if proto_cnt % 100 == 0:
             print("Processed %d/%d (%.1f /100)" % (proto_cnt, raw_cnt, 100.0*proto_cnt/raw_cnt))
+            logging.info("Processed %d/%d (%.1f /100)" % (proto_cnt, raw_cnt, 100.0*proto_cnt/raw_cnt))
+        if proto_cnt % 1000 == 0:
+            print("Dump checkpoint %d" % proto_cnt)
+            pickle.dump(proto_string_list, open(join(output_dir, "proto_summ_ckpt.pkl"), "wb"))
+            logging.info("Dump checkpoint %d" % proto_cnt)
 #%%
 pickle.dump(proto_string_list, open(join(output_dir, "proto_summary.pkl"), "wb"))
 pickle.dump(segment_graph, open(join(output_dir, "segment_graph.pkl"), "wb"))

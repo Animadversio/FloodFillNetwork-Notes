@@ -25,7 +25,7 @@ class Base(object):
     self.viewer = neuroglancer.Viewer()
     self.num_to_prefetch = num_to_prefetch
 
-    self.todo = []  # items are lists of segment IDs
+    self.todo = []  # items are lists of segment IDs which are considered to be same object
     self.index = 0
     self.batch = 1
     self.apply_equivs = False
@@ -49,7 +49,7 @@ class Base(object):
       l.equivalences.clear()
     else:
       l.equivalences.clear()
-      for a in self.todo[self.index:self.index + self.batch]:
+      for a in self.todo[self.index:self.index + self.batch]:  # each entry of `todo` is a list of id s
         l.equivalences.union(*a)
 
     if loc is not None:
@@ -114,6 +114,10 @@ class Base(object):
           neuroglancer.PrefetchState(state=prefetch_state, priority=-i)
           for i, prefetch_state in enumerate(prefetch_states)
       ]
+
+class ManualMerge(Base):
+  def __init__(self,):
+    super(ManualMerge,self).__init__()
 
 
 class ObjectReview(Base):
@@ -277,7 +281,7 @@ class GraphUpdater(Base):
     self.split_index = 1
 
     self.todo = []
-    for o in objects:
+    for o in objects:  # objects should be a list of list of idx, which means the segments of the same object
       if isinstance(o, collections.Iterable):
         self.todo.append(o)
       else:
@@ -294,6 +298,9 @@ class GraphUpdater(Base):
     self.viewer.actions.add('mark-bad', lambda s: self.mark_bad())
     self.viewer.actions.add('next-batch', lambda s: self.next_batch())
     self.viewer.actions.add('prev-batch', lambda s: self.prev_batch())
+    self.viewer.actions.add('visualize-cc', lambda s: self.clear_equiv())
+    self.viewer.actions.add('clear-equiv', lambda s: self.visualize_cc())
+    # self.viewer.actions.add('toggle-equiv', lambda s: self.toggle_equiv())
 
     with self.viewer.config_state.txn() as s:
       s.input_event_bindings.viewer['keyj'] = 'next-batch'
@@ -306,7 +313,10 @@ class GraphUpdater(Base):
       s.input_event_bindings.viewer['keys'] = 'accept-split'
       s.input_event_bindings.data_view['shift+mousedown0'] = 'add-split'
       s.input_event_bindings.viewer['keyv'] = 'mark-bad'
-
+      s.input_event_bindings.viewer['keyd'] = 'visualize-cc'
+      s.input_event_bindings.viewer['keyx'] = 'clear-equiv'
+      # s.input_event_bindings.viewer['keyt'] = 'toggle-equiv'
+    self.apply_equivs = True
     with self.viewer.txn() as s:
       s.layers['split'] = neuroglancer.SegmentationLayer(
           source=s.layers['seg'].source)
@@ -315,6 +325,24 @@ class GraphUpdater(Base):
   def merge_segments(self):
     sids = [sid for sid in self.viewer.state.layers['seg'].segments if sid > 0]
     self.graph.add_edges_from(zip(sids, sids[1:]))
+    # l.equivalences.union(*sids)
+
+  def clear_equiv(self):
+    s = copy.deepcopy(self.viewer.state)
+    l = s.layers['seg']
+    l.equivalences.clear()
+    self.viewer.set_state(s)
+
+  def visualize_cc(self):
+    # add this to ease the manual merging stuff
+    if self.apply_equivs:
+      s = copy.deepcopy(self.viewer.state)
+      l = s.layers['seg']
+      for idx in l.segments:
+        cc = nx.node_connected_component(self.graph, idx)
+        print(str(cc))
+        l.equivalences.union(*cc)
+      self.viewer.set_state(s)
 
   def update_split(self):
     s = copy.deepcopy(self.viewer.state)

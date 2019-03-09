@@ -1,4 +1,4 @@
-python compute_partitions.py \
+    python compute_partitions.py \
     --input_volume third_party/LGN_DATA/groundtruth.h5:stack \
     --output_volume third_party/LGN_DATA/af.h5:af \
     --thresholds 0.025,0.05,0.075,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9 \
