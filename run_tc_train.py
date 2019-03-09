@@ -57,27 +57,26 @@ def zero_corrected_countless(data):
 #     img_ds = imresize(img, 0.5, interp='nearest')
 #     plt.imsave(fn[:fn.find('.png')] + "_DS.png", img_ds)
 #%%
-# processor = pixel_classify_data_proc(65, 65)
-# processor.prepare_volume({"Soma_DS":
-#                 {"pattern": "Soma_s*DS",
-#           "seg_pattern": "IxD_W002_invert2_tissuetype_BX_soma.vsseg_export_s*DS"}}, save=True)
-# processor.create_train_coordinate(2000000)
+processor = pixel_classify_data_proc(65, 65)
+processor.prepare_volume({"Soma_DS":
+                {"pattern": "Soma_s*DS",
+                "seg_pattern": "IxD_W002_invert2_tissuetype_BX_soma.vsseg_export_s*DS"}}, save=True)
+processor.create_train_coordinate(2000000)
 
 #%%
 # param = {"use_coord": True,
 #          "label_path":"/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/labels_train_ds.npy",
 #          "coord_path":"/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/imgs_coords_ds.npy",
 #          "vol_dict":{"Soma_DS": ("/home/morganlab/Documents/ixP11LGN/TissueClassifier_Soma/Train_dataset/Soma_DS_EM.h5", 'raw')},}
-# param = {"use_coord": True,
-#          "label_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/labels_train_ds.npy",
-#          "coord_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/imgs_coords_ds.npy",
-#          "vol_dict": {"Soma_DS": ("/scratch/binxu.wang/tissue_classifier/Train_dataset/Soma_DS_EM.h5", 'raw')}}
-# generator = pixel_classify_data_generator(np.arange(int(6000000*0.8)), **param)
-# valid_generator = pixel_classify_data_generator(np.arange(int(6000000*0.8),None), **param)
+param = {"use_coord": True,
+         "label_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/labels_train_ds.npy",
+         "coord_path": "/scratch/binxu.wang/tissue_classifier/Train_dataset/imgs_coords_ds.npy",
+         "vol_dict": {"Soma_DS": ("/scratch/binxu.wang/tissue_classifier/Train_dataset/Soma_DS_EM.h5", 'raw')}}
+generator = pixel_classify_data_generator(np.arange(int(6000000*0.8)), **param)
+valid_generator = pixel_classify_data_generator(np.arange(int(6000000*0.8),None), **param)
 #%%
 from tissue_classify.pixel_classifier2D import pixel_classifier_2d, inference_on_image
-ps2 = pixel_classifier_2d(65, 65,
-                          proj_dir="/scratch/binxu.wang/tissue_classifier/")
+ps2 = pixel_classifier_2d(65, 65, proj_dir="/scratch/binxu.wang/tissue_classifier/")
 # ps2.train_generator(generator, valid_generator, )#use_multiprocessing=True, workers=4)
 
 #%% Load the most recent checkpoint into model
