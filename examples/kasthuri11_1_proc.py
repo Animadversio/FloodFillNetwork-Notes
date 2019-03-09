@@ -59,6 +59,16 @@ seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasth
                                 seg_dir_list=["kasthuri_1_exp1_rev-2/"])
 img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
+#%%
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
+                                seg_dir_list=["kasthuri_1_exp1_rev-%d/" % i for i in range(41,69)])
+img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
+viewer = neuroglancer_visualize(seg_dict, img_dir)
+#%%
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
+                                seg_dir_list=["kasthuri_1_exp1-%d/" % i for i in range(41,56)])
+img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
+viewer = neuroglancer_visualize(seg_dict, img_dir)
 #%% ##############################################################
 #%% Consensus of 2 stacks
 #%% ##############################################################
