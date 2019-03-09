@@ -163,7 +163,6 @@ viewer = neuroglancer_visualize(seg_dict, image_dir)
 from ffn.utils.proofreading import GraphUpdater, ObjectReview
 import networkx as nx
 from neuroglancer_segment_visualize import GraphUpdater_show
-
 # class GraphUpdater_show(GraphUpdater):
 #     def set_init_state(self):
 #         self.viewer = neuroglancer_visualize(self.seg_dict, self.img_dir)
@@ -173,15 +172,19 @@ from neuroglancer_segment_visualize import GraphUpdater_show
 #         self.img_dir = img_dir
 #         super(GraphUpdater_show, self).__init__(graph, objects, bad)
 
-# graph = nx.Graph()
-seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+graph = nx.Graph()
+# seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
 segmentation = seg["segmentation"]
-seg.close()
-objects, cnts = np.unique(segmentation, return_counts=True)
-objects = objects
-image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-graph_update = GraphUpdater_show(connect_segment_graph, objects, [], {'seg': {"vol": segmentation}, }, image_dir)
-
+objects = np.unique(segmentation,)
+# seg.close()
+# objects, cnts = np.unique(segmentation, return_counts=True)
+# objects = objects
+#image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+graph.add_nodes_from(objects[1:])
+image_dir = "/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_6_align_norm.h5"
+graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": segmentation}, }, None)
+#connect_segment_
 #%%
 
 #%%
