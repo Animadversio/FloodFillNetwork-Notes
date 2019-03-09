@@ -4,7 +4,7 @@ from os.path import join
 import numpy as np
 from ffn.inference.storage import subvolume_path
 from neuroglancer_segment_visualize import neuroglancer_visualize, generate_seg_dict_from_dir, generate_seg_dict_from_dir_list
-
+from time import time
 #%% ##############################################################
 #%% Import downscaled image to make dataset
 path = "/home/morganlab/Documents/Kasthuri11_dataset"
@@ -55,69 +55,53 @@ seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasth
 img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
 #%%
-seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixP11LGN/",
-                                seg_dir_list=["p11_6_exp1-1", "p11_6_exp1-2", "p11_6_exp1-21", "p11_6_exp1-22",
-                                              "p11_6_exp1-23", "p11_6_exp1-24", "p11_6_exp1-25", "p11_6_exp1-26",
-                                              "p11_6_exp1-27", "p11_6_exp1-28", "p11_6_exp1-29", "p11_6_exp1-30", ])
-img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-viewer = neuroglancer_visualize(seg_dict, img_dir)
-#%%
-seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/ixP11LGN/p11_6_exp1-38")
-img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-viewer2 = neuroglancer_visualize(seg_dict, img_dir)
-#%%
-seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/ixP11LGN/p11_6_exp1-33")
-img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-viewer2 = neuroglancer_visualize(seg_dict, img_dir)
-#%%
-seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixP11LGN/",
-                                seg_dir_list=["p11_6_exp1-33", "p11_6_exp1-38",])
-img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
+                                seg_dir_list=["kasthuri_1_exp1_rev-2/"])
+img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
 #%% ##############################################################
 #%% Consensus of 2 stacks
 #%% ##############################################################
 from run_consensus import run_save_consensus
-from time import time
-from analysis_script.subvolume_stitching import stitich_subvolume_grid
-seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/ixP11LGN/p11_6_exp1-38")
+seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2/")
 corners = []
 for name, spec in seg_dict.items():
     if type(spec) is dict:
         corners.append(spec['corner'])
 config = """
     segmentation1 {
-        directory: "/home/morganlab/Documents/ixP11LGN/p11_6_exp1-38/"
+        directory: "/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2"
         threshold: 0.6
         split_cc: 1
         min_size: 5000
     }
     segmentation2 {
-        directory: "/home/morganlab/Documents/ixP11LGN/p11_6_exp1-33/"
+        directory: ???
         threshold: 0.6
         split_cc: 1
         min_size: 5000
     }
-    segmentation_output_dir: "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38/"
+    segmentation_output_dir: "/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2-consensus/"
     type: CONSENSUS_SPLIT
     split_min_size: 5000
     """
 cons_seg = run_save_consensus(config, corners=corners)
 # Spend 35 mins to consensus on 45 subvolumes
-
+#%%
 ##  Stitching up the subvolumes!
+from analysis_script.subvolume_stitching import stitich_subvolume_grid
 t0 = time()
-seg_dir = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38/"
-full_segment, segment_graph, seg_id_dict = stitich_subvolume_grid(seg_dir, x_step=500, y_step=500, x_num=9, y_num=5, size=(152, 600, 600),
+seg_dir = "/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2/"
+full_segment, segment_graph, seg_id_dict = stitich_subvolume_grid(seg_dir, x_step=500, y_step=500, x_num=9, y_num=5, size=(400, 600, 600),
                                                  start_corner=(0, 0, 0), overlap_d=1,
-                                                 output_dir="/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full")
+                                                 output_dir="/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2_full/")
 # seems the graph is all correct but the final ourput is not updated!!!
 print("Spend ", time()-t0, "s. ")
-# Spend  1168.8590106964111 s.  for stitching up 45 subvolumes
+# Spend  3111.853937149048 s. to stiticha
 #%% See the whole volume segmented
-seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixP11LGN/",
-                                seg_dir_list=["p11_6_consensus_33_38_full", ])
-img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/Kasthuri11_dataset/",
+                                seg_dir_list=["kasthuri_1_exp1_rev-2_full", ])
+img_dir = "/home/morganlab/Documents/Kasthuri11_dataset/grayscale_kasthuri_1_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
 
 #%% ##############################################################

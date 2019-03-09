@@ -3,8 +3,10 @@ from analysis_script.image_preprocess import normalize_img_stack_with_mask
 from os.path import join
 import numpy as np
 from ffn.inference.storage import subvolume_path
+from time import time
 from neuroglancer_segment_visualize import neuroglancer_visualize, generate_seg_dict_from_dir, generate_seg_dict_from_dir_list
 from ffn.inference.segmentation import relabel_volume
+path = "/home/morganlab/Documents/ixQ_IPL/"
 #%% make dataset
 path = "/home/morganlab/Documents/ixQ_IPL/"
 stack_n = 78
@@ -17,16 +19,62 @@ norm_EM_stack = normalize_img_stack_with_mask(path, norm_output_name, EM_stack,
                               upper=196, lower=80, up_outlier=245, low_outlier=30)
 print("mean: %.2f, std: %.2f" % (norm_EM_stack.mean(), norm_EM_stack.std()))
 #%%
-from neuroglancer_segment_visualize import neuroglancer_visualize
-h5_name = join(path, norm_output_name)
+h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5" )#norm_output_name)
 neuroglancer_visualize({}, h5_name)
 #%% on Cluster inference
 
 
 
 #%%
-from neuroglancer_segment_visualize import neuroglancer_visualize
 h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
 seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
-                                           seg_dir_list=["IPL_exp1-%d"%i for i in range(1,17)])
+                                           seg_dir_list=["IPL_exp1-%d"%i for i in range(3,17)])
+viewer = neuroglancer_visualize(seg_dict, h5_name)
+#%%
+h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
+                                           seg_dir_list=["IPL_exp1-2", "IPL_exp1-2_rev"])
+viewer = neuroglancer_visualize(seg_dict, h5_name)
+
+#%%
+from run_consensus import run_save_consensus
+seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev/")
+corners = []
+for name, spec in seg_dict.items():
+    if type(spec) is dict:
+        corners.append(spec['corner'])
+config = """
+    segmentation1 {
+        directory: "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2/"
+        threshold: 0.6
+        split_cc: 1
+        min_size: 5000
+    }
+    segmentation2 {
+        directory: "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev/"
+        threshold: 0.6
+        split_cc: 1
+        min_size: 5000
+    }
+    segmentation_output_dir: "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus/"
+    type: CONSENSUS_SPLIT
+    split_min_size: 5000
+    """
+cons_seg = run_save_consensus(config, corners=corners)
+# Spent 32min to do 25 consensus
+#%%
+from analysis_script.subvolume_stitching import stitich_subvolume_grid
+t0 = time()
+seg_dir = "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus/"
+full_segment, segment_graph, seg_id_dict = stitich_subvolume_grid(seg_dir, x_step=1000, y_step=1000, x_num=5, y_num=5, size=(78, 1100, 1100),
+                                                 start_corner=(0, 0, 0), overlap_d=1,
+                                                 output_dir="/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus_full/")
+# seems the graph is all correct but the final ourput is not updated!!!
+print("Spend ", time()-t0, "s. ")
+# Spend  864.5802557468414 s.
+
+#%%
+h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
+seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
+                                           seg_dir_list=["IPL_exp1-2_rev_consensus_full/",])
 viewer = neuroglancer_visualize(seg_dict, h5_name)

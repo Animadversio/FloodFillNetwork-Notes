@@ -211,9 +211,9 @@ print("joining pool")
 pool.join()
 print("joined pool")
 #%%
-# reseg_dir =  "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg"
-# import pickle
-# segment_graph = pickle.load(open(join(reseg_dir, "segment_graph.pkl"), "rb"))
+reseg_dir =  "/home/morganlab/Downloads/ffn-master/results/LGN/testing_exp12/reseg"
+import pickle
+segment_graph = pickle.load(open(join(reseg_dir, "segment_graph.pkl"), "rb"))
 # strong_edge = [(u, v) for (u, v, d) in segment_graph.edges(data=True) if d['weight'] > 0.8]  # filter the edges here!!!!
 # connect_segment_graph = networkx.Graph()
 # connect_segment_graph.add_nodes_from(segment_graph.nodes)

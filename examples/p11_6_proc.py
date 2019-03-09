@@ -107,8 +107,9 @@ full_segment, segment_graph, seg_id_dict = stitich_subvolume_grid(seg_dir, x_ste
 print("Spend ", time()-t0, "s. ")
 # Spend  1168.8590106964111 s.  for stitching up 45 subvolumes
 #%% See the whole volume segmented
-seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixP11LGN/",
-                                seg_dir_list=["p11_6_consensus_33_38_full", ])
+seg_dict = generate_seg_dict_from_dir("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/")
+# seg_dict = {"seg_dir":"/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/",
+#             "consensus_33_38_full":{"corner":(0,0,0)}}
 img_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, img_dir)
 
