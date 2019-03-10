@@ -297,8 +297,8 @@ class GraphUpdater(Base):
     self.viewer.actions.add('mark-bad', lambda s: self.mark_bad())
     self.viewer.actions.add('next-batch', lambda s: self.next_batch())
     self.viewer.actions.add('prev-batch', lambda s: self.prev_batch())
-    self.viewer.actions.add('visualize-cc', lambda s: self.clear_equiv())
-    self.viewer.actions.add('clear-equiv', lambda s: self.visualize_cc())
+    self.viewer.actions.add('visualize-cc', lambda s: self.visualize_cc())
+    self.viewer.actions.add('clear-equiv', lambda s: self.clear_equiv())
     # self.viewer.actions.add('toggle-equiv', lambda s: self.toggle_equiv())
 
     with self.viewer.config_state.txn() as s:
