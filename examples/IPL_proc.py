@@ -31,6 +31,11 @@ seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_I
                                            seg_dir_list=["IPL_exp1-%d"%i for i in range(3,17)])
 viewer = neuroglancer_visualize(seg_dict, h5_name)
 #%%
+#h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
+seg_dict = generate_seg_dict_from_dir_list(path="/Users/binxu/Connectomics_Code/results/IPL/",
+                                           seg_dir_list=["IPL_exp1-%d"%i for i in range(10,16)])
+viewer = neuroglancer_visualize(seg_dict, None)
+#%%
 h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
 seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
                                            seg_dir_list=["IPL_exp1-2", "IPL_exp1-2_rev"])
