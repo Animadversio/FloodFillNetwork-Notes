@@ -115,9 +115,9 @@ class Base(object):
           for i, prefetch_state in enumerate(prefetch_states)
       ]
 
-class ManualMerge(Base):
-  def __init__(self,):
-    super(ManualMerge,self).__init__()
+# class ManualMerge(Base):
+#   def __init__(self,):
+#     super(ManualMerge,self).__init__()
 
 
 class ObjectReview(Base):
@@ -246,7 +246,6 @@ class ObjectClassification(Base):
       self.results[cls].add(sid)
 
     self.next_batch()
-
 
 class GraphUpdater(Base):
   """Base class for agglomeration graph modification.
