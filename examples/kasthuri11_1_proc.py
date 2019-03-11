@@ -5,9 +5,9 @@ import numpy as np
 from ffn.inference.storage import subvolume_path
 from neuroglancer_segment_visualize import neuroglancer_visualize, generate_seg_dict_from_dir, generate_seg_dict_from_dir_list
 from time import time
+path = "/home/morganlab/Documents/Kasthuri11_dataset"
 #%% ##############################################################
 #%% Import downscaled image to make dataset
-path = "/home/morganlab/Documents/Kasthuri11_dataset"
 stack_n = 400
 EM_name_pattern = "Kasthuri11_dataset_1_%03d.png"
 output_name = "grayscale_kasthuri_1.h5"
@@ -125,33 +125,31 @@ viewer = neuroglancer_visualize(seg_dict, img_dir)
 #%% ##############################################################
 #%% Manual Agglomeration
 #%% ##############################################################
-from ffn.utils.proofreading import GraphUpdater, ObjectReview
+#%%###################################################
+# Manual agglomeration
+######################################################
+h5_name = join(path, "grayscale_kasthuri_1_norm.h5")
+seg_dict = {'seg': {"seg_dir":"/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2_full/"}}
+viewer = neuroglancer_visualize(seg_dict, h5_name)
+#%%
 import networkx as nx
-from neuroglancer_segment_visualize import GraphUpdater_show
-
-# class GraphUpdater_show(GraphUpdater):
-#     def set_init_state(self):
-#         self.viewer = neuroglancer_visualize(self.seg_dict, self.img_dir)
-#
-#     def __init__(self, graph, objects, bad, seg_dict, img_dir):
-#         self.seg_dict = seg_dict
-#         self.img_dir = img_dir
-#         super(GraphUpdater_show, self).__init__(graph, objects, bad)
-
-graph = nx.Graph()
-seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-segmentation = seg["segmentation"]
-seg.close()
-objects, cnts = np.unique(segmentation, return_counts=True)
-objects = objects
-image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/grayscale_ixP11_5_align_norm_new.h5"
-graph_update = GraphUpdater_show(graph, objects, [], {'seg':{"vol":segmentation}, }, image_dir)
+import pickle
+from analysis_script.neuroglancer_agglomeration import ManualAgglomeration
+# seg = np.load("/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2_full/0/0/seg-0_0_0.npz")
+# segmentation = seg["segmentation"]
+# seg.close()
+# graph = nx.Graph()
+# objects = np.unique(segmentation,)
+# # assert objects[0]==0
+# graph.add_nodes_from(objects[1:])
+p = pickle.load(open("/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2_full/kasthuri_agglomeration.pkl","rb"))
+objects, graph = p['objects'], p['graph']
+agg_tool = ManualAgglomeration(graph, viewer, objects)
 #%%
+save_path = "/home/morganlab/Documents/Kasthuri11_dataset/kasthuri_1_exp1_rev-2_full/kasthuri_agglomeration.pkl"
+objects, graph = agg_tool.objects, agg_tool.graph
+agg_tool.export_merge_data(save_path);
 
-#%%
-image_size = (152, 4474, 2383)
-full_segment[:, :, 4474:] = 0
-full_segment[:, 2383:, :] = 0
 
 #%%##############################################################
 #%% Output to KNOSSOS to do manual merging

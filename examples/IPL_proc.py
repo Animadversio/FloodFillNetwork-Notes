@@ -108,7 +108,7 @@ objects = np.unique(segmentation,)
 assert objects[0]==0
 graph.add_nodes_from(objects[1:])
 agg_tool = ManualAgglomeration(graph, viewer, )
-#%%
+ #%%
 save_path = "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus/IPL_agglomeration.pkl"
 objects, graph = agg_tool.objects, agg_tool.graph
 agg_tool.export_merge_data(save_path);

@@ -206,7 +206,7 @@ agg_tool = ManualAgglomeration(graph, viewer, objects)
 #%%
 save_path = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl"
 objects, graph = agg_tool.objects, agg_tool.graph
-agg_tool.export_merge_data(save_path)
+agg_tool.export_merge_data(save_path);
 #%%
 
 #%%
