@@ -88,3 +88,26 @@ h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
 seg_dict = generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
                                            seg_dir_list=["IPL_exp1-2_rev_consensus_full/",])
 viewer = neuroglancer_visualize(seg_dict, h5_name)
+#%%
+h5_name = join(path, "grayscale_ixQ_IPL_align_norm.h5")
+seg_dict = {'seg': {"seg_dir":"/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus_full/"}}
+    # generate_seg_dict_from_dir_list(path="/home/morganlab/Documents/ixQ_IPL/",
+    #                                        seg_dir_list=["IPL_exp1-2_rev_consensus_full/",])
+viewer = neuroglancer_visualize(seg_dict, h5_name)
+
+#%%
+import networkx as nx
+import pickle
+from analysis_script.neuroglancer_agglomeration import ManualAgglomeration
+seg = np.load("/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus/0/0/seg-0_0_0.npz")
+segmentation = seg["segmentation"]
+seg.close()
+graph = nx.Graph()
+objects = np.unique(segmentation,)
+assert objects[0]==0
+graph.add_nodes_from(objects[1:])
+agg_tool = ManualAgglomeration(graph, viewer, )
+#%%
+save_path = "/home/morganlab/Documents/ixQ_IPL/IPL_exp1-2_rev_consensus/IPL_agglomeration.pkl"
+objects, graph = agg_tool.objects, agg_tool.graph
+agg_tool.export_merge_data(save_path);
