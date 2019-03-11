@@ -157,41 +157,67 @@ print("Spent %f s" % (time()-t0))  # 180s for a single cpu running
 seg_dict = {"Original":{'vol':seg, 'corner':(0, 0, 0)}, "merge": {'vol': relabel_vol, 'corner':(0,0,0)}}
 image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
 viewer = neuroglancer_visualize(seg_dict, image_dir)
+
+
 #%% ##############################################################
 #%% Manual Agglomeration
-#%% ##############################################################
-from ffn.utils.proofreading import GraphUpdater, ObjectReview
-import networkx as nx
-from neuroglancer_segment_visualize import GraphUpdater_show
-# class GraphUpdater_show(GraphUpdater):
-#     def set_init_state(self):
-#         self.viewer = neuroglancer_visualize(self.seg_dict, self.img_dir)
-#
-#     def __init__(self, graph, objects, bad, seg_dict, img_dir):
-#         self.seg_dict = seg_dict
-#         self.img_dir = img_dir
-#         super(GraphUpdater_show, self).__init__(graph, objects, bad)
+# #%% ##############################################################
 
-graph = nx.Graph()
+
+# from ffn.utils.proofreading import GraphUpdater, ObjectReview
+# import networkx as nx
+# from neuroglancer_segment_visualize import GraphUpdater_show
+# graph = nx.Graph()
+# # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+# seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+# segmentation = seg["segmentation"]
+# objects = np.unique(segmentation,)
+# # seg.close()
+# # objects, cnts = np.unique(segmentation, return_counts=True)
+# # objects = objects
+# #image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+# graph.add_nodes_from(objects[1:])
+# image_dir = "/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_6_align_norm.h5"
+# graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": segmentation}, }, None)
+# #connect_segment_
+
+#%%
+import networkx as nx
+from ffn.inference.storage import subvolume_path
+from neuroglancer_segment_visualize import neuroglancer_visualize
 # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+seg = np.load("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/seg-0_0_0.npz")  # no border version of it
+# seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
 segmentation = seg["segmentation"]
-objects = np.unique(segmentation,)
-# seg.close()
-# objects, cnts = np.unique(segmentation, return_counts=True)
-# objects = objects
-#image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-graph.add_nodes_from(objects[1:])
-image_dir = "/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_6_align_norm.h5"
-graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": segmentation}, }, None)
-#connect_segment_
+seg.close()
+image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+viewer = neuroglancer_visualize({'seg': {"vol": segmentation}, }, image_dir)
+#%%
+import pickle
+from analysis_script.neuroglancer_agglomeration import ManualAgglomeration
+# graph = nx.Graph()
+# objects = np.unique(segmentation,)
+# # objects, cnts = np.unique(segmentation, return_counts=True)
+# # objects = objects
+# graph.add_nodes_from(objects[1:])
+p = pickle.load(open("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl","rb"))
+objects, graph = p['objects'], p['graph']
+agg_tool = ManualAgglomeration(graph, viewer, objects)
+#%%
+save_path = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl"
+objects, graph = agg_tool.objects, agg_tool.graph
+agg_tool.export_merge_data(save_path)
 #%%
 
 #%%
 image_size = (152, 4474, 2383)
-full_segment[:, :, 4474:] = 0
-full_segment[:, 2383:, :] = 0
-
+segmentation[:, :, 4474:] = 0
+# segmentation[:, 2383:, :] = 0
+seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+seg_new = dict()
+seg_new["segmentation"] = segmentation
+seg_new["origins"] = seg["origins"]
+np.savez_compressed("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/seg-0_0_0.npz", **seg_new)
 #%%##############################################################
 #%% Output to KNOSSOS to do manual merging
 #%%##############################################################

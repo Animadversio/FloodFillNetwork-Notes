@@ -453,23 +453,23 @@ class Canvas(object):
       # disconnectedness predictions in the course of inference.
       if self.options.disco_seed_threshold >= 0:
         th_max = logit(0.5)
-        old_seed = self.seed[sel]
+        old_seed = self.seed[sel]  # save the old seed result!
 
         if self._keep_history:
           self.history_deleted.append(
-              np.sum((old_seed >= logit(0.8)) & (logits < th_max)))
+              np.sum((old_seed >= logit(0.8)) & (logits < th_max)))  # new
 
         if (np.mean(logits >= self.options.move_threshold) >
-            self.options.disco_seed_threshold):
+            self.options.disco_seed_threshold):  # the proportion of voxels possible to move to! If larger than dst
           # Because (x > NaN) is always False, this mask excludes positions that
           # were previously uninitialized (i.e. set to NaN in old_seed).
           try:
-            old_err = np.seterr(invalid='ignore')
-            mask = ((old_seed < th_max) & (logits > old_seed))
+            old_err = np.seterr(invalid='ignore')  # set treatment of error about NaN output!
+            mask = ((old_seed < th_max) & (logits > old_seed))  # select
           finally:
-            np.seterr(**old_err)
-          logits[mask] = old_seed[mask]
-
+            np.seterr(**old_err)  # set treatment of error!
+          logits[mask] = old_seed[mask]  # change the mask region logits predictions
+          # i.e. remains the former prediction for the sub-threshold (0.5) old_seed and
       # Update working space.
       self.seed[sel] = logits  # only place, that update `seed` segmentation and seg_prob is not updated
 
@@ -529,7 +529,7 @@ class Canvas(object):
 
         pred = self.update_at(pos, start_pos)  # core function call, the pred (logits) used to update movement
         self._min_pos = np.minimum(self._min_pos, pos)
-        self._max_pos = np.maximum(self._max_pos, pos)
+        self._max_pos = np.maximum(self._max_pos, pos) # record the move range of each segment_at call
         num_iters += 1
 
         with timer_counter(self.counters, 'movement_policy'):

@@ -3,7 +3,7 @@ import numpy as np
 from ffn.utils.proofreading import GraphUpdater, ObjectReview
 import networkx as nx
 from neuroglancer_segment_visualize import GraphUpdater_show
-
+from os.path import join
 import pickle
 
 #%%
@@ -13,6 +13,7 @@ import collections
 import neuroglancer
 class ManualAgglomeration(Base):
     """
+    TODO: add mark bad function in case of merge
     """
     def set_init_state(self):
         pass
@@ -159,9 +160,13 @@ class ManualAgglomeration(Base):
                         self.cur_base_id, base_id_to_merge, base_id_to_merge,
                         segment_id, ','.join([str(idx) for idx in id_list_to_merge]), self.cur_base_id,
                         ','.join([str(idx) for idx in self.cur_id_list])))
-                    if input("Going to merge object %d and %d. %d will be deleted. Influenced supervoxels id=%s \n Input [Y] to continue."
-                             %(self.cur_base_id, base_id_to_merge, base_id_to_merge,
-                               ','.join([str(idx) for idx in self.cur_id_list])) )=='Y':
+                    while True:
+                        input_str = input("Going to merge object %d and %d. %d will be deleted. Influenced supervoxels id=%s \n Input [Y] to continue."
+                            % (self.cur_base_id, base_id_to_merge, base_id_to_merge, ','.join([str(idx) for idx in self.cur_id_list])))
+                        if not input_str == None:
+                            print(input_str)
+                            break
+                    if input_str == 'Y':
                         self.objects.pop(base_id_to_merge)
                         self.cur_id_list.extend(id_list_to_merge)
                         self.update_msg('Merged up object %d and %d. %d has been deleted. \n'
@@ -264,51 +269,63 @@ class ManualAgglomeration(Base):
 
         self.update_segments(curr)
 
-    def export_merge_data(self):
+    def export_merge_data(self, save_path):
         # np.savez("agglomeration_save.npz",objects=self.objects, graph=self.graph)
-        pickle.dump({"objects": self.objects, "graph": self.graph}, open("p11_agglomeration.pkl", "wb"))
+        pickle.dump({"objects": self.objects, "graph": self.graph}, open(save_path, "wb"))
         return self.objects, self.graph
+# #%%
 #%%
-from neuroglancer_segment_visualize import neuroglancer_visualize
-graph = nx.Graph()
-seg = np.zeros((100,100,100),dtype=np.uint32)
-seg[:50,:50,:20]=1
-seg[:50,50:,:30]=2
-seg[50:,:50,5:45]=3
-seg[50:,50:,:50]=4
-seg[:50,:50,40:80]=5
-seg[:50,50:,30:]=6
-seg[50:,:50,50:]=7
-seg[50:,50:,60:]=8
-objects = np.unique(seg,)
-if objects[0] == 0:
-    objects = objects[1:]
-graph.add_nodes_from(objects)
-# graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": seg}, }, None)
+if __name__ == '__main__':
+    #%%
+    from neuroglancer_segment_visualize import neuroglancer_visualize
+    graph = nx.Graph()
+    seg = np.zeros((100,100,100), dtype=np.uint32)
+    seg[:50,:50,:20]=1
+    seg[:50,50:,:30]=2
+    seg[50:,:50,5:45]=3
+    seg[50:,50:,:50]=4
+    seg[:50,:50,40:80]=5
+    seg[:50,50:,30:]=6
+    seg[50:,:50,50:]=7
+    seg[50:,50:,60:]=8
+    objects = np.unique(seg,)
+    if objects[0] == 0:
+        objects = objects[1:]
+    graph.add_nodes_from(objects)
+    # graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": seg}, }, None)
+
+    #%%
+    viewer = neuroglancer_visualize({'seg':{'vol':seg}}, None)
+    agg_tool = ManualAgglomeration(graph, viewer)
+
 
 #%%
-viewer = neuroglancer_visualize({'seg':{'vol':seg}}, None)
-agg_tool = ManualAgglomeration(graph, viewer)
+    # import networkx as nx
+    # from ffn.inference.storage import subvolume_path
+    # from neuroglancer_segment_visualize import neuroglancer_visualize
+    # # graph = nx.Graph()
+    # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+    # # seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
+    # segmentation = seg["segmentation"]
+    # seg.close()
+    # # objects = np.unique(segmentation,)
+    # # # objects, cnts = np.unique(segmentation, return_counts=True)
+    # # # objects = objects
+    # image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+    # # graph.add_nodes_from(objects[1:])
+    # viewer = neuroglancer_visualize({'seg': {"vol": segmentation}, }, image_dir)
+    # #%%
+
+    p = pickle.load(open("/home/morganlab/PycharmProjects/FloodFillNetwork-Notes/p11_agglomeration.pkl","rb"))
+    objects, graph = p['objects'], p['graph']
+    agg_tool = ManualAgglomeration(graph, viewer, objects)
+    #%%
+    objects, graph = agg_tool.objects, agg_tool.graph
+    pickle.dump({"objects":objects, "graph": graph}, open("p11_agglomeration.pkl","wb"))
+    #%%
 #%%
-import networkx as nx
-from ffn.inference.storage import subvolume_path
-from neuroglancer_segment_visualize import neuroglancer_visualize
-p = pickle.load(open("p11_agglomeration.pkl","rb"))
-objects, graph = p['objects'], p['graph']
-# graph = nx.Graph()
-# # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-segmentation = seg["segmentation"]
-seg.close()
-# objects = np.unique(segmentation,)
-# # objects, cnts = np.unique(segmentation, return_counts=True)
-# # objects = objects
-# #image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-# graph.add_nodes_from(objects[1:])
-viewer = neuroglancer_visualize({'seg': {"vol": segmentation}, }, None)
-# #%%
-agg_tool = ManualAgglomeration(graph, viewer, objects)
-#%%
-objects, graph = agg_tool.objects, agg_tool.graph
-pickle.dump({"objects":objects, "graph": graph}, open("p11_agglomeration.pkl","wb"))
-#%%
+def foo():
+    while True:
+        s = input("say")
+        if s == "q":
+            break
