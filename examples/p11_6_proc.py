@@ -162,35 +162,21 @@ viewer = neuroglancer_visualize(seg_dict, image_dir)
 #%% ##############################################################
 #%% Manual Agglomeration
 # #%% ##############################################################
-
-
 # from ffn.utils.proofreading import GraphUpdater, ObjectReview
 # import networkx as nx
 # from neuroglancer_segment_visualize import GraphUpdater_show
-# graph = nx.Graph()
-# # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-# seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-# segmentation = seg["segmentation"]
-# objects = np.unique(segmentation,)
-# # seg.close()
-# # objects, cnts = np.unique(segmentation, return_counts=True)
-# # objects = objects
-# #image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
-# graph.add_nodes_from(objects[1:])
-# image_dir = "/Users/binxu/Connectomics_Code/LGN_Data/grayscale_ixP11_6_align_norm.h5"
-# graph_update = GraphUpdater_show(graph, [], [], {'seg': {"vol": segmentation}, }, None)
-# #connect_segment_
-
 #%%
 import networkx as nx
 from ffn.inference.storage import subvolume_path
 from neuroglancer_segment_visualize import neuroglancer_visualize
 # seg = np.load(subvolume_path("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
-seg = np.load("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/seg-0_0_0.npz")  # no border version of it
+# seg = np.load("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/seg-0_0_0.npz")  # no border version of it
+seg = np.load("D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\0\\0\\seg-0_0_0.npz")
 # seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
 segmentation = seg["segmentation"]
 seg.close()
 image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+image_dir = "D:\\LGN_DATA\\grayscale_ixP11_6_align_norm.h5"
 viewer = neuroglancer_visualize({'seg': {"vol": segmentation}, }, image_dir)
 #%%
 import pickle
@@ -200,11 +186,13 @@ from analysis_script.neuroglancer_agglomeration import ManualAgglomeration
 # # objects, cnts = np.unique(segmentation, return_counts=True)
 # # objects = objects
 # graph.add_nodes_from(objects[1:])
-p = pickle.load(open("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl","rb"))
+p = pickle.load(open("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl", "rb"))
+p = pickle.load(open("D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\p11_agglomeration.pkl", "rb"))
 objects, graph = p['objects'], p['graph']
 agg_tool = ManualAgglomeration(graph, viewer, objects)
 #%%
 save_path = "/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl"
+save_path = "D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\p11_agglomeration.pkl"
 objects, graph = agg_tool.objects, agg_tool.graph
 agg_tool.export_merge_data(save_path);
 #%%
