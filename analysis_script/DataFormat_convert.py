@@ -81,4 +81,6 @@ for i in range(10,12):
     plt.axis('off')
     plt.colorbar()
     plt.show()
-    
+
+
+#%%

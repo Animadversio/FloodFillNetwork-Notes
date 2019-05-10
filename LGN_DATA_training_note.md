@@ -13,7 +13,7 @@ python compute_partitions.py \
     --min_size 10000
 
 
- python build_coordinates.py \
+python build_coordinates.py \
      --partition_volumes LGN_hr:third_party/LGN_DATA/af_zyx.h5:af \
      --coordinate_output third_party/LGN_DATA/tf_record_file \
      --margin 24,24,24
@@ -5300,3 +5300,22 @@ p11_6 Json
   },
   "layout": "3d"
 }
+
+
+```bash
+cd PycharmProjects/FloodFillNetwork-Notes
+python3.6 compute_partitions.py    \
+--input_volume /home/morganlab/Documents/ixQ_IPL/IxQ_retina_groundtruth.h5:stack    \
+--output_volume /home/morganlab/Documents/ixQ_IPL/af_LR.h5:af     \
+--thresholds 0.025,0.05,0.075,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9     \
+--lom_radius 24,24,24     \
+--min_size 10000
+
+cd ~/PycharmProjects/FloodFillNetwork-Notes
+python3.6 build_coordinates.py \
+     --partition_volumes Retina_hr:/home/morganlab/Documents/ixQ_IPL/af_LR.h5:af  \
+     --coordinate_output /home/morganlab/Documents/ixQ_IPL/tf_record_file \
+     --margin 24,24,24
+```
+```
+```bash

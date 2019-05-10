@@ -366,7 +366,7 @@ def compute_partitions_parallel_new(seg_array,
     # Assign tasks (worker_func) to the processes
     # with mp.Pool(processes=mp.cpu_count()) as pool:  # , initializer=init_worker, initargs=(X, X_shape)
     #     result = pool.map(worker_func, labels)
-    pool = mp.Pool(processes=mp.cpu_count())  # the code above does not work in Python 2.x but do in 3.6
+    pool = mp.Pool(processes=12)  # mp.cpu_count() # the code above does not work in Python 2.x but do in 3.6
     result = pool.map(worker_func, labels)
 
     print("Total Processing time %.3f s" % (time() - t1))
