@@ -175,7 +175,7 @@ seg = np.load("D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\0\\0\\seg-0_0_0
 # seg = np.load(subvolume_path("/Users/binxu/Connectomics_Code/results/LGN/p11_6_consensus_33_38_full/", (0, 0, 0), "npz"))
 segmentation = seg["segmentation"]
 seg.close()
-image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
+# image_dir = "/home/morganlab/Documents/ixP11LGN/EM_data/p11_6_EM/grayscale_ixP11_6_align_norm.h5"
 image_dir = "D:\\LGN_DATA\\grayscale_ixP11_6_align_norm.h5"
 viewer = neuroglancer_visualize({'seg': {"vol": segmentation}, }, image_dir)
 #%%
@@ -186,8 +186,10 @@ from analysis_script.neuroglancer_agglomeration import ManualAgglomeration
 # # objects, cnts = np.unique(segmentation, return_counts=True)
 # # objects = objects
 # graph.add_nodes_from(objects[1:])
-p = pickle.load(open("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl", "rb"))
-p = pickle.load(open("D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\p11_agglomeration.pkl", "rb"))
+# p = pickle.load(open("/home/morganlab/Documents/ixP11LGN/p11_6_consensus_33_38_full/p11_agglomeration.pkl", "rb"))
+# p = pickle.load(open("D:\\ffn_results\\LGN\\p11_6_consensus_33_38_full\\p11_agglomeration.pkl", "rb"))
+p = pickle.load(open("D:\\ixP11LGN\\p11_6_consensus_33_38_full\\p11_agglomeration.pkl", "rb"))
+
 objects, graph = p['objects'], p['graph']
 agg_tool = ManualAgglomeration(graph, viewer, objects)
 #%%
