@@ -43,7 +43,7 @@ flags.DEFINE_list('margin', None, '(z, y, x) tuple specifying the '
                   '+ deltas.')
 
 
-IGNORE_PARTITION = 0
+IGNORE_PARTITION = 255
 
 
 def _int64_feature(values):
