@@ -43,7 +43,7 @@ flags.DEFINE_list('margin', None, '(z, y, x) tuple specifying the '
                   '+ deltas.')
 
 
-IGNORE_PARTITION = 255
+IGNORE_PARTITION = 255  # NOTE: Seems masking 0 will cause problem!
 
 
 def _int64_feature(values):
@@ -73,7 +73,7 @@ def main(argv):
 
       uniques, counts = np.unique(partitions, return_counts=True)
       for val, cnt in zip(uniques, counts):  # val are the uint8 markers marked in compute_partition (not label)
-        if val == IGNORE_PARTITION:
+        if val == IGNORE_PARTITION or val == 0:
           continue
 
         totals[val] += cnt  #
