@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e8f95853-5f5e-47ea-b6dd-0c7e25c039d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LGN_DATA_training_note.md" beforeDir="false" afterPath="$PROJECT_DIR$/LGN_DATA_training_note.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_script/DataFormat_convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_script/DataFormat_convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute_partitions.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_partitions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute_partitions_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute_partitions_parallel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/IPL_proc.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/IPL_proc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/p11_6_proc.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/p11_6_proc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_coordinates.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_coordinates.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,10 +26,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compute_partitions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="864">
+              <caret line="177" column="14" lean-forward="true" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="14" />
               <folding>
                 <element signature="e#563#601#0" expanded="true" />
               </folding>
@@ -42,20 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="368" column="51" selection-start-line="368" selection-start-column="51" selection-end-line="368" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build_coordinates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="21" selection-start-line="21" selection-end-line="26" selection-end-column="16" />
+            <state relative-caret-position="342">
+              <caret line="32" column="49" lean-forward="true" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -63,7 +58,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378" />
+            <state relative-caret-position="360">
+              <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -79,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/p11_6_proc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-90">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="601">
+              <caret line="224" column="3" selection-start-line="224" selection-start-column="3" selection-end-line="224" selection-end-column="3" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
               </folding>
@@ -92,36 +89,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LGN_DATA_training_note.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="321">
-                <caret line="114" selection-start-line="114" selection-end-line="114" />
-              </first_editor>
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
+        <entry file="file://$PROJECT_DIR$/analysis_script/image_preprocess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+            <state relative-caret-position="234">
+              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
               <folding>
-                <element signature="e#238#275#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis_script/utils_format_convert.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1602">
-              <caret line="94" column="28" selection-start-line="92" selection-start-column="4" selection-end-line="94" selection-end-column="28" />
-              <folding>
-                <element signature="e#744#762#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -191,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ffn/inference/resegmentation_analysis.py" />
         <option value="$PROJECT_DIR$/segment_visualize_exp.py" />
         <option value="$PROJECT_DIR$/ffn/inference/storage.py" />
         <option value="$PROJECT_DIR$/analysis_script/read_segmentation_results.py" />
@@ -236,19 +217,20 @@
         <option value="$PROJECT_DIR$/analysis_script/neuroglancer_agglomeration.py" />
         <option value="$PROJECT_DIR$/examples/kasthuri11_1_proc.py" />
         <option value="$PROJECT_DIR$/examples/p11_6_proc.py" />
-        <option value="$PROJECT_DIR$/analysis_script/DataFormat_convert.py" />
         <option value="$PROJECT_DIR$/analysis_script/utils_format_convert.py" />
         <option value="$PROJECT_DIR$/LGN_DATA_training_note.md" />
         <option value="$PROJECT_DIR$/examples/IPL_proc.py" />
         <option value="$PROJECT_DIR$/compute_partitions_parallel.py" />
         <option value="$PROJECT_DIR$/compute_partitions.py" />
+        <option value="$PROJECT_DIR$/analysis_script/DataFormat_convert.py" />
+        <option value="$PROJECT_DIR$/build_coordinates.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2649" />
-    <option name="y" value="400" />
-    <option name="width" value="2259" />
+    <option name="x" value="2703" />
+    <option name="y" value="577" />
+    <option name="width" value="2249" />
     <option name="height" value="1212" />
   </component>
   <component name="ProjectView">
@@ -256,7 +238,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -279,31 +260,11 @@
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
               <item name="FloodFillNetwork-Notes" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="parallel_misc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
               <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="neuroglancer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="neuroglancer" type="462c0819:PsiDirectoryNode" />
-              <item name="python" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="neuroglancer" type="462c0819:PsiDirectoryNode" />
-              <item name="python" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FloodFillNetwork-Notes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ffn-master" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="neuroglancer" type="462c0819:PsiDirectoryNode" />
-              <item name="python" type="462c0819:PsiDirectoryNode" />
               <item name="neuroglancer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -319,13 +280,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/analysis_script" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/pratyush_trial/FloodFillNetwork-Notes" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -340,18 +302,18 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/analysis_script" />
+      <recent name="$PROJECT_DIR$/configs" />
+      <recent name="$PROJECT_DIR$/ffn/inference" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/analysis_script" />
       <recent name="$PROJECT_DIR$/examples" />
       <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$/misc" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/analysis_script" />
-      <recent name="$PROJECT_DIR$/configs" />
-      <recent name="$PROJECT_DIR$/ffn/inference" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -554,21 +516,8 @@
       <workItem from="1552063950688" duration="40104000" />
       <workItem from="1552272479578" duration="10116000" />
       <workItem from="1557503868839" duration="11660000" />
-      <workItem from="1557523724358" duration="1801000" />
-    </task>
-    <task id="LOCAL-00027" summary="Add notes and generate new h5 files">
-      <created>1549505157169</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1549505157169</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Add notes and change resegmentation proto file">
-      <created>1549508894961</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1549508894961</updated>
+      <workItem from="1557523724358" duration="4768000" />
+      <workItem from="1557790983016" duration="3598000" />
     </task>
     <task id="LOCAL-00029" summary="Add notes and change visualization code">
       <created>1549580039739</created>
@@ -899,11 +848,25 @@
       <option name="project" value="LOCAL" />
       <updated>1552281494613</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples&#10;Add notes md files">
+      <created>1557525737831</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1557525737831</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Fix bug in build coordinates &#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <created>1557791071884</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1557791071884</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="619863000" />
+    <option name="totallyTimeSpent" value="626428000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -918,7 +881,7 @@
     <frame x="2560" y="25" width="2560" height="1374" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19316375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19475357" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" weight="0.24980047" />
       <window_info anchor="bottom" id="TypeScript" order="0" sideWeight="0.49960256" weight="0.3295107" />
@@ -931,18 +894,18 @@
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49960256" weight="0.32928678" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.354531" side_tool="true" visible="true" weight="0.3224" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.35492846" side_tool="true" visible="true" weight="0.3224" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49602544" weight="0.328" />
       <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49841017" weight="0.32721713" />
-      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.645469" visible="true" weight="0.3224" />
+      <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.64507157" visible="true" weight="0.3224" />
       <window_info anchor="bottom" id="GitHub Pull Requests" order="15" sideWeight="0.49960256" weight="0.3296" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="965" y="371" width="629" height="697" id="SciView" order="3" sideWeight="0.9350649" visible="true" weight="0.3481717" />
+      <window_info anchor="right" x="965" y="371" width="629" height="697" id="SciView" order="3" sideWeight="0.9338843" visible="true" weight="0.3481717" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.064935066" side_tool="true" visible="true" weight="0.3481717" />
+      <window_info anchor="right" x="0" y="0" width="587" height="889" id="Documentation" order="5" sideWeight="0.0661157" side_tool="true" visible="true" weight="0.3481717" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -989,8 +952,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add notes and change resegmentation proto file" />
-    <MESSAGE value="Add notes and change visualization code" />
     <MESSAGE value="Add seed reversing mechanism!" />
     <MESSAGE value="Add seed reversing mechanism!&#10;Add subvolume stitching!" />
     <MESSAGE value="Add segmentation combination method&#10;Add consensus run method" />
@@ -1014,7 +975,9 @@
     <MESSAGE value="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples" />
     <MESSAGE value="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples&#10;Add training note" />
     <MESSAGE value="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples&#10;Add notes and augment the merging graph visualization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples&#10;Add notes and augment the merging graph visualization" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/Animadversio/FloodFillNetwork-Notes&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;debug inference, add examples&#10;Add notes md files" />
+    <MESSAGE value="Fix bug in build coordinates &#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug in build coordinates &#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1102,23 +1065,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/analysis_script/image_preprocess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="54" column="33" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/resegmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-695">
-          <caret line="55" column="40" lean-forward="true" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_tc_inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3690">
@@ -1405,13 +1351,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1832">
-          <caret line="617" column="25" selection-start-line="617" selection-start-column="25" selection-end-line="617" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_inference.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -1435,13 +1374,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/generate_h5_file.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_script/DataFormat_convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1458">
-          <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/neuroglancer_segment_visualize.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1473,33 +1405,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="368" column="51" selection-start-line="368" selection-start-column="51" selection-end-line="368" selection-end-column="51" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/analysis_script/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
+    <entry file="file://$PROJECT_DIR$/analysis_script/image_preprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="21" selection-start-line="21" selection-end-line="26" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compute_partitions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="234">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
           <folding>
-            <element signature="e#563#601#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/analysis_script/DataFormat_convert.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378" />
+        <state relative-caret-position="594">
+          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ffn/inference/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/p11_6_proc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="224" column="3" selection-start-line="224" selection-start-column="3" selection-end-line="224" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#95#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/IPL_proc.py">
@@ -1512,13 +1452,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/p11_6_proc.py">
+    <entry file="file://$PROJECT_DIR$/compute_partitions_parallel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="126">
+          <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compute_partitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="177" column="14" lean-forward="true" selection-start-line="177" selection-start-column="14" selection-end-line="177" selection-end-column="14" />
           <folding>
-            <element signature="e#0#95#0" expanded="true" />
+            <element signature="e#563#601#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build_coordinates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="32" column="49" lean-forward="true" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
         </state>
       </provider>
     </entry>

@@ -203,7 +203,7 @@ I0116 11:02:52.620095 139856426125120 inference.py:554] [cl 0] Failed: too small
 Approximately 0.4 s per seed ! estimated time 28.75 h for 258754 seeds ! 
 
 
-```
+```bash
 python compute_partitions_parallel.py \
     --input_volume third_party/LGN_DATA/groundtruth_LR.h5:stack \
     --output_volume third_party/LGN_DATA/af_LR_WF.h5:af \
@@ -5305,8 +5305,8 @@ p11_6 Json
 ```bash
 cd PycharmProjects/FloodFillNetwork-Notes
 python3.6 compute_partitions.py    \
---input_volume /home/morganlab/Documents/ixQ_IPL/IxQ_retina_groundtruth.h5:stack    \
---output_volume /home/morganlab/Documents/ixQ_IPL/af_LR.h5:af     \
+--input_volume /home/morganlab/Documents/ixQ_IPL/IxQ_retina_groundtruth.h5::stack    \
+--output_volume /home/morganlab/Documents/ixQ_IPL/af_LR.h5::af     \
 --thresholds 0.025,0.05,0.075,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9     \
 --lom_radius 24,24,24     \
 --min_size 10000
