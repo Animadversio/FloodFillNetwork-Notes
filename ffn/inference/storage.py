@@ -36,6 +36,13 @@ from ..utils import bounding_box
 
 OriginInfo = namedtuple('OriginInfo', ['start_zyx', 'iters', 'walltime_sec'])
 
+import platform
+if platform.system() == 'Windows':
+    DIVSTR = '::'
+elif platform.system() in ['Linux', 'Darwin']:
+    DIVSTR = ':'
+else:
+    DIVSTR = ':'
 
 def decorated_volume(settings, **kwargs):
   """Converts DecoratedVolume proto object into volume objects.
@@ -55,16 +62,16 @@ def decorated_volume(settings, **kwargs):
   if settings.HasField('volinfo'):
     raise NotImplementedError('VolumeStore operations not available.')
   elif settings.HasField('hdf5'):
-    path = settings.hdf5.split(':')
+    path = settings.hdf5.split(DIVSTR)
     if len(path) != 2:
-      raise ValueError('hdf5 volume_path should be specified as file_path:'
-                       'hdf5_internal_dataset_path.  Got: ' + settings.hdf5)
+      raise ValueError('hdf5 volume_path should be specified as file_path%s'
+                       'hdf5_internal_dataset_path.  Got: ' % DIVSTR + settings.hdf5)
     volume = h5py.File(path[0], 'r')[path[1]]
   elif settings.HasField('npz'):
-    path = settings.npz.split(':')
+    path = settings.npz.split(DIVSTR)
     if len(path) != 2:
-      raise ValueError('npz volume_path should be specified as file_path:'
-                       'dataset_key_name.  Got: ' + settings.npz)
+      raise ValueError('npz volume_path should be specified as file_path%s'
+                       'dataset_key_name.  Got: ' % DIVSTR + settings.npz)
     volume = np.load(path[0])[path[1]]
   else:
     raise ValueError('A volume_path must be set.')
